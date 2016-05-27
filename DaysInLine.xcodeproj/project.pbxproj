@@ -10,7 +10,7 @@
 		1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5983FA2D9325FA1EAD7D0CC /* libPods.a */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
-		A4E26C8E1CF84042004DFBC3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* ViewController.m */; };
+		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
 		A4E26C911CF84042004DFBC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C8F1CF84042004DFBC3 /* Main.storyboard */; };
 		A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C921CF84042004DFBC3 /* Assets.xcassets */; };
 		A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C941CF84042004DFBC3 /* LaunchScreen.storyboard */; };
@@ -67,6 +67,22 @@
 		A4E26D4D1CF843FA004DFBC3 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D411CF843FA004DFBC3 /* roundFrameLabel.m */; };
 		A4E26D4E1CF843FA004DFBC3 /* topBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D431CF843FA004DFBC3 /* topBarView.m */; };
 		A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D511CF8445F004DFBC3 /* CommonUtility.m */; };
+		A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D551CF84654004DFBC3 /* baseViewController.m */; };
+		A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D561CF84654004DFBC3 /* baseViewController.xib */; };
+		A4E26D6C1CF8473F004DFBC3 /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D661CF8473F004DFBC3 /* 上午.png */; };
+		A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D671CF8473F004DFBC3 /* 上午1.png */; };
+		A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D681CF8473F004DFBC3 /* 下午.png */; };
+		A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D691CF8473F004DFBC3 /* 下午1.png */; };
+		A4E26D701CF8473F004DFBC3 /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D6A1CF8473F004DFBC3 /* 夜间.png */; };
+		A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D6B1CF8473F004DFBC3 /* 夜间1.png */; };
+		A4E26D751CF84867004DFBC3 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D731CF84867004DFBC3 /* SideMenuViewController.m */; };
+		A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D741CF84867004DFBC3 /* SideMenuViewController.xib */; };
+		A4E26D7A1CF848F7004DFBC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E26D771CF848F7004DFBC3 /* FBSDKCoreKit.framework */; };
+		A4E26D7B1CF848F7004DFBC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E26D781CF848F7004DFBC3 /* FBSDKLoginKit.framework */; };
+		A4E26D7C1CF848F7004DFBC3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E26D791CF848F7004DFBC3 /* FBSDKShareKit.framework */; };
+		A4E26D7E1CF84914004DFBC3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E26D7D1CF84914004DFBC3 /* CoreTelephony.framework */; };
+		A4E26D801CF84922004DFBC3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E26D7F1CF84922004DFBC3 /* libsqlite3.tbd */; };
+		A4E26D821CF8492B004DFBC3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E26D811CF8492B004DFBC3 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,8 +91,8 @@
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A4E26C8C1CF84042004DFBC3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A4E26C8D1CF84042004DFBC3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A4E26C8C1CF84042004DFBC3 /* homeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = homeViewController.h; sourceTree = "<group>"; };
+		A4E26C8D1CF84042004DFBC3 /* homeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeViewController.m; sourceTree = "<group>"; };
 		A4E26C901CF84042004DFBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4E26C921CF84042004DFBC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4E26C951CF84042004DFBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -188,7 +204,24 @@
 		A4E26D431CF843FA004DFBC3 /* topBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topBarView.m; sourceTree = "<group>"; };
 		A4E26D501CF8445F004DFBC3 /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
 		A4E26D511CF8445F004DFBC3 /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
-		A4E26D521CF8445F004DFBC3 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A4E26D541CF84654004DFBC3 /* baseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseViewController.h; sourceTree = "<group>"; };
+		A4E26D551CF84654004DFBC3 /* baseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseViewController.m; sourceTree = "<group>"; };
+		A4E26D561CF84654004DFBC3 /* baseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = baseViewController.xib; sourceTree = "<group>"; };
+		A4E26D661CF8473F004DFBC3 /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
+		A4E26D671CF8473F004DFBC3 /* 上午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午1.png"; sourceTree = "<group>"; };
+		A4E26D681CF8473F004DFBC3 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
+		A4E26D691CF8473F004DFBC3 /* 下午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午1.png"; sourceTree = "<group>"; };
+		A4E26D6A1CF8473F004DFBC3 /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
+		A4E26D6B1CF8473F004DFBC3 /* 夜间1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间1.png"; sourceTree = "<group>"; };
+		A4E26D721CF84867004DFBC3 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		A4E26D731CF84867004DFBC3 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		A4E26D741CF84867004DFBC3 /* SideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
+		A4E26D771CF848F7004DFBC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A4E26D781CF848F7004DFBC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A4E26D791CF848F7004DFBC3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A4E26D7D1CF84914004DFBC3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		A4E26D7F1CF84922004DFBC3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A4E26D811CF8492B004DFBC3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C5983FA2D9325FA1EAD7D0CC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -198,7 +231,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E26D821CF8492B004DFBC3 /* libz.tbd in Frameworks */,
+				A4E26D801CF84922004DFBC3 /* libsqlite3.tbd in Frameworks */,
+				A4E26D7E1CF84914004DFBC3 /* CoreTelephony.framework in Frameworks */,
+				A4E26D7C1CF848F7004DFBC3 /* FBSDKShareKit.framework in Frameworks */,
 				1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */,
+				A4E26D7A1CF848F7004DFBC3 /* FBSDKCoreKit.framework in Frameworks */,
+				A4E26D7B1CF848F7004DFBC3 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,15 +267,20 @@
 			children = (
 				A4E26D501CF8445F004DFBC3 /* CommonUtility.h */,
 				A4E26D511CF8445F004DFBC3 /* CommonUtility.m */,
-				A4E26D521CF8445F004DFBC3 /* PrefixHeader.pch */,
 				A4E26D4F1CF84401004DFBC3 /* customized view */,
 				A4E26CAA1CF841EC004DFBC3 /* 3rd-party */,
 				A4E26D2D1CF8439A004DFBC3 /* modal */,
 				A4E26C891CF84042004DFBC3 /* AppDelegate.h */,
 				A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */,
-				A4E26C8C1CF84042004DFBC3 /* ViewController.h */,
-				A4E26C8D1CF84042004DFBC3 /* ViewController.m */,
+				A4E26C8C1CF84042004DFBC3 /* homeViewController.h */,
+				A4E26C8D1CF84042004DFBC3 /* homeViewController.m */,
 				A4E26C8F1CF84042004DFBC3 /* Main.storyboard */,
+				A4E26D721CF84867004DFBC3 /* SideMenuViewController.h */,
+				A4E26D731CF84867004DFBC3 /* SideMenuViewController.m */,
+				A4E26D741CF84867004DFBC3 /* SideMenuViewController.xib */,
+				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
+				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
+				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
 				A4E26C921CF84042004DFBC3 /* Assets.xcassets */,
 				A4E26C941CF84042004DFBC3 /* LaunchScreen.storyboard */,
 				A4E26C971CF84042004DFBC3 /* Info.plist */,
@@ -248,6 +292,7 @@
 		A4E26C861CF84042004DFBC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4E26D651CF8473F004DFBC3 /* backgrounds */,
 				A4E26C871CF84042004DFBC3 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -459,6 +504,19 @@
 			name = "customized view";
 			sourceTree = "<group>";
 		};
+		A4E26D651CF8473F004DFBC3 /* backgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				A4E26D661CF8473F004DFBC3 /* 上午.png */,
+				A4E26D671CF8473F004DFBC3 /* 上午1.png */,
+				A4E26D681CF8473F004DFBC3 /* 下午.png */,
+				A4E26D691CF8473F004DFBC3 /* 下午1.png */,
+				A4E26D6A1CF8473F004DFBC3 /* 夜间.png */,
+				A4E26D6B1CF8473F004DFBC3 /* 夜间1.png */,
+			);
+			path = backgrounds;
+			sourceTree = "<group>";
+		};
 		BD527EC3E21E48CBE229C777 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +529,12 @@
 		C80F2DC47583D05BFC322F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4E26D811CF8492B004DFBC3 /* libz.tbd */,
+				A4E26D7F1CF84922004DFBC3 /* libsqlite3.tbd */,
+				A4E26D7D1CF84914004DFBC3 /* CoreTelephony.framework */,
+				A4E26D771CF848F7004DFBC3 /* FBSDKCoreKit.framework */,
+				A4E26D781CF848F7004DFBC3 /* FBSDKLoginKit.framework */,
+				A4E26D791CF848F7004DFBC3 /* FBSDKShareKit.framework */,
 				C5983FA2D9325FA1EAD7D0CC /* libPods.a */,
 			);
 			name = Frameworks;
@@ -538,9 +602,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4E26D151CF842E1004DFBC3 /* Info.plist in Resources */,
+				A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */,
+				A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */,
+				A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */,
+				A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */,
+				A4E26D701CF8473F004DFBC3 /* 夜间.png in Resources */,
 				A4E26CA81CF841CA004DFBC3 /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
+				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
+				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
+				A4E26D6C1CF8473F004DFBC3 /* 上午.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
 				A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */,
@@ -608,11 +680,13 @@
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
 				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
+				A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */,
 				A4E26D2A1CF84385004DFBC3 /* categoryObject.m in Sources */,
 				A4E26D471CF843FA004DFBC3 /* dateSelectView.m in Sources */,
-				A4E26C8E1CF84042004DFBC3 /* ViewController.m in Sources */,
+				A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */,
 				A4E26D4E1CF843FA004DFBC3 /* topBarView.m in Sources */,
 				A4E26D0D1CF842E1004DFBC3 /* RATreeNodeItem+Private.m in Sources */,
+				A4E26D751CF84867004DFBC3 /* SideMenuViewController.m in Sources */,
 				A4E26D0E1CF842E1004DFBC3 /* RATreeNodeItem.m in Sources */,
 				A4E26D211CF842F5004DFBC3 /* MFSideMenuContainerViewController.m in Sources */,
 				A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */,
@@ -765,6 +839,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DaysInLine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.DaysInLine;
@@ -778,6 +856,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = DaysInLine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.DaysInLine;
