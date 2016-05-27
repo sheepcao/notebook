@@ -52,6 +52,21 @@
 		A4E26D211CF842F5004DFBC3 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D1B1CF842F5004DFBC3 /* MFSideMenuContainerViewController.m */; };
 		A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D1D1CF842F5004DFBC3 /* MFSideMenuShadow.m */; };
 		A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D1F1CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m */; };
+		A4E26D2A1CF84385004DFBC3 /* categoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D251CF84385004DFBC3 /* categoryObject.m */; };
+		A4E26D2B1CF84385004DFBC3 /* itemObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D271CF84385004DFBC3 /* itemObj.m */; };
+		A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D291CF84385004DFBC3 /* RADataObject.m */; };
+		A4E26D441CF843FA004DFBC3 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D2F1CF843FA004DFBC3 /* BottomView.m */; };
+		A4E26D451CF843FA004DFBC3 /* categoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D311CF843FA004DFBC3 /* categoryButton.m */; };
+		A4E26D461CF843FA004DFBC3 /* constellationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D331CF843FA004DFBC3 /* constellationView.m */; };
+		A4E26D471CF843FA004DFBC3 /* dateSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D351CF843FA004DFBC3 /* dateSelectView.m */; };
+		A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D371CF843FA004DFBC3 /* dateShowView.m */; };
+		A4E26D491CF843FA004DFBC3 /* gradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D391CF843FA004DFBC3 /* gradientButton.m */; };
+		A4E26D4A1CF843FA004DFBC3 /* LuckyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D3B1CF843FA004DFBC3 /* LuckyLabel.m */; };
+		A4E26D4B1CF843FA004DFBC3 /* numberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D3D1CF843FA004DFBC3 /* numberPadButton.m */; };
+		A4E26D4C1CF843FA004DFBC3 /* pickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D3F1CF843FA004DFBC3 /* pickerLabel.m */; };
+		A4E26D4D1CF843FA004DFBC3 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D411CF843FA004DFBC3 /* roundFrameLabel.m */; };
+		A4E26D4E1CF843FA004DFBC3 /* topBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D431CF843FA004DFBC3 /* topBarView.m */; };
+		A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D511CF8445F004DFBC3 /* CommonUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +158,37 @@
 		A4E26D1D1CF842F5004DFBC3 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		A4E26D1E1CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
 		A4E26D1F1CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		A4E26D241CF84385004DFBC3 /* categoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryObject.h; sourceTree = "<group>"; };
+		A4E26D251CF84385004DFBC3 /* categoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryObject.m; sourceTree = "<group>"; };
+		A4E26D261CF84385004DFBC3 /* itemObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemObj.h; sourceTree = "<group>"; };
+		A4E26D271CF84385004DFBC3 /* itemObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemObj.m; sourceTree = "<group>"; };
+		A4E26D281CF84385004DFBC3 /* RADataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RADataObject.h; sourceTree = "<group>"; };
+		A4E26D291CF84385004DFBC3 /* RADataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RADataObject.m; sourceTree = "<group>"; };
+		A4E26D2E1CF843FA004DFBC3 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
+		A4E26D2F1CF843FA004DFBC3 /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
+		A4E26D301CF843FA004DFBC3 /* categoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryButton.h; sourceTree = "<group>"; };
+		A4E26D311CF843FA004DFBC3 /* categoryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryButton.m; sourceTree = "<group>"; };
+		A4E26D321CF843FA004DFBC3 /* constellationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constellationView.h; sourceTree = "<group>"; };
+		A4E26D331CF843FA004DFBC3 /* constellationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = constellationView.m; sourceTree = "<group>"; };
+		A4E26D341CF843FA004DFBC3 /* dateSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateSelectView.h; sourceTree = "<group>"; };
+		A4E26D351CF843FA004DFBC3 /* dateSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateSelectView.m; sourceTree = "<group>"; };
+		A4E26D361CF843FA004DFBC3 /* dateShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateShowView.h; sourceTree = "<group>"; };
+		A4E26D371CF843FA004DFBC3 /* dateShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateShowView.m; sourceTree = "<group>"; };
+		A4E26D381CF843FA004DFBC3 /* gradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gradientButton.h; sourceTree = "<group>"; };
+		A4E26D391CF843FA004DFBC3 /* gradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gradientButton.m; sourceTree = "<group>"; };
+		A4E26D3A1CF843FA004DFBC3 /* LuckyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuckyLabel.h; sourceTree = "<group>"; };
+		A4E26D3B1CF843FA004DFBC3 /* LuckyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuckyLabel.m; sourceTree = "<group>"; };
+		A4E26D3C1CF843FA004DFBC3 /* numberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = numberPadButton.h; sourceTree = "<group>"; };
+		A4E26D3D1CF843FA004DFBC3 /* numberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = numberPadButton.m; sourceTree = "<group>"; };
+		A4E26D3E1CF843FA004DFBC3 /* pickerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pickerLabel.h; sourceTree = "<group>"; };
+		A4E26D3F1CF843FA004DFBC3 /* pickerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerLabel.m; sourceTree = "<group>"; };
+		A4E26D401CF843FA004DFBC3 /* roundFrameLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roundFrameLabel.h; sourceTree = "<group>"; };
+		A4E26D411CF843FA004DFBC3 /* roundFrameLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = roundFrameLabel.m; sourceTree = "<group>"; };
+		A4E26D421CF843FA004DFBC3 /* topBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topBarView.h; sourceTree = "<group>"; };
+		A4E26D431CF843FA004DFBC3 /* topBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topBarView.m; sourceTree = "<group>"; };
+		A4E26D501CF8445F004DFBC3 /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
+		A4E26D511CF8445F004DFBC3 /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
+		A4E26D521CF8445F004DFBC3 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C5983FA2D9325FA1EAD7D0CC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -180,7 +226,12 @@
 		A4E26C851CF84042004DFBC3 /* DaysInLine */ = {
 			isa = PBXGroup;
 			children = (
+				A4E26D501CF8445F004DFBC3 /* CommonUtility.h */,
+				A4E26D511CF8445F004DFBC3 /* CommonUtility.m */,
+				A4E26D521CF8445F004DFBC3 /* PrefixHeader.pch */,
+				A4E26D4F1CF84401004DFBC3 /* customized view */,
 				A4E26CAA1CF841EC004DFBC3 /* 3rd-party */,
+				A4E26D2D1CF8439A004DFBC3 /* modal */,
 				A4E26C891CF84042004DFBC3 /* AppDelegate.h */,
 				A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */,
 				A4E26C8C1CF84042004DFBC3 /* ViewController.h */,
@@ -228,7 +279,6 @@
 				A4E26CAF1CF8421E004DFBC3 /* CHCSVParser */,
 				A4E26CAB1CF8420C004DFBC3 /* MLIAPManager */,
 				A4E26C9E1CF841CA004DFBC3 /* FlatDatePicker */,
-				A4E26C9D1CF841A3004DFBC3 /* global.h */,
 			);
 			name = "3rd-party";
 			sourceTree = "<group>";
@@ -364,6 +414,49 @@
 				A4E26D1F1CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m */,
 			);
 			path = MFSideMenu;
+			sourceTree = "<group>";
+		};
+		A4E26D2D1CF8439A004DFBC3 /* modal */ = {
+			isa = PBXGroup;
+			children = (
+				A4E26C9D1CF841A3004DFBC3 /* global.h */,
+				A4E26D241CF84385004DFBC3 /* categoryObject.h */,
+				A4E26D251CF84385004DFBC3 /* categoryObject.m */,
+				A4E26D261CF84385004DFBC3 /* itemObj.h */,
+				A4E26D271CF84385004DFBC3 /* itemObj.m */,
+				A4E26D281CF84385004DFBC3 /* RADataObject.h */,
+				A4E26D291CF84385004DFBC3 /* RADataObject.m */,
+			);
+			name = modal;
+			sourceTree = "<group>";
+		};
+		A4E26D4F1CF84401004DFBC3 /* customized view */ = {
+			isa = PBXGroup;
+			children = (
+				A4E26D2E1CF843FA004DFBC3 /* BottomView.h */,
+				A4E26D2F1CF843FA004DFBC3 /* BottomView.m */,
+				A4E26D301CF843FA004DFBC3 /* categoryButton.h */,
+				A4E26D311CF843FA004DFBC3 /* categoryButton.m */,
+				A4E26D321CF843FA004DFBC3 /* constellationView.h */,
+				A4E26D331CF843FA004DFBC3 /* constellationView.m */,
+				A4E26D341CF843FA004DFBC3 /* dateSelectView.h */,
+				A4E26D351CF843FA004DFBC3 /* dateSelectView.m */,
+				A4E26D361CF843FA004DFBC3 /* dateShowView.h */,
+				A4E26D371CF843FA004DFBC3 /* dateShowView.m */,
+				A4E26D381CF843FA004DFBC3 /* gradientButton.h */,
+				A4E26D391CF843FA004DFBC3 /* gradientButton.m */,
+				A4E26D3A1CF843FA004DFBC3 /* LuckyLabel.h */,
+				A4E26D3B1CF843FA004DFBC3 /* LuckyLabel.m */,
+				A4E26D3C1CF843FA004DFBC3 /* numberPadButton.h */,
+				A4E26D3D1CF843FA004DFBC3 /* numberPadButton.m */,
+				A4E26D3E1CF843FA004DFBC3 /* pickerLabel.h */,
+				A4E26D3F1CF843FA004DFBC3 /* pickerLabel.m */,
+				A4E26D401CF843FA004DFBC3 /* roundFrameLabel.h */,
+				A4E26D411CF843FA004DFBC3 /* roundFrameLabel.m */,
+				A4E26D421CF843FA004DFBC3 /* topBarView.h */,
+				A4E26D431CF843FA004DFBC3 /* topBarView.m */,
+			);
+			name = "customized view";
 			sourceTree = "<group>";
 		};
 		BD527EC3E21E48CBE229C777 /* Pods */ = {
@@ -512,14 +605,21 @@
 			files = (
 				A4E26CD01CF84271004DFBC3 /* XHShareView.m in Sources */,
 				A4E26D201CF842F5004DFBC3 /* FabonacciNum.m in Sources */,
+				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
+				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
+				A4E26D2A1CF84385004DFBC3 /* categoryObject.m in Sources */,
+				A4E26D471CF843FA004DFBC3 /* dateSelectView.m in Sources */,
 				A4E26C8E1CF84042004DFBC3 /* ViewController.m in Sources */,
+				A4E26D4E1CF843FA004DFBC3 /* topBarView.m in Sources */,
 				A4E26D0D1CF842E1004DFBC3 /* RATreeNodeItem+Private.m in Sources */,
 				A4E26D0E1CF842E1004DFBC3 /* RATreeNodeItem.m in Sources */,
 				A4E26D211CF842F5004DFBC3 /* MFSideMenuContainerViewController.m in Sources */,
+				A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */,
 				A4E26CC81CF8425A004DFBC3 /* OpenShare+Weixin.m in Sources */,
 				A4E26D141CF842E1004DFBC3 /* RATreeView.m in Sources */,
 				A4E26CC61CF8425A004DFBC3 /* OpenShare+Renren.m in Sources */,
+				A4E26D451CF843FA004DFBC3 /* categoryButton.m in Sources */,
 				A4E26D121CF842E1004DFBC3 /* RATreeView+TableViewDataSource.m in Sources */,
 				A4E26CE31CF842CB004DFBC3 /* AFURLConnectionOperation.m in Sources */,
 				A4E26CE11CF842CB004DFBC3 /* AFHTTPRequestOperation.m in Sources */,
@@ -527,10 +627,13 @@
 				A4E26D0F1CF842E1004DFBC3 /* RATreeView+Enums.m in Sources */,
 				A4E26D111CF842E1004DFBC3 /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */,
+				A4E26D4C1CF843FA004DFBC3 /* pickerLabel.m in Sources */,
 				A4E26D0A1CF842E1004DFBC3 /* RATreeNode.m in Sources */,
+				A4E26D491CF843FA004DFBC3 /* gradientButton.m in Sources */,
 				A4E26CB21CF8421E004DFBC3 /* CHCSVParser.m in Sources */,
 				A4E26D071CF842E1004DFBC3 /* RABatchChangeEntity.m in Sources */,
 				A4E26CC51CF8425A004DFBC3 /* OpenShare+QQ.m in Sources */,
+				A4E26D441CF843FA004DFBC3 /* BottomView.m in Sources */,
 				A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A4E26CA91CF841CA004DFBC3 /* FlatDatePicker.m in Sources */,
 				A4E26D091CF842E1004DFBC3 /* RATableView.m in Sources */,
@@ -541,9 +644,14 @@
 				A4E26CC41CF8425A004DFBC3 /* OpenShare+Alipay.m in Sources */,
 				A4E26D131CF842E1004DFBC3 /* RATreeView+TableViewDelegate.m in Sources */,
 				A4E26C881CF84042004DFBC3 /* main.m in Sources */,
+				A4E26D2B1CF84385004DFBC3 /* itemObj.m in Sources */,
+				A4E26D4A1CF843FA004DFBC3 /* LuckyLabel.m in Sources */,
 				A4E26CB51CF8422C004DFBC3 /* UIDevice-Hardware.m in Sources */,
 				A4E26D081CF842E1004DFBC3 /* RABatchChanges.m in Sources */,
+				A4E26D461CF843FA004DFBC3 /* constellationView.m in Sources */,
+				A4E26D4B1CF843FA004DFBC3 /* numberPadButton.m in Sources */,
 				A4E26CE21CF842CB004DFBC3 /* AFHTTPRequestOperationManager.m in Sources */,
+				A4E26D4D1CF843FA004DFBC3 /* roundFrameLabel.m in Sources */,
 				A4E26CC71CF8425A004DFBC3 /* OpenShare+Weibo.m in Sources */,
 				A4E26D101CF842E1004DFBC3 /* RATreeView+Private.m in Sources */,
 			);
