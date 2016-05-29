@@ -11,6 +11,7 @@
 
 #import "FMDatabase.h"
 #import "MobClick.h"
+#import "myTextLabel.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -39,7 +40,7 @@
 
 
 #define PieHeight 270
-#define summaryViewHeight 160
+#define summaryViewHeight 40
 #define bottomBar 50
 #define rowHeight 48
 #define topBarHeight 75

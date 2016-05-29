@@ -44,12 +44,14 @@
 -(NSString *)dbPath
 {
     NSString *docsPath = [self docsPath];
-    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"JianBu.db"];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"infoNew.sqlite"];
     return dbPath;
 }
 -(NSString *)docsPath
 {
-    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
+    NSString *docsPath = [storeURL path];
+    
     return docsPath;
 }
 

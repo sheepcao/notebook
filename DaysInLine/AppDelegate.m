@@ -38,6 +38,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    
     NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
     if (!autoSwitchString) {
         [[NSUserDefaults standardUserDefaults] setObject:@"on" forKey:AUTOSWITCH];
@@ -52,7 +55,7 @@
     self.window.rootViewController = container;
     
     [self initDB];
-    [self judgeTimeFrame];
+//    [self judgeTimeFrame];
     [self configShare];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
