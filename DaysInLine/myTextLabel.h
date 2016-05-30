@@ -12,4 +12,5 @@
 
 -(id)initWithFrame:(CGRect)frame andFontName:(NSString *)name andSize:(CGFloat)fontSize;
 -(id)initWithFrame:(CGRect)frame andSize:(CGFloat)fontSize;
+-(id)initWithFrame:(CGRect)frame andColor:(UIColor *)textColor;
 @end

@@ -7,20 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "myTextLabel.h"
 
-@interface myMaskTableViewCell : UITableViewCell
+@interface myWorkTableViewCell : UITableViewCell
 {
     CGFloat fontSize;
 
 }
 
 @property (nonatomic,strong) UILabel *category;
-@property (nonatomic,strong) UILabel *title;
-@property (nonatomic,strong) UILabel *money;
+@property (nonatomic,strong) UILabel *note;
 @property (nonatomic,strong) UIView *seperator;
+@property (nonatomic,strong) UIView *line;
+@property (nonatomic,strong) UIView *midLine;
+@property (nonatomic,strong) myTextLabel *itemTimeLabel;
 
 
 - (void)maskCellFromTop:(CGFloat)margin;
--(void)makeTextStyle:(UIColor *)myColor;
+-(void)makeTextStyle;
 -(void)makeColor:(NSString *)category;
+//-(void)makeMidLine:(UIColor *)myColor withHeight:(CGFloat)heigh;
 @end

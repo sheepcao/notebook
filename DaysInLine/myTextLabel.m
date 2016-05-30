@@ -60,5 +60,20 @@
     
 }
 
+-(id)initWithFrame:(CGRect)frame andColor:(UIColor *)textColor
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.textAlignment = NSTextAlignmentCenter;
+        self.backgroundColor = [UIColor clearColor];
+        self.textColor = textColor ;
+        self.adjustsFontSizeToFitWidth = YES;
+        
+        
+    }
+    return self;
+    
+}
+
 
 @end

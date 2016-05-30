@@ -16,18 +16,77 @@
 #import "pickerLabel.h"
 #import "calendarViewController.h"
 #import "constellationView.h"
-#import "myMaskTableViewCell.h"
+#import "myLifeTableViewCell.h"
+#import "myWorkTableViewCell.h"
+#import "itemObj.h"
 
 @interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSMutableArray *todayItems;
 @property (nonatomic,strong)  constellationView *myConstellView;
+@property (nonatomic,strong) UIView *summaryView;
 @end
 
 @implementation homeViewController
+@synthesize summaryView;
+@synthesize db;
+
+- (void)configUIAppearance{
+    NSLog(@"home config ui ");
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
+    if ([showModel isEqualToString:@"上午"]) {
+        self.myTextColor = TextColor0;
+    }else if([showModel isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor3;
+    }
+    NSString *backName;
+    if (!showModel) {
+        backName = @"上午.png";
+    }else
+    {
+        backName  = [NSString stringWithFormat:@"%@.png",showModel];
+    }
+    
+    if (!self.myBackImage)
+    {
+        self.myBackImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.myBackImage setImage:[UIImage imageNamed:backName]];
+        [self.view addSubview:self.myBackImage];
+        [self.view sendSubviewToBack:self.myBackImage];
+        [self.view setNeedsDisplay];
+    }else
+    {
+        [self.myBackImage setImage:[UIImage imageNamed:backName]];
+    }
+    
+    [self.maintableView reloadData];
+    [self configTextColor];
+    
+    
+}
+
+- (void)registerLuckChangedNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(configLuckyText)
+                                                 name:LuckChanged
+                                               object:nil];
+}
+
+-(void)configTextColor
+{
+    [self.titleTextLabel setTextColor:self.myTextColor];
+    [self.TimelineText setTextColor:self.myTextColor];
+    [self.luckyText setTextColor:self.myTextColor];
+    [self.constellationButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self registerLuckChangedNotification];
+
+    [self prepareData];
     
     if (IS_IPHONE_6P) {
         bottomHeight = 65;
@@ -48,11 +107,16 @@
     self.TimelineText.alpha = 0.0f;
     
     [self configLuckyText];
+    [self configTextColor];
+
     
     self.navigationController.navigationBarHidden = YES;
     self.luckyText.alpha = 1.0f;
     
     self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT- bottomHeight -topBarHeight) style:UITableViewStylePlain];
+    
+//    self.maintableView.backgroundColor = [UIColor colorWithPatternImage:self.myBackImage.image];
+
     self.maintableView.showsVerticalScrollIndicator = NO;
     self.maintableView.backgroundColor = [UIColor clearColor];
     self.maintableView.delegate = self;
@@ -65,6 +129,7 @@
     [self.view addSubview:self.maintableView];
     [self.view bringSubviewToFront:self.maintableView];
     
+    [self configHeaderView];
     
     moneyLuckSpace = self.luckView.frame.size.height + self.luckView.frame.origin.y - topBarHeight;
 //    if (IS_IPHONE_5) {
@@ -79,6 +144,12 @@
 //    {
 //        moneyLuckSpace = moneyLuckSpace-38;
 //    }
+//    
+    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, moneyLuckSpace+ 15, 1, self.maintableView.frame.size.height)];
+    midLine.backgroundColor = self.myTextColor;
+    [self.maintableView addSubview:midLine];
+    [self.maintableView sendSubviewToBack:midLine];
+
     
     if ([CommonUtility isSystemLangChinese]) {
         [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
@@ -122,6 +193,33 @@
     
 }
 
+-(void)prepareData
+{
+    self.todayItems = [[NSMutableArray alloc] init];
+    itemObj *oneItem = [[itemObj alloc] init];
+    oneItem.itemCategory = @"水电煤";
+    oneItem.itemDescription = @"快速华盛顿参加宁夏可刺激啊设备出口下降啊";
+    oneItem.itemType = 1;
+    
+    itemObj *oneItem2 = [[itemObj alloc] init];
+    oneItem2.itemCategory = @"旅游";
+    oneItem2.itemDescription = @"快速的是法国今年的咖啡结核杆菌对话方式带来健康";
+    oneItem2.itemType = 0;
+    
+    itemObj *oneItem3 = [[itemObj alloc] init];
+    oneItem3.itemCategory = @"阅读";
+    oneItem3.itemDescription = @"萨肯的杀菌开始的解放路弗兰克";
+    oneItem3.itemType = 1;
+
+    [self.todayItems addObject:oneItem];
+    [self.todayItems addObject:oneItem2];
+    [self.todayItems addObject:oneItem3];
+
+
+    [self.maintableView reloadData];
+    
+}
+
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
@@ -156,6 +254,30 @@
     if ([CommonUtility isSystemLangChinese]) {
         [[CommonUtility sharedCommonUtility] fetchConstellation:Constellation ForView:self.luckyText];
     }
+}
+
+-(void)configHeaderView
+{
+    summaryView = [[UIView alloc] initWithFrame:CGRectMake(self.maintableView.frame.origin.x, 0, self.maintableView.frame.size.width, summaryViewHeight)];
+    summaryView.backgroundColor = [UIColor clearColor];
+    
+    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, 15, 1, summaryViewHeight-15)];
+    midLine.backgroundColor = self.myTextColor;
+    [summaryView addSubview:midLine];
+
+    myTextLabel *workLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(0, 0, summaryView.frame.size.width/2, summaryViewHeight) andColor:self.myTextColor];
+    [workLabel setText:NSLocalizedString(@"工作",nil)];
+    UIView *bottomLine = [[UIView alloc ] initWithFrame:CGRectMake(workLabel.frame.size.width/8, workLabel.frame.size.height - 11, workLabel.frame.size.width*3/4, 1)];
+    bottomLine.backgroundColor = self.myTextColor;
+    [workLabel addSubview:bottomLine];
+    [summaryView addSubview:workLabel];
+    
+    myTextLabel *lifeLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(summaryView.frame.size.width/2, 0, summaryView.frame.size.width/2, summaryViewHeight) andColor:self.myTextColor];
+    [lifeLabel setText:NSLocalizedString(@"生活",nil)];
+    UIView *bottomLine2 = [[UIView alloc ] initWithFrame:CGRectMake(workLabel.frame.size.width/8, workLabel.frame.size.height - 11, workLabel.frame.size.width*3/4, 1)];
+    bottomLine2.backgroundColor = self.myTextColor;
+    [lifeLabel addSubview:bottomLine2];
+    [summaryView addSubview:lifeLabel];
 }
 
 
@@ -252,6 +374,13 @@
             return moneyLuckSpace;
         }
         return 0;
+    }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
+        if (self.todayItems.count == 0) {
+            return rowHeight;
+        }else
+        {
+            return (self.maintableView.frame.size.height - summaryViewHeight - (rowHeight * self.todayItems.count));
+        }
     }else
         return rowHeight;
 }
@@ -259,7 +388,7 @@
 {
     if (section == 0) {
         return 0;
-    }else if (section == 1) {
+    }else if (section == 1 ) {
         return summaryViewHeight;
     }else
         return 0;
@@ -290,27 +419,6 @@
         return nil;
     }else if (section == 1)
     {
-        UIView *summaryView = [[UIView alloc] initWithFrame:CGRectMake(tableView.frame.origin.x, 0, tableView.frame.size.width, summaryViewHeight)];
-        summaryView.backgroundColor = [UIColor clearColor];
-        
-        UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(tableView.frame.size.width/2 -0.5, 10, 1, summaryViewHeight -10)];
-        midline.backgroundColor = [UIColor colorWithWhite:0.9f alpha:0.8];
-        [summaryView addSubview:midline];
-        
-        myTextLabel *workLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width/2, summaryViewHeight)];
-        [workLabel setText:NSLocalizedString(@"工作",nil)];
-        UIView *bottomLine = [[UIView alloc ] initWithFrame:CGRectMake(workLabel.frame.size.width/8, workLabel.frame.size.height - 1, workLabel.frame.size.width*3/4, 1)];
-        bottomLine.backgroundColor = [UIColor colorWithWhite:0.9f alpha:0.8];
-        [workLabel addSubview:bottomLine];
-        [summaryView addSubview:workLabel];
-        
-        myTextLabel *lifeLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width/2, 0, tableView.frame.size.width/2, summaryViewHeight)];
-        [lifeLabel setText:NSLocalizedString(@"生活",nil)];
-        UIView *bottomLine2 = [[UIView alloc ] initWithFrame:CGRectMake(workLabel.frame.size.width/8, workLabel.frame.size.height - 1, workLabel.frame.size.width*3/4, 1)];
-        bottomLine2.backgroundColor = [UIColor colorWithWhite:0.9f alpha:0.8];
-        [lifeLabel addSubview:bottomLine2];
-        [summaryView addSubview:lifeLabel];
-        
         return summaryView;
     }else
         return nil;
@@ -323,14 +431,8 @@
         return 1;
     }else if(section == 1)
     {
-        if (self.todayItems.count == 0) {
-            if (IS_IPHONE_6P || IS_IPHONE_4_OR_LESS) {
-                return ((self.maintableView.frame.size.height-summaryViewHeight )/rowHeight);
-            }else
-                return ((self.maintableView.frame.size.height-summaryViewHeight )/rowHeight)+1;
-        }
-        
-        return self.todayItems.count<((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)+1:self.todayItems.count + 1;
+
+        return self.todayItems.count<((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)?self.todayItems.count +1:self.todayItems.count ;
     }else
     {
         return self.todayItems.count;
@@ -353,26 +455,76 @@
         
         return cell;
         
-    }else
-    {// 补全table content 的实际长度，以便可以滑上去
-        NSString *CellIdentifier = @"Cell";
+    }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count)
+    {
+        NSString *CellIdentifier = @"CellFill1";
         
-        myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        myLifeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[myMaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[myLifeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
+            
         }
+        
         return cell;
+    }else 
+    {
+        NSString *category = @"";
+        NSString *description = @"";
+        int itemType = -1;
+        if(self.todayItems.count>indexPath.row)
+        {
+            itemObj *oneItem = self.todayItems[indexPath.row];
+            category = oneItem.itemCategory;
+            description = oneItem.itemDescription;
+            itemType = oneItem.itemType;
+        }
+        
+        if (itemType == 0) {
+            NSString *CellItemIdentifier = @"CellWork";
+            myWorkTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellItemIdentifier];
+            if (cell == nil) {
+                cell = [[myWorkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellItemIdentifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor clearColor];
+                
+            }
+            [cell.category setText:category];
+            [cell.note setText:description];
+            [cell.itemTimeLabel setText:@"14:20 — 15:20"];
+            
+            [cell makeColor:category];
+            [cell makeTextStyle];
+            return cell;
+
+
+        }else
+        {
+            NSString *CellItemIdentifier = @"CellLife";
+            myLifeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellItemIdentifier];
+            if (cell == nil) {
+                cell = [[myLifeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellItemIdentifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor clearColor];
+                
+            }
+            [cell.category setText:category];
+            [cell.note setText:description];
+            [cell.itemTimeLabel setText:@"15:50 — 16:20"];
+
+            [cell makeColor:category];
+            [cell makeTextStyle];
+            return cell;
+        }
     }
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     for (UITableViewCell *cell in self.maintableView.visibleCells) {
-        if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
-            myMaskTableViewCell *oneCell = (myMaskTableViewCell *)cell;
+        if ([cell isKindOfClass:[myLifeTableViewCell class]]) {
+            myLifeTableViewCell *oneCell = (myLifeTableViewCell *)cell;
             CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 [oneCell maskCellFromTop:hiddenFrameHeight];

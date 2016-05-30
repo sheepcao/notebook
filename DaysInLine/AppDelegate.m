@@ -55,7 +55,7 @@
     self.window.rootViewController = container;
     
     [self initDB];
-//    [self judgeTimeFrame];
+    [self judgeTimeFrame];
     [self configShare];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -246,11 +246,8 @@
         hour = [cal component:NSCalendarUnitHour fromDate:date];
     }
     
-    if (hour>6 &&hour<12) {
+    if (hour>6 &&hour<18) {
         [[NSUserDefaults standardUserDefaults] setObject:@"上午" forKey:SHOWMODEL];
-    }else if(hour>=12 &&hour<19)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"下午" forKey:SHOWMODEL];
     }else
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"夜间" forKey:SHOWMODEL];

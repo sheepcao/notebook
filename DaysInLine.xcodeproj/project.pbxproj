@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5983FA2D9325FA1EAD7D0CC /* libPods.a */; };
 		A49E62421CFB2AEE0047011B /* myTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62411CFB2AEE0047011B /* myTextLabel.m */; };
-		A49E62451CFB2E280047011B /* myMaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62441CFB2E280047011B /* myMaskTableViewCell.m */; };
+		A49E62451CFB2E280047011B /* myLifeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62441CFB2E280047011B /* myLifeTableViewCell.m */; };
+		A4A9779C1CFC23B900099E4F /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A9779B1CFC23B900099E4F /* 上午.png */; };
+		A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A9779E1CFC24DA00099E4F /* TimeLineTableView.m */; };
+		A4A977A21CFC29B100099E4F /* myWorkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977A11CFC29B100099E4F /* myWorkTableViewCell.m */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
@@ -71,7 +74,6 @@
 		A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D511CF8445F004DFBC3 /* CommonUtility.m */; };
 		A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D551CF84654004DFBC3 /* baseViewController.m */; };
 		A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D561CF84654004DFBC3 /* baseViewController.xib */; };
-		A4E26D6C1CF8473F004DFBC3 /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D661CF8473F004DFBC3 /* 上午.png */; };
 		A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D671CF8473F004DFBC3 /* 上午1.png */; };
 		A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D681CF8473F004DFBC3 /* 下午.png */; };
 		A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D691CF8473F004DFBC3 /* 下午1.png */; };
@@ -96,9 +98,14 @@
 		79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A49E62401CFB2AEE0047011B /* myTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTextLabel.h; sourceTree = "<group>"; };
 		A49E62411CFB2AEE0047011B /* myTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTextLabel.m; sourceTree = "<group>"; };
-		A49E62431CFB2E280047011B /* myMaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myMaskTableViewCell.h; sourceTree = "<group>"; };
-		A49E62441CFB2E280047011B /* myMaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myMaskTableViewCell.m; sourceTree = "<group>"; };
+		A49E62431CFB2E280047011B /* myLifeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myLifeTableViewCell.h; sourceTree = "<group>"; };
+		A49E62441CFB2E280047011B /* myLifeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myLifeTableViewCell.m; sourceTree = "<group>"; };
 		A49E62471CFB32020047011B /* DaysInLine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DaysInLine.entitlements; sourceTree = "<group>"; };
+		A4A9779B1CFC23B900099E4F /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
+		A4A9779D1CFC24DA00099E4F /* TimeLineTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineTableView.h; sourceTree = "<group>"; };
+		A4A9779E1CFC24DA00099E4F /* TimeLineTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLineTableView.m; sourceTree = "<group>"; };
+		A4A977A01CFC29B100099E4F /* myWorkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myWorkTableViewCell.h; sourceTree = "<group>"; };
+		A4A977A11CFC29B100099E4F /* myWorkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myWorkTableViewCell.m; sourceTree = "<group>"; };
 		A4E26C831CF84042004DFBC3 /* DaysInLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaysInLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -219,7 +226,6 @@
 		A4E26D541CF84654004DFBC3 /* baseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseViewController.h; sourceTree = "<group>"; };
 		A4E26D551CF84654004DFBC3 /* baseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseViewController.m; sourceTree = "<group>"; };
 		A4E26D561CF84654004DFBC3 /* baseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = baseViewController.xib; sourceTree = "<group>"; };
-		A4E26D661CF8473F004DFBC3 /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
 		A4E26D671CF8473F004DFBC3 /* 上午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午1.png"; sourceTree = "<group>"; };
 		A4E26D681CF8473F004DFBC3 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
 		A4E26D691CF8473F004DFBC3 /* 下午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午1.png"; sourceTree = "<group>"; };
@@ -265,8 +271,10 @@
 		A49E62461CFB2E2D0047011B /* cells */ = {
 			isa = PBXGroup;
 			children = (
-				A49E62431CFB2E280047011B /* myMaskTableViewCell.h */,
-				A49E62441CFB2E280047011B /* myMaskTableViewCell.m */,
+				A4A977A01CFC29B100099E4F /* myWorkTableViewCell.h */,
+				A4A977A11CFC29B100099E4F /* myWorkTableViewCell.m */,
+				A49E62431CFB2E280047011B /* myLifeTableViewCell.h */,
+				A49E62441CFB2E280047011B /* myLifeTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -533,6 +541,8 @@
 				A4E26D431CF843FA004DFBC3 /* topBarView.m */,
 				A49E62401CFB2AEE0047011B /* myTextLabel.h */,
 				A49E62411CFB2AEE0047011B /* myTextLabel.m */,
+				A4A9779D1CFC24DA00099E4F /* TimeLineTableView.h */,
+				A4A9779E1CFC24DA00099E4F /* TimeLineTableView.m */,
 			);
 			name = "customized view";
 			sourceTree = "<group>";
@@ -540,7 +550,7 @@
 		A4E26D651CF8473F004DFBC3 /* backgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				A4E26D661CF8473F004DFBC3 /* 上午.png */,
+				A4A9779B1CFC23B900099E4F /* 上午.png */,
 				A4E26D671CF8473F004DFBC3 /* 上午1.png */,
 				A4E26D681CF8473F004DFBC3 /* 下午.png */,
 				A4E26D691CF8473F004DFBC3 /* 下午1.png */,
@@ -672,9 +682,9 @@
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
-				A4E26D6C1CF8473F004DFBC3 /* 上午.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
+				A4A9779C1CFC23B900099E4F /* 上午.png in Resources */,
 				A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */,
 				A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
@@ -742,6 +752,7 @@
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
 				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
+				A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */,
 				A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */,
 				A4E26D931CFB0F7A004DFBC3 /* calendarViewController.m in Sources */,
 				A4E26D2A1CF84385004DFBC3 /* categoryObject.m in Sources */,
@@ -766,6 +777,7 @@
 				A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */,
 				A4E26D4C1CF843FA004DFBC3 /* pickerLabel.m in Sources */,
 				A4E26D0A1CF842E1004DFBC3 /* RATreeNode.m in Sources */,
+				A4A977A21CFC29B100099E4F /* myWorkTableViewCell.m in Sources */,
 				A4E26D491CF843FA004DFBC3 /* gradientButton.m in Sources */,
 				A4E26CB21CF8421E004DFBC3 /* CHCSVParser.m in Sources */,
 				A4E26D071CF842E1004DFBC3 /* RABatchChangeEntity.m in Sources */,
@@ -774,7 +786,7 @@
 				A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A4E26CA91CF841CA004DFBC3 /* FlatDatePicker.m in Sources */,
 				A49E62421CFB2AEE0047011B /* myTextLabel.m in Sources */,
-				A49E62451CFB2E280047011B /* myMaskTableViewCell.m in Sources */,
+				A49E62451CFB2E280047011B /* myLifeTableViewCell.m in Sources */,
 				A4E26D091CF842E1004DFBC3 /* RATableView.m in Sources */,
 				A4E26D0C1CF842E1004DFBC3 /* RATreeNodeController.m in Sources */,
 				A4E26D0B1CF842E1004DFBC3 /* RATreeNodeCollectionController.m in Sources */,

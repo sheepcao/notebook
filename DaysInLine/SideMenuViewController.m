@@ -19,7 +19,6 @@
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
-@property(nonatomic,strong) UIImageView *myBackImage;
 
 @end
 
@@ -78,8 +77,6 @@
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if ([showModel isEqualToString:@"上午"]) {
         self.myTextColor = TextColor0;
-    }else if([showModel isEqualToString:@"下午"]) {
-        self.myTextColor = TextColor1;
     }else if([showModel isEqualToString:@"夜间"]) {
         self.myTextColor = TextColor3;
     }

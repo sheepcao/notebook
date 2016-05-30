@@ -364,57 +364,6 @@
     return range.length != 0;
 }
 
--(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array
-{
-    NSMutableDictionary *incomeSortDic = [[NSMutableDictionary alloc] init];
-    for (NSObject *oneItem in array) {
-        if ([oneItem isKindOfClass:[itemObj class]]) {
-            itemObj *item = (itemObj *)oneItem;
-            if (item.itemType == 0) {
-                continue;
-            }
-            NSString *cateName = item.itemCategory;
-            double itemMoney = item.moneyAmount;
-            
-            NSNumber *savedMoney = [incomeSortDic objectForKey:cateName];
-            if (!savedMoney)
-            {
-                [incomeSortDic setObject:[NSNumber numberWithDouble:itemMoney] forKey:cateName];
-            }else
-            {
-                [incomeSortDic setObject:[NSNumber numberWithDouble:(itemMoney + [savedMoney doubleValue])] forKey:cateName];
-            }
-        }
-    }
-    return incomeSortDic;
-    
-}
-
--(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array
-{
-    NSMutableDictionary *expenseSortDic = [[NSMutableDictionary alloc] init];
-    for (NSObject *oneItem in array) {
-        if ([oneItem isKindOfClass:[itemObj class]]) {
-            itemObj *item = (itemObj *)oneItem;
-            if (item.itemType == 1) {
-                continue;
-            }
-            NSString *cateName = item.itemCategory;
-            double itemMoney = item.moneyAmount;
-            
-            NSNumber *savedMoney = [expenseSortDic objectForKey:cateName];
-            if (!savedMoney)
-            {
-                [expenseSortDic setObject:[NSNumber numberWithDouble:itemMoney] forKey:cateName];
-            }else
-            {
-                [expenseSortDic setObject:[NSNumber numberWithDouble:(itemMoney + [savedMoney doubleValue])] forKey:cateName];
-            }
-        }
-    }
-    return expenseSortDic;
-    
-}
 
 -(UIColor *)categoryColor:(NSString *)categoryName
 {
@@ -432,7 +381,7 @@
         double color_G = [rs doubleForColumn:@"color_G"];
         double color_B = [rs doubleForColumn:@"color_B"];
         
-        color = [UIColor colorWithRed:color_R/255.0f green:color_G/255.0f blue:color_B/255.0f alpha:0.85f ];
+        color = [UIColor colorWithRed:color_R/255.0f green:color_G/255.0f blue:color_B/255.0f alpha:1.0f ];
     }
     [db close];
     

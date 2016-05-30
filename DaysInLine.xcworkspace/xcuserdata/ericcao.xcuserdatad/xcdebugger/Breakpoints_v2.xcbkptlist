@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DaysInLine/AppDelegate.m"
-            timestampString = "486210925.036985"
+            filePath = "DaysInLine/homeViewController.m"
+            timestampString = "486288717.363759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-initDB"
+            startingLineNumber = "484"
+            endingLineNumber = "484"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
