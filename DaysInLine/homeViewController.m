@@ -19,6 +19,7 @@
 #import "myLifeTableViewCell.h"
 #import "myWorkTableViewCell.h"
 #import "itemObj.h"
+#import "itemDetailViewController.h"
 
 @interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
 @property (nonatomic,strong) FMDatabase *db;
@@ -37,7 +38,7 @@
     if ([showModel isEqualToString:@"上午"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"夜间"]) {
-        self.myTextColor = TextColor3;
+        self.myTextColor = TextColor2;
     }
     NSString *backName;
     if (!showModel) {
@@ -130,6 +131,7 @@
     [self.view bringSubviewToFront:self.maintableView];
     
     [self configHeaderView];
+    [self configBottomView];
     
     moneyLuckSpace = self.luckView.frame.size.height + self.luckView.frame.origin.y - topBarHeight;
 //    if (IS_IPHONE_5) {
@@ -322,6 +324,73 @@
 {
     [self.myConstellView removeDimView];
 }
+
+-(void)configBottomView
+{
+    if (IS_IPHONE_6P) {
+        bottomHeight = 65;
+    }else
+    {
+        bottomHeight = bottomBar;
+    }
+    
+    
+    BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-bottomHeight, SCREEN_WIDTH, bottomHeight)];
+    bottomView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:bottomView];
+    
+    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
+    [addNewButton setTitle:NSLocalizedString(@"+ 新事项",nil) forState:UIControlStateNormal];
+    [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    addNewButton.layer.borderColor = [UIColor grayColor].CGColor;
+    addNewButton.layer.borderWidth = 0.75;
+    
+    UIButton *trackButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
+    [trackButton setTitle:NSLocalizedString(@"日常跟进",nil) forState:UIControlStateNormal];
+    trackButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    trackButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [trackButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    trackButton.layer.borderColor = [UIColor grayColor].CGColor;
+    trackButton.layer.borderWidth = 0.75;
+    
+    [addNewButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
+    [trackButton addTarget:self action:@selector(trackItems:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [bottomView addSubview:trackButton];
+    [bottomView addSubview:addNewButton];
+    
+    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.4, 0, 0.8, bottomHeight)];
+    midLine.backgroundColor = [UIColor whiteColor];
+//    [bottomView addSubview:midLine];
+    
+}
+-(void)addNewItem:(UIButton *)sender
+{
+    
+    [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
+    
+}
+
+- (UIViewController *)nextAddNewItemViewController
+{
+    itemDetailViewController* addItemVC = [[itemDetailViewController alloc] init];
+    [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
+    addItemVC.isEditing = NO;
+//    NSDate *targetDay = [NSDate date];
+//    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+//    [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSCalendar *cal = [[NSCalendar alloc]
+//                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//    dateFormatter1.calendar = cal;
+//    
+//    NSString *targetDate = [dateFormatter1 stringFromDate:targetDay];
+//    addItemVC.targetDate = targetDate;
+    
+    return addItemVC;
+}
+
 
 #pragma mark picker delegate
 // pickerView 列数

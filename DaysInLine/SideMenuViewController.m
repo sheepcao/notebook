@@ -78,7 +78,7 @@
     if ([showModel isEqualToString:@"上午"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"夜间"]) {
-        self.myTextColor = TextColor3;
+        self.myTextColor = TextColor2;
     }
     NSString *backName;
     

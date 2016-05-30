@@ -58,6 +58,9 @@
  * Controls whether to show the coordinate axis. Default is NO.
  */
 @property (nonatomic, getter = isShowCoordinateAxis) BOOL showCoordinateAxis;
+@property  BOOL showAxisX;
+@property  BOOL showAxisY;
+
 @property (nonatomic) UIColor *axisColor;
 @property (nonatomic) CGFloat axisWidth;
 
@@ -82,7 +85,7 @@
 
 - (void)updateChartData:(NSArray *)data;
 
-
+-(void)prepareYLabelsWithData:(NSArray *)data;
 /**
  *  returns the Legend View, or nil if no chart data is present. 
  *  The origin of the legend frame is 0,0 but you can set it with setFrame:(CGRect)
@@ -92,7 +95,8 @@
  *  @return UIView of Legend
  */
 - (UIView*) getLegendWithMaxWidth:(CGFloat)mWidth;
-
+- (UIImageView*)drawOfaxisY;
 
 + (CGSize)sizeOfString:(NSString *)text withWidth:(float)width font:(UIFont *)font;
+
 @end
