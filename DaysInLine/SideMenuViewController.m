@@ -58,19 +58,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"sider->didReceiveMemoryWarning");
 }
 
-- (void)registerThemeChangedNotification{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleThemeChangedNotification:)
-                                                 name:ThemeChanged
-                                               object:nil];
-}
 
-- (void)handleThemeChangedNotification:(NSNotification*)notification{
-    
-    [self configUIAppearance];
-}
 
 - (void)configUIAppearance{
     NSLog(@"sidebar config ui ");

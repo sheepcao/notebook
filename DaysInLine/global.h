@@ -60,8 +60,8 @@
 
 #define normalColor [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1.0]
 
-//#define TextColor0 [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
-#define TextColor0 [UIColor colorWithRed:0.18 green:0.18 blue:0.18 alpha:1.0]
+#define TextColor0 [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
+//#define TextColor0 [UIColor colorWithRed:0.18 green:0.18 blue:0.18 alpha:1.0]
 #define TextColor1 [UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]
 #define TextColor2 [UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1.0]
 #define TextColor3 [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.0]

@@ -45,7 +45,7 @@
         self.category.layer.shadowColor = [UIColor blackColor].CGColor;
         self.category.layer.shadowOpacity = 0.8;
         self.category.layer.shadowRadius = 2;
-        self.category.layer.shadowOffset = CGSizeMake(1.6f, 0.8f);
+        self.category.layer.shadowOffset = CGSizeMake(1.2f, 0.6f);
         
         
         if (IS_IPHONE_5_OR_LESS) {

@@ -26,6 +26,10 @@
 @property (nonatomic,strong) NSMutableArray *todayItems;
 @property (nonatomic,strong)  constellationView *myConstellView;
 @property (nonatomic,strong) UIView *summaryView;
+
+@property (nonatomic,strong) UIButton *addNewBtn;
+@property (nonatomic,strong) UIButton *trackBtn;
+
 @end
 
 @implementation homeViewController
@@ -80,6 +84,12 @@
     [self.luckyText setTextColor:self.myTextColor];
     [self.constellationButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     
+    
+    [self.addNewBtn setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    self.addNewBtn.layer.borderColor = self.myTextColor.CGColor;
+    [self.trackBtn setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    self.trackBtn.layer.borderColor = self.myTextColor.CGColor;
+    
 }
 
 
@@ -88,13 +98,7 @@
     [self registerLuckChangedNotification];
 
     [self prepareData];
-    
-    if (IS_IPHONE_6P) {
-        bottomHeight = 65;
-    }else
-    {
-        bottomHeight = bottomBar;
-    }
+
     
     constellationList = [[NSArray alloc]initWithObjects:@"白羊座     3.21-4.19",@"金牛座     4.20-5.20",@"双子座     5.21-6.21",@"巨蟹座     6.22-7.22",@"狮子座     7.23-8.22",@"处女座     8.23-9.22",@"天秤座     9.23-10.23",@"天蝎座     10.24-11.22",@"射手座     11.23-12.21",@"摩羯座     12.22-1.19",@"水瓶座     1.20-2.18",@"双鱼座     2.19-3.20",nil];
     constellationSelected = constellationList[0];
@@ -113,6 +117,13 @@
     
     self.navigationController.navigationBarHidden = YES;
     self.luckyText.alpha = 1.0f;
+    
+    if (IS_IPHONE_6P) {
+        bottomHeight = 65;
+    }else
+    {
+        bottomHeight = bottomBar;
+    }
     
     self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT- bottomHeight -topBarHeight) style:UITableViewStylePlain];
     
@@ -327,16 +338,11 @@
 
 -(void)configBottomView
 {
-    if (IS_IPHONE_6P) {
-        bottomHeight = 65;
-    }else
-    {
-        bottomHeight = bottomBar;
-    }
-    
+
     
     BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-bottomHeight, SCREEN_WIDTH, bottomHeight)];
     bottomView.backgroundColor = [UIColor clearColor];
+    
     [self.view addSubview:bottomView];
     
     UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
@@ -344,16 +350,18 @@
     [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    addNewButton.layer.borderColor = [UIColor grayColor].CGColor;
+    addNewButton.layer.borderColor = self.myTextColor.CGColor;
     addNewButton.layer.borderWidth = 0.75;
+    self.addNewBtn = addNewButton;
     
     UIButton *trackButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
     [trackButton setTitle:NSLocalizedString(@"日常跟进",nil) forState:UIControlStateNormal];
     trackButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     trackButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [trackButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
-    trackButton.layer.borderColor = [UIColor grayColor].CGColor;
+    trackButton.layer.borderColor = self.myTextColor.CGColor;
     trackButton.layer.borderWidth = 0.75;
+    self.trackBtn = trackButton;
     
     [addNewButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
     [trackButton addTarget:self action:@selector(trackItems:) forControlEvents:UIControlEventTouchUpInside];
@@ -361,9 +369,7 @@
     [bottomView addSubview:trackButton];
     [bottomView addSubview:addNewButton];
     
-    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.4, 0, 0.8, bottomHeight)];
-    midLine.backgroundColor = [UIColor whiteColor];
-//    [bottomView addSubview:midLine];
+
     
 }
 -(void)addNewItem:(UIButton *)sender
@@ -378,15 +384,15 @@
     itemDetailViewController* addItemVC = [[itemDetailViewController alloc] init];
     [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
     addItemVC.isEditing = NO;
-//    NSDate *targetDay = [NSDate date];
-//    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-//    [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSCalendar *cal = [[NSCalendar alloc]
-//                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-//    dateFormatter1.calendar = cal;
-//    
-//    NSString *targetDate = [dateFormatter1 stringFromDate:targetDay];
-//    addItemVC.targetDate = targetDate;
+    NSDate *targetDay = [NSDate date];
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:@"yyyy-MM-dd"];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter1.calendar = cal;
+    
+    NSString *targetDate = [dateFormatter1 stringFromDate:targetDay];
+    addItemVC.targetDate = targetDate;
     
     return addItemVC;
 }

@@ -130,26 +130,57 @@
 
 -(void)configBottomView
 {
+    CGFloat photoHeigh;
+    if (IS_IPHONE_4_OR_LESS) {
+        photoHeigh = 100;
+    }else
+    {
+        photoHeigh = 135;
+    }
     
     CGFloat f = (SCREEN_HEIGHT-SCREEN_WIDTH)*0.5;
-    self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, f, 135, SCREEN_WIDTH) style:UITableViewStylePlain];
-    [self.photoTable setCenter:CGPointMake(SCREEN_WIDTH/2, self.itemInfoTable.frame.size.height + self.itemInfoTable.frame.origin.y+100)];
+    self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(0, f, photoHeigh, SCREEN_WIDTH) style:UITableViewStylePlain];
+    [self.photoTable setCenter:CGPointMake(SCREEN_WIDTH/2, self.itemInfoTable.frame.size.height + self.itemInfoTable.frame.origin.y+photoHeigh-30)];
     self.photoTable.dataSource = self;
     self.photoTable.delegate = self;
     self.photoTable.transform = CGAffineTransformMakeRotation(-M_PI/2);
-    self.photoTable.backgroundColor = [UIColor redColor];
+    self.photoTable.backgroundColor = [UIColor clearColor];
     self.photoTable.pagingEnabled = YES;
     self.photoTable.showsVerticalScrollIndicator = NO;
     self.photoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    UIView *upline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y-1.5,self.photoTable.frame.size.width, 1.3)];
+    upline.backgroundColor = normalColor;
+    upline.layer.shadowOffset = CGSizeMake(0.5, 0.6);
+    upline.layer.shadowColor = [UIColor blackColor].CGColor;
+    upline.layer.shadowOpacity = 0.8;
+    
+    UIView *downline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y + self.photoTable.frame.size.height-1,self.photoTable.frame.size.width,1.2)];
+    downline.backgroundColor = normalColor;
+    downline.layer.shadowOffset = CGSizeMake(0.5, 0.6);
+    downline.layer.shadowColor = [UIColor blackColor].CGColor;
+    downline.layer.shadowOpacity = 0.8;
+    [self.view addSubview:upline];
+    [self.view addSubview:downline];
+
     [self.view addSubview:self.photoTable];
+    
+    
     
 }
 
 
 -(void)configDetailTable
 {
-    self.itemInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight + 5, SCREEN_WIDTH, 60*5 )];
+    CGFloat height ;
+    if (IS_IPHONE_4_OR_LESS) {
+        height =50;
+    }else
+    {
+        height =60;
+    }
+    
+    self.itemInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight + 5, SCREEN_WIDTH, height*5 )];
     self.itemInfoTable.showsVerticalScrollIndicator = NO;
     self.itemInfoTable.scrollEnabled = NO;
     self.itemInfoTable.backgroundColor = [UIColor clearColor];
@@ -161,20 +192,21 @@
 }
 
 
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.photoTable) {
         return tableView.frame.size.height;
     }else
     {
-        return 60;
+        if (IS_IPHONE_4_OR_LESS) {
+            return 50;
+        }else
+        {
+            return 60;
+        }
 
-        
-//        if(indexPath.row == 3)
-//        {
-//            return 70;
-//        }else
-//            return 50;
     }
 }
 

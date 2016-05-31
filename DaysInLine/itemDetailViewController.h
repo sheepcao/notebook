@@ -17,6 +17,7 @@
 @property (nonatomic,strong) NSString *itemDescription;
 @property (nonatomic,strong) NSString *itemStartTime;
 @property (nonatomic,strong) NSString *itemEndTime;
+@property (nonatomic,strong) NSString *targetDate;
 
 @property BOOL isEditing;
 @end
