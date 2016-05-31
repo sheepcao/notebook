@@ -23,6 +23,7 @@
 		A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977B81CFC8AFB00099E4F /* expend0.png */; };
 		A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BD1CFD2F6900099E4F /* 上午.png */; };
 		A4A977C01CFD306C00099E4F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BF1CFD306C00099E4F /* launch.png */; };
+		A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
@@ -127,6 +128,8 @@
 		A4A977B81CFC8AFB00099E4F /* expend0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expend0.png; sourceTree = "<group>"; };
 		A4A977BD1CFD2F6900099E4F /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
 		A4A977BF1CFD306C00099E4F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryTableViewCell.h; sourceTree = "<group>"; };
+		A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryTableViewCell.m; sourceTree = "<group>"; };
 		A4E26C831CF84042004DFBC3 /* DaysInLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaysInLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				A49E62441CFB2E280047011B /* myLifeTableViewCell.m */,
 				A4A977A81CFC3F6600099E4F /* itemDetailTableViewCell.h */,
 				A4A977A91CFC3F6600099E4F /* itemDetailTableViewCell.m */,
+				A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */,
+				A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -789,6 +794,7 @@
 				A4E26D201CF842F5004DFBC3 /* FabonacciNum.m in Sources */,
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
 				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
+				A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
 				A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */,
 				A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */,

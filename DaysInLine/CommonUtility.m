@@ -12,6 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "AFHTTPSessionManager.h"
 #import "MBProgressHUD.h"
+#import "categoryObject.h"
 
 
 @implementation CommonUtility
@@ -587,4 +588,58 @@
     
     return [passwordTest evaluateWithObject:candidate];
 }
+
+
+-(NSMutableArray *)prepareCategoryDataForWork:(BOOL)isWork
+{
+    NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
+
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"addNewItem/Could not open db.");
+        return nil;
+    }
+    NSString *sqlCommand;
+
+    sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
+
+    
+    FMResultSet *rs = [db executeQuery:sqlCommand];
+    while ([rs next]) {
+        categoryObject *oneCategory = [[categoryObject alloc] init];
+        
+        oneCategory.categoryName = [rs stringForColumn:@"category_name"];
+        oneCategory.color_R  = [rs doubleForColumn:@"color_R"];
+        oneCategory.color_G = [rs doubleForColumn:@"color_G"];
+        oneCategory.color_B = [rs doubleForColumn:@"color_B"];
+        
+        if (isWork) {
+            if ([rs intForColumn:@"category_type"] == 0) {
+                [categoryArray addObject:oneCategory];
+            }
+        }else
+        {
+            if ([rs intForColumn:@"category_type"] == 1) {
+                [categoryArray addObject:oneCategory];
+            }
+        }
+    }
+    
+    [db close];
+    
+    
+    categoryObject *oneCategory = [[categoryObject alloc] init];
+    
+    oneCategory.categoryName = NSLocalizedString(@"+ 新主题",nil);
+    oneCategory.color_R  =245;
+    oneCategory.color_G =245;
+    oneCategory.color_B = 245;
+    
+    [categoryArray addObject:oneCategory];
+    
+    return categoryArray;
+    
+}
+
+
 @end

@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface itemDetailTableViewCell : UITableViewCell
+@protocol showPadDelegate <NSObject>
 
+-(void)showPad:(UIButton *)sender;
+
+@end
+
+@interface itemDetailTableViewCell : UITableViewCell
+@property (nonatomic,strong) id <showPadDelegate> padDelegate;
 @property (nonatomic,strong) UILabel *leftText;
 @property (nonatomic,strong) UIButton *rightText;
 -(void)addExpend;

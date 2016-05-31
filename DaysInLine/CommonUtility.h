@@ -66,4 +66,5 @@
 - (BOOL) validateEmail: (NSString *) candidate ;
 - (BOOL) validatePassword: (NSString *) candidate ;
 
+-(NSMutableArray *)prepareCategoryDataForWork:(BOOL)isWork;
 @end

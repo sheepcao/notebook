@@ -34,6 +34,8 @@
         [self addSubview:self.leftText ];
         [self addSubview:self.rightText ];
         
+        [self.rightText addTarget:self.padDelegate action:@selector(showPad:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.leftText.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
         self.leftText.textAlignment = NSTextAlignmentLeft;
         self.rightText.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
@@ -50,9 +52,9 @@
     UIImageView *expendImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.rightText.frame.size.width - 30, 6, 20, 20)];
     [expendImage setImage:[UIImage imageNamed:@"expend"]];
     
-    expendImage.tag = 10;
+    expendImage.tag = 100;
     
-    if (![self.rightText viewWithTag:10]) {
+    if (![self.rightText viewWithTag:100]) {
         [self.rightText addSubview:expendImage];
     }
     
