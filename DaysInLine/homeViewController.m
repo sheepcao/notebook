@@ -394,6 +394,14 @@
     NSString *targetDate = [dateFormatter1 stringFromDate:targetDay];
     addItemVC.targetDate = targetDate;
     
+    NSString *now = [[CommonUtility sharedCommonUtility] timeNow];
+    NSString *nowLater =[[CommonUtility sharedCommonUtility] timeByAddingMinutes:now andMinsToAdd:30];
+    
+    addItemVC.itemStartTime = now;
+    addItemVC.itemEndTime = nowLater;
+
+    
+    
     return addItemVC;
 }
 
@@ -430,6 +438,8 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     constellationSelected = [constellationList objectAtIndex:(row%[constellationList count])];
+    NSLog(@"constellationSelected  :%@",constellationSelected);
+
 }
 
 //返回当前行的内容,此处是将数组中数值添加到滚动的那个显示栏上

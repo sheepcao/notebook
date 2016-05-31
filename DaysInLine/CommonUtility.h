@@ -38,6 +38,7 @@
 -(NSString *)lastMonthDate;
 -(NSString *)firstNextMonthDate;
 - (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd;
+- (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd;
 
 -(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array;
 -(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array;

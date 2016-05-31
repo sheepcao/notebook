@@ -140,6 +140,16 @@
     NSDate *dstDate = [calendar dateByAddingComponents: days toDate: day options: 0];
     return [self stringFromDate:dstDate];
 }
+
+- (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd
+{
+
+    NSDate *day = [self timeFromString:srcTime];
+  
+    NSDate *plusHour = [day dateByAddingTimeInterval:minsToAdd * 60.0f];
+    return [self stringFromTime:plusHour];
+
+}
 -(NSString *)todayDate
 {
     //    NSCalendar *cal = [NSCalendar currentCalendar];
@@ -204,6 +214,18 @@
     NSDate *dtPostDate = [df1 dateFromString:pstrDate];
     return dtPostDate;
 }
+
+-(NSDate *)timeFromString:(NSString *)pstrTime
+{
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    df1.calendar = cal;
+    [df1 setDateFormat:@"HH:mm"];
+    NSDate *dtPostDate = [df1 dateFromString:pstrTime];
+    return dtPostDate;
+}
+
 - (NSString *)stringFromDate:(NSDate *)date{
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -223,7 +245,7 @@
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     dateFormatter.calendar = cal;
     //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"HH:mm"];
     NSString *destDateString = [dateFormatter stringFromDate:time];
     return destDateString;
 }

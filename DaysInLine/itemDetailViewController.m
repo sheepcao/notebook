@@ -16,8 +16,11 @@
 #import "categoryTableViewCell.h"
 #import "categoryObject.h"
 #import "categoryManagementViewController.h"
+#import "dateSelectView.h"
+#import "pickerLabel.h"
 
-@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate>
+
+@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate,FlatDatePickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     CGFloat bottomHeight;
 }
@@ -30,6 +33,16 @@
 @property (nonatomic,strong) NSMutableArray *workCategoryArray;
 @property (nonatomic,strong) NSMutableArray *lifeCategoryArray;
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
+@property (nonatomic,strong) dateSelectView *dateView;
+@property (nonatomic, strong) UIPickerView *timePicker;
+
+@property (nonatomic,strong) NSArray *dayOffsiteArray;
+@property (nonatomic,strong) NSArray *hourArray;
+@property (nonatomic,strong) NSArray *minuteArray;
+
+@property (nonatomic,strong) NSString *hourTemp;
+@property (nonatomic,strong) NSString *minuteTemp;
+@property (nonatomic,strong) NSString *dayOffsiteTemp;
 
 @end
 
@@ -262,6 +275,85 @@
         [contentView addSubview:categoryTable];
     }else
     {
+        self.dayOffsiteArray = [NSArray arrayWithObjects:@" ",@"+1", nil];
+        self.hourArray = [NSArray arrayWithObjects:@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23", nil];
+
+        NSMutableArray *minTempArray = [[NSMutableArray alloc] init];
+        for (int i =0; i<60; i++) {
+            [minTempArray addObject:[NSString stringWithFormat:@"%02d",i]];
+        }
+        self.minuteArray = [NSArray arrayWithArray:minTempArray];
+        
+        self.timePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(20, 20,SCREEN_WIDTH-40 , contentView.frame.size.height -25)];
+        self.timePicker.showsSelectionIndicator=YES;
+        self.timePicker.delegate = self;
+        self.timePicker.tag = row;
+        [contentView addSubview:self.timePicker];
+        
+        if (row == 1) {
+            NSString *hour = [self.itemStartTime componentsSeparatedByString:@":"][0];
+            [self.timePicker selectRow:[hour integerValue] inComponent:0 animated:YES];
+            [self pickerView:self.timePicker didSelectRow:[hour integerValue] inComponent:0];
+            
+            NSString *minute = [self.itemStartTime componentsSeparatedByString:@":"][1];
+            [self.timePicker selectRow:[minute integerValue] inComponent:1 animated:YES];
+            [self pickerView:self.timePicker didSelectRow:[minute integerValue] inComponent:1];
+
+        }else
+        {
+            NSArray *endArrray = [self.itemEndTime componentsSeparatedByString:@" "];
+            if (endArrray.count > 1) {
+                [self.timePicker selectRow:1 inComponent:0 animated:YES];
+                [self pickerView:self.timePicker didSelectRow:1 inComponent:0];
+                
+                NSString *times = endArrray[1];
+                
+                NSString *hour = [times componentsSeparatedByString:@":"][0];
+                [self.timePicker selectRow:[hour integerValue] inComponent:1 animated:YES];
+                [self pickerView:self.timePicker didSelectRow:[hour integerValue] inComponent:1];
+                
+                NSString *minute = [times componentsSeparatedByString:@":"][1];
+                [self.timePicker selectRow:[minute integerValue] inComponent:2 animated:YES];
+                [self pickerView:self.timePicker didSelectRow:[minute integerValue] inComponent:2];
+                
+            }else
+            {
+                [self.timePicker selectRow:0 inComponent:0 animated:YES];
+                [self pickerView:self.timePicker didSelectRow:0 inComponent:0];
+                
+                
+                NSString *hour = [self.itemEndTime componentsSeparatedByString:@":"][0];
+                [self.timePicker selectRow:[hour integerValue] inComponent:1 animated:YES];
+                [self pickerView:self.timePicker didSelectRow:[hour integerValue] inComponent:1];
+                
+                NSString *minute = [self.itemEndTime componentsSeparatedByString:@":"][1];
+                [self.timePicker selectRow:[minute integerValue] inComponent:2 animated:YES];
+                [self pickerView:self.timePicker didSelectRow:[minute integerValue] inComponent:2];
+            }
+            
+
+
+
+        }
+        
+        
+        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
+        //        [cancelBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
+        [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        cancelBtn.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:15.0];
+        [contentView addSubview:cancelBtn];
+        
+        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-48, 5, 40, 35)];
+        [selectBtn setTitle:NSLocalizedString(@"确定",nil) forState:UIControlStateNormal];
+        [selectBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        selectBtn.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:15.0f];
+        [contentView addSubview:selectBtn];
+        selectBtn.tag = 20+row;
+        
+        [cancelBtn addTarget:self action:@selector(cancelTime) forControlEvents:UIControlEventTouchUpInside];
+        [selectBtn addTarget:self action:@selector(timeChoose:) forControlEvents:UIControlEventTouchUpInside];
+        
 
     }
 
@@ -273,7 +365,133 @@
     
 }
 
+-(void)timeChoose:(UIButton *)sender
+{
+    if (sender.tag == 21) {
+        self.itemStartTime = [NSString stringWithFormat:@"%@:%@",self.hourTemp,self.minuteTemp];
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [indexPaths addObject: indexPath];
+        [self.itemInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
 
+    }else
+    {
+        self.itemEndTime = [NSString stringWithFormat:@"%@ %@:%@",self.dayOffsiteTemp,self.hourTemp,self.minuteTemp];
+
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        [indexPaths addObject: indexPath];
+        [self.itemInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+
+    }
+
+    [self dismissKeyboard];
+}
+
+
+
+#pragma mark picker delegate
+// pickerView 列数
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    if (pickerView.tag == 1) {
+        return 2;
+    }else
+        return 3;
+}
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view
+{
+    pickerLabel *picker = [[pickerLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 60, 38)];
+    if (pickerView.tag == 1) {
+        
+        if (component == 0) {
+            [picker makeText:[self.hourArray objectAtIndex:(row%[self.hourArray count])]];
+        }else if(component == 1)
+        {
+            [picker makeText:[self.minuteArray objectAtIndex:(row%[self.minuteArray count])]];
+        }
+    }else
+    {
+        if (component == 0) {
+            [picker makeText:[self.dayOffsiteArray objectAtIndex:(row%[self.dayOffsiteArray count])]];
+        }else if (component == 1) {
+            [picker makeText:[self.hourArray objectAtIndex:(row%[self.hourArray count])]];
+        }else if(component == 2)
+        {
+            [picker makeText:[self.minuteArray objectAtIndex:(row%[self.minuteArray count])]];
+        }
+
+    }
+    
+    return picker;
+
+}
+
+
+
+// pickerView 每列个数
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    if (pickerView.tag == 1) {
+        
+        return 1000000;
+    }else
+    {
+        if (component == 0) {
+            return 2;
+        }else
+            return 1000000;
+    }
+}
+
+// 每列宽度
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    
+    return 80;
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 32;
+}
+// 返回选中的行
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+
+
+    if (pickerView.tag == 1) {
+        
+        if (component == 0) {
+            self.hourTemp = [self.hourArray objectAtIndex:(row%[self.hourArray count])];
+        }else
+        {
+            self.minuteTemp = [self.minuteArray objectAtIndex:(row%[self.minuteArray count])];
+        }
+        
+    }else
+    {
+        if (component == 0) {
+            self.dayOffsiteTemp = [self.dayOffsiteArray objectAtIndex:(row%[self.dayOffsiteArray count])];
+        }else if (component == 1) {
+            self.hourTemp = [self.hourArray objectAtIndex:(row%[self.hourArray count])];
+        }else
+        {
+            self.minuteTemp = [self.minuteArray objectAtIndex:(row%[self.minuteArray count])];
+        }
+    }
+    
+    NSLog(@"row   :%ld  component:%ld",(long)row,(long)component);
+
+
+}
+
+//返回当前行的内容,此处是将数组中数值添加到滚动的那个显示栏上
+//-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+//{
+//    return [constellationList objectAtIndex:(row%[constellationList count])];
+//}
+
+
+
+#pragma mark tableview delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -490,6 +708,9 @@
 {
     if (sender.tag - 10 == 0) {
         [self showingModelOfHeight:300 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] forRow:0];
+    }else if (sender.tag - 10 == 1 || sender.tag - 10 == 2)
+    {
+        [self showingModelOfHeight:200 andColor:[UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f] forRow:(sender.tag - 10)];
     }
 }
 
