@@ -15,8 +15,9 @@
 #import "BottomView.h"
 #import "categoryTableViewCell.h"
 #import "categoryObject.h"
+#import "categoryManagementViewController.h"
 
-@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate>
+@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate>
 {
     CGFloat bottomHeight;
 }
@@ -230,9 +231,9 @@
     contentView.tag = 100;
     contentView.backgroundColor = backColor;
     [dimView addSubview:contentView];
-    contentView.layer.cornerRadius = 6;
+    contentView.layer.cornerRadius = 10;
     
-    [UIView animateWithDuration:0.32f delay:0.15f options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:0.2f delay:0.05f options:UIViewAnimationOptionLayoutSubviews animations:^{
         if (contentView) {
             [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT- (height-10), contentView.frame.size.width, contentView.frame.size.height)];
         }
@@ -461,6 +462,14 @@
 {
     if ([sender.titleLabel.text isEqualToString:NSLocalizedString(@"+ 新主题",nil)])
     {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            categoryManagementViewController *exportVC = [[categoryManagementViewController alloc] initWithNibName:@"categoryManagementViewController" bundle:nil];
+            [self presentViewController:exportVC animated:YES completion:nil];
+        });
+
+        [self dismissKeyboard];
+
         return;
     }
     

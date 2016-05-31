@@ -24,6 +24,10 @@
 		A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BD1CFD2F6900099E4F /* 上午.png */; };
 		A4A977C01CFD306C00099E4F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BF1CFD306C00099E4F /* launch.png */; };
 		A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */; };
+		A4A977C71CFD7AD000099E4F /* categoryManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977C51CFD7AD000099E4F /* categoryManagementViewController.m */; };
+		A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4A977C61CFD7AD000099E4F /* categoryManagementViewController.xib */; };
+		A4A977CB1CFD7D5C00099E4F /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977CA1CFD7D5C00099E4F /* back.png */; };
+		A4A977CD1CFD801800099E4F /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977CC1CFD801800099E4F /* delete.png */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
@@ -130,6 +134,11 @@
 		A4A977BF1CFD306C00099E4F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryTableViewCell.h; sourceTree = "<group>"; };
 		A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryTableViewCell.m; sourceTree = "<group>"; };
+		A4A977C41CFD7AD000099E4F /* categoryManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryManagementViewController.h; sourceTree = "<group>"; };
+		A4A977C51CFD7AD000099E4F /* categoryManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryManagementViewController.m; sourceTree = "<group>"; };
+		A4A977C61CFD7AD000099E4F /* categoryManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryManagementViewController.xib; sourceTree = "<group>"; };
+		A4A977CA1CFD7D5C00099E4F /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		A4A977CC1CFD801800099E4F /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		A4E26C831CF84042004DFBC3 /* DaysInLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaysInLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -306,6 +315,19 @@
 			name = cells;
 			sourceTree = "<group>";
 		};
+		A4A977C91CFD7AE400099E4F /* items */ = {
+			isa = PBXGroup;
+			children = (
+				A4A977A31CFC3E6C00099E4F /* itemDetailViewController.h */,
+				A4A977A41CFC3E6C00099E4F /* itemDetailViewController.m */,
+				A4A977A51CFC3E6C00099E4F /* itemDetailViewController.xib */,
+				A4A977C41CFD7AD000099E4F /* categoryManagementViewController.h */,
+				A4A977C51CFD7AD000099E4F /* categoryManagementViewController.m */,
+				A4A977C61CFD7AD000099E4F /* categoryManagementViewController.xib */,
+			);
+			name = items;
+			sourceTree = "<group>";
+		};
 		A4E26C7A1CF84042004DFBC3 = {
 			isa = PBXGroup;
 			children = (
@@ -344,9 +366,7 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
-				A4A977A31CFC3E6C00099E4F /* itemDetailViewController.h */,
-				A4A977A41CFC3E6C00099E4F /* itemDetailViewController.m */,
-				A4A977A51CFC3E6C00099E4F /* itemDetailViewController.xib */,
+				A4A977C91CFD7AE400099E4F /* items */,
 				A4E26D951CFB0F8F004DFBC3 /* calendar */,
 				A49E62461CFB2E2D0047011B /* cells */,
 				A4E26C921CF84042004DFBC3 /* Assets.xcassets */,
@@ -594,6 +614,8 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4A977CC1CFD801800099E4F /* delete.png */,
+				A4A977CA1CFD7D5C00099E4F /* back.png */,
 				A4A977B71CFC8AFB00099E4F /* expend.png */,
 				A4A977B81CFC8AFB00099E4F /* expend0.png */,
 				A4A977AD1CFC42FE00099E4F /* done.png */,
@@ -713,14 +735,17 @@
 				A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */,
 				A4E26D8F1CFB0E7F004DFBC3 /* calendar.png in Resources */,
 				A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */,
+				A4A977CB1CFD7D5C00099E4F /* back.png in Resources */,
 				A4A977AF1CFC42FE00099E4F /* done.png in Resources */,
 				A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */,
 				A4E26CA81CF841CA004DFBC3 /* FlatDatePicker-Icon-Close@2x.png in Resources */,
+				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4A977B91CFC8AFB00099E4F /* expend.png in Resources */,
 				A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
+				A4A977CD1CFD801800099E4F /* delete.png in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
@@ -797,6 +822,7 @@
 				A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
 				A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */,
+				A4A977C71CFD7AD000099E4F /* categoryManagementViewController.m in Sources */,
 				A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */,
 				A4E26D931CFB0F7A004DFBC3 /* calendarViewController.m in Sources */,
 				A4E26D2A1CF84385004DFBC3 /* categoryObject.m in Sources */,
