@@ -296,15 +296,15 @@
 -(void)makeTitle
 {
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                          @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                            UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                          @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                            UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                             UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 17.0f]
                                                             }];
     
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
                                                    }];
 

@@ -28,7 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    NSLog(@"viewDidLoad ");
+
     self.menuArray = @[NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"分类管理",nil),NSLocalizedString(@"帐目流水",nil),NSLocalizedString(@"帐目日历",nil),NSLocalizedString(@"显示模式",nil),NSLocalizedString(@"关于简簿",nil)];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
@@ -40,6 +41,9 @@
     [self.view addSubview:menuTable];
     self.myMenuTable = menuTable;
     
+    NSLog(@"viewDidLoad2 ");
+
+    
 //    [self configUIAppearance];
     
 }
@@ -48,6 +52,8 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"SideMenu"];
+    NSLog(@"viewWillAppear ");
+
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -91,8 +97,8 @@
     {
         [self.myBackImage setImage:[UIImage imageNamed:backName]];
     }
-
     [self.myMenuTable reloadData];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,8 +132,8 @@
         
         
         UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                              @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                                UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                              @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                                UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                                 UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/20]
                                                                 }];
          [cellTitle setFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width*3/4, cell.frame.size.height)];

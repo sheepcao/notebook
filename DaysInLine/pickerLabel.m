@@ -29,8 +29,8 @@
 -(void)makeText:(NSString *)text
 {
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                          @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                            UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                          @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                            UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                             UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 18.0f]
                                                             }];
     

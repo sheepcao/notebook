@@ -18,8 +18,8 @@
         UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 28, 160, 50)];
         
         UIFontDescriptor *titleFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: titleSize]
                                                    }];
         title.font = [UIFont fontWithDescriptor:titleFontDescriptor size:0.0f];

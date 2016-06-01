@@ -126,6 +126,8 @@
 
 -(void)initDB
 {
+    NSLog(@"init db.");
+
 
     db = [[CommonUtility sharedCommonUtility] db];
     
@@ -228,6 +230,8 @@
 
 -(void)judgeTimeFrame
 {
+    NSLog(@"judgeTimeFrame");
+    
     NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
     if (![autoSwitchString isEqualToString:@"on"])
     {
@@ -259,6 +263,9 @@
 
 -(void)loadLuckInfoFromServer
 {
+    
+    NSLog(@"loadLuckInfoFromServer");
+    
     NSDate *dateNow = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:dateNow];
@@ -514,6 +521,9 @@
 
 -(void)configShare
 {
+    NSLog(@"configShare");
+
+    
 //    [MobClick startWithAppkey:@"573ab031e0f55ac2c900313c" reportPolicy:REALTIME   channelId:nil];
 //    [MobClick setAppVersion:VERSIONNUMBER];
 //    

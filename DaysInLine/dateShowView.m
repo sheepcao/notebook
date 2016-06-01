@@ -28,8 +28,8 @@
     self.selectionButton.backgroundColor = [UIColor clearColor];
     [self addSubview:self.selectionButton];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  14.0f]
                                                    }];
     UILabel * midLine = [[UILabel alloc] initWithFrame:CGRectMake(self.selectionButton.frame.size.width/2-15, 0, 30, self.selectionButton.frame.size.height)];

@@ -44,6 +44,7 @@
     }else if([showModel isEqualToString:@"夜间"]) {
         self.myTextColor = TextColor2;
     }
+
     NSString *backName;
     if (!showModel) {
         backName = @"上午.png";
@@ -51,7 +52,7 @@
     {
         backName  = [NSString stringWithFormat:@"%@.png",showModel];
     }
-    
+
     if (!self.myBackImage)
     {
         self.myBackImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -63,10 +64,11 @@
     {
         [self.myBackImage setImage:[UIImage imageNamed:backName]];
     }
-    
+
     [self.maintableView reloadData];
+
     [self configTextColor];
-    
+
     
 }
 
@@ -95,6 +97,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self registerLuckChangedNotification];
 
     [self prepareData];
@@ -110,6 +113,8 @@
     
     self.titleTextLabel.alpha = 1.0f;
     self.TimelineText.alpha = 0.0f;
+    
+
     
     [self configLuckyText];
     [self configTextColor];
@@ -176,6 +181,8 @@
     [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
                                        fromViewController:[self class]
                                                 forAction:RZTransitionAction_PresentDismiss];
+    
+
 
 }
 

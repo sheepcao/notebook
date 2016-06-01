@@ -50,8 +50,8 @@
     
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
                                                    }];
     
