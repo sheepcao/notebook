@@ -30,6 +30,10 @@
 + (void)tapSound:(NSString *)name withType:(NSString *)type;
 + (BOOL)isSystemVersionLessThan7;
 + (BOOL)myContainsStringFrom:(NSString*)str forSubstring:(NSString*)other;
+
+-(NSString *)voicePathWithRecorderID:(int)recorderID;
+
+
 -(NSString *)timeNow;
 -(NSString *)todayDate;
 -(NSString *)tomorrowDate;

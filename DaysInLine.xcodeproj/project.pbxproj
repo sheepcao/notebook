@@ -28,6 +28,8 @@
 		A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4A977C61CFD7AD000099E4F /* categoryManagementViewController.xib */; };
 		A4A977CB1CFD7D5C00099E4F /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977CA1CFD7D5C00099E4F /* back.png */; };
 		A4A977CD1CFD801800099E4F /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977CC1CFD801800099E4F /* delete.png */; };
+		A4A977F31CFEB84C00099E4F /* addPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977F21CFEB84C00099E4F /* addPhoto.png */; };
+		A4A977F61CFEC52E00099E4F /* photoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977F51CFEC52E00099E4F /* photoCell.m */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
@@ -139,6 +141,9 @@
 		A4A977C61CFD7AD000099E4F /* categoryManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryManagementViewController.xib; sourceTree = "<group>"; };
 		A4A977CA1CFD7D5C00099E4F /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		A4A977CC1CFD801800099E4F /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		A4A977F21CFEB84C00099E4F /* addPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addPhoto.png; sourceTree = "<group>"; };
+		A4A977F41CFEC52E00099E4F /* photoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoCell.h; sourceTree = "<group>"; };
+		A4A977F51CFEC52E00099E4F /* photoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoCell.m; sourceTree = "<group>"; };
 		A4E26C831CF84042004DFBC3 /* DaysInLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaysInLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -311,6 +316,8 @@
 				A4A977A91CFC3F6600099E4F /* itemDetailTableViewCell.m */,
 				A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */,
 				A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */,
+				A4A977F41CFEC52E00099E4F /* photoCell.h */,
+				A4A977F51CFEC52E00099E4F /* photoCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -614,6 +621,7 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4A977F21CFEB84C00099E4F /* addPhoto.png */,
 				A4A977CC1CFD801800099E4F /* delete.png */,
 				A4A977CA1CFD7D5C00099E4F /* back.png */,
 				A4A977B71CFC8AFB00099E4F /* expend.png */,
@@ -753,6 +761,7 @@
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
 				A4A977C01CFD306C00099E4F /* launch.png in Resources */,
 				A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */,
+				A4A977F31CFEB84C00099E4F /* addPhoto.png in Resources */,
 				A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
@@ -842,6 +851,7 @@
 				A4A977A61CFC3E6C00099E4F /* itemDetailViewController.m in Sources */,
 				A4E26D121CF842E1004DFBC3 /* RATreeView+TableViewDataSource.m in Sources */,
 				A4E26CE31CF842CB004DFBC3 /* AFURLConnectionOperation.m in Sources */,
+				A4A977F61CFEC52E00099E4F /* photoCell.m in Sources */,
 				A4E26CE11CF842CB004DFBC3 /* AFHTTPRequestOperation.m in Sources */,
 				A4E26CC91CF8425A004DFBC3 /* OpenShare.m in Sources */,
 				A4E26D0F1CF842E1004DFBC3 /* RATreeView+Enums.m in Sources */,

@@ -38,10 +38,11 @@
         
         self.leftText.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
         self.leftText.textAlignment = NSTextAlignmentLeft;
-        self.rightText.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        self.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:14.0f];
         self.rightText.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.rightText.titleLabel.numberOfLines = 2;
-        self.rightText.titleLabel.minimumScaleFactor = 0.8;
+        self.rightText.titleLabel.numberOfLines = 1;
+        self.rightText.titleLabel.adjustsFontSizeToFitWidth = TRUE;
+        self.rightText.titleLabel.minimumScaleFactor = 0.7;
         
     }
     return self;
@@ -49,7 +50,7 @@
 
 -(void)addExpend
 {
-    UIImageView *expendImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.rightText.frame.size.width - 30, 6, 20, 20)];
+    UIImageView *expendImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.rightText.frame.size.width - 20, 6, 18, 18)];
     [expendImage setImage:[UIImage imageNamed:@"expend"]];
     
     expendImage.tag = 100;

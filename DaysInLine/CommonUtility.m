@@ -55,6 +55,14 @@
     
     return docsPath;
 }
+-(NSString *)voicePathWithRecorderID:(int)recorderID
+{
+    NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
+    NSString *voicePath = [[storeURL path] stringByAppendingPathComponent:[NSString stringWithFormat:@"message%d.caf",recorderID]];
+
+    return voicePath;
+}
+
 
 
 -(NSDateFormatter *)dateFormatter

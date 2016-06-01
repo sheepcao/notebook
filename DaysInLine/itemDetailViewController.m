@@ -18,11 +18,15 @@
 #import "categoryManagementViewController.h"
 #import "dateSelectView.h"
 #import "pickerLabel.h"
+#import "photoCell.h"
 
 
-@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate,FlatDatePickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate,FlatDatePickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     CGFloat bottomHeight;
+    CGFloat btnHeight;
+    BOOL isNewRecord;
+
 }
 @property (nonatomic,strong) UITableView *itemInfoTable;
 @property (nonatomic,strong) UITableView *photoTable;
@@ -36,6 +40,8 @@
 @property (nonatomic,strong) dateSelectView *dateView;
 @property (nonatomic, strong) UIPickerView *timePicker;
 
+@property (nonatomic,strong) NSMutableArray *photosArray;
+
 @property (nonatomic,strong) NSArray *dayOffsiteArray;
 @property (nonatomic,strong) NSArray *hourArray;
 @property (nonatomic,strong) NSArray *minuteArray;
@@ -44,6 +50,16 @@
 @property (nonatomic,strong) NSString *minuteTemp;
 @property (nonatomic,strong) NSString *dayOffsiteTemp;
 
+@property (nonatomic ,strong) UIView *noteView;
+@property (nonatomic ,strong) UITextView *noteBody;
+@property (nonatomic ,strong) UIButton *noteDoneButton;
+
+//recorder
+@property (strong, nonatomic)  UIImageView *voiceImageview;
+@property (nonatomic, strong)AVAudioPlayer * avPlay;
+@property (nonatomic, strong) AVAudioRecorder * recorder;
+//坚挺音量大小,控制话筒图片
+@property (nonatomic, strong) NSTimer * timer;
 @end
 
 @implementation itemDetailViewController
@@ -52,9 +68,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+
+    [self preparePhotos];
+    [self configAudio];
     [self configTopbar];
     [self configDetailTable];
     [self configBottomView];
+    [self configNoteView];
+    
 //    [self configButton];
     
     [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
@@ -89,6 +115,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)preparePhotos
+{
+    self.photosArray = [[NSMutableArray alloc] init];
+    if (self.photoNames) {
+        
+        NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
+        NSString *destPath = [storeURL path];
+        
+        NSArray *namesArray = [self.photoNames componentsSeparatedByString:@";"];
+        for (int i = 0; i < namesArray.count; i++) {
+            NSString *fullPath = [destPath stringByAppendingPathComponent:namesArray[i]];
+            UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+            [self.photosArray addObject:savedImage];
+        }
+    }
+    [self.photosArray addObject:[UIImage imageNamed:@"addPhoto.png"]];
+
+}
+
+
 
 -(void)prepareData
 {
@@ -180,13 +227,13 @@
     self.photoTable.showsVerticalScrollIndicator = NO;
     self.photoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 
-    UIView *upline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y-1.5,self.photoTable.frame.size.width, 1.3)];
+    UIView *upline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y-1.5,self.photoTable.frame.size.width, 1.2)];
     upline.backgroundColor = normalColor;
     upline.layer.shadowOffset = CGSizeMake(0.5, 0.6);
     upline.layer.shadowColor = [UIColor blackColor].CGColor;
     upline.layer.shadowOpacity = 0.8;
     
-    UIView *downline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y + self.photoTable.frame.size.height-1,self.photoTable.frame.size.width,1.2)];
+    UIView *downline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y + self.photoTable.frame.size.height-1.5,self.photoTable.frame.size.width,1.2)];
     downline.backgroundColor = normalColor;
     downline.layer.shadowOffset = CGSizeMake(0.5, 0.6);
     downline.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -220,9 +267,162 @@
     
 }
 
+-(void)configNoteView
+{
+    if (IS_IPHONE_4_OR_LESS) {
+        btnHeight = 34;
+    }else
+    {
+        btnHeight = 44;
+    }
+    
+    UIView *noteView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 150)];
+    noteView.backgroundColor = numberColor;
+    self.noteView = noteView;
+    [self.view addSubview:noteView];
+    UILabel *noteTitle = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 25, 3, 50, 17)];
+    noteTitle.backgroundColor = [UIColor clearColor];
+    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                   }];
+    [noteTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
+    [noteTitle setText:NSLocalizedString(@"备 注",nil)];
+    [noteTitle setTextColor:[UIColor whiteColor]];
+    noteTitle.textAlignment = NSTextAlignmentCenter;
+    
+    
+    UIButton *finishNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(noteView.frame.size.width - 70, noteView.frame.size.height - btnHeight +4, 70, btnHeight)];
+    [finishNoteButton setImage:[UIImage imageNamed:@"doneBig"] forState:UIControlStateNormal];
+    [finishNoteButton setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 2, 15)];
+    //    [finishNoteButton setTitle:@"完成" forState:UIControlStateNormal];
+    finishNoteButton.layer.cornerRadius = 4.0f;
+    [finishNoteButton setBackgroundColor:[UIColor colorWithRed:242/255.0f green:191/255.0f blue:109/255.0f alpha:1.0f]];
+    [finishNoteButton addTarget:self action:@selector(finishNote) forControlEvents:UIControlEventTouchUpInside];
+    self.noteDoneButton = finishNoteButton;
+    [noteView addSubview:finishNoteButton];
+    
+    
+    UITextView *noteText = [[UITextView alloc] initWithFrame:CGRectMake(20, noteTitle.frame.origin.y+noteTitle.frame.size.height + 5, SCREEN_WIDTH-40, noteView.frame.size.height - (noteTitle.frame.origin.y+noteTitle.frame.size.height + 5) - finishNoteButton.frame.size.height)];
+    UIFontDescriptor *bodyFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                            @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                              UIFontDescriptorNameAttribute:@"HelveticaNeue-LightItalic",
+                                              UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 14.0f]
+                                              }];
+    [noteText setFont:[UIFont fontWithDescriptor:bodyFontDescriptor size:0.0]];
+    noteText.backgroundColor = [UIColor clearColor];
+    [noteText setTextColor:self.myTextColor];
+    noteText.textAlignment = NSTextAlignmentLeft;
+    noteText.tintColor = [UIColor whiteColor];
+    
+    self.noteBody = noteText;
+    [noteView addSubview:noteTitle];
+    [noteView addSubview:noteText];
+    
+    
+}
+
+-(void)updateNotePad
+{
+    [self.noteDoneButton setFrame:CGRectMake(self.noteView.frame.size.width - 70, self.noteView.frame.size.height - btnHeight + 4, 70, btnHeight)];
+    [self.noteBody setFrame:CGRectMake(20, 25, SCREEN_WIDTH-40, self.noteView.frame.size.height - 25 - self.noteDoneButton.frame.size.height)];
+    
+}
+
+-(void)keyboardWasShown:(NSNotification*)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.noteView setFrame:CGRectMake(0, 150, self.noteView.frame.size.width, SCREEN_HEIGHT-keyboardSize.height-(150))];
+        [self updateNotePad];
+    }];
+    
+    
+    [self.view layoutIfNeeded];
+}
+
+-(void)finishNote
+{
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.noteView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.noteView.frame.size.width, self.noteView.frame.size.height)];
+    }];
+    [self.view layoutIfNeeded];
+
+    
+    if (self.noteBody.text && ![[self.noteBody.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""]) {
+        self.itemDescription = self.noteBody.text;
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+        [indexPaths addObject: indexPath];
+        [self.itemInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        
+    }
+    
+
+    [self dismissDimView];
+    [self.noteBody resignFirstResponder];
 
 
--(void)showingModelOfHeight:(CGFloat)height andColor:(UIColor *)backColor forRow:(int)row
+    [MobClick event:@"addNote"];
+    
+}
+
+- (void)configAudio
+{
+    
+    NSMutableDictionary *recodeSeting = [@{} mutableCopy];
+    [recodeSeting setValue:[NSNumber numberWithFloat:44100] forKey:AVSampleRateKey];
+    //录音通道数
+    [recodeSeting setValue:[NSNumber numberWithInt:1] forKey:AVNumberOfChannelsKey];
+    //线性采样位数
+    [recodeSeting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+    //录音质量
+    [recodeSeting setValue:[NSNumber numberWithInt:AVAudioQualityHigh] forKey:AVEncoderAudioQualityKey];
+    //数据持久化(将声音存储到磁盘中)
+    NSString *strUrl = [[CommonUtility sharedCommonUtility] voicePathWithRecorderID:[self searchEventID]];
+//    NSString *strUrl = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSURL *url = [NSURL fileURLWithPath:strUrl];
+    NSError *error = nil;
+    //初始化AVAudioRecorder
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recodeSeting error:&error];
+    self.recorder.meteringEnabled = YES;
+    
+    
+    AVAudioPlayer * player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
+    self.avPlay = player;
+    if(player)
+    {
+        isNewRecord = NO;
+    }else
+    {
+        isNewRecord = YES;
+    }
+}
+-(int)searchEventID
+{
+    int recorderID = 0;
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return recorderID;
+    }
+    
+    if (self.isEditing) {
+        return [self.currentItemID intValue];
+    }else
+    {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM SQLITE_SEQUENCE WHERE name='EVENT'"];
+        if ([rs next]) {
+            recorderID = [rs intForColumnIndex:0];
+        }
+        return recorderID+1;
+    }
+
+}
+
+-(void)showingModelOfHeight:(CGFloat)height andColor:(UIColor *)backColor forRow:(NSInteger)row
 {
     
     UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -236,7 +436,7 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
+                                   action:@selector(dismissDimView)];
     
     [gestureView addGestureRecognizer:tap];
     
@@ -273,7 +473,7 @@
         categoryTable.delaysContentTouches = YES;
         self.categoryTableView = categoryTable;
         [contentView addSubview:categoryTable];
-    }else
+    }else if (row == 1 || row == 2 )
     {
         self.dayOffsiteArray = [NSArray arrayWithObjects:@" ",@"+1", nil];
         self.hourArray = [NSArray arrayWithObjects:@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23", nil];
@@ -301,7 +501,7 @@
 
         }else
         {
-            NSArray *endArrray = [self.itemEndTime componentsSeparatedByString:@" "];
+            NSArray *endArrray = [self.itemEndTime componentsSeparatedByString:@"  "];
             if (endArrray.count > 1) {
                 [self.timePicker selectRow:1 inComponent:0 animated:YES];
                 [self pickerView:self.timePicker didSelectRow:1 inComponent:0];
@@ -330,12 +530,8 @@
                 [self.timePicker selectRow:[minute integerValue] inComponent:2 animated:YES];
                 [self pickerView:self.timePicker didSelectRow:[minute integerValue] inComponent:2];
             }
-            
-
-
 
         }
-        
         
         UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
         //        [cancelBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
@@ -353,7 +549,6 @@
         
         [cancelBtn addTarget:self action:@selector(cancelTime) forControlEvents:UIControlEventTouchUpInside];
         [selectBtn addTarget:self action:@selector(timeChoose:) forControlEvents:UIControlEventTouchUpInside];
-        
 
     }
 
@@ -376,7 +571,7 @@
 
     }else
     {
-        self.itemEndTime = [NSString stringWithFormat:@"%@ %@:%@",self.dayOffsiteTemp,self.hourTemp,self.minuteTemp];
+        self.itemEndTime = [NSString stringWithFormat:@"%@  %@:%@",self.dayOffsiteTemp,self.hourTemp,self.minuteTemp];
 
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
@@ -385,7 +580,12 @@
 
     }
 
-    [self dismissKeyboard];
+    [self dismissDimView];
+}
+
+-(void)cancelTime
+{
+    [self dismissDimView];
 }
 
 
@@ -489,9 +689,39 @@
 //    return [constellationList objectAtIndex:(row%[constellationList count])];
 //}
 
-
+#pragma mark - UIImagePickerControllerDelegate
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    UIImage *photo = info[UIImagePickerControllerOriginalImage];
+    
+    [self.photosArray insertObject:photo atIndex:self.photosArray.count - 1];
+    [self .photoTable reloadData];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark tableview delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (tableView == self.photoTable) {
+        if (indexPath.row == self.photosArray.count - 1) {
+            UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
+            //设置照片来源
+            pickVC.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            pickVC.delegate = self;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self presentViewController:pickVC animated:YES completion:nil];
+
+            });
+        }else
+        {
+            // zoom big the image...
+        }
+    }
+    
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -514,7 +744,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.photoTable) {
-        return 10;
+        return self.photosArray.count;
     }else if (tableView == self.categoryTableView)
     {
         if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
@@ -532,12 +762,15 @@
     if (tableView == self.photoTable) {
         NSString *CellIdentifier = @"CellPhoto";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        photoCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[photoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
+            cell.transform = CGAffineTransformMakeRotation(M_PI/2);
+
         }
+        [cell configPhotoWitchRect:CGRectMake(5, 5, tableView.frame.size.height - 10, tableView.frame.size.height - 10) andPhoto:self.photosArray[indexPath.row]];
         
         return cell;
     }else if (tableView == self.categoryTableView)
@@ -655,13 +888,22 @@
             
         case 4:
             [cell.leftText  setText:NSLocalizedString(@"语音备注",nil)] ;
-            if(self.soundName)
+            
+            if(!isNewRecord)
             {
-                [cell.rightText setTitle:@"播放 录音" forState:UIControlStateNormal];
+                [cell.rightText setTitle:@"播放(长按重录)" forState:UIControlStateNormal];
+                UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(sendVoiceButtonLongPress:)];
+                //设置长按时间
+                longPress.minimumPressDuration = 1.25;
+                [cell.rightText addGestureRecognizer:longPress];
                 
             }else
             {
                 [cell.rightText setTitle:@"按住 录音" forState:UIControlStateNormal];
+                UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(sendVoiceButtonLongPress:)];
+                //设置长按时间
+                longPress.minimumPressDuration = 0.5;
+                [cell.rightText addGestureRecognizer:longPress];
             }
             [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
 
@@ -672,6 +914,94 @@
             break;
     }
     return cell;
+}
+
+-(void)sendVoiceButtonLongPress:(UILongPressGestureRecognizer *)recognizer
+{
+    
+
+    
+    if (self.avPlay.playing) {
+        [self.avPlay stop];
+        return;
+    }
+
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        self.voiceImageview = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, SCREEN_HEIGHT/2-60, 120, 120)];
+        [self.view addSubview:self.voiceImageview];
+        
+        if ([self.recorder prepareToRecord]) {
+            //开始录音
+            [self.recorder record];
+        }
+        //定时检测
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(detectionVice) userInfo:nil repeats:YES];
+        
+    }
+    else
+    {
+        if (recognizer.state == UIGestureRecognizerStateCancelled
+            || recognizer.state == UIGestureRecognizerStateFailed
+            || recognizer.state == UIGestureRecognizerStateEnded)
+        {
+            if (self.voiceImageview) {
+                [self.voiceImageview removeFromSuperview];
+            }
+            
+            double cTime = self.recorder.currentTime;
+            if (cTime > 2) {
+                NSLog(@"录音成功");
+
+            }else{
+                //删除记录的文件
+                
+                [self.recorder deleteRecording];
+            }
+            [self.recorder stop];//录音结束
+            [self.timer invalidate];//取消定时器
+        }
+    }
+    
+    }
+
+
+- (void)detectionVice
+{
+    [self.recorder updateMeters];
+    double lowPassResults = pow(10, (0.5 * [self.recorder peakPowerForChannel:0]));
+    //图片随音量大小变化
+    if (0<lowPassResults<=0.06) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"上午.png"]];
+    }else if (0.06<lowPassResults<=0.13) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"上午1.png"]];
+    }else if (0.13<lowPassResults<=0.20) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"下午.png"]];
+    }else if (0.20<lowPassResults<=0.27) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"下午1.png"]];
+    }else if (0.27<lowPassResults<=0.34) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"夜间.png"]];
+    }else if (0.34<lowPassResults<=0.41) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"夜间1.png"]];
+    }else if (0.41<lowPassResults<=0.48) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"launch.png"]];
+    }else if (0.48<lowPassResults<=0.55) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"menu.png"]];
+    }else if (0.55<lowPassResults<=0.62) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"done.png"]];
+    }else if (0.62<lowPassResults<=0.69) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"上午.png"]];
+    }else if (0.69<lowPassResults<=0.76) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"上午1.png"]];
+    }else if (0.76<lowPassResults<=0.83) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"下午.png"]];
+    }else if (0.83<lowPassResults<=0.9) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"下午1.png"]];
+    }else {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"夜间.png"]];
+    }//图片根据音量来变化,大家知道就好
+    
 }
 
 #pragma category cell delegate
@@ -686,7 +1016,7 @@
             [self presentViewController:exportVC animated:YES completion:nil];
         });
 
-        [self dismissKeyboard];
+        [self dismissDimView];
 
         return;
     }
@@ -698,7 +1028,7 @@
     [indexPaths addObject: indexPath];
     [self.itemInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
 
-    [self dismissKeyboard];
+    [self dismissDimView];
     
 }
 
@@ -711,10 +1041,26 @@
     }else if (sender.tag - 10 == 1 || sender.tag - 10 == 2)
     {
         [self showingModelOfHeight:200 andColor:[UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f] forRow:(sender.tag - 10)];
+    }else if (sender.tag -10 == 3)
+    {
+        [self showingModelOfHeight:SCREEN_HEIGHT andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:0.0f] forRow:3];
+
+        [self.view bringSubviewToFront:self.noteView];
+        [self.noteBody becomeFirstResponder];
+    }else if (sender.tag - 10 == 4)
+    {
+        if (self.avPlay.playing) {
+            [self.avPlay stop];
+            return;
+        }
+        //初始化AVAudioPlayer 对象
+        AVAudioPlayer * player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
+        self.avPlay = player;
+        [self.avPlay play];
     }
 }
 
--(void)dismissKeyboard
+-(void)dismissDimView
 {
     UIView *contentView = [self.myDimView viewWithTag:100];
     [UIView animateWithDuration:0.32f animations:^{
@@ -725,6 +1071,8 @@
         [self.myDimView removeFromSuperview];
     }];
 }
+
+
 
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -738,6 +1086,9 @@
 
 -(void)closeVC
 {
+    if (isNewRecord) {
+        [self.recorder deleteRecording];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

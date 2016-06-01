@@ -19,6 +19,8 @@
 @property (nonatomic,strong) NSString *itemEndTime;
 @property (nonatomic,strong) NSString *targetDate;
 @property (nonatomic,strong) NSString *soundName;
+@property (nonatomic,strong) NSString *photoNames;
+
 
 @property BOOL isEditing;
 @end
