@@ -126,7 +126,6 @@
 
 -(void)initDB
 {
-    NSLog(@"init db.");
 
 
     db = [[CommonUtility sharedCommonUtility] db];
@@ -139,7 +138,7 @@
     NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS MONEYLUCK (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT,start_date TEXT,content TEXT, constellation TEXT)";
     NSString *createColorTable = @"CREATE TABLE IF NOT EXISTS COLORINFO (color_id INTEGER PRIMARY KEY AUTOINCREMENT,color_R Double,color_G Double,color_B Double, used_count INTEGER)";
     
-    NSString *createEvent = @"CREATE TABLE IF NOT EXISTS EVENT (eventID INTEGER PRIMARY KEY,TYPE INTEGER,TITLE TEXT,mainText TEXT,income REAL,expend REAL,date TEXT,startTime REAL,endTime REAL,distance TEXT,label TEXT,remind TEXT,startArea INTEGER,photoDir TEXT,soundDir INTEGER, isPrivate TEXT)";
+    NSString *createEvent = @"CREATE TABLE IF NOT EXISTS EVENT (eventID INTEGER PRIMARY KEY,TYPE INTEGER,TITLE TEXT,mainText TEXT,income REAL,expend REAL,date TEXT,startTime REAL,endTime REAL,distance TEXT,label TEXT,remind TEXT,startArea INTEGER,photoDir TEXT,soundDir INTEGER)";
     
     NSString *createCollect = @"CREATE TABLE IF NOT EXISTS collection (collectionID INTEGER PRIMARY KEY AUTOINCREMENT,eventID INTEGER)";
     NSString *createPassword = @"CREATE TABLE IF NOT EXISTS passwordVar (varName TEXT PRIMARY KEY,value TEXT)";
@@ -230,7 +229,7 @@
 
 -(void)judgeTimeFrame
 {
-    NSLog(@"judgeTimeFrame");
+//    NSLog(@"judgeTimeFrame");
     
     NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
     if (![autoSwitchString isEqualToString:@"on"])
@@ -264,7 +263,7 @@
 -(void)loadLuckInfoFromServer
 {
     
-    NSLog(@"loadLuckInfoFromServer");
+//    NSLog(@"loadLuckInfoFromServer");
     
     NSDate *dateNow = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];

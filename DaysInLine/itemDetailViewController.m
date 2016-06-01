@@ -39,6 +39,7 @@
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
 @property (nonatomic,strong) dateSelectView *dateView;
 @property (nonatomic, strong) UIPickerView *timePicker;
+@property (nonatomic, strong) UIImageView *bigPhoto;
 
 @property (nonatomic,strong) NSMutableArray *photosArray;
 
@@ -534,7 +535,6 @@
         }
         
         UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
-        //        [cancelBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
         [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
         [cancelBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
         cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0];
@@ -550,9 +550,79 @@
         [cancelBtn addTarget:self action:@selector(cancelTime) forControlEvents:UIControlEventTouchUpInside];
         [selectBtn addTarget:self action:@selector(timeChoose:) forControlEvents:UIControlEventTouchUpInside];
 
+    }else if(row == 6)
+    {
+        self.bigPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(6, 0, (SCREEN_WIDTH -32), (SCREEN_WIDTH -32))];
+        [contentView addSubview:self.bigPhoto];
+        
+        UIView *operateBar = [[UIView alloc] initWithFrame:CGRectMake(self.bigPhoto.frame.origin.x, self.bigPhoto.frame.origin.y + self.bigPhoto.frame.size.height, self.bigPhoto.frame.size.width, 50)];
+        operateBar.backgroundColor = [UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] ;
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
+        [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        deleteBtn.layer.borderWidth = 0.5f;
+        deleteBtn.layer.borderColor = normalColor.CGColor;
+        
+        UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width - 45 , 5, 40, 40)];
+        [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+        closeBtn.layer.borderWidth = 0.5f;
+        closeBtn.layer.borderColor = normalColor.CGColor;
+        
+        UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width/2 - 41 , 5, 40, 40)];
+        [leftBtn setTitle:@"左" forState:UIControlStateNormal];
+        leftBtn.layer.borderWidth = 0.5f;
+        leftBtn.layer.borderColor = normalColor.CGColor;
+        
+        UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width/2+1 , 5, 40, 40)];
+        [rightBtn setTitle:@"右" forState:UIControlStateNormal];
+        rightBtn.layer.borderWidth = 0.5f;
+        rightBtn.layer.borderColor = normalColor.CGColor;
+        
+        [operateBar addSubview:deleteBtn];
+        [operateBar addSubview:closeBtn];
+        [operateBar addSubview:leftBtn];
+        [operateBar addSubview:rightBtn];
+        [contentView addSubview:operateBar];
+        
+        [deleteBtn addTarget:self action:@selector(deletePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [closeBtn addTarget:self action:@selector(closePhoto) forControlEvents:UIControlEventTouchUpInside];
+        [leftBtn addTarget:self action:@selector(leftPhoto) forControlEvents:UIControlEventTouchUpInside];
+        [rightBtn addTarget:self action:@selector(rightPhoto) forControlEvents:UIControlEventTouchUpInside];
+
     }
+}
+
+-(void)deletePhoto
+{
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"确认删除照片?", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消",nil) otherButtonTitles:NSLocalizedString(@"删除",nil), nil];
+    alert.tag = 11;
+    [alert show];
+    
 
 }
+
+-(void)closePhoto
+{
+    [self dismissDimView];
+}
+
+-(void)leftPhoto
+{
+    NSUInteger index =  [self.photosArray indexOfObject:self.bigPhoto.image];
+    if (index>0) {
+        [self.bigPhoto setImage:self.photosArray[index - 1]];
+    }
+}
+
+-(void)rightPhoto
+{
+    NSUInteger index =  [self.photosArray indexOfObject:self.bigPhoto.image];
+    if (index<self.photosArray.count -2) {
+        [self.bigPhoto setImage:self.photosArray[index + 1]];
+    }
+}
+
+
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);
@@ -683,19 +753,45 @@
 
 }
 
-//返回当前行的内容,此处是将数组中数值添加到滚动的那个显示栏上
-//-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-//{
-//    return [constellationList objectAtIndex:(row%[constellationList count])];
-//}
+#pragma mark - 保存图片至沙盒 和 系统相册
+- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
+{
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.1);
+    
+    NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
+    NSString *destPath = [storeURL path];
+    
+    
+    // 获取沙盒目录
+    NSString *fullPath = [destPath
+                          stringByAppendingPathComponent:imageName];
+    
+    NSLog(@"image path___:%@",fullPath);
+    
+    // 将图片写入文件
+    [imageData writeToFile:fullPath atomically:NO];
+
+}
 
 #pragma mark - UIImagePickerControllerDelegate
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     UIImage *photo = info[UIImagePickerControllerOriginalImage];
-    
+
     [self.photosArray insertObject:photo atIndex:self.photosArray.count - 1];
     [self .photoTable reloadData];
+    
+    NSString *UUID = [[NSUUID UUID] UUIDString];
+    NSString *name = [NSString stringWithFormat:@"%@.png", UUID];
+    
+    [self saveImage:photo withName: name];
+    
+    if ([self.photoNames isEqualToString:@""] || self.photoNames == nil) {
+        self.photoNames = name;
+    } else {
+        self.photoNames = [NSString stringWithFormat:@"%@;%@", self.photoNames, name];
+    }
+    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -718,6 +814,10 @@
         }else
         {
             // zoom big the image...
+            [self showingModelOfHeight:SCREEN_HEIGHT/2 + (SCREEN_WIDTH -32)/2 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:0.0f] forRow:6];
+            [self.bigPhoto setImage:self.photosArray[indexPath.row]];
+            
+
         }
     }
     
@@ -1073,22 +1173,41 @@
 }
 
 
-
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//    if (tableView == self.itemInfoTable && indexPath.row == 0) {
-//        
-//        [self showingModelOfHeight:300];
-//    }
-//    
-//}
-
 -(void)closeVC
 {
     if (isNewRecord) {
         [self.recorder deleteRecording];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark alert delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex ==1) {
+        NSUInteger index =  [self.photosArray indexOfObject:self.bigPhoto.image];
+        [self.photosArray removeObject:self.bigPhoto.image];
+        [self.photoTable reloadData];
+        
+        NSArray *names = [self.photoNames componentsSeparatedByString:@";"];
+        self.photoNames = @"";
+        for (int i = 0; i<names.count; i++) {
+            if (i == index) {
+                continue;
+            }else
+            {
+                if ([self.photoNames isEqualToString:@""]) {
+                    self.photoNames = names[i];
+                }else
+                {
+                    self.photoNames = [self.photoNames stringByAppendingString:[NSString stringWithFormat:@";%@",names[i]]];
+                }
+            }
+        }
+        
+        [self dismissDimView];
+    }
 }
 @end

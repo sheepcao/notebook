@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSLog(@"viewDidLoad ");
+//    NSLog(@"viewDidLoad ");
 
     self.menuArray = @[NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"分类管理",nil),NSLocalizedString(@"帐目流水",nil),NSLocalizedString(@"帐目日历",nil),NSLocalizedString(@"显示模式",nil),NSLocalizedString(@"关于简簿",nil)];
     
@@ -41,7 +41,6 @@
     [self.view addSubview:menuTable];
     self.myMenuTable = menuTable;
     
-    NSLog(@"viewDidLoad2 ");
 
     
 //    [self configUIAppearance];
@@ -52,7 +51,6 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"SideMenu"];
-    NSLog(@"viewWillAppear ");
 
 }
 - (void)viewWillDisappear:(BOOL)animated
@@ -70,7 +68,7 @@
 
 
 - (void)configUIAppearance{
-    NSLog(@"sidebar config ui ");
+//    NSLog(@"sidebar config ui ");
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if ([showModel isEqualToString:@"上午"]) {
         self.myTextColor = TextColor0;
