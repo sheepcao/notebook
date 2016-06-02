@@ -31,6 +31,9 @@
 		A4A977F31CFEB84C00099E4F /* addPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977F21CFEB84C00099E4F /* addPhoto.png */; };
 		A4A977F61CFEC52E00099E4F /* photoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977F51CFEC52E00099E4F /* photoCell.m */; };
 		A4A977F91CFFD13F00099E4F /* highLightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977F81CFFD13F00099E4F /* highLightButton.m */; };
+		A4A977FD1D001E1D00099E4F /* checkEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977FB1D001E1D00099E4F /* checkEventViewController.m */; };
+		A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4A977FC1D001E1D00099E4F /* checkEventViewController.xib */; };
+		A4A978011D0027B400099E4F /* checkEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A978001D0027B400099E4F /* checkEventTableViewCell.m */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
@@ -147,6 +150,11 @@
 		A4A977F51CFEC52E00099E4F /* photoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoCell.m; sourceTree = "<group>"; };
 		A4A977F71CFFD13F00099E4F /* highLightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = highLightButton.h; sourceTree = "<group>"; };
 		A4A977F81CFFD13F00099E4F /* highLightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = highLightButton.m; sourceTree = "<group>"; };
+		A4A977FA1D001E1D00099E4F /* checkEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkEventViewController.h; sourceTree = "<group>"; };
+		A4A977FB1D001E1D00099E4F /* checkEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = checkEventViewController.m; sourceTree = "<group>"; };
+		A4A977FC1D001E1D00099E4F /* checkEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = checkEventViewController.xib; sourceTree = "<group>"; };
+		A4A977FF1D0027B400099E4F /* checkEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkEventTableViewCell.h; sourceTree = "<group>"; };
+		A4A978001D0027B400099E4F /* checkEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = checkEventTableViewCell.m; sourceTree = "<group>"; };
 		A4E26C831CF84042004DFBC3 /* DaysInLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaysInLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -317,6 +325,8 @@
 				A49E62441CFB2E280047011B /* myLifeTableViewCell.m */,
 				A4A977A81CFC3F6600099E4F /* itemDetailTableViewCell.h */,
 				A4A977A91CFC3F6600099E4F /* itemDetailTableViewCell.m */,
+				A4A977FF1D0027B400099E4F /* checkEventTableViewCell.h */,
+				A4A978001D0027B400099E4F /* checkEventTableViewCell.m */,
 				A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */,
 				A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */,
 				A4A977F41CFEC52E00099E4F /* photoCell.h */,
@@ -334,6 +344,9 @@
 				A4A977C41CFD7AD000099E4F /* categoryManagementViewController.h */,
 				A4A977C51CFD7AD000099E4F /* categoryManagementViewController.m */,
 				A4A977C61CFD7AD000099E4F /* categoryManagementViewController.xib */,
+				A4A977FA1D001E1D00099E4F /* checkEventViewController.h */,
+				A4A977FB1D001E1D00099E4F /* checkEventViewController.m */,
+				A4A977FC1D001E1D00099E4F /* checkEventViewController.xib */,
 			);
 			name = items;
 			sourceTree = "<group>";
@@ -752,6 +765,7 @@
 				A4A977AF1CFC42FE00099E4F /* done.png in Resources */,
 				A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */,
 				A4E26CA81CF841CA004DFBC3 /* FlatDatePicker-Icon-Close@2x.png in Resources */,
+				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
 				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4A977B91CFC8AFB00099E4F /* expend.png in Resources */,
@@ -848,6 +862,7 @@
 				A4A977AA1CFC3F6600099E4F /* itemDetailTableViewCell.m in Sources */,
 				A4E26D751CF84867004DFBC3 /* SideMenuViewController.m in Sources */,
 				A4E26D0E1CF842E1004DFBC3 /* RATreeNodeItem.m in Sources */,
+				A4A978011D0027B400099E4F /* checkEventTableViewCell.m in Sources */,
 				A4E26D211CF842F5004DFBC3 /* MFSideMenuContainerViewController.m in Sources */,
 				A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */,
 				A4E26CC81CF8425A004DFBC3 /* OpenShare+Weixin.m in Sources */,
@@ -859,6 +874,7 @@
 				A4E26CE31CF842CB004DFBC3 /* AFURLConnectionOperation.m in Sources */,
 				A4A977F61CFEC52E00099E4F /* photoCell.m in Sources */,
 				A4E26CE11CF842CB004DFBC3 /* AFHTTPRequestOperation.m in Sources */,
+				A4A977FD1D001E1D00099E4F /* checkEventViewController.m in Sources */,
 				A4E26CC91CF8425A004DFBC3 /* OpenShare.m in Sources */,
 				A4E26D0F1CF842E1004DFBC3 /* RATreeView+Enums.m in Sources */,
 				A4E26D111CF842E1004DFBC3 /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,

@@ -20,6 +20,7 @@
 #import "myWorkTableViewCell.h"
 #import "itemObj.h"
 #import "itemDetailViewController.h"
+#import "checkEventViewController.h"
 
 @interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate,reloadDataDelegate>
 @property (nonatomic,strong) FMDatabase *db;
@@ -123,7 +124,7 @@
     self.navigationController.navigationBarHidden = YES;
     self.luckyText.alpha = 1.0f;
     
-    if (IS_IPHONE_6P) {
+    if (IS_IPHONE_6P || IS_IPHONE_6) {
         bottomHeight = 65;
     }else
     {
@@ -149,7 +150,12 @@
     [self configHeaderView];
     [self configBottomView];
     
-    moneyLuckSpace = self.luckView.frame.size.height + self.luckView.frame.origin.y - topBarHeight;
+    if ([CommonUtility isSystemLangChinese]) {
+        moneyLuckSpace = self.luckView.frame.size.height + self.luckView.frame.origin.y - topBarHeight;
+    }else
+    {
+        moneyLuckSpace = 0;
+    }
 //    if (IS_IPHONE_5) {
 //        moneyLuckSpace = moneyLuckSpace-58;
 //    }else if (IS_IPHONE_4_OR_LESS)
@@ -215,26 +221,6 @@
 
 -(void)prepareData
 {
-//    self.todayItems = [[NSMutableArray alloc] init];
-//    itemObj *oneItem = [[itemObj alloc] init];
-//    oneItem.itemCategory = @"水电煤";
-//    oneItem.itemDescription = @"快速华盛顿参加宁夏可刺激啊设备出口下降啊";
-//    oneItem.itemType = 1;
-//    
-//    itemObj *oneItem2 = [[itemObj alloc] init];
-//    oneItem2.itemCategory = @"旅游";
-//    oneItem2.itemDescription = @"快速的是法国今年的咖啡结核杆菌对话方式带来健康";
-//    oneItem2.itemType = 0;
-//    
-//    itemObj *oneItem3 = [[itemObj alloc] init];
-//    oneItem3.itemCategory = @"阅读";
-//    oneItem3.itemDescription = @"萨肯的杀菌开始的解放路弗兰克";
-//    oneItem3.itemType = 1;
-//
-//    [self.todayItems addObject:oneItem];
-//    [self.todayItems addObject:oneItem2];
-//    [self.todayItems addObject:oneItem3];
-    
     
     self.todayItems = [[NSMutableArray alloc] init];
     
@@ -255,6 +241,7 @@
         oneItem.targetTime = [rs stringForColumn:@"date"];
         oneItem.startTime = [rs doubleForColumn:@"startTime"];
         oneItem.endTime = [rs doubleForColumn:@"endTime"];
+        oneItem.photoNames = [rs stringForColumn:@"photoDir"];
 
         
         [self.todayItems addObject:oneItem];
@@ -501,12 +488,6 @@
         
         return (self.maintableView.frame.size.height - summaryViewHeight - (rowHeight * self.todayItems.count));
 
-//        if (self.todayItems.count == 0) {
-//            return rowHeight;
-//        }else
-//        {
-//            return (self.maintableView.frame.size.height - summaryViewHeight - (rowHeight * self.todayItems.count));
-//        }
     }else
         return rowHeight;
 }
@@ -526,6 +507,14 @@
     
     if (indexPath.section == 0) {
         [self configConstellation:nil];
+    }else
+    {
+        if (self.todayItems.count > 0) {
+            checkEventViewController *myCheckVC = [[checkEventViewController alloc] initWithNibName:@"checkEventViewController" bundle:nil];
+            myCheckVC.currentItem = self.todayItems[indexPath.row];
+            [self.navigationController pushViewController:myCheckVC animated:YES];
+        }
+
     }
 
 }

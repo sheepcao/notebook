@@ -16,6 +16,7 @@
 @property (strong , nonatomic) NSString *itemDescription;
 @property (strong , nonatomic) NSString *createdTime;
 @property (strong , nonatomic) NSString *targetTime;
+@property (strong , nonatomic) NSString *photoNames;
 
 @property double startTime;
 @property double endTime;

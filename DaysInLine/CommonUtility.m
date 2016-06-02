@@ -733,7 +733,7 @@
         destTimeString = [NSString stringWithFormat:@"%02d:%02d",hour,minute];
     }else
     {
-        destTimeString = [NSString stringWithFormat:@"%02d:%02d  +%d",hour,minute,dayOffsite];
+        destTimeString = [NSString stringWithFormat:@"%02d:%02d +%d天",hour,minute,dayOffsite];
     }
     
     return destTimeString;

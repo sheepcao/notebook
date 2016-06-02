@@ -82,12 +82,12 @@
     [self configBottomView];
     [self configNoteView];
     
-//    [self configButton];
-    
-    [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
-                                       fromViewController:[self class]
-                                                forAction:RZTransitionAction_PresentDismiss];
-    
+////    [self configButton];
+//    
+//    [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
+//                                       fromViewController:[self class]
+//                                                forAction:RZTransitionAction_PresentDismiss];
+//    
 
 
 }
@@ -129,7 +129,9 @@
         for (int i = 0; i < namesArray.count; i++) {
             NSString *fullPath = [destPath stringByAppendingPathComponent:namesArray[i]];
             UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-            [self.photosArray addObject:savedImage];
+            if (savedImage) {
+                [self.photosArray addObject:savedImage];
+            }
         }
     }
     [self.photosArray addObject:[UIImage imageNamed:@"addPhoto.png"]];
@@ -146,7 +148,7 @@
     [self.view addSubview:topbar];
     
     if (self.isEditing) {
-        [topbar.titleLabel  setText:NSLocalizedString(@"事项详情",nil)];
+        [topbar.titleLabel  setText:NSLocalizedString(@"事项编辑",nil)];
     }else
     {
         [topbar.titleLabel  setText:NSLocalizedString(@"新增事项",nil)];
@@ -157,7 +159,6 @@
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
     closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
-    //    [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
     [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
@@ -352,7 +353,6 @@
     [recodeSeting setValue:[NSNumber numberWithInt:AVAudioQualityHigh] forKey:AVEncoderAudioQualityKey];
     //数据持久化(将声音存储到磁盘中)
     NSString *strUrl = [[CommonUtility sharedCommonUtility] voicePathWithRecorderID:[self searchEventID]];
-//    NSString *strUrl = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSURL *url = [NSURL fileURLWithPath:strUrl];
     NSError *error = nil;
     //初始化AVAudioRecorder
@@ -392,8 +392,11 @@
         if ([rs next]) {
             recorderID = [rs intForColumnIndex:0];
         }
+        
+        [db close];
         return recorderID+1;
     }
+    
 
 }
 
@@ -1061,7 +1064,7 @@
             break;
         case 3:
             [cell.leftText  setText:NSLocalizedString(@"文字备注",nil)] ;
-            if(self.itemDescription)
+            if(self.itemDescription && ![self.itemDescription isEqualToString:@""])
             {
                 [cell.rightText setTitle:self.itemDescription forState:UIControlStateNormal];
                 
@@ -1272,10 +1275,14 @@
 
 -(void)closeVC
 {
-    if (isNewRecord) {
-        [self.recorder deleteRecording];
+    if (isNewRecord && [[NSFileManager defaultManager] fileExistsAtPath:self.recorder.url.path]) {
+        if (![self.recorder deleteRecording])
+            NSLog(@"Failed to delete %@", self.recorder.url);
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (![self isBeingDismissed]) {
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }
 }
 
 
@@ -1306,5 +1313,10 @@
         
         [self dismissDimView];
     }
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 @end
