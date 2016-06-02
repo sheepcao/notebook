@@ -388,9 +388,9 @@
         return [self.currentItemID intValue];
     }else
     {
-        FMResultSet *rs = [db executeQuery:@"SELECT * FROM SQLITE_SEQUENCE WHERE name='EVENT'"];
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM SQLITE_SEQUENCE WHERE name='EVENTS'"];
         if ([rs next]) {
-            recorderID = [rs intForColumnIndex:0];
+            recorderID = [rs intForColumn:@"seq"];
         }
         
         [db close];
@@ -419,7 +419,7 @@
 
     
     if (self.isEditing) {
-        BOOL sql = [db executeUpdate:@"update EVENT set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where item_id = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[self searchEventID]];
+        BOOL sql = [db executeUpdate:@"update EVENTS set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where item_id = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[self searchEventID]];
         if (!sql) {
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
@@ -432,7 +432,7 @@
         }
     }else
     {
-        BOOL sql = [db executeUpdate:@"INSERT INTO EVENT(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames];
+        BOOL sql = [db executeUpdate:@"INSERT INTO EVENTS(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames];
         
         if (!sql) {
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);

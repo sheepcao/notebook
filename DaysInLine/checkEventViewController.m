@@ -78,7 +78,7 @@
     
     
     
-    FMResultSet *rs = [db executeQuery:@"select * from EVENT where eventID = ?", self.currentItem.itemID];
+    FMResultSet *rs = [db executeQuery:@"select * from EVENTS where eventID = ?", self.currentItem.itemID];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
         oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"eventID"]];
@@ -378,7 +378,7 @@
                 return;
             }
             
-            NSString *sqlCommand = [NSString stringWithFormat:@"delete from EVENT where item_id=%ld",(long)itemID];
+            NSString *sqlCommand = [NSString stringWithFormat:@"delete from EVENTS where item_id=%ld",(long)itemID];
             BOOL sql = [db executeUpdate:sqlCommand];
             if (!sql) {
                 NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);

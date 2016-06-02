@@ -231,7 +231,7 @@
     }
     
     NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
-    FMResultSet *rs = [db executeQuery:@"select * from EVENT where date = ?", today];
+    FMResultSet *rs = [db executeQuery:@"select * from EVENTS where date = ?", today];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
         oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"eventID"]];

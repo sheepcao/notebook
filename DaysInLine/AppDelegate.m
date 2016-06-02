@@ -138,7 +138,7 @@
     NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS MONEYLUCK (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT,start_date TEXT,content TEXT, constellation TEXT)";
     NSString *createColorTable = @"CREATE TABLE IF NOT EXISTS COLORINFO (color_id INTEGER PRIMARY KEY AUTOINCREMENT,color_R Double,color_G Double,color_B Double, used_count INTEGER)";
     
-    NSString *createEvent = @"CREATE TABLE IF NOT EXISTS EVENT (eventID INTEGER PRIMARY KEY,TYPE INTEGER,TITLE TEXT,mainText TEXT,income REAL,expend REAL,date TEXT,startTime REAL,endTime REAL,distance TEXT,label TEXT,remind TEXT,startArea INTEGER,photoDir TEXT)";
+    NSString *createEvent = @"CREATE TABLE IF NOT EXISTS EVENTS (eventID INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,TITLE TEXT,mainText TEXT,income REAL,expend REAL,date TEXT,startTime REAL,endTime REAL,distance TEXT,label TEXT,remind TEXT,startArea INTEGER,photoDir TEXT)";
     
     NSString *createCollect = @"CREATE TABLE IF NOT EXISTS collection (collectionID INTEGER PRIMARY KEY AUTOINCREMENT,eventID INTEGER)";
     NSString *createPassword = @"CREATE TABLE IF NOT EXISTS passwordVar (varName TEXT PRIMARY KEY,value TEXT)";
@@ -150,37 +150,25 @@
     [db executeUpdate:createEvent];
     [db executeUpdate:createCollect];
     [db executeUpdate:createPassword];
-
-//    
-//    FMResultSet *patchRS = [db executeQuery:@"PRAGMA table_info('EVENT')"];
-//    if ([patchRS next]) {
-//
-//        NSLog(@"%@",[patchRS stringForColumnIndex:0]);
-//        
-//    }else
-//    {
-//        BOOL sql = [db executeUpdate:@"alter table EVENT add column soundDir INTEGER DEFAULT 0"];
-//        if (!sql) {
-//            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-//        }
-//        BOOL sql2 = [db executeUpdate:@"alter table EVENT add column isPrivate TEXT DEFAULT '0'"];
-//        if (!sql2) {
-//            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-//        }
-//        
-//        FMResultSet *findRS = [db executeQuery:@"select eventID from collection"];
-//        if ([findRS next]) {
-//            int privateEventID = [findRS intForColumn:@"eventID"];
-//            BOOL sql = [db executeUpdate:@"update EVENT set isPrivate = '1' where eventID = ?",[NSNumber numberWithInt:privateEventID]];
-//            if (!sql) {
-//                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-//            }
-//        }
-//        
-//        //soundID 等到编辑event时候，自然会得到id，到时候再update到soundDir中。
-//
-//    }
     
+    
+    NSString *selectEVENTSCount = @"select * from EVENTS";
+    FMResultSet *rs1 = [db executeQuery:selectEVENTSCount];
+    if ([rs1 next]) {
+    }else
+    {
+        FMResultSet *rs2 = [db executeQuery:@"select * from EVENT"];
+        while ([rs2 next]) {
+            BOOL sql =  [db executeUpdate:@"insert into EVENTS (eventID,TYPE,TITLE,mainText,income,expend,date,startTime,endTime,distance,label,remind,startArea,photoDir) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[NSNumber numberWithInt:[rs2 intForColumnIndex:0]],[NSNumber numberWithInt:[rs2 intForColumnIndex:1]],[rs2 stringForColumnIndex:2],[rs2 stringForColumnIndex:3],[NSNumber numberWithDouble:[rs2 doubleForColumnIndex:4]],[NSNumber numberWithDouble:[rs2 doubleForColumnIndex:5]],[rs2 stringForColumnIndex:6],[NSNumber numberWithDouble:[rs2 doubleForColumnIndex:7]],[NSNumber numberWithDouble:[rs2 doubleForColumnIndex:8]],[rs2 stringForColumnIndex:9],[rs2 stringForColumnIndex:10],[rs2 stringForColumnIndex:11],[NSNumber numberWithInt:[rs2 intForColumnIndex:12]],[rs2 stringForColumnIndex:13]];
+            if (!sql) {
+                NSLog(@"CATEGORY ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+            }
+
+        }
+
+    }
+
+
     //第一次启动，加载默认类别和颜色
     int categoryCount;
     NSString *selectCategoryCount = @"select count (*) from CATEGORYINFO";
@@ -190,24 +178,24 @@
     }
     if (categoryCount == 0) {
         [self insertDefaultCategoryToDB:db];
+//        
+//        BOOL sql = [db executeUpdate:@"alter table EVENT add column soundDir INTEGER DEFAULT 0"];
+//        if (!sql) {
+//            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+//        }
+//        BOOL sql2 = [db executeUpdate:@"alter table EVENT add column isPrivate TEXT DEFAULT '0'"];
+//        if (!sql2) {
+//            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+//        }
         
-        BOOL sql = [db executeUpdate:@"alter table EVENT add column soundDir INTEGER DEFAULT 0"];
-        if (!sql) {
-            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-        }
-        BOOL sql2 = [db executeUpdate:@"alter table EVENT add column isPrivate TEXT DEFAULT '0'"];
-        if (!sql2) {
-            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-        }
-        
-        FMResultSet *findRS = [db executeQuery:@"select eventID from collection"];
-        if ([findRS next]) {
-            int privateEventID = [findRS intForColumn:@"eventID"];
-            BOOL sql = [db executeUpdate:@"update EVENT set isPrivate = '1' where eventID = ?",[NSNumber numberWithInt:privateEventID]];
-            if (!sql) {
-                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-            }
-        }
+//        FMResultSet *findRS = [db executeQuery:@"select eventID from collection"];
+//        if ([findRS next]) {
+//            int privateEventID = [findRS intForColumn:@"eventID"];
+//            BOOL sql = [db executeUpdate:@"update EVENT set isPrivate = '1' where eventID = ?",[NSNumber numberWithInt:privateEventID]];
+//            if (!sql) {
+//                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+//            }
+//        }
         
         //soundID 等到编辑event时候，自然会得到id，到时候再update到soundDir中。
         
