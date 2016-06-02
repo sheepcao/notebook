@@ -671,5 +671,52 @@
     
 }
 
+-(CGFloat)timeToDouble:(NSString *)time
+{
+    CGFloat destTime= 0.0f;
+    
+    NSArray *timeParts = [time componentsSeparatedByString:@"  "];
+    if (timeParts.count>1) {
+        destTime +=24 * 60;
+        NSArray *timePart = [timeParts[1] componentsSeparatedByString:@":"];
+        double hour_0 = [timePart[0] doubleValue];
+        double minite_0 = [timePart[1] doubleValue];
+        double timeTemp = hour_0*60 + minite_0;
+        destTime += timeTemp;
+    }else
+    {
+        NSArray *timePart = [time componentsSeparatedByString:@":"];
+        double hour_0 = [timePart[0] doubleValue];
+        double minite_0 = [timePart[1] doubleValue];
+        double timeTemp = hour_0*60 + minite_0;
+        destTime += timeTemp;
+
+    }
+    
+    return destTime;
+}
+
+-(NSString *)doubleToTime:(int)timeNumber
+{
+    NSString *destTimeString;
+    
+    int hour = timeNumber/60;
+    int minute = timeNumber%60;
+    int  dayOffsite = hour/24;
+    if (hour >23) {
+        hour %= 24;
+    }
+    
+    if (dayOffsite == 0) {
+        destTimeString = [NSString stringWithFormat:@"%2d:%2d",hour,minute];
+    }else
+    {
+        destTimeString = [NSString stringWithFormat:@"+%d  %2d:%2d",dayOffsite,hour,minute];
+    }
+    
+    return destTimeString;
+    
+}
+
 
 @end

@@ -8,6 +8,7 @@
 
 #import "itemDetailTableViewCell.h"
 #import "global.h"
+#import "highLightButton.h"
 
 @implementation itemDetailTableViewCell
 
@@ -27,7 +28,7 @@
         
         self.leftText = [[UILabel alloc] initWithFrame:CGRectMake(20, Height, SCREEN_WIDTH*2/5+10, 30)];
         
-        self.rightText = [[UIButton alloc] initWithFrame:CGRectMake(self.leftText.frame.origin.x + self.leftText.frame.size.width +10, Height, SCREEN_WIDTH*3/5 -10 - 20-20 -10, 30)];
+        self.rightText = [[highLightButton alloc] initWithFrame:CGRectMake(self.leftText.frame.origin.x + self.leftText.frame.size.width +10, Height, SCREEN_WIDTH*3/5 -10 - 20-20 -10, 30)];
         self.rightText.layer.borderWidth = 0.75f;
         self.rightText.layer.borderColor = normalColor.CGColor;
         self.rightText.layer.cornerRadius = 5;

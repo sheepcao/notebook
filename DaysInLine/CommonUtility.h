@@ -44,8 +44,7 @@
 - (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd;
 - (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd;
 
--(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array;
--(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array;
+
 -(UIColor *)categoryColor:(NSString *)categoryName;
 
 -(NSDate *)dateFromString:(NSString *)pstrDate;
@@ -72,4 +71,8 @@
 - (BOOL) validatePassword: (NSString *) candidate ;
 
 -(NSMutableArray *)prepareCategoryDataForWork:(BOOL)isWork;
+
+-(CGFloat)timeToDouble:(NSString *)time;
+-(NSString *)doubleToTime:(int)timeNumber;
+
 @end

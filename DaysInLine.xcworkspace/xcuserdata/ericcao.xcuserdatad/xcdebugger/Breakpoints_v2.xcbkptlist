@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/itemDetailViewController.m"
-            timestampString = "486464104.442166"
+            timestampString = "486529764.985224"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1110"
-            endingLineNumber = "1110"
-            landmarkName = "-categoryTap:"
+            startingLineNumber = "1120"
+            endingLineNumber = "1120"
+            landmarkName = "-validateData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/itemDetailViewController.m"
-            timestampString = "486464104.442166"
+            timestampString = "486529764.985224"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
-            landmarkName = "-timeChoose:"
+            startingLineNumber = "639"
+            endingLineNumber = "639"
+            landmarkName = "-validateData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/itemDetailViewController.m"
-            timestampString = "486461242.776896"
+            timestampString = "486528900.408822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "-finishNote"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,13 +58,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/itemDetailViewController.m"
-            timestampString = "486464104.442166"
+            timestampString = "486529764.985224"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "619"
-            endingLineNumber = "619"
-            landmarkName = "-rightPhoto"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
+            landmarkName = "-validateData"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DaysInLine/itemDetailViewController.m"
+            timestampString = "486529764.985224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
+            landmarkName = "-validateData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DaysInLine/itemDetailViewController.m"
+            timestampString = "486529764.985224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1053"
+            endingLineNumber = "1053"
+            landmarkName = "-validateData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DaysInLine/itemDetailViewController.m"
+            timestampString = "486529764.985224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1188"
+            endingLineNumber = "1188"
+            landmarkName = "-validateData"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[itemDetailViewController dismissDimView]_block_invoke730"
+                  moduleName = "DaysInLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/itemDetailViewController.m"
+                  timestampString = "486529765.112295"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1188"
+                  endingLineNumber = "1188"
+                  offsetFromSymbolStart = "94">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_731"
+                  moduleName = "DaysInLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/itemDetailViewController.m"
+                  timestampString = "486529765.112649"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_732"
+                  moduleName = "DaysInLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/itemDetailViewController.m"
+                  timestampString = "486529765.112979"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "10">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

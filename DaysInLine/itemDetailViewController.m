@@ -138,38 +138,7 @@
 
 
 
--(void)prepareData
-{
-    //    db = [[CommonUtility sharedCommonUtility] db];
-    //    if (![db open]) {
-    //        NSLog(@"mainVC/Could not open db.");
-    //        return;
-    //    }
-    
-    //    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where item_id = ?", self.currentItemID];
-    //    while ([rs next]) {
-    //
-    //        self.categoryOnly  = [rs stringForColumn:@"item_category"];
-    //        self.itemType = [rs intForColumn:@"item_type"];
-    //        if (self.itemType == 0)
-    //        {
-    //            self.category = [NSLocalizedString(@"支出 > ",nil) stringByAppendingString:self.categoryOnly];
-    //        }else
-    //        {
-    //            self.category = [NSLocalizedString(@"收入 > ",nil) stringByAppendingString:self.categoryOnly];
-    //        }
-    //
-    //        self.itemDescription = [rs stringForColumn:@"item_description"];
-    //        self.money = [NSString stringWithFormat:@"%.2f", [rs doubleForColumn:@"money"]];
-    //
-    //    }
-    //
-    //    [self.itemInfoTable reloadData];
-    //    [self.itemMoneyLabel setText:self.money];
-    //
-    //    [db close];
-    
-}
+
 -(void)configTopbar
 {
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topBarHeight)];
@@ -376,7 +345,7 @@
     NSMutableDictionary *recodeSeting = [@{} mutableCopy];
     [recodeSeting setValue:[NSNumber numberWithFloat:44100] forKey:AVSampleRateKey];
     //录音通道数
-    [recodeSeting setValue:[NSNumber numberWithInt:1] forKey:AVNumberOfChannelsKey];
+    [recodeSeting setValue:[NSNumber numberWithInt:2] forKey:AVNumberOfChannelsKey];
     //线性采样位数
     [recodeSeting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
     //录音质量
@@ -387,6 +356,11 @@
     NSURL *url = [NSURL fileURLWithPath:strUrl];
     NSError *error = nil;
     //初始化AVAudioRecorder
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord
+                        error:nil];
+    
     self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:recodeSeting error:&error];
     self.recorder.meteringEnabled = YES;
     
@@ -422,6 +396,99 @@
     }
 
 }
+
+#pragma mark save event
+
+-(void)saveItem:(UIButton *)sender
+{
+    NSLog(@"saving item...");
+    if (![self validateData]) {
+        return;
+    }
+    
+    if (![db open]) {
+        NSLog(@"addNewItemVC/Could not open db.");
+        return;
+    }
+    
+    double startNum = [[CommonUtility sharedCommonUtility] timeToDouble:self.itemStartTime];
+    double endNum = [[CommonUtility sharedCommonUtility] timeToDouble:self.itemEndTime];
+
+    
+    if (self.isEditing) {
+        BOOL sql = [db executeUpdate:@"update EVENT set TYPE=? ,TITLE = ? ,mainText = ? ,date = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where item_id = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,startNum,endNum,endNum - startNum,self.photoNames,[self searchEventID]];
+        if (!sql) {
+            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [self.refreshDelegate refreshData];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [MobClick event:@"editItem"];
+            
+        }
+    }else
+    {
+        BOOL sql = [db executeUpdate:@"INSERT INTO EVENT(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,startNum,endNum,endNum - startNum,self.photoNames];
+        
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+                [MobClick event:@"addWork"];
+            }else
+            {
+                [MobClick event:@"addLife"];
+            }
+            
+        }
+        
+    }
+    [db close];
+    
+}
+
+-(BOOL)validateData
+{
+    double startNum = [[CommonUtility sharedCommonUtility] timeToDouble:self.itemStartTime];
+    double endNum = [[CommonUtility sharedCommonUtility] timeToDouble:self.itemEndTime];
+
+    if (!self.category) {
+        
+        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"请选择一个主题",nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertview show];
+        
+        return NO;
+    }else if (startNum >= endNum)
+    {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"开始时间应该早于结束时间",nil);
+        [hud hide:YES afterDelay:1.5];
+        return NO;
+
+    }else
+    {
+        if (!self.itemDescription) {
+            self.itemDescription = @"";
+        }
+        
+        if (!self.photoNames) {
+            self.photoNames = @"";
+        }
+    }
+    
+
+    
+    return YES;
+}
+
+
+
 
 -(void)showingModelOfHeight:(CGFloat)height andColor:(UIColor *)backColor forRow:(NSInteger)row
 {
@@ -552,10 +619,10 @@
 
     }else if(row == 6)
     {
-        self.bigPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(6, 0, (SCREEN_WIDTH -32), (SCREEN_WIDTH -32))];
-        [contentView addSubview:self.bigPhoto];
+        dimView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:0.9];
+
         
-        UIView *operateBar = [[UIView alloc] initWithFrame:CGRectMake(self.bigPhoto.frame.origin.x, self.bigPhoto.frame.origin.y + self.bigPhoto.frame.size.height, self.bigPhoto.frame.size.width, 50)];
+        UIView *operateBar = [[UIView alloc] initWithFrame:CGRectMake(6, 0,(SCREEN_WIDTH -32), 50)];
         operateBar.backgroundColor = [UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] ;
         UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
         [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
@@ -587,6 +654,9 @@
         [closeBtn addTarget:self action:@selector(closePhoto) forControlEvents:UIControlEventTouchUpInside];
         [leftBtn addTarget:self action:@selector(leftPhoto) forControlEvents:UIControlEventTouchUpInside];
         [rightBtn addTarget:self action:@selector(rightPhoto) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.bigPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(6, operateBar.frame.size.height, (SCREEN_WIDTH -32), (SCREEN_WIDTH -32))];
+        [contentView addSubview:self.bigPhoto];
 
     }
 }
@@ -610,6 +680,11 @@
 {
     NSUInteger index =  [self.photosArray indexOfObject:self.bigPhoto.image];
     if (index>0) {
+        
+        UIImage *image = self.photosArray[index-1];
+        CGRect aframe = self.bigPhoto.frame;
+        aframe.size.height = (image.size.height/image.size.width) *aframe.size.width;
+        [self.bigPhoto setFrame:aframe];
         [self.bigPhoto setImage:self.photosArray[index - 1]];
     }
 }
@@ -618,6 +693,10 @@
 {
     NSUInteger index =  [self.photosArray indexOfObject:self.bigPhoto.image];
     if (index<self.photosArray.count -2) {
+        UIImage *image = self.photosArray[index + 1];
+        CGRect aframe = self.bigPhoto.frame;
+        aframe.size.height = (image.size.height/image.size.width) *aframe.size.width;
+        [self.bigPhoto setFrame:aframe];
         [self.bigPhoto setImage:self.photosArray[index + 1]];
     }
 }
@@ -814,7 +893,13 @@
         }else
         {
             // zoom big the image...
-            [self showingModelOfHeight:SCREEN_HEIGHT/2 + (SCREEN_WIDTH -32)/2 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:0.0f] forRow:6];
+
+            [self showingModelOfHeight:SCREEN_HEIGHT - topBarHeight  andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:0.0f] forRow:6];
+            
+            UIImage *image = self.photosArray[indexPath.row];
+            CGRect aframe = self.bigPhoto.frame;
+            aframe.size.height = (image.size.height/image.size.width) *aframe.size.width;
+            [self.bigPhoto setFrame:aframe];
             [self.bigPhoto setImage:self.photosArray[indexPath.row]];
             
 
@@ -988,8 +1073,7 @@
             
         case 4:
             [cell.leftText  setText:NSLocalizedString(@"语音备注",nil)] ;
-            
-            if(!isNewRecord)
+            if( [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil])
             {
                 [cell.rightText setTitle:@"播放(长按重录)" forState:UIControlStateNormal];
                 UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(sendVoiceButtonLongPress:)];
@@ -1029,7 +1113,9 @@
     
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-        self.voiceImageview = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, SCREEN_HEIGHT/2-60, 120, 120)];
+        
+        
+        self.voiceImageview = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-60, 150, 120, 120)];
         [self.view addSubview:self.voiceImageview];
         
         if ([self.recorder prepareToRecord]) {
@@ -1051,16 +1137,26 @@
             }
             
             double cTime = self.recorder.currentTime;
-            if (cTime > 2) {
+            if (cTime > 1.5) {
                 NSLog(@"录音成功");
+                [self.recorder stop];//录音结束
+
 
             }else{
                 //删除记录的文件
-                
-                [self.recorder deleteRecording];
+                [self.recorder stop];//录音结束
+
+                if (isNewRecord) {
+                    [self.recorder deleteRecording];
+                }
             }
-            [self.recorder stop];//录音结束
             [self.timer invalidate];//取消定时器
+            
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+            [indexPaths addObject: indexPath];
+            [self.itemInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+
         }
     }
     

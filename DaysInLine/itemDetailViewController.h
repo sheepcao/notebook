@@ -7,11 +7,16 @@
 //
 
 #import "baseViewController.h"
+@protocol reloadDataDelegate <NSObject>
+
+-(void)refreshData;
+@end
+
 
 @interface itemDetailViewController : baseViewController
+@property (nonatomic,weak)  id <reloadDataDelegate> refreshDelegate;
 
 @property (nonatomic,strong) NSNumber *currentItemID;
-@property (nonatomic,strong) NSString *money;
 @property int itemType;
 @property (nonatomic,strong) NSString *category;
 @property (nonatomic,strong) NSString *itemDescription;

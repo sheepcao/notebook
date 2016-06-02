@@ -30,6 +30,7 @@
 		A4A977CD1CFD801800099E4F /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977CC1CFD801800099E4F /* delete.png */; };
 		A4A977F31CFEB84C00099E4F /* addPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977F21CFEB84C00099E4F /* addPhoto.png */; };
 		A4A977F61CFEC52E00099E4F /* photoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977F51CFEC52E00099E4F /* photoCell.m */; };
+		A4A977F91CFFD13F00099E4F /* highLightButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977F81CFFD13F00099E4F /* highLightButton.m */; };
 		A4E26C881CF84042004DFBC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C871CF84042004DFBC3 /* main.m */; };
 		A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8A1CF84042004DFBC3 /* AppDelegate.m */; };
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
@@ -144,6 +145,8 @@
 		A4A977F21CFEB84C00099E4F /* addPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addPhoto.png; sourceTree = "<group>"; };
 		A4A977F41CFEC52E00099E4F /* photoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photoCell.h; sourceTree = "<group>"; };
 		A4A977F51CFEC52E00099E4F /* photoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = photoCell.m; sourceTree = "<group>"; };
+		A4A977F71CFFD13F00099E4F /* highLightButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = highLightButton.h; sourceTree = "<group>"; };
+		A4A977F81CFFD13F00099E4F /* highLightButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = highLightButton.m; sourceTree = "<group>"; };
 		A4E26C831CF84042004DFBC3 /* DaysInLine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaysInLine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4E26C871CF84042004DFBC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4E26C891CF84042004DFBC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -590,6 +593,8 @@
 				A4E26D3B1CF843FA004DFBC3 /* LuckyLabel.m */,
 				A4E26D3C1CF843FA004DFBC3 /* numberPadButton.h */,
 				A4E26D3D1CF843FA004DFBC3 /* numberPadButton.m */,
+				A4A977F71CFFD13F00099E4F /* highLightButton.h */,
+				A4A977F81CFFD13F00099E4F /* highLightButton.m */,
 				A4E26D3E1CF843FA004DFBC3 /* pickerLabel.h */,
 				A4E26D3F1CF843FA004DFBC3 /* pickerLabel.m */,
 				A4E26D401CF843FA004DFBC3 /* roundFrameLabel.h */,
@@ -824,6 +829,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A977F91CFFD13F00099E4F /* highLightButton.m in Sources */,
 				A4E26CD01CF84271004DFBC3 /* XHShareView.m in Sources */,
 				A4E26D201CF842F5004DFBC3 /* FabonacciNum.m in Sources */,
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,

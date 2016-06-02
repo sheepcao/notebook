@@ -12,6 +12,7 @@
 #import "FMDatabase.h"
 #import "MobClick.h"
 #import "myTextLabel.h"
+#import "MBProgressHUD.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)

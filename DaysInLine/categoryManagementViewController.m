@@ -13,7 +13,6 @@
 #import "CommonUtility.h"
 #import "categoryObject.h"
 #import "categoryTableViewCell.h"
-#import "MBProgressHUD.h"
 
 @interface categoryManagementViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate,UITextFieldDelegate>
 {
