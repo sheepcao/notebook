@@ -416,7 +416,7 @@
 
     
     if (self.isEditing) {
-        BOOL sql = [db executeUpdate:@"update EVENT set TYPE=? ,TITLE = ? ,mainText = ? ,date = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where item_id = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,startNum,endNum,endNum - startNum,self.photoNames,[self searchEventID]];
+        BOOL sql = [db executeUpdate:@"update EVENT set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where item_id = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[self searchEventID]];
         if (!sql) {
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
@@ -429,12 +429,13 @@
         }
     }else
     {
-        BOOL sql = [db executeUpdate:@"INSERT INTO EVENT(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,startNum,endNum,endNum - startNum,self.photoNames];
+        BOOL sql = [db executeUpdate:@"INSERT INTO EVENT(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames];
         
         if (!sql) {
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
         {
+            [self.refreshDelegate refreshData];
             [self dismissViewControllerAnimated:YES completion:nil];
             if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
                 [MobClick event:@"addWork"];
@@ -619,7 +620,7 @@
 
     }else if(row == 6)
     {
-        dimView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:0.9];
+        dimView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.93];
 
         
         UIView *operateBar = [[UIView alloc] initWithFrame:CGRectMake(6, 0,(SCREEN_WIDTH -32), 50)];

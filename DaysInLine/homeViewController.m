@@ -21,7 +21,7 @@
 #import "itemObj.h"
 #import "itemDetailViewController.h"
 
-@interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
+@interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate,reloadDataDelegate>
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSMutableArray *todayItems;
 @property (nonatomic,strong)  constellationView *myConstellView;
@@ -163,7 +163,7 @@
 //        moneyLuckSpace = moneyLuckSpace-38;
 //    }
 //    
-    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, moneyLuckSpace+ 15, 1, self.maintableView.frame.size.height)];
+    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, moneyLuckSpace+ 18, 1, self.maintableView.frame.size.height)];
     midLine.backgroundColor = self.myTextColor;
     [self.maintableView addSubview:midLine];
     [self.maintableView sendSubviewToBack:midLine];
@@ -215,31 +215,62 @@
 
 -(void)prepareData
 {
+//    self.todayItems = [[NSMutableArray alloc] init];
+//    itemObj *oneItem = [[itemObj alloc] init];
+//    oneItem.itemCategory = @"水电煤";
+//    oneItem.itemDescription = @"快速华盛顿参加宁夏可刺激啊设备出口下降啊";
+//    oneItem.itemType = 1;
+//    
+//    itemObj *oneItem2 = [[itemObj alloc] init];
+//    oneItem2.itemCategory = @"旅游";
+//    oneItem2.itemDescription = @"快速的是法国今年的咖啡结核杆菌对话方式带来健康";
+//    oneItem2.itemType = 0;
+//    
+//    itemObj *oneItem3 = [[itemObj alloc] init];
+//    oneItem3.itemCategory = @"阅读";
+//    oneItem3.itemDescription = @"萨肯的杀菌开始的解放路弗兰克";
+//    oneItem3.itemType = 1;
+//
+//    [self.todayItems addObject:oneItem];
+//    [self.todayItems addObject:oneItem2];
+//    [self.todayItems addObject:oneItem3];
+    
+    
     self.todayItems = [[NSMutableArray alloc] init];
-    itemObj *oneItem = [[itemObj alloc] init];
-    oneItem.itemCategory = @"水电煤";
-    oneItem.itemDescription = @"快速华盛顿参加宁夏可刺激啊设备出口下降啊";
-    oneItem.itemType = 1;
     
-    itemObj *oneItem2 = [[itemObj alloc] init];
-    oneItem2.itemCategory = @"旅游";
-    oneItem2.itemDescription = @"快速的是法国今年的咖啡结核杆菌对话方式带来健康";
-    oneItem2.itemType = 0;
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return;
+    }
     
-    itemObj *oneItem3 = [[itemObj alloc] init];
-    oneItem3.itemCategory = @"阅读";
-    oneItem3.itemDescription = @"萨肯的杀菌开始的解放路弗兰克";
-    oneItem3.itemType = 1;
+    NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
+    FMResultSet *rs = [db executeQuery:@"select * from EVENT where date = ?", today];
+    while ([rs next]) {
+        itemObj *oneItem = [[itemObj alloc] init];
+        oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"eventID"]];
+        oneItem.itemCategory  = [rs stringForColumn:@"TITLE"];
+        oneItem.itemDescription = [rs stringForColumn:@"mainText"];
+        oneItem.itemType = [rs intForColumn:@"TYPE"];
+        oneItem.targetTime = [rs stringForColumn:@"date"];
+        oneItem.startTime = [rs doubleForColumn:@"startTime"];
+        oneItem.endTime = [rs doubleForColumn:@"endTime"];
 
-    [self.todayItems addObject:oneItem];
-    [self.todayItems addObject:oneItem2];
-    [self.todayItems addObject:oneItem3];
-
+        
+        [self.todayItems addObject:oneItem];
+        
+    }
+     [db close];
 
     [self.maintableView reloadData];
     
 }
 
+#pragma mark reloadData delegate
+-(void)refreshData
+{
+    [self prepareData];
+}
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
@@ -407,7 +438,7 @@
     addItemVC.itemStartTime = now;
     addItemVC.itemEndTime = nowLater;
 
-    
+    addItemVC.refreshDelegate = self;
     
     return addItemVC;
 }
@@ -467,12 +498,15 @@
         }
         return 0;
     }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
-        if (self.todayItems.count == 0) {
-            return rowHeight;
-        }else
-        {
-            return (self.maintableView.frame.size.height - summaryViewHeight - (rowHeight * self.todayItems.count));
-        }
+        
+        return (self.maintableView.frame.size.height - summaryViewHeight - (rowHeight * self.todayItems.count));
+
+//        if (self.todayItems.count == 0) {
+//            return rowHeight;
+//        }else
+//        {
+//            return (self.maintableView.frame.size.height - summaryViewHeight - (rowHeight * self.todayItems.count));
+//        }
     }else
         return rowHeight;
 }
@@ -562,15 +596,25 @@
         return cell;
     }else 
     {
+        NSInteger itemID = -1;
         NSString *category = @"";
         NSString *description = @"";
         int itemType = -1;
+        NSString *targetTime = @"";
+        double endTime = 0.0f;
+        double startTime = 0.0f;
+
         if(self.todayItems.count>indexPath.row)
         {
             itemObj *oneItem = self.todayItems[indexPath.row];
+            itemID = [oneItem.itemID integerValue];
             category = oneItem.itemCategory;
             description = oneItem.itemDescription;
             itemType = oneItem.itemType;
+            startTime = oneItem.startTime;
+            endTime = oneItem.endTime;
+            targetTime = oneItem.targetTime;
+
         }
         
         if (itemType == 0) {
@@ -584,8 +628,11 @@
             }
             [cell.category setText:category];
             [cell.note setText:description];
-            [cell.itemTimeLabel setText:@"14:20 — 15:20"];
             
+            NSString *startString = [[CommonUtility sharedCommonUtility] timeInLine:((int)startTime)];
+            NSString *endString = [[CommonUtility sharedCommonUtility] timeInLine:((int)endTime)];
+
+            [cell.itemTimeLabel setText:[NSString stringWithFormat:@"%@ — %@",startString,endString]];
             [cell makeColor:category];
             [cell makeTextStyle];
             return cell;
@@ -599,12 +646,14 @@
                 cell = [[myLifeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellItemIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.backgroundColor = [UIColor clearColor];
-                
             }
             [cell.category setText:category];
             [cell.note setText:description];
-            [cell.itemTimeLabel setText:@"15:50 — 16:20"];
-
+            NSString *startString = [[CommonUtility sharedCommonUtility] timeInLine:((int)startTime)];
+            NSString *endString = [[CommonUtility sharedCommonUtility] timeInLine:((int)endTime)];
+            
+            [cell.itemTimeLabel setText:[NSString stringWithFormat:@"%@ — %@",startString,endString]];
+            
             [cell makeColor:category];
             [cell makeTextStyle];
             return cell;

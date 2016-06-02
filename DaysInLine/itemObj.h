@@ -17,5 +17,9 @@
 @property (strong , nonatomic) NSString *createdTime;
 @property (strong , nonatomic) NSString *targetTime;
 
+@property double startTime;
+@property double endTime;
+
+
 @end
 

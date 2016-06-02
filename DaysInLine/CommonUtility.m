@@ -708,10 +708,32 @@
     }
     
     if (dayOffsite == 0) {
-        destTimeString = [NSString stringWithFormat:@"%2d:%2d",hour,minute];
+        destTimeString = [NSString stringWithFormat:@"%02d:%02d",hour,minute];
     }else
     {
-        destTimeString = [NSString stringWithFormat:@"+%d  %2d:%2d",dayOffsite,hour,minute];
+        destTimeString = [NSString stringWithFormat:@"+%d  %02d:%02d",dayOffsite,hour,minute];
+    }
+    
+    return destTimeString;
+    
+}
+
+-(NSString *)timeInLine:(int)timeNumber
+{
+    NSString *destTimeString;
+    
+    int hour = timeNumber/60;
+    int minute = timeNumber%60;
+    int  dayOffsite = hour/24;
+    if (hour >23) {
+        hour %= 24;
+    }
+    
+    if (dayOffsite == 0) {
+        destTimeString = [NSString stringWithFormat:@"%02d:%02d",hour,minute];
+    }else
+    {
+        destTimeString = [NSString stringWithFormat:@"%02d:%02d  +%d",hour,minute,dayOffsite];
     }
     
     return destTimeString;

@@ -67,7 +67,8 @@
 
     
         self.itemTimeLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/16, rowHeight/2 - 20, SCREEN_WIDTH*3/8, 40) andSize:fontSize-2.0];
-        
+        self.itemTimeLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:14.0f];
+
         [self addSubview:self.midLine];
         [self.contentView addSubview:self.line];
         [self addSubview:self.seperator];
@@ -125,6 +126,9 @@
     self.category.attributedText = attributedCategory;
     self.note.attributedText = attributedNote;
     
+    if ([self.note.text isEqualToString:@""]) {
+        [self.category setFrame:CGRectMake(self.line.frame.origin.x  + self.line.frame.size.width, 7, SCREEN_WIDTH * 22/66, rowHeight-7*2)];
+    }
 }
 
 -(void)makeColor:(NSString *)category

@@ -74,5 +74,6 @@
 
 -(CGFloat)timeToDouble:(NSString *)time;
 -(NSString *)doubleToTime:(int)timeNumber;
+-(NSString *)timeInLine:(int)timeNumber;
 
 @end

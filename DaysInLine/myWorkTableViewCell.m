@@ -29,9 +29,9 @@
         self.seperator.layer.cornerRadius = pointRadius;
         self.seperator.layer.masksToBounds = YES;
         
-        self.line = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - SCREEN_WIDTH * 4/66,  self.seperator.frame.origin.y + pointRadius - 0.7, SCREEN_WIDTH * 5/66, 1.4)];
+        self.line = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - SCREEN_WIDTH * 5/66,  self.seperator.frame.origin.y + pointRadius - 0.7, SCREEN_WIDTH * 5/66, 1.4)];
         
-        self.note = [[roundFrameLabel alloc] initWithFrame:CGRectMake(self.line.frame.origin.x - SCREEN_WIDTH * 27/66,15, SCREEN_WIDTH * 25/66, rowHeight-15*2)];
+        self.note = [[roundFrameLabel alloc] initWithFrame:CGRectMake(self.line.frame.origin.x - SCREEN_WIDTH * 25/66,15, SCREEN_WIDTH * 25/66, rowHeight-15*2)];
         self.note.numberOfLines = 3;
         self.note.textAlignment = NSTextAlignmentLeft;
         self.note.layer.cornerRadius = 5;
@@ -126,6 +126,10 @@
 
     self.category.attributedText = attributedCategory;
     self.note.attributedText = attributedNote;
+    
+    if ([self.note.text isEqualToString:@""]) {
+        [self.category setFrame:CGRectMake(self.line.frame.origin.x - SCREEN_WIDTH * 22/66, 7, SCREEN_WIDTH * 22/66, rowHeight-7*2)];
+    }
     
 }
 
