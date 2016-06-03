@@ -391,7 +391,7 @@
     self.addNewBtn = addNewButton;
     
     UIButton *trackButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
-    [trackButton setTitle:NSLocalizedString(@"日常跟进",nil) forState:UIControlStateNormal];
+    [trackButton setTitle:NSLocalizedString(@"目标推进",nil) forState:UIControlStateNormal];
     trackButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     trackButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [trackButton setTitleColor:self.myTextColor forState:UIControlStateNormal];

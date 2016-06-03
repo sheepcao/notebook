@@ -116,6 +116,12 @@
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
 		A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF61D012CEE00733932 /* historyViewController.xib */; };
+		A4EDDEFC1D015B0400733932 /* trackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEFA1D015B0400733932 /* trackViewController.m */; };
+		A4EDDEFD1D015B0400733932 /* trackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEFB1D015B0400733932 /* trackViewController.xib */; };
+		A4EDDEFF1D015CF800733932 /* pie.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEFE1D015CF800733932 /* pie.png */; };
+		A4EDDF011D015D7C00733932 /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDF001D015D7C00733932 /* trend.png */; };
+		A4EDDF041D01619900733932 /* goalObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDF031D01619900733932 /* goalObj.m */; };
+		A4EDDF071D0170FA00733932 /* goalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDF061D0170FA00733932 /* goalTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -303,6 +309,15 @@
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
 		A4EDDEF51D012CEE00733932 /* historyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyViewController.m; sourceTree = "<group>"; };
 		A4EDDEF61D012CEE00733932 /* historyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = historyViewController.xib; sourceTree = "<group>"; };
+		A4EDDEF91D015B0400733932 /* trackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trackViewController.h; sourceTree = "<group>"; };
+		A4EDDEFA1D015B0400733932 /* trackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = trackViewController.m; sourceTree = "<group>"; };
+		A4EDDEFB1D015B0400733932 /* trackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = trackViewController.xib; sourceTree = "<group>"; };
+		A4EDDEFE1D015CF800733932 /* pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie.png; sourceTree = "<group>"; };
+		A4EDDF001D015D7C00733932 /* trend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend.png; sourceTree = "<group>"; };
+		A4EDDF021D01619900733932 /* goalObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalObj.h; sourceTree = "<group>"; };
+		A4EDDF031D01619900733932 /* goalObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalObj.m; sourceTree = "<group>"; };
+		A4EDDF051D0170FA00733932 /* goalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalTableViewCell.h; sourceTree = "<group>"; };
+		A4EDDF061D0170FA00733932 /* goalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalTableViewCell.m; sourceTree = "<group>"; };
 		AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C5983FA2D9325FA1EAD7D0CC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -338,6 +353,8 @@
 				A4A978001D0027B400099E4F /* checkEventTableViewCell.m */,
 				A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */,
 				A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */,
+				A4EDDF051D0170FA00733932 /* goalTableViewCell.h */,
+				A4EDDF061D0170FA00733932 /* goalTableViewCell.m */,
 				A4A977F41CFEC52E00099E4F /* photoCell.h */,
 				A4A977F51CFEC52E00099E4F /* photoCell.m */,
 			);
@@ -398,6 +415,9 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
+				A4EDDEF91D015B0400733932 /* trackViewController.h */,
+				A4EDDEFA1D015B0400733932 /* trackViewController.m */,
+				A4EDDEFB1D015B0400733932 /* trackViewController.xib */,
 				A4A977C91CFD7AE400099E4F /* items */,
 				A4E26D951CFB0F8F004DFBC3 /* calendar */,
 				A49E62461CFB2E2D0047011B /* cells */,
@@ -590,6 +610,8 @@
 				A4E26D251CF84385004DFBC3 /* categoryObject.m */,
 				A4E26D261CF84385004DFBC3 /* itemObj.h */,
 				A4E26D271CF84385004DFBC3 /* itemObj.m */,
+				A4EDDF021D01619900733932 /* goalObj.h */,
+				A4EDDF031D01619900733932 /* goalObj.m */,
 				A4E26D281CF84385004DFBC3 /* RADataObject.h */,
 				A4E26D291CF84385004DFBC3 /* RADataObject.m */,
 			);
@@ -648,6 +670,8 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4EDDF001D015D7C00733932 /* trend.png */,
+				A4EDDEFE1D015CF800733932 /* pie.png */,
 				A4EDDEF21D0122AC00733932 /* edit.png */,
 				A4EDDEF01D0122A600733932 /* trush.png */,
 				A4A977F21CFEB84C00099E4F /* addPhoto.png */,
@@ -770,6 +794,7 @@
 				A4A977B41CFC845700099E4F /* 夜间.png in Resources */,
 				A4E26D151CF842E1004DFBC3 /* Info.plist in Resources */,
 				A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */,
+				A4EDDF011D015D7C00733932 /* trend.png in Resources */,
 				A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */,
 				A4E26D8C1CFB0CBC004DFBC3 /* menu.png in Resources */,
 				A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */,
@@ -786,11 +811,13 @@
 				A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
+				A4EDDEFF1D015CF800733932 /* pie.png in Resources */,
 				A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */,
 				A4A977CD1CFD801800099E4F /* delete.png in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
+				A4EDDEFD1D015B0400733932 /* trackViewController.xib in Resources */,
 				A4EDDEF11D0122A600733932 /* trush.png in Resources */,
 				A4A977AC1CFC42D900099E4F /* cancel.png in Resources */,
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
@@ -864,6 +891,7 @@
 				A4E26CD01CF84271004DFBC3 /* XHShareView.m in Sources */,
 				A4E26D201CF842F5004DFBC3 /* FabonacciNum.m in Sources */,
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
+				A4EDDEFC1D015B0400733932 /* trackViewController.m in Sources */,
 				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
 				A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
@@ -901,7 +929,9 @@
 				A4E26D0A1CF842E1004DFBC3 /* RATreeNode.m in Sources */,
 				A4A977A21CFC29B100099E4F /* myWorkTableViewCell.m in Sources */,
 				A4E26D491CF843FA004DFBC3 /* gradientButton.m in Sources */,
+				A4EDDF041D01619900733932 /* goalObj.m in Sources */,
 				A4E26CB21CF8421E004DFBC3 /* CHCSVParser.m in Sources */,
+				A4EDDF071D0170FA00733932 /* goalTableViewCell.m in Sources */,
 				A4E26D071CF842E1004DFBC3 /* RABatchChangeEntity.m in Sources */,
 				A4E26CC51CF8425A004DFBC3 /* OpenShare+QQ.m in Sources */,
 				A4E26D441CF843FA004DFBC3 /* BottomView.m in Sources */,

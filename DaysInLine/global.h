@@ -45,6 +45,8 @@
 #define bottomBar 50
 #define rowHeight 70
 #define topBarHeight 75
+#define goalRowHeight 80
+
 
 #define categoryRowHeight 38
 
