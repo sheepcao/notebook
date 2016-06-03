@@ -38,7 +38,9 @@
     
         
         self.category = [[UILabel alloc] initWithFrame:CGRectMake(self.line.frame.size.width+self.line.frame.origin.x, 7, rowHeight-5*2, rowHeight-7*2)];
-        self.category.numberOfLines = 2;
+        self.category.numberOfLines = 1;
+        self.category.adjustsFontSizeToFitWidth = YES;
+        self.category.minimumScaleFactor = 0.5f;
         self.category.textAlignment = NSTextAlignmentCenter;
         self.category.layer.cornerRadius = 3;
         self.category.layer.masksToBounds = NO;
@@ -128,6 +130,9 @@
     
     if ([self.note.text isEqualToString:@""]) {
         [self.category setFrame:CGRectMake(self.line.frame.origin.x  + self.line.frame.size.width, 7, SCREEN_WIDTH * 22/66, rowHeight-7*2)];
+    }else
+    {
+        [self.category setFrame:CGRectMake(self.line.frame.size.width+self.line.frame.origin.x, 7, rowHeight-5*2, rowHeight-7*2)];
     }
 }
 

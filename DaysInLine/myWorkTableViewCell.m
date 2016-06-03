@@ -22,9 +22,6 @@
     if (self)
     {
         
-
-        
-        
         self.seperator = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - pointRadius, rowHeight/2-pointRadius, pointRadius*2, pointRadius*2)];
         self.seperator.layer.cornerRadius = pointRadius;
         self.seperator.layer.masksToBounds = YES;
@@ -39,7 +36,9 @@
     
         
         self.category = [[UILabel alloc] initWithFrame:CGRectMake(self.line.frame.origin.x - (rowHeight-5*2), 7, rowHeight-5*2, rowHeight-7*2)];
-        self.category.numberOfLines = 2;
+        self.category.numberOfLines = 1;
+        self.category.adjustsFontSizeToFitWidth = YES;
+        self.category.minimumScaleFactor = 0.5f;
         self.category.textAlignment = NSTextAlignmentCenter;
         self.category.layer.cornerRadius = 3;
         self.category.layer.masksToBounds = NO;
@@ -129,6 +128,9 @@
     
     if ([self.note.text isEqualToString:@""]) {
         [self.category setFrame:CGRectMake(self.line.frame.origin.x - SCREEN_WIDTH * 22/66, 7, SCREEN_WIDTH * 22/66, rowHeight-7*2)];
+    }else
+    {
+        [self.category setFrame:CGRectMake(self.line.frame.origin.x - (rowHeight-5*2), 7, rowHeight-5*2, rowHeight-7*2)];
     }
     
 }

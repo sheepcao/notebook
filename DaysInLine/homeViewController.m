@@ -22,7 +22,7 @@
 #import "itemDetailViewController.h"
 #import "checkEventViewController.h"
 
-@interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate,reloadDataDelegate>
+@interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSMutableArray *todayItems;
 @property (nonatomic,strong)  constellationView *myConstellView;
@@ -101,7 +101,7 @@
     
     [self registerLuckChangedNotification];
 
-    [self prepareData];
+//    [self prepareData];
 
     
     constellationList = [[NSArray alloc]initWithObjects:@"白羊座     3.21-4.19",@"金牛座     4.20-5.20",@"双子座     5.21-6.21",@"巨蟹座     6.22-7.22",@"狮子座     7.23-8.22",@"处女座     8.23-9.22",@"天秤座     9.23-10.23",@"天蝎座     10.24-11.22",@"射手座     11.23-12.21",@"摩羯座     12.22-1.19",@"水瓶座     1.20-2.18",@"双鱼座     2.19-3.20",nil];
@@ -231,7 +231,7 @@
     }
     
     NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
-    FMResultSet *rs = [db executeQuery:@"select * from EVENTS where date = ?", today];
+    FMResultSet *rs = [db executeQuery:@"select * from EVENTS where date = ? ORDER BY startTime", today];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
         oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"eventID"]];
@@ -253,11 +253,22 @@
     
 }
 
-#pragma mark reloadData delegate
--(void)refreshData
+-(void)viewWillAppear:(BOOL)animated
 {
+    [self.maintableView setContentOffset:CGPointMake(0, 0)];
+    
+    [super viewWillAppear:animated];
     [self prepareData];
+    [MobClick beginLogPageView:@"homePage"];
+    
 }
+
+//#pragma mark reloadData delegate
+//-(void)refreshData
+//{
+//    [self prepareData];
+//}
+
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
@@ -424,8 +435,6 @@
     
     addItemVC.itemStartTime = now;
     addItemVC.itemEndTime = nowLater;
-
-    addItemVC.refreshDelegate = self;
     
     return addItemVC;
 }
@@ -509,7 +518,7 @@
         [self configConstellation:nil];
     }else
     {
-        if (self.todayItems.count > 0) {
+        if (indexPath.row< self.todayItems.count) {
             checkEventViewController *myCheckVC = [[checkEventViewController alloc] initWithNibName:@"checkEventViewController" bundle:nil];
             myCheckVC.currentItem = self.todayItems[indexPath.row];
             [self.navigationController pushViewController:myCheckVC animated:YES];

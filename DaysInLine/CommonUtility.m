@@ -398,7 +398,7 @@
 
 -(UIColor *)categoryColor:(NSString *)categoryName
 {
-    UIColor *color = [UIColor lightGrayColor];
+    UIColor *color = [UIColor colorWithRed:112/255.0f green:190/255.0f blue:169/255.0f alpha:1.0f];
     db = [[CommonUtility sharedCommonUtility] db];
     if (![db open]) {
         NSLog(@"addNewItem/Could not open db.");

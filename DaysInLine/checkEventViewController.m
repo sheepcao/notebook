@@ -368,29 +368,9 @@
     if(itemID >=0)
     {
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"永久删除这笔账目?",nil) preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"是的",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [MobClick event:@"deleteItem"];
-            
-            db = [[CommonUtility sharedCommonUtility] db];
-            if (![db open]) {
-                NSLog(@"mainVC/Could not open db.");
-                return;
-            }
-            
-            NSString *sqlCommand = [NSString stringWithFormat:@"delete from EVENTS where item_id=%ld",(long)itemID];
-            BOOL sql = [db executeUpdate:sqlCommand];
-            if (!sql) {
-                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-            }
-            [db close];
-            [self closeVC];
-        }];
-        
-        UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"不",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:yesAction];
-        [alert addAction:noAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"永久删除这笔账目?",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"不",nil)  otherButtonTitles:NSLocalizedString(@"是的",nil), nil];
+        alert.tag = 77;
+        [alert show];
         
     }
 }
@@ -421,5 +401,27 @@
 -(void)closeVC
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex ==1) {
+        [MobClick event:@"deleteItem"];
+        
+        db = [[CommonUtility sharedCommonUtility] db];
+        if (![db open]) {
+            NSLog(@"mainVC/Could not open db.");
+            return;
+        }
+        
+        NSString *sqlCommand = [NSString stringWithFormat:@"delete from EVENTS where eventID=%ld",(long) [self.currentItem.itemID integerValue]];
+        BOOL sql = [db executeUpdate:sqlCommand];
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }
+        [db close];
+        [self closeVC];
+
+    }
 }
 @end

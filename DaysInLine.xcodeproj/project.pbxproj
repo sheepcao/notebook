@@ -112,6 +112,10 @@
 		A4E26D8F1CFB0E7F004DFBC3 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D8E1CFB0E7F004DFBC3 /* calendar.png */; };
 		A4E26D931CFB0F7A004DFBC3 /* calendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */; };
 		A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */; };
+		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
+		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
+		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
+		A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF61D012CEE00733932 /* historyViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -294,6 +298,11 @@
 		A4E26D901CFB0F7A004DFBC3 /* calendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calendarViewController.h; sourceTree = "<group>"; };
 		A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calendarViewController.m; sourceTree = "<group>"; };
 		A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = calendarViewController.xib; sourceTree = "<group>"; };
+		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
+		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
+		A4EDDEF51D012CEE00733932 /* historyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyViewController.m; sourceTree = "<group>"; };
+		A4EDDEF61D012CEE00733932 /* historyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = historyViewController.xib; sourceTree = "<group>"; };
 		AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C5983FA2D9325FA1EAD7D0CC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -639,6 +648,8 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4EDDEF21D0122AC00733932 /* edit.png */,
+				A4EDDEF01D0122A600733932 /* trush.png */,
 				A4A977F21CFEB84C00099E4F /* addPhoto.png */,
 				A4A977CC1CFD801800099E4F /* delete.png */,
 				A4A977CA1CFD7D5C00099E4F /* back.png */,
@@ -660,6 +671,9 @@
 				A4E26D901CFB0F7A004DFBC3 /* calendarViewController.h */,
 				A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */,
 				A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */,
+				A4EDDEF41D012CEE00733932 /* historyViewController.h */,
+				A4EDDEF51D012CEE00733932 /* historyViewController.m */,
+				A4EDDEF61D012CEE00733932 /* historyViewController.xib */,
 			);
 			name = calendar;
 			sourceTree = "<group>";
@@ -772,15 +786,18 @@
 				A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
+				A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */,
 				A4A977CD1CFD801800099E4F /* delete.png in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
+				A4EDDEF11D0122A600733932 /* trush.png in Resources */,
 				A4A977AC1CFC42D900099E4F /* cancel.png in Resources */,
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
 				A4A977C01CFD306C00099E4F /* launch.png in Resources */,
 				A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */,
 				A4A977F31CFEB84C00099E4F /* addPhoto.png in Resources */,
+				A4EDDEF31D0122AC00733932 /* edit.png in Resources */,
 				A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
@@ -877,6 +894,7 @@
 				A4A977FD1D001E1D00099E4F /* checkEventViewController.m in Sources */,
 				A4E26CC91CF8425A004DFBC3 /* OpenShare.m in Sources */,
 				A4E26D0F1CF842E1004DFBC3 /* RATreeView+Enums.m in Sources */,
+				A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */,
 				A4E26D111CF842E1004DFBC3 /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */,
 				A4E26D4C1CF843FA004DFBC3 /* pickerLabel.m in Sources */,

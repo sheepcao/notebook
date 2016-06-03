@@ -77,10 +77,10 @@
 
     [self preparePhotos];
     [self configAudio];
+    [self configNoteView];
     [self configTopbar];
     [self configDetailTable];
     [self configBottomView];
-    [self configNoteView];
     
 ////    [self configButton];
 //    
@@ -397,7 +397,6 @@
         return recorderID+1;
     }
     
-
 }
 
 #pragma mark save event
@@ -419,7 +418,7 @@
 
     
     if (self.isEditing) {
-        BOOL sql = [db executeUpdate:@"update EVENTS set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where item_id = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[self searchEventID]];
+        BOOL sql = [db executeUpdate:@"update EVENTS set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where eventID = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[NSNumber numberWithInt:[self searchEventID]]];
         if (!sql) {
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
@@ -1067,6 +1066,7 @@
             if(self.itemDescription && ![self.itemDescription isEqualToString:@""])
             {
                 [cell.rightText setTitle:self.itemDescription forState:UIControlStateNormal];
+                [self.noteBody setText:self.itemDescription];
                 
             }else
             {

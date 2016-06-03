@@ -11,6 +11,7 @@
 #import "global.h"
 #import "topBarView.h"
 #import "CommonUtility.h"
+#import "historyViewController.h"
 
 @interface calendarViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDataSourceDeprecatedProtocol>
 
@@ -28,7 +29,7 @@
     
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight+11)];
     topbar.backgroundColor = [UIColor clearColor];
-    [topbar.titleLabel  setText:NSLocalizedString(@"帐目日历",nil)];
+    [topbar.titleLabel  setText:NSLocalizedString(@"日 程",nil)];
     [self.view addSubview:topbar];
     
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 34, 40, 40)];
@@ -114,17 +115,16 @@
         return;
     }
 
-    FMResultSet *rs = [db executeQuery:@"select DISTINCT target_date from ITEMINFO"];
+    FMResultSet *rs = [db executeQuery:@"select DISTINCT date from EVENT"];
     while ([rs next]) {
         
-        NSString *dateString = [rs stringForColumn:@"target_date"];
-        NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
+        NSString *dateString = [rs stringForColumn:@"date"];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         NSCalendar *cal = [[NSCalendar alloc]
                            initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         dateFormatter.calendar = cal;
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *date = [dateFormatter dateFromString:timeParts[0]];
+        NSDate *date = [dateFormatter dateFromString:dateString];
 
         if(![self.eventDateArray containsObject:date])
         {
@@ -158,7 +158,7 @@
     NSDate *today = [NSDate date];
     
     NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-    [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter1 setDateFormat:@"yyyy-MM-dd"];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     dateFormatter1.calendar = cal;
@@ -166,15 +166,10 @@
     NSString *selectString = [dateFormatter1 stringFromDate:date];
     NSString *todayString = [dateFormatter1 stringFromDate:today];
     
-    NSString *selectDayString = [selectString componentsSeparatedByString:@" "][0];
-    NSString *todayDayString = [todayString componentsSeparatedByString:@" "][0];
 
-    NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
-    [dateFormatter2 setDateFormat:@"yyyy-MM-dd"];
-     dateFormatter2.calendar = cal;
     
-    NSDate *todayDay = [dateFormatter2 dateFromString:todayDayString];
-    NSDate *selectedDay = [dateFormatter2 dateFromString:selectDayString];
+    NSDate *todayDay = [dateFormatter1 dateFromString:todayString];
+    NSDate *selectedDay = [dateFormatter1 dateFromString:selectString];
 
     
     if ([selectedDay compare:todayDay] == NSOrderedDescending) {
@@ -183,10 +178,10 @@
     } else if ([selectedDay compare:todayDay] == NSOrderedAscending) {
         NSLog(@"date is earlier than today");
         
-//        historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
-//        historyVC.recordDate = selectDayString;
-//        [self.navigationController pushViewController:historyVC animated:YES];
-//        return;
+        historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
+        historyVC.recordDate = selectString;
+        [self.navigationController pushViewController:historyVC animated:YES];
+        return;
     } else {
         [self.navigationController popViewControllerAnimated:YES];
         return;
