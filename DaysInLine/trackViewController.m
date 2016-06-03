@@ -11,6 +11,8 @@
 #import "global.h"
 #import "BottomView.h"
 #import "goalObj.h"
+#import "goalTableViewCell.h"
+#import "CommonUtility.h"
 
 @interface trackViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -36,6 +38,7 @@
         bottomHeight = bottomBar;
     }
     
+    [self prepareGoalsData];
     [self configTopbar];
     [self configDetailTable];
     [self configBottomView];
@@ -166,5 +169,82 @@
     [bottomView addSubview:midLine];
     
 }
+
+
+#pragma mark -
+#pragma mark Table view delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return goalRowHeight;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"didSelectRowAtIndexPath:%ld",indexPath.row);
+}
+
+
+#pragma mark -
+#pragma mark Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.goalArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger itemID = -1;
+    NSString *theme = @"";
+//    NSString *description = @"";
+    int itemType = -1;
+    BOOL isByTime = -1;
+    
+    double timeDone = -1.0f;
+    double timeTotal = -1.0f;
+
+    
+    if(self.goalArray.count>indexPath.row)
+    {
+        goalObj *oneGoal = self.goalArray[indexPath.row];
+        itemID = [oneGoal.goalID integerValue];
+        theme = oneGoal.goalTheme;
+        itemType = oneGoal.goalType;
+        isByTime = oneGoal.byTime;
+        
+        if (isByTime) {
+            timeDone = oneGoal.doneTime;
+            timeTotal = oneGoal.targetTime;
+        }else
+        {
+            timeDone = oneGoal.doneCount;
+            timeTotal = oneGoal.targetCount;
+        }
+        
+        
+    }
+    
+    NSString *CellItemIdentifier = @"CellGoal";
+    goalTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellItemIdentifier];
+    if (cell == nil) {
+        cell = [[goalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellItemIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor colorWithWhite:0.9f alpha:0.2f];
+    }
+    
+    UIColor *categoryColor = [[CommonUtility sharedCommonUtility] categoryColor:theme];
+    
+    NSArray *items = @[[PNPieChartDataItem dataItemWithValue:timeDone color:categoryColor
+                                                 description:@""],
+                       [PNPieChartDataItem dataItemWithValue:timeTotal - timeDone color:[categoryColor colorWithAlphaComponent:0.6f] description:@""]
+                       ];
+    
+    [cell updatePieWith:items byTime:isByTime centerColor:[UIColor colorWithWhite:0.9 alpha:0.6f]];
+    
+    return cell;
+
+}
+
 
 @end

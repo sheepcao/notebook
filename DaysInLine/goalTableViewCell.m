@@ -21,35 +21,36 @@
         // adding pie===============================================================
         NSArray *items = @[[PNPieChartDataItem dataItemWithValue:80 color:PNRed
                                                      description:@"吃喝"],
-                           [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"],
+                           [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"]
                            ];
         
-        self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(20, 5.0, goalRowHeight-10, goalRowHeight - 10) items:items];
+        self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(20, 5.0, goalRowHeight-5, goalRowHeight - 5) items:items];
 
+//        self.pieChart.innerCircleRadius = self.pieChart.outerCircleRadius - 15;
         [self.pieChart strokeChart];
         self.pieChart.displayAnimated = YES;
         self.pieChart.shouldHighlightSectorOnTouch = NO;
         self.pieChart.userInteractionEnabled = NO;
-        self.pieChart.labelPercentageCutoff = 0.06;
+        self.pieChart.labelPercentageCutoff = 1.1;
         self.pieChart.duration = 0.38f;
         [self.contentView addSubview:self.pieChart];
         
-        self.centerButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, goalRowHeight-30, goalRowHeight-30)];
+        self.centerButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, goalRowHeight-20, goalRowHeight-20)];
         [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];    ;
 
         self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2;
-        self.centerButton.layer.masksToBounds = NO;
+        self.centerButton.layer.masksToBounds = YES;
         self.centerButton.layer.shadowOpacity = 1.0;
         self.centerButton.layer.shadowRadius = 1.5f;
         
         self.centerButton.layer.shadowColor =  [UIColor blackColor].CGColor;
         self.centerButton.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
         
-//        [self.centerButton setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+//        [self.centerButton setImage:[UIImage imageNamed:@"上午"]];
 
         [self.contentView addSubview:self.centerButton];
         
-        self.doneLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.centerButton.frame.size.width*3/4, self.centerButton.frame.size.height *3/5)];
+        self.doneLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/8, 0, self.centerButton.frame.size.width*3/4, self.centerButton.frame.size.height *3/5)];
         self.doneLabel.numberOfLines = 1;
         self.doneLabel.adjustsFontSizeToFitWidth = YES;
         self.doneLabel.textAlignment = NSTextAlignmentCenter;
@@ -57,7 +58,7 @@
         self.doneLabel.font  = [UIFont fontWithName:@"Avenir-Medium" size:15.0];
         [self.centerButton addSubview:self.doneLabel];
         
-        self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,self.doneLabel.frame.size.height + 1, self.doneLabel.frame.size.width, self.centerButton.frame.size.height *2/5 - 1)];
+        self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/8,self.doneLabel.frame.size.height + 1, self.doneLabel.frame.size.width, self.centerButton.frame.size.height *2/5 - 1)];
         self.totalLabel.numberOfLines = 1;
         self.totalLabel.adjustsFontSizeToFitWidth = YES;
         self.totalLabel.textAlignment = NSTextAlignmentCenter;
@@ -122,7 +123,7 @@
     } completion:nil ];
 }
 
--(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime
+-(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor
 {
     [self.pieChart setItems:array];
     [self.pieChart recompute];
@@ -140,6 +141,8 @@
         [self.doneLabel setText:[NSString stringWithFormat:@"%d",(int)itemDone.value]];
         [self.totalLabel setText:[NSString stringWithFormat:@"%d",(int)(itemDone.value + itemUndone.value)]];
     }
+    
+    [self.centerButton setBackgroundColor:[UIColor whiteColor]];
 }
 
 @end

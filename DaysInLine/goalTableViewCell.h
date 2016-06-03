@@ -23,6 +23,6 @@
 
 -(void)returnTimer;
 -(void)showTimer;
--(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime;
+-(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor;
 
 @end

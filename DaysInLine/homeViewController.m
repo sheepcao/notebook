@@ -21,6 +21,7 @@
 #import "itemObj.h"
 #import "itemDetailViewController.h"
 #import "checkEventViewController.h"
+#import "trackViewController.h"
 
 @interface homeViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
 @property (nonatomic,strong) FMDatabase *db;
@@ -400,7 +401,7 @@
     self.trackBtn = trackButton;
     
     [addNewButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];
-    [trackButton addTarget:self action:@selector(trackItems:) forControlEvents:UIControlEventTouchUpInside];
+    [trackButton addTarget:self action:@selector(trackItems) forControlEvents:UIControlEventTouchUpInside];
     
     [bottomView addSubview:trackButton];
     [bottomView addSubview:addNewButton];
@@ -439,6 +440,11 @@
     return addItemVC;
 }
 
+-(void)trackItems
+{
+    trackViewController *trackVC = [[trackViewController alloc] initWithNibName:@"trackViewController" bundle:nil];
+    [self.navigationController pushViewController:trackVC animated:YES];
+}
 
 #pragma mark picker delegate
 // pickerView 列数
