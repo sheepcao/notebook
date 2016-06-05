@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "PNChart.h"
 
+@protocol showTimerDelegate <NSObject>
+
+-(void)timerMove:(UIButton *)sender;
+
+@end
 
 @interface goalTableViewCell : UITableViewCell
+@property(nonatomic,weak) id<showTimerDelegate>timerDelegate;
 @property (nonatomic, strong) PNPieChart *pieChart;
 @property (nonatomic,strong) UIImageView *centerButton;
 @property (nonatomic,strong) UILabel *doneLabel;
@@ -19,6 +25,7 @@
 
 @property (nonatomic,strong) UIButton *timerButton;
 @property (nonatomic,strong) UILabel *timerLabel;
+@property BOOL isTimerShown;
 
 
 -(void)returnTimer;

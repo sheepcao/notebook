@@ -8,6 +8,7 @@
 
 #import "goalTableViewCell.h"
 #import "global.h"
+#import "CommonUtility.h"
 
 @implementation goalTableViewCell
 
@@ -17,6 +18,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
+        self.isTimerShown = NO;
         
         // adding pie===============================================================
         NSArray *items = @[[PNPieChartDataItem dataItemWithValue:80 color:PNRed
@@ -26,7 +28,7 @@
         
         self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(20, 5.0, goalRowHeight-5, goalRowHeight - 5) items:items];
 
-//        self.pieChart.innerCircleRadius = self.pieChart.outerCircleRadius - 15;
+        self.pieChart.innerCircleRadius = self.pieChart.outerCircleRadius - 7;
         [self.pieChart strokeChart];
         self.pieChart.displayAnimated = YES;
         self.pieChart.shouldHighlightSectorOnTouch = NO;
@@ -58,7 +60,12 @@
         self.doneLabel.font  = [UIFont fontWithName:@"Avenir-Medium" size:15.0];
         [self.centerButton addSubview:self.doneLabel];
         
-        self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/8,self.doneLabel.frame.size.height + 1, self.doneLabel.frame.size.width, self.centerButton.frame.size.height *2/5 - 1)];
+        UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(8, self.centerButton.frame.size.height *.55 , self.centerButton.frame.size.width - 16, 1)];
+        midline.backgroundColor = [UIColor lightGrayColor];
+        [self.centerButton addSubview:midline];
+        
+        
+        self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/4,self.doneLabel.frame.size.height + 1, self.centerButton.frame.size.width/2, self.centerButton.frame.size.height *2/5 - 1)];
         self.totalLabel.numberOfLines = 1;
         self.totalLabel.adjustsFontSizeToFitWidth = YES;
         self.totalLabel.textAlignment = NSTextAlignmentCenter;
@@ -72,9 +79,9 @@
         self.themeLabel.adjustsFontSizeToFitWidth = YES;
         self.themeLabel.textAlignment = NSTextAlignmentLeft;
         self.themeLabel.backgroundColor = [UIColor clearColor];
-        self.themeLabel.font  = [UIFont fontWithName:@"Avenir-Medium" size:14.0];
-        [self.centerButton addSubview:self.themeLabel];
-    
+        self.themeLabel.font  = [UIFont fontWithName:@"Avenir-Roman" size:14.0];
+        [self.contentView addSubview:self.themeLabel];
+
         // adding Timer button
         self.timerButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 32) -  rowHeight, 15 , rowHeight-30, rowHeight - 30)];
         [self.timerButton setImage:[UIImage imageNamed:@"pie"] forState:UIControlStateNormal];
@@ -83,8 +90,9 @@
         self.timerButton.layer.masksToBounds = YES;
         self.timerButton.layer.shadowColor =  [UIColor blackColor].CGColor;
         self.timerButton.layer.shadowOffset = CGSizeMake(0.3f, 0.5f);
+        [self.timerButton addTarget:self.timerDelegate action:@selector(timerMove:) forControlEvents:UIControlEventTouchUpInside];
         
-        self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.timerButton.frame.origin.x + 10, self.timerButton.center.y - 13, self.timerButton.frame.size.width - 20, 26)];
+        self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.timerButton.frame.origin.x + 10, self.timerButton.center.y - 13, 20, 26)];
         self.timerLabel.numberOfLines = 1;
         self.timerLabel.adjustsFontSizeToFitWidth = YES;
         self.timerLabel.textAlignment = NSTextAlignmentCenter;
@@ -93,8 +101,10 @@
         self.timerLabel.layer.cornerRadius = 6;
         self.timerLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
         self.timerLabel.layer.shadowOffset = CGSizeMake(0.3f, 0.5f);
-        [self.centerButton addSubview:self.timerLabel];
-        [self.centerButton addSubview:self.timerButton];
+        self.timerLabel.alpha = 0.0;
+        
+        [self addSubview:self.timerLabel];
+        [self addSubview:self.timerButton];
 
 
       }
@@ -104,23 +114,37 @@
 
 -(void)showTimer
 {
-    [self.timerLabel setText:@"00:00:00"];
-    
-    [UIView animateWithDuration:0.25f delay:0.01f options:UIViewAnimationOptionLayoutSubviews animations:^{
+
+    [self.timerLabel setText:@"0:00:00"];
+    [self.timerLabel setFrame:CGRectMake(self.timerButton.frame.origin.x - 30, self.timerLabel.frame.origin.y, 50, self.timerLabel.frame.size.height)];
+
+    [UIView animateWithDuration:0.25f delay:0.01f options:UIViewAnimationOptionCurveEaseIn animations:^{
         if (self.timerLabel) {
-            [self.timerLabel setFrame:CGRectMake(self.timerButton.frame.origin.x - 80, self.timerLabel.frame.origin.y, 80, self.timerLabel.frame.size.height)];
+            self.timerLabel.alpha = 1.0f;
+            [self.timerLabel setFrame:CGRectMake(self.timerButton.frame.origin.x - 70, self.timerLabel.frame.origin.y, 80, self.timerLabel.frame.size.height)];
         }
     } completion:^(BOOL isfinished){
+//    
+//        [UIView animateWithDuration:0.25f delay:0.01f options:UIViewAnimationOptionLayoutSubviews animations:^{
+//            if (self.timerLabel) {
+//                [self.timerLabel setFrame:CGRectMake(self.timerButton.frame.origin.x - 70, self.timerLabel.frame.origin.y, 90, self.timerLabel.frame.size.height)];
+//            }
+//        } completion:nil];
+        self.isTimerShown = YES;
     } ];
+    
     
 }
 -(void)returnTimer
 {
     [UIView animateWithDuration:0.25f delay:0.01f options:UIViewAnimationOptionLayoutSubviews animations:^{
         if (self.timerLabel) {
-            [self.timerLabel setFrame:CGRectMake(self.timerButton.frame.origin.x + 10, self.timerButton.center.y - 13, self.timerButton.frame.size.width - 20, 26)];
+            self.timerLabel.alpha = 0.0f;
+            [self.timerLabel setFrame:CGRectMake(self.timerButton.frame.origin.x , self.timerButton.center.y - 13, 20, 26)];
         }
-    } completion:nil ];
+    } completion:^(BOOL isfinished){
+        self.isTimerShown = NO;
+    } ];
 }
 
 -(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor
@@ -129,11 +153,20 @@
     [self.pieChart recompute];
     [self.pieChart strokeChart];
     
+    [self.doneLabel setTextColor:myColor];
+    [self.totalLabel setTextColor:myColor];
+    
     PNPieChartDataItem * itemDone = array[0];
     PNPieChartDataItem * itemUndone = array[1];
 
     if (isByTime) {
-        [self.doneLabel setText:[NSString stringWithFormat:@"%.2f h",itemDone.value]];
+        if ([CommonUtility myContainsStringFrom:[NSString stringWithFormat:@"%.2f",itemDone.value] forSubstring:@".00"])
+        {
+            [self.doneLabel setText:[NSString stringWithFormat:@"%d h",(int)itemDone.value]];
+        }else
+        {
+            [self.doneLabel setText:[NSString stringWithFormat:@"%.2f h",itemDone.value]];
+        }
         [self.totalLabel setText:[NSString stringWithFormat:@"%d h",(int)(itemDone.value + itemUndone.value)]];
 
     }else
@@ -142,7 +175,11 @@
         [self.totalLabel setText:[NSString stringWithFormat:@"%d",(int)(itemDone.value + itemUndone.value)]];
     }
     
-    [self.centerButton setBackgroundColor:[UIColor whiteColor]];
+    [self.centerButton setBackgroundColor:[UIColor colorWithWhite:0.9f alpha:0.2f]];
+    
+    self.themeLabel.textColor = myColor;
+    
+
 }
 
 @end

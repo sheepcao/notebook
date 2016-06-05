@@ -95,7 +95,9 @@ CGFloat fontSize;
     
     _selectedItems = [NSMutableDictionary dictionary];
     _outerCircleRadius  = CGRectGetWidth(self.bounds) / 2;
-    _innerCircleRadius  = CGRectGetWidth(self.bounds) / 6;
+    _innerCircleRadius  = _outerCircleRadius - 7;
+
+//    _innerCircleRadius  = CGRectGetWidth(self.bounds) / 6;
     _descriptionTextColor = [UIColor whiteColor];
     _descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:fontSize];
     _descriptionTextShadowColor  = [[UIColor blackColor] colorWithAlphaComponent:0.4];
@@ -136,7 +138,7 @@ CGFloat fontSize;
 /** Override this to change how inner attributes are computed. **/
 - (void)recompute {
     self.outerCircleRadius = CGRectGetWidth(self.bounds) / 2;
-    self.innerCircleRadius = CGRectGetWidth(self.bounds) / 6;
+    self.innerCircleRadius = self.outerCircleRadius - 7;
 }
 
 #pragma mark -

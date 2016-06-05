@@ -73,9 +73,12 @@
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
-    
 
+
+    
+    
     [self preparePhotos];
+    [self configDimView];
     [self configAudio];
     [self configNoteView];
     [self configTopbar];
@@ -139,8 +142,24 @@
 }
 
 
+-(void)configDimView
+{
+    
+    self.timePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(20, 20,SCREEN_WIDTH-40 , 200 -25)];
+    self.timePicker.showsSelectionIndicator=YES;
+    self.timePicker.delegate = self;
 
-
+    
+    self.dayOffsiteArray = [NSArray arrayWithObjects:@" ",@"+1", nil];
+    self.hourArray = [NSArray arrayWithObjects:@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23", nil];
+    
+    NSMutableArray *minTempArray = [[NSMutableArray alloc] init];
+    for (int i =0; i<60; i++) {
+        [minTempArray addObject:[NSString stringWithFormat:@"%02d",i]];
+    }
+    self.minuteArray = [NSArray arrayWithArray:minTempArray];
+    
+}
 -(void)configTopbar
 {
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topBarHeight)];
@@ -495,29 +514,34 @@
 
 -(void)showingModelOfHeight:(CGFloat)height andColor:(UIColor *)backColor forRow:(NSInteger)row
 {
+    UIView *contentView;
+    UIView *gestureView;
+        UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];
+        [self.view addSubview:dimView];
+        self.myDimView = dimView;
+        gestureView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT- height)];
+        gestureView.backgroundColor = [UIColor clearColor];
+        gestureView.tag = 101;
+        [dimView addSubview:gestureView];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self
+                                       action:@selector(dismissDimView)];
+        
+        [gestureView addGestureRecognizer:tap];
+        
+        contentView = [[UIView alloc] initWithFrame:CGRectMake(10, SCREEN_HEIGHT, SCREEN_WIDTH-20, height)];
+        contentView.tag = 100;
+        contentView.backgroundColor = backColor;
+        [dimView addSubview:contentView];
+        contentView.layer.cornerRadius = 10;
+
+
     
-    UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];
-    [self.view addSubview:dimView];
-    self.myDimView = dimView;
+
     
-    UIView *gestureView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT- height)];
-    gestureView.backgroundColor = [UIColor clearColor];
-    [dimView addSubview:gestureView];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissDimView)];
-    
-    [gestureView addGestureRecognizer:tap];
-    
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, SCREEN_HEIGHT, SCREEN_WIDTH-20, height)];
-    contentView.tag = 100;
-    contentView.backgroundColor = backColor;
-    [dimView addSubview:contentView];
-    contentView.layer.cornerRadius = 10;
-    
-    [UIView animateWithDuration:0.2f delay:0.05f options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
         if (contentView) {
             [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT- (height-10), contentView.frame.size.width, contentView.frame.size.height)];
         }
@@ -546,20 +570,14 @@
         [contentView addSubview:categoryTable];
     }else if (row == 1 || row == 2 )
     {
-        self.dayOffsiteArray = [NSArray arrayWithObjects:@" ",@"+1", nil];
-        self.hourArray = [NSArray arrayWithObjects:@"00",@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23", nil];
 
-        NSMutableArray *minTempArray = [[NSMutableArray alloc] init];
-        for (int i =0; i<60; i++) {
-            [minTempArray addObject:[NSString stringWithFormat:@"%02d",i]];
-        }
-        self.minuteArray = [NSArray arrayWithArray:minTempArray];
         
-        self.timePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(20, 20,SCREEN_WIDTH-40 , contentView.frame.size.height -25)];
-        self.timePicker.showsSelectionIndicator=YES;
-        self.timePicker.delegate = self;
+//        self.timePicker = [[UIPickerView alloc]initWithFrame:CGRectMake(20, 20,SCREEN_WIDTH-40 , contentView.frame.size.height -25)];
+//        self.timePicker.showsSelectionIndicator=YES;
+//        self.timePicker.delegate = self;
         self.timePicker.tag = row;
         [contentView addSubview:self.timePicker];
+        [self.timePicker reloadAllComponents];
         
         if (row == 1) {
             NSString *hour = [self.itemStartTime componentsSeparatedByString:@":"][0];
@@ -622,7 +640,7 @@
 
     }else if(row == 6)
     {
-        dimView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.93];
+        self.myDimView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.93];
 
         
         UIView *operateBar = [[UIView alloc] initWithFrame:CGRectMake(6, 0,(SCREEN_WIDTH -32), 50)];
@@ -723,8 +741,12 @@
 
     }else
     {
-        self.itemEndTime = [NSString stringWithFormat:@"%@  %@:%@",self.dayOffsiteTemp,self.hourTemp,self.minuteTemp];
-
+        if ([self.dayOffsiteTemp isEqualToString:@" "]) {
+            self.itemEndTime = [NSString stringWithFormat:@"%@:%@",self.hourTemp,self.minuteTemp];
+        }else
+        {
+            self.itemEndTime = [NSString stringWithFormat:@"%@  %@:%@",self.dayOffsiteTemp,self.hourTemp,self.minuteTemp];
+        }
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
         [indexPaths addObject: indexPath];

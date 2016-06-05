@@ -14,7 +14,7 @@
 #import "goalTableViewCell.h"
 #import "CommonUtility.h"
 
-@interface trackViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate>
 {
     CGFloat bottomHeight;
 
@@ -57,8 +57,8 @@
     oneGoal.goalType = 0;
     oneGoal.goalTheme = @"阅读";
     oneGoal.byTime = 1;
-    oneGoal.targetTime = 20;
-    oneGoal.doneTime = 6;
+    oneGoal.targetTime = 20000;
+    oneGoal.doneTime = 6000.3;
     
     goalObj *twoGoal = [[goalObj alloc] init];
     twoGoal.goalType = 1;
@@ -193,7 +193,7 @@
     return self.goalArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (goalTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger itemID = -1;
     NSString *theme = @"";
@@ -237,13 +237,30 @@
     
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:timeDone color:categoryColor
                                                  description:@""],
-                       [PNPieChartDataItem dataItemWithValue:timeTotal - timeDone color:[categoryColor colorWithAlphaComponent:0.6f] description:@""]
+                       [PNPieChartDataItem dataItemWithValue:timeTotal - timeDone color:[[UIColor whiteColor] colorWithAlphaComponent:0.5f] description:@""]
                        ];
     
-    [cell updatePieWith:items byTime:isByTime centerColor:[UIColor colorWithWhite:0.9 alpha:0.6f]];
+    NSString *type = itemType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
+    
+    [cell updatePieWith:items byTime:isByTime centerColor:self.myTextColor];
+    [cell.themeLabel setText:[NSString stringWithFormat:@"%@ > %@",type,theme]];
+    cell.timerButton.tag = indexPath.row;
     
     return cell;
 
+}
+
+-(void)timerMove:(UIButton *)sender
+{
+//    NSIndexPath *cellIndex = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    goalTableViewCell *cell = (goalTableViewCell *)sender.superview;
+
+    if (cell.isTimerShown) {
+        [cell returnTimer];
+    }else
+    {
+        [cell showTimer];
+    }
 }
 
 
