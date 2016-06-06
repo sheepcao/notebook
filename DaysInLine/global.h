@@ -45,7 +45,7 @@
 #define bottomBar 50
 #define rowHeight 70
 #define topBarHeight 75
-#define goalRowHeight 80
+#define goalRowHeight 86
 
 
 #define categoryRowHeight 38
@@ -87,7 +87,7 @@
 #define AUTOSWITCH @"autoSwitch"
 #define DEFAULT_USER @"defaultUser"
 #define EXPORTBUY @"ExportBuy"
-
+#define Timer @"timerDict"
 
 #define ThemeChanged  @"modelNotification"
 #define LuckChanged  @"luckNotification"

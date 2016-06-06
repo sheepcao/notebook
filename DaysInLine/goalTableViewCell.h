@@ -26,10 +26,12 @@
 @property (nonatomic,strong) UIButton *timerButton;
 @property (nonatomic,strong) UILabel *timerLabel;
 @property BOOL isTimerShown;
+@property NSInteger timerCount;
+-(void)timerPlus;
+
 
 
 -(void)returnTimer;
--(void)showTimer;
 -(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor;
-
+-(void)showTimerFrom:(NSInteger )startTime;
 @end

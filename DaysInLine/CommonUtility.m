@@ -19,6 +19,7 @@
 
 @synthesize myAudioPlayer;
 @synthesize db;
+@synthesize myTimer;
 
 +(CommonUtility *)sharedCommonUtility
 {
@@ -183,6 +184,18 @@
     return [self stringFromTime:now];
 }
 
+-(NSDate *)timeNowDate
+{
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *date = [NSDate date];
+    NSDateComponents *comps = [cal components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitHour |NSCalendarUnitSecond)
+                                     fromDate:date];
+    
+    NSDate *now = [cal dateFromComponents:comps];
+    return now;
+}
+
 -(NSString *)tomorrowDate
 {
     //    NSCalendar *cal = [NSCalendar currentCalendar];
@@ -307,6 +320,21 @@
     return comps.weekOfYear ;
 }
 
+
+
+
+- (NSInteger )timeIntervalFromLastTime:(NSDate *)lastTime ToCurrentTime:(NSDate *)currentTime
+{
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    //上次时间
+    NSDate *lastDate = [lastTime dateByAddingTimeInterval:[timeZone secondsFromGMTForDate:lastTime]];
+    //当前时间
+    NSDate *currentDate = [currentTime dateByAddingTimeInterval:[timeZone secondsFromGMTForDate:currentTime]];
+    //时间间隔
+    NSInteger intevalTime = [currentDate timeIntervalSinceReferenceDate] - [lastDate timeIntervalSinceReferenceDate];
+    
+    return intevalTime;
+}
 
 -(NSDate *)dateFromChinese:(NSString *)dateCN
 {
@@ -738,6 +766,13 @@
     
     return destTimeString;
     
+}
+
+-(void)createTimer
+{
+    dispatch_queue_t  queue = dispatch_queue_create("com.sheepcao.app.timer", 0);
+    myTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(myTimer, dispatch_walltime(DISPATCH_TIME_NOW, 1ull * NSEC_PER_SEC), 1ull * NSEC_PER_SEC, 1ull * NSEC_PER_SEC);
 }
 
 

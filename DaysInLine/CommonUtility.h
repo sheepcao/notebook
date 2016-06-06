@@ -23,6 +23,8 @@
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSString *dbPath;
 @property (nonatomic,strong) NSString *docsPath;
+@property (nonatomic,strong) dispatch_source_t myTimer;
+
 
 + (CommonUtility *)sharedCommonUtility;
 + (BOOL)isSystemLangChinese;
@@ -33,7 +35,7 @@
 
 -(NSString *)voicePathWithRecorderID:(int)recorderID;
 
-
+-(NSDate *)timeNowDate;
 -(NSString *)timeNow;
 -(NSString *)todayDate;
 -(NSString *)tomorrowDate;
@@ -43,6 +45,8 @@
 -(NSString *)firstNextMonthDate;
 - (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd;
 - (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd;
+
+- (NSInteger )timeIntervalFromLastTime:(NSDate *)lastTime ToCurrentTime:(NSDate *)currentTime;
 
 
 -(UIColor *)categoryColor:(NSString *)categoryName;
@@ -75,5 +79,6 @@
 -(CGFloat)timeToDouble:(NSString *)time;
 -(NSString *)doubleToTime:(int)timeNumber;
 -(NSString *)timeInLine:(int)timeNumber;
+-(void)createTimer;
 
 @end

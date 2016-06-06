@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5983FA2D9325FA1EAD7D0CC /* libPods.a */; };
+		A48D37F61D056E93005B87A5 /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37F51D056E93005B87A5 /* add1.png */; };
 		A49E62421CFB2AEE0047011B /* myTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62411CFB2AEE0047011B /* myTextLabel.m */; };
 		A49E62451CFB2E280047011B /* myLifeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62441CFB2E280047011B /* myLifeTableViewCell.m */; };
 		A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A9779E1CFC24DA00099E4F /* TimeLineTableView.m */; };
@@ -126,6 +127,7 @@
 
 /* Begin PBXFileReference section */
 		79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A48D37F51D056E93005B87A5 /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		A49E62401CFB2AEE0047011B /* myTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTextLabel.h; sourceTree = "<group>"; };
 		A49E62411CFB2AEE0047011B /* myTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTextLabel.m; sourceTree = "<group>"; };
 		A49E62431CFB2E280047011B /* myLifeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myLifeTableViewCell.h; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A48D37F51D056E93005B87A5 /* add1.png */,
 				A4EDDF001D015D7C00733932 /* trend.png */,
 				A4EDDEFE1D015CF800733932 /* pie.png */,
 				A4EDDEF21D0122AC00733932 /* edit.png */,
@@ -764,6 +767,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 						};
 					};
 				};
@@ -814,6 +820,7 @@
 				A4EDDEFF1D015CF800733932 /* pie.png in Resources */,
 				A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */,
 				A4A977CD1CFD801800099E4F /* delete.png in Resources */,
+				A48D37F61D056E93005B87A5 /* add1.png in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
