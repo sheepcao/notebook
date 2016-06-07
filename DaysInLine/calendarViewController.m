@@ -115,7 +115,7 @@
         return;
     }
 
-    FMResultSet *rs = [db executeQuery:@"select DISTINCT date from EVENT"];
+    FMResultSet *rs = [db executeQuery:@"select DISTINCT date from EVENTS"];
     while ([rs next]) {
         
         NSString *dateString = [rs stringForColumn:@"date"];

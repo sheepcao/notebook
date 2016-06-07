@@ -13,6 +13,8 @@
 #import "goalObj.h"
 #import "goalTableViewCell.h"
 #import "CommonUtility.h"
+#import "goalDetailViewController.h"
+#import "RZTransitions.h"
 
 @interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate>
 {
@@ -53,7 +55,9 @@
     [self configDetailTable];
     [self prepareGoalsData];
 
-//    [self configBottomView];
+    [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
+                                       fromViewController:[self class]
+                                                forAction:RZTransitionAction_PresentDismiss];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +73,7 @@
     oneGoal.goalType = 0;
     NSString *type = oneGoal.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
     oneGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type,@"阅读"];
+    oneGoal.themeOnly = @"阅读";
     oneGoal.byTime = 1;
     oneGoal.targetTime = 20000;
     oneGoal.doneTime = 6000.3;
@@ -76,7 +81,8 @@
     goalObj *twoGoal = [[goalObj alloc] init];
     twoGoal.goalType = 1;
     NSString *type1 = twoGoal.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-    twoGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type1,@"跑步"];
+    twoGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type1,@"培训"];
+    twoGoal.themeOnly = @"培训";
     twoGoal.byTime = 0;
     twoGoal.targetCount = 10;
     twoGoal.doneCount = 6;
@@ -85,6 +91,7 @@
     threeGoal.goalType = 1;
     NSString *type2 = threeGoal.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
     threeGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type2,@"旅游"];
+    threeGoal.themeOnly = @"旅游";
     threeGoal.byTime = 0;
     threeGoal.targetCount = 10;
     threeGoal.doneCount = 6;
@@ -236,16 +243,19 @@
     [saveButton setImage:[UIImage imageNamed:@"add1"] forState:UIControlStateNormal];
     saveButton.imageEdgeInsets = UIEdgeInsetsMake(3.9, 3.9,3.9, 3.9);
     [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
-    [saveButton addTarget:self action:@selector(checkTrend) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton addTarget:self action:@selector(addGoal) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
     
 }
 
--(void)checkTrend
+-(void)addGoal
 {
-    
+    goalDetailViewController *newGoalVC = [[goalDetailViewController alloc] initWithNibName:@"goalDetailViewController" bundle:nil];
+    [newGoalVC setTransitioningDelegate:[RZTransitionsManager shared]];
+    newGoalVC.isEditing = NO;
+    [self presentViewController:newGoalVC animated:YES completion:nil];
 }
 
 -(void)closeVC
@@ -269,47 +279,6 @@
     [self.view addSubview:self.goalsTable];
     
 }
-
--(void)configBottomView
-{
-    if (IS_IPHONE_6P) {
-        bottomHeight = 65;
-    }else
-    {
-        bottomHeight = bottomBar;
-    }
-    
-    
-    BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-bottomHeight, SCREEN_WIDTH, bottomHeight)];
-    bottomView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:bottomView];
-    
-    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2-1, bottomHeight)];
-    self.myDeleteButton = deleteButton;
-    [deleteButton setTitle:NSLocalizedString(@"删减",nil) forState:UIControlStateNormal];
-    [deleteButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
-    deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    deleteButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
-    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, bottomHeight)];
-    [addNewButton setTitle:NSLocalizedString(@"添加",nil) forState:UIControlStateNormal];
-    addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
-    
-    [deleteButton addTarget:self action:@selector(deleteItem) forControlEvents:UIControlEventTouchUpInside];
-    [addNewButton addTarget:self action:@selector(addItem:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [bottomView addSubview:deleteButton];
-    [bottomView addSubview:addNewButton];
-    
-    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 1, 8, 1, bottomHeight-16)];
-    midLine.backgroundColor = [UIColor whiteColor];
-    [bottomView addSubview:midLine];
-    
-}
-
-
 
 
 
@@ -339,6 +308,8 @@
     
     NSInteger itemID = -1;
     NSString *theme = @"";
+    NSString *themeOnly = @"";
+
 //    NSString *description = @"";
     int itemType = -1;
     BOOL isByTime = -1;
@@ -354,6 +325,7 @@
         theme = oneGoal.goalTheme;
         itemType = oneGoal.goalType;
         isByTime = oneGoal.byTime;
+        themeOnly = oneGoal.themeOnly;
         
         if (isByTime) {
             timeDone = oneGoal.doneTime;
@@ -376,16 +348,13 @@
         cell.timerDelegate =self;
     }
     
-    UIColor *categoryColor = [[CommonUtility sharedCommonUtility] categoryColor:theme];
+    UIColor *categoryColor = [[CommonUtility sharedCommonUtility] categoryColor:themeOnly];
     
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:timeDone color:categoryColor
                                                  description:@""],
                        [PNPieChartDataItem dataItemWithValue:timeTotal - timeDone color:[[UIColor whiteColor] colorWithAlphaComponent:0.5f] description:@""]
                        ];
     
-//    NSString *type = itemType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-//    [cell.themeLabel setText:[NSString stringWithFormat:@"%@ > %@",type,theme]];
-
     [cell.themeLabel setText:theme];
     [cell updatePieWith:items byTime:isByTime centerColor:self.myTextColor];
     cell.timerButton.tag = indexPath.row;
@@ -403,7 +372,6 @@
     if (countingButton && countingButton != sender) {
         return;
     }
-    
 
     goalTableViewCell *cell = (goalTableViewCell *)sender.superview;
 
@@ -426,9 +394,7 @@
         });
         
         dispatch_resume(_timer);
-        //unlock button when changing status  done...
 
-        
         [cell showTimerFrom:0];
         countingButton = sender;
     }

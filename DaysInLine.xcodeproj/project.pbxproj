@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5983FA2D9325FA1EAD7D0CC /* libPods.a */; };
 		A48D37F61D056E93005B87A5 /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37F51D056E93005B87A5 /* add1.png */; };
+		A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */; };
+		A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */; };
+		A48D38011D06C9C5005B87A5 /* delete1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FD1D06C9C5005B87A5 /* delete1.png */; };
+		A48D38021D06C9C5005B87A5 /* equal1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FE1D06C9C5005B87A5 /* equal1.png */; };
+		A48D38031D06C9C5005B87A5 /* minus1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FF1D06C9C5005B87A5 /* minus1.png */; };
+		A48D38041D06C9C5005B87A5 /* plus1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D38001D06C9C5005B87A5 /* plus1.png */; };
 		A49E62421CFB2AEE0047011B /* myTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62411CFB2AEE0047011B /* myTextLabel.m */; };
 		A49E62451CFB2E280047011B /* myLifeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A49E62441CFB2E280047011B /* myLifeTableViewCell.m */; };
 		A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A9779E1CFC24DA00099E4F /* TimeLineTableView.m */; };
@@ -128,6 +134,13 @@
 /* Begin PBXFileReference section */
 		79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A48D37F51D056E93005B87A5 /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
+		A48D37F81D0693E8005B87A5 /* goalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalDetailViewController.h; sourceTree = "<group>"; };
+		A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalDetailViewController.m; sourceTree = "<group>"; };
+		A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = goalDetailViewController.xib; sourceTree = "<group>"; };
+		A48D37FD1D06C9C5005B87A5 /* delete1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete1.png; sourceTree = "<group>"; };
+		A48D37FE1D06C9C5005B87A5 /* equal1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = equal1.png; sourceTree = "<group>"; };
+		A48D37FF1D06C9C5005B87A5 /* minus1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus1.png; sourceTree = "<group>"; };
+		A48D38001D06C9C5005B87A5 /* plus1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus1.png; sourceTree = "<group>"; };
 		A49E62401CFB2AEE0047011B /* myTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTextLabel.h; sourceTree = "<group>"; };
 		A49E62411CFB2AEE0047011B /* myTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTextLabel.m; sourceTree = "<group>"; };
 		A49E62431CFB2E280047011B /* myLifeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myLifeTableViewCell.h; sourceTree = "<group>"; };
@@ -342,6 +355,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A48D37F71D069352005B87A5 /* goalsVC */ = {
+			isa = PBXGroup;
+			children = (
+				A4EDDEF91D015B0400733932 /* trackViewController.h */,
+				A4EDDEFA1D015B0400733932 /* trackViewController.m */,
+				A4EDDEFB1D015B0400733932 /* trackViewController.xib */,
+				A48D37F81D0693E8005B87A5 /* goalDetailViewController.h */,
+				A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */,
+				A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */,
+			);
+			name = goalsVC;
+			sourceTree = "<group>";
+		};
 		A49E62461CFB2E2D0047011B /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,9 +443,7 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
-				A4EDDEF91D015B0400733932 /* trackViewController.h */,
-				A4EDDEFA1D015B0400733932 /* trackViewController.m */,
-				A4EDDEFB1D015B0400733932 /* trackViewController.xib */,
+				A48D37F71D069352005B87A5 /* goalsVC */,
 				A4A977C91CFD7AE400099E4F /* items */,
 				A4E26D951CFB0F8F004DFBC3 /* calendar */,
 				A49E62461CFB2E2D0047011B /* cells */,
@@ -688,6 +712,10 @@
 				A4E26D8E1CFB0E7F004DFBC3 /* calendar.png */,
 				A4E26D891CFB0CBC004DFBC3 /* glow.png */,
 				A4E26D8A1CFB0CBC004DFBC3 /* menu.png */,
+				A48D37FD1D06C9C5005B87A5 /* delete1.png */,
+				A48D37FE1D06C9C5005B87A5 /* equal1.png */,
+				A48D37FF1D06C9C5005B87A5 /* minus1.png */,
+				A48D38001D06C9C5005B87A5 /* plus1.png */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -798,6 +826,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A977B41CFC845700099E4F /* 夜间.png in Resources */,
+				A48D38041D06C9C5005B87A5 /* plus1.png in Resources */,
 				A4E26D151CF842E1004DFBC3 /* Info.plist in Resources */,
 				A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */,
 				A4EDDF011D015D7C00733932 /* trend.png in Resources */,
@@ -807,13 +836,17 @@
 				A4E26D8F1CFB0E7F004DFBC3 /* calendar.png in Resources */,
 				A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */,
 				A4A977CB1CFD7D5C00099E4F /* back.png in Resources */,
+				A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */,
 				A4A977AF1CFC42FE00099E4F /* done.png in Resources */,
 				A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */,
 				A4E26CA81CF841CA004DFBC3 /* FlatDatePicker-Icon-Close@2x.png in Resources */,
+				A48D38031D06C9C5005B87A5 /* minus1.png in Resources */,
 				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
 				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
+				A48D38021D06C9C5005B87A5 /* equal1.png in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4A977B91CFC8AFB00099E4F /* expend.png in Resources */,
+				A48D38011D06C9C5005B87A5 /* delete1.png in Resources */,
 				A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
@@ -930,6 +963,7 @@
 				A4E26CC91CF8425A004DFBC3 /* OpenShare.m in Sources */,
 				A4E26D0F1CF842E1004DFBC3 /* RATreeView+Enums.m in Sources */,
 				A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */,
+				A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */,
 				A4E26D111CF842E1004DFBC3 /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */,
 				A4E26D4C1CF843FA004DFBC3 /* pickerLabel.m in Sources */,

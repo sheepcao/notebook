@@ -203,15 +203,14 @@
             break;
         case 13:
     
-            self.symbolText = NSLocalizedString(@"备 注",nil);
+            self.symbolText = NSLocalizedString(@" ",nil);
             self.isNumber = NO;
             fontType = @"HelveticaNeue-Light";
             fontSize = 16;
-            self.layer.borderWidth = 1.0f;
-            self.layer.borderColor = [UIColor blackColor].CGColor;
+//            self.layer.borderWidth = 1.0f;
+//            self.layer.borderColor = [UIColor blackColor].CGColor;
 //            self.backgroundColor = [UIColor colorWithRed:152/255.0f green:154/255.0f blue:156/255.0f alpha:1.0f];
-            self.backgroundColor =  [UIColor colorWithRed:229/255.0f green:182/255.0f blue:127/255.0f alpha:1.0f];
-            [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
             break;
         case 14:

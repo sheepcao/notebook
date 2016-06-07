@@ -538,9 +538,6 @@
         contentView.layer.cornerRadius = 10;
 
 
-    
-
-    
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
         if (contentView) {
             [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT- (height-10), contentView.frame.size.width, contentView.frame.size.height)];
@@ -1047,8 +1044,10 @@
             [cell addExpend];
             if(self.category)
             {
-                [cell.rightText setTitle:self.category forState:UIControlStateNormal];
-                
+                NSString *type = self.itemType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
+                NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.category];
+                [cell.rightText setTitle:theme forState:UIControlStateNormal];
+                                
             }else
             {
                 [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
@@ -1244,7 +1243,8 @@
     }
     
     self.category =sender.titleLabel.text;
-    
+    self.itemType =(int)self.moneyTypeSeg.selectedSegmentIndex;
+
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [indexPaths addObject: indexPath];

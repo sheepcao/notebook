@@ -223,11 +223,13 @@
         NSURL *url = [NSURL fileURLWithPath:strUrl];
         self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         
+        NSString *type = self.currentItem.itemType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
+        NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.currentItem.itemCategory];
         
         switch (indexPath.row) {
             case 0:
                 [cell.leftText setText: NSLocalizedString(@"类别",nil)];
-                [cell.rightText setText:self.currentItem.itemCategory];
+                [cell.rightText setText:theme];
                 break;
             case 1:
                 [cell.leftText  setText: NSLocalizedString(@"时段",nil)];
@@ -368,7 +370,7 @@
     if(itemID >=0)
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"永久删除这笔账目?",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"不",nil)  otherButtonTitles:NSLocalizedString(@"是的",nil), nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"永久删除该事项?",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"不",nil)  otherButtonTitles:NSLocalizedString(@"是的",nil), nil];
         alert.tag = 77;
         [alert show];
         

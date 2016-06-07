@@ -150,6 +150,7 @@
     
     NSString *createCollect = @"CREATE TABLE IF NOT EXISTS collection (collectionID INTEGER PRIMARY KEY AUTOINCREMENT,eventID INTEGER)";
     NSString *createPassword = @"CREATE TABLE IF NOT EXISTS passwordVar (varName TEXT PRIMARY KEY,value TEXT)";
+    NSString *goalTable = @"CREATE TABLE IF NOT EXISTS GOALS (goal_id INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,theme TEXT,byTime INTEGER,target_time REAL,done_time REAL,target_count INTEGER,done_count INTEGER,start_date TEXT,finish_date TEXT,is_completed INTEGER)";
 
     
     [db executeUpdate:createCategoryTable];
@@ -158,7 +159,8 @@
     [db executeUpdate:createEvent];
     [db executeUpdate:createCollect];
     [db executeUpdate:createPassword];
-    
+    [db executeUpdate:goalTable];
+
     
     NSString *selectEVENTSCount = @"select * from EVENTS";
     FMResultSet *rs1 = [db executeQuery:selectEVENTSCount];
@@ -171,10 +173,16 @@
             if (!sql) {
                 NSLog(@"CATEGORY ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
             }
-
+        }
+        
+        BOOL sql2 =  [db executeUpdate:@"DROP TABLE EVENT"];
+        if (!sql2) {
+            NSLog(@"DROP ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }
 
     }
+    
+
 
 
     //第一次启动，加载默认类别和颜色

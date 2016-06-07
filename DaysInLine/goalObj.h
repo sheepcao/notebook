@@ -12,6 +12,8 @@
 
 @property (strong , nonatomic) NSNumber *goalID;
 @property (strong , nonatomic) NSString *goalTheme;
+@property (strong , nonatomic) NSString *themeOnly;
+
 @property  int goalType;
 @property (strong , nonatomic) NSString *startDate;
 @property (strong , nonatomic) NSString *finishDate;
