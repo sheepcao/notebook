@@ -10,7 +10,7 @@
 
 @interface goalDetailViewController : baseViewController
 @property BOOL isEditing;
-@property (nonatomic,strong) NSNumber *currentItemID;
+@property (nonatomic,strong) NSNumber *currentIGoalID;
 @property int goalType;
 @property (nonatomic,strong) NSString *category;
 @property BOOL isByTime;

@@ -223,8 +223,7 @@
         NSURL *url = [NSURL fileURLWithPath:strUrl];
         self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
         
-        NSString *type = self.currentItem.itemType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-        NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.currentItem.itemCategory];
+        NSString *theme = [NSString stringWithFormat:@"%@",self.currentItem.itemCategory];
         
         switch (indexPath.row) {
             case 0:

@@ -93,7 +93,7 @@
     [saveButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
     saveButton.imageEdgeInsets = UIEdgeInsetsMake(3.9, 3.9,3.9, 3.9);
     [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
-    [saveButton addTarget:self action:@selector(saveItem:) forControlEvents:UIControlEventTouchUpInside];
+    [saveButton addTarget:self action:@selector(saveGoal) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
@@ -101,6 +101,99 @@
 -(void)closeVC
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)saveGoal
+{
+    NSLog(@"saving goal...");
+    if (![self validateData]) {
+        return;
+    }
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"goalDetailVC/Could not open db.");
+        return;
+    }
+
+    NSNumber *totalTime = @-1.0f;
+    NSNumber *totalCount = @-1;
+    if (self.isByTime) {
+        totalTime = [NSNumber numberWithDouble:[self.totalNum doubleValue]];
+    }else
+    {
+        totalCount = [NSNumber numberWithInt:[self.totalNum intValue]];
+    }
+    
+    if (self.isEditing) {
+
+
+        BOOL sql = [db executeUpdate:@"update GOALS set TYPE=? ,theme = ? ,byTime = ? ,target_time = ? ,target_count = ? ,is_completed = ? where goal_id = ?" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,@0,self.currentIGoalID];
+        if (!sql) {
+            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [MobClick event:@"editGoal"];
+        }
+    }else
+    {
+        FMResultSet *rs = [db executeQuery:@"select * from GOALS where TYPE = ? AND theme = ?", [NSNumber numberWithInt:self.goalType],self.category];
+        if ([rs next]) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.animationType = MBProgressHUDAnimationZoom;
+            hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"该目标已经存在",nil) ;
+            [hud hide:YES afterDelay:1.5];
+            return;
+        }
+        
+        BOOL sql = [db executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(?,?,?,?,?,?)" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,@0,@0,@0];
+        
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            if (self.goalType == 0) {
+                [MobClick event:@"addWorkGoal"];
+            }else
+            {
+                [MobClick event:@"addLifeGoal"];
+            }
+            
+        }
+        
+    }
+    [db close];
+}
+
+
+-(BOOL)validateData
+{
+    if (!self.category) {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"请选择一个主题",nil) ;
+        [hud hide:YES afterDelay:1.5];
+
+        return NO;
+    }else if (!self.totalNum)
+    {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"请设置您的目标",nil);
+        [hud hide:YES afterDelay:1.5];
+        return NO;
+        
+    }
+    
+    return YES;
 }
 
 -(void)configDetailTable
@@ -758,7 +851,7 @@
             NSIndexPath *oneIndex = [NSIndexPath indexPathForRow:[oneDay integerValue] inSection:0];
             [self.remindTable selectRowAtIndexPath:oneIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
-//
+
         
     }
 }
@@ -798,6 +891,15 @@
     if (sender.tag == 21) {
         self.isByTime = self.goalByTimeSeg.selectedSegmentIndex;
         self.totalNum = [NSString stringWithFormat:@"%@",self.InputLabel.text];
+        if ([self.totalNum integerValue] <= 0) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.animationType = MBProgressHUDAnimationZoom;
+            hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"目标不能为0",nil);
+            [hud hide:YES afterDelay:1.5];
+            return;
+        }
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
         [indexPaths addObject: indexPath];

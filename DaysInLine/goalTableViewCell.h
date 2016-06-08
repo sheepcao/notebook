@@ -12,6 +12,9 @@
 @protocol showTimerDelegate <NSObject>
 
 -(void)timerMove:(UIButton *)sender;
+-(void)archiveGoal:(UIButton *)sender;
+-(void)KeepingGoal:(UIButton *)sender;
+
 
 @end
 
@@ -27,6 +30,11 @@
 @property (nonatomic,strong) UILabel *timerLabel;
 @property BOOL isTimerShown;
 @property NSInteger timerCount;
+
+@property (nonatomic,strong) UIButton *finishButton;
+@property (nonatomic,strong) UIButton *goOnButton;
+
+
 -(void)timerPlus;
 
 

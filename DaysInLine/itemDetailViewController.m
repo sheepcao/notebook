@@ -479,8 +479,12 @@
 
     if (!self.category) {
         
-        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"请选择一个主题",nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertview show];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"请选择一个主题",nil) ;
+        [hud hide:YES afterDelay:1.5];
         
         return NO;
     }else if (startNum >= endNum)

@@ -34,7 +34,7 @@
         
         self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(20, 8.0, goalRowHeight-16, goalRowHeight - 16) items:items];
 
-        self.pieChart.innerCircleRadius = self.pieChart.outerCircleRadius - 7;
+        self.pieChart.innerCircleRadius = self.pieChart.outerCircleRadius - 5;
         [self.pieChart strokeChart];
         self.pieChart.displayAnimated = NO;
         self.pieChart.shouldHighlightSectorOnTouch = NO;
@@ -111,6 +111,36 @@
         
         [self addSubview:self.timerLabel];
         [self addSubview:self.timerButton];
+        
+        
+        self.finishButton = [[UIButton alloc] initWithFrame:CGRectMake(self.timerButton.frame.origin.x-15, 10, self.timerButton.frame.size.width+20, 30)];
+        [self.finishButton setTitle:NSLocalizedString(@"移至成就",nil) forState:UIControlStateNormal];
+        self.finishButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13.0f];
+        self.finishButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.finishButton.layer.cornerRadius = 6;
+        self.finishButton.layer.masksToBounds = YES;
+        self.finishButton.layer.shadowColor =  [UIColor darkGrayColor].CGColor;
+        self.finishButton.layer.shadowOffset = CGSizeMake(0.3f, 0.5f);
+        self.finishButton.layer.borderColor = [UIColor colorWithRed:243/255.0f green:209/255.0f blue:104/255.0f alpha:1.0f].CGColor;
+        self.finishButton.layer.borderWidth = 1.2;
+        [self.finishButton addTarget:self.timerDelegate action:@selector(archiveGoal:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        self.goOnButton = [[UIButton alloc] initWithFrame:CGRectMake(self.finishButton.frame.origin.x, self.finishButton.frame.origin.y+self.finishButton.frame.size.height + 6, self.finishButton.frame.size.width, 30)];
+        [self.goOnButton setTitle:NSLocalizedString(@"目标进阶",nil) forState:UIControlStateNormal];
+        self.goOnButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13.0f];
+        self.goOnButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.goOnButton.layer.cornerRadius = 6;
+        self.goOnButton.layer.masksToBounds = YES;
+        self.goOnButton.layer.shadowColor =  [UIColor darkGrayColor].CGColor;
+        self.goOnButton.layer.shadowOffset = CGSizeMake(0.3f, 0.5f);
+        self.goOnButton.layer.borderColor = [UIColor colorWithRed:243/255.0f green:209/255.0f blue:104/255.0f alpha:1.0f].CGColor;
+        self.goOnButton.layer.borderWidth = 1.2;
+        [self.goOnButton addTarget:self.timerDelegate action:@selector(KeepingGoal:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        [self addSubview:self.finishButton];
+        [self addSubview:self.goOnButton];
 
       }
     
