@@ -18,6 +18,9 @@
 @interface goalDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate>
 @property (nonatomic,strong) UITableView *goalInfoTable;
 @property (nonatomic ,strong) UITableView *categoryTableView;
+@property (nonatomic ,strong) UITableView *remindTable;
+
+@property (nonatomic ,strong) UIDatePicker *myRemindPicker;
 
 @property (nonatomic,strong) NSArray *weekDays;
 @property (nonatomic,strong) UIView *myDimView;
@@ -122,13 +125,34 @@
 }
 
 #pragma mark tableview delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.remindTable) {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.remindTable) {
+
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
  if (tableView == self.categoryTableView)
     {
         return ((int)(SCREEN_WIDTH/8));
-    }else
+    }else if(tableView == self.remindTable)
+    {
+        return 35;
+    } else
     {
         if (IS_IPHONE_4_OR_LESS) {
             return 65;
@@ -152,6 +176,9 @@
             return (self.lifeCategoryArray.count/4) + 1;
         }
         
+    }else if(tableView == self.remindTable)
+    {
+        return 7;
     }else
         return 3;
 }
@@ -202,6 +229,31 @@
         
         return cell;
         
+    }
+    else if(tableView == self.remindTable)
+    {
+        NSString *CellIdentifier = @"remindCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+            
+        }
+        [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"每%@",nil),self.weekDays[indexPath.row]]];
+        cell.textLabel.textColor =  [UIColor colorWithWhite:0.2f alpha:1.0f];
+        for (NSNumber *oneDay in self.remindDays) {
+            NSInteger index = [oneDay integerValue];
+            if (indexPath.row == index) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+                break;
+            }else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+        }
+        
+        return cell;
     }
     NSString *CellIdentifier = @"goalInfoCell";
     itemDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -264,7 +316,8 @@
             if(self.remindTime)
             {
                 [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 50)];
-                
+                cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
+
                 NSString *remindWeekDay = @"";
 
                 for (NSNumber *oneDay in self.remindDays) {
@@ -642,23 +695,70 @@
         
         
         
-    }else if(row == 3)
+    }else if(row == 2)
     {
         UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
         [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
-        [cancelBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
         cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0];
         [contentView addSubview:cancelBtn];
         
         UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-48, 5, 40, 35)];
         [selectBtn setTitle:NSLocalizedString(@"确定",nil) forState:UIControlStateNormal];
-        [selectBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        [selectBtn setTitleColor:[UIColor colorWithWhite:0.35f alpha:0.9f] forState:UIControlStateNormal];
         selectBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         [contentView addSubview:selectBtn];
         selectBtn.tag = 20+row;
         
         [cancelBtn addTarget:self action:@selector(cancelSetting) forControlEvents:UIControlEventTouchUpInside];
-        [selectBtn addTarget:self action:@selector(timeChoose:) forControlEvents:UIControlEventTouchUpInside];
+        [selectBtn addTarget:self action:@selector(goalChoose:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UILabel *timeTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 50, 8, 100, 20)];
+        [timeTitle setText:NSLocalizedString(@"提醒时间",nil)];
+        [timeTitle setTextColor:[UIColor colorWithWhite:0.35f alpha:0.9f]];
+        timeTitle.textAlignment = NSTextAlignmentCenter;
+        timeTitle.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        [contentView addSubview:timeTitle];
+        
+        UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 150,timeTitle.frame.size.height + timeTitle.frame.origin.y + 10,300,150)];
+        datePicker.datePickerMode = UIDatePickerModeTime;
+        NSDate* date = [NSDate date];
+        if (self.remindTime) {
+            [datePicker setDate:[[CommonUtility sharedCommonUtility] timeFromString:self.remindTime]];
+        }else
+        {
+            [datePicker setDate:date];
+        }
+        [contentView addSubview:datePicker];
+        self.myRemindPicker = datePicker;
+        
+        UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 50, datePicker.frame.size.height + datePicker.frame.origin.y + 8, 100, 20)];
+        [pickerTitle setText:NSLocalizedString(@"提醒日期",nil)];
+        [pickerTitle setTextColor:[UIColor colorWithWhite:0.35f alpha:0.9f]];
+        pickerTitle.textAlignment = NSTextAlignmentCenter;
+        pickerTitle.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        [contentView addSubview:pickerTitle];
+
+        UITableView *repeatTable = [[UITableView alloc] initWithFrame:CGRectMake(0, pickerTitle.frame.size.height + pickerTitle.frame.origin.y + 5, SCREEN_WIDTH-20, 35*7)];
+        repeatTable.showsVerticalScrollIndicator = NO;
+        repeatTable.scrollEnabled = NO;
+        repeatTable.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        repeatTable.backgroundColor = [UIColor clearColor];
+        repeatTable.delegate = self;
+        repeatTable.dataSource = self;
+        repeatTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        repeatTable.canCancelContentTouches = YES;
+        repeatTable.delaysContentTouches = YES;
+        repeatTable.allowsMultipleSelection = YES;
+        self.remindTable = repeatTable;
+        [contentView addSubview:repeatTable];
+        
+        
+        for (NSNumber *oneDay in self.remindDays) {
+            NSIndexPath *oneIndex = [NSIndexPath indexPathForRow:[oneDay integerValue] inSection:0];
+            [self.remindTable selectRowAtIndexPath:oneIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+//
         
     }
 }
@@ -669,10 +769,10 @@
         [self showingModelOfHeight:300 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] forRow:0];
     }else if (sender.tag - 10 == 1)
     {
-        [self showingModelOfHeight:SCREEN_WIDTH*1.03 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] forRow:(sender.tag - 10)];
+        [self showingModelOfHeight:SCREEN_WIDTH*1.03 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] forRow:1];
     }else if (sender.tag -10 == 2)
     {
-        [self showingModelOfHeight:SCREEN_WIDTH andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:0.0f] forRow:3];
+        [self showingModelOfHeight:480 andColor:[UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f] forRow:2];
 
     }
 }
@@ -703,9 +803,34 @@
         [indexPaths addObject: indexPath];
         [self.goalInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         
-    }else
+    }else if (sender.tag == 22)
     {
+        if ([[self.remindTable indexPathsForSelectedRows] count] == 0 && self.remindDays.count == 0) {
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.animationType = MBProgressHUDAnimationZoom;
+            hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"请选择提醒日期",nil);
+            [hud hide:YES afterDelay:1.5];
+            return;
+        }
+        
+        NSDate *reminder = self.myRemindPicker.date;
+        self.remindTime = [[CommonUtility sharedCommonUtility] stringFromTime:reminder];
+        NSMutableArray *selectedDays = [[NSMutableArray alloc] initWithCapacity:7];
+        for (NSIndexPath *oneIndex in [self.remindTable indexPathsForSelectedRows]) {
+            [selectedDays addObject:[NSNumber numberWithInteger:oneIndex.row]];
+        }
+        if (selectedDays.count>0) {
+            self.remindDays = [NSArray arrayWithArray:selectedDays];
+            self.remindDays = [self.remindDays sortedArrayUsingSelector: @selector(compare:)];
+        }
 
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        [indexPaths addObject: indexPath];
+        [self.goalInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        
     }
     
     [self dismissDimView];

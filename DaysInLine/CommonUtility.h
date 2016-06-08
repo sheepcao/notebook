@@ -52,7 +52,10 @@
 -(UIColor *)categoryColor:(NSString *)categoryName;
 
 -(NSDate *)dateFromString:(NSString *)pstrDate;
+-(NSDate *)timeFromString:(NSString *)pstrTime;
+
 - (NSString *)stringFromDate:(NSDate *)date;
+- (NSString *)stringFromTime:(NSDate *)time;
 
 -(NSString *)weekEndDayOf:(NSDate *)date;
 -(NSString *)weekStartDayOf:(NSDate *)date;

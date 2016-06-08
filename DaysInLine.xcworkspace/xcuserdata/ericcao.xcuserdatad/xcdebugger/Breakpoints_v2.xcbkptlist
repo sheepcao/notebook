@@ -425,22 +425,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DaysInLine/trackViewController.m"
-            timestampString = "486975569.499007"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "-viewDidDisappear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DaysInLine/homeViewController.m"
             timestampString = "486960553.198605"
             startingColumnNumber = "9223372036854775807"
@@ -490,12 +474,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/goalDetailViewController.m"
-            timestampString = "486983955.420165"
+            timestampString = "487048766.584999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "-configNumberPadInView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DaysInLine/goalDetailViewController.m"
+            timestampString = "487047841.28172"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
