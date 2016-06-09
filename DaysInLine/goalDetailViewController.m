@@ -98,6 +98,31 @@
     [topbar addSubview:saveButton];
     
 }
+
+-(int)searchEventID
+{
+    int recorderID = 0;
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return recorderID;
+    }
+    
+    if (self.isEditing) {
+        return [self.currentIGoalID intValue];
+    }else
+    {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM SQLITE_SEQUENCE WHERE name='GOALS'"];
+        if ([rs next]) {
+            recorderID = [rs intForColumn:@"seq"];
+        }
+        
+        [db close];
+        return recorderID;
+    }
+    
+}
+
 -(void)closeVC
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -123,10 +148,21 @@
         totalCount = [NSNumber numberWithInt:[self.totalNum intValue]];
     }
     
+    NSString *reminderDays = @"";
+    for (NSNumber *oneDay in self.remindDays) {
+        reminderDays = [reminderDays stringByAppendingString:[NSString stringWithFormat:@"%@,",oneDay]];
+    }
+    if (reminderDays.length>0) {
+        reminderDays  = [reminderDays substringToIndex:reminderDays.length - 1];
+    }
+    if (!self.remindTime) {
+        self.remindTime = @"";
+    }
+    
     if (self.isEditing) {
 
 
-        BOOL sql = [db executeUpdate:@"update GOALS set TYPE=? ,theme = ? ,byTime = ? ,target_time = ? ,target_count = ? ,is_completed = ? where goal_id = ?" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,@0,self.currentIGoalID];
+        BOOL sql = [db executeUpdate:@"update GOALS set TYPE=? ,theme = ? ,byTime = ? ,target_time = ? ,target_count = ? ,remind_time = ?, remind_days = ?, is_completed = ? where goal_id = ?" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,self.remindTime,reminderDays,@0,self.currentIGoalID];
         if (!sql) {
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
@@ -148,7 +184,7 @@
             return;
         }
         
-        BOOL sql = [db executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(?,?,?,?,?,?)" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,@0,@0,@0];
+        BOOL sql = [db executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,remind_time,remind_days,is_completed) VALUES(?,?,?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,@0,@0,self.remindTime,reminderDays,@0];
         
         if (!sql) {
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
@@ -166,6 +202,11 @@
         
     }
     [db close];
+    
+    [self setNotificationsForGoal:[self searchEventID]];
+    
+    
+    
 }
 
 
@@ -406,7 +447,7 @@
         case 2:
             [cell.leftText  setText: NSLocalizedString(@" 提 醒",nil)];
             
-            if(self.remindTime)
+            if(self.remindTime && ![self.remindTime isEqualToString:@""])
             {
                 [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 50)];
                 cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
@@ -816,7 +857,7 @@
         UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 150,timeTitle.frame.size.height + timeTitle.frame.origin.y + 10,300,150)];
         datePicker.datePickerMode = UIDatePickerModeTime;
         NSDate* date = [NSDate date];
-        if (self.remindTime) {
+        if (self.remindTime && ![self.remindTime isEqualToString:@""]) {
             [datePicker setDate:[[CommonUtility sharedCommonUtility] timeFromString:self.remindTime]];
         }else
         {
@@ -979,9 +1020,51 @@
     [indexPaths addObject: indexPath];
     [self.goalInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     
+    
     [self dismissDimView];
     
 }
+
+-(void)setNotificationsForGoal:(int)goalID
+{
+    NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+//    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
+    
+    NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday] -1;// this will give you current day of week
+
+    for (NSNumber *oneDay in self.remindDays) {
+        NSInteger index = [oneDay integerValue];
+        NSInteger dayInterval = (index + 7 - dayofweek)%7;
+        NSString *dstDate = [[CommonUtility sharedCommonUtility] dateByAddingDate:[NSDate date] andDaysToAdd:dayInterval];
+        
+        NSString *dstTime = [NSString stringWithFormat:@"%@ %@:00",dstDate,self.remindTime];
+        NSDate *fireTime = [[CommonUtility sharedCommonUtility] fullTimeFromString:dstTime];
+        
+        UILocalNotification *notification=[[UILocalNotification alloc] init];
+        
+        if (notification!=nil) {
+            
+            notification.fireDate=fireTime;
+            
+            notification.repeatInterval=kCFCalendarUnitWeekday;//循环次数，kCFCalendarUnitWeekday一周一次
+            
+            notification.timeZone=[NSTimeZone defaultTimeZone];
+            
+            notification.applicationIconBadgeNumber=1; //应用的红色数字
+            
+            notification.soundName= UILocalNotificationDefaultSoundName;//声音，可以换成alarm.soundName = @"myMusic.caf"
+            
+            //去掉下面2行就不会弹出提示框
+            notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"是时候开始<%@>了",nil),self.category];
+            notification.hasAction = NO; //是否显示额外的按钮，为no时alertAction消失
+             NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:goalID] forKey:@"reminderID"];
+            notification.userInfo = infoDict; //添加额外的信息
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    }
+}
+
 
 
 @end

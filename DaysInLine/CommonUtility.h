@@ -45,6 +45,7 @@
 -(NSString *)firstNextMonthDate;
 - (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd;
 - (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd;
+- (NSString *) dateByAddingDate: (NSDate *)srcDate andDaysToAdd:(NSInteger) daysToAdd;
 
 - (NSInteger )timeIntervalFromLastTime:(NSDate *)lastTime ToCurrentTime:(NSDate *)currentTime;
 
@@ -53,6 +54,7 @@
 
 -(NSDate *)dateFromString:(NSString *)pstrDate;
 -(NSDate *)timeFromString:(NSString *)pstrTime;
+-(NSDate *)fullTimeFromString:(NSString *)pstrTime;
 
 - (NSString *)stringFromDate:(NSDate *)date;
 - (NSString *)stringFromTime:(NSDate *)time;

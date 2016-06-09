@@ -150,6 +150,18 @@
     return [self stringFromDate:dstDate];
 }
 
+- (NSString *) dateByAddingDate: (NSDate *)srcDate andDaysToAdd:(NSInteger) daysToAdd
+{
+    //    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc]
+                            initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+    NSDateComponents * days = [[NSDateComponents alloc] init];
+    [days setDay: daysToAdd];
+    NSDate *dstDate = [calendar dateByAddingComponents: days toDate: srcDate options: 0];
+    return [self stringFromDate:dstDate];
+}
+
 - (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd
 {
 
@@ -243,6 +255,17 @@
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     df1.calendar = cal;
     [df1 setDateFormat:@"HH:mm"];
+    NSDate *dtPostDate = [df1 dateFromString:pstrTime];
+    return dtPostDate;
+}
+
+-(NSDate *)fullTimeFromString:(NSString *)pstrTime
+{
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    df1.calendar = cal;
+    [df1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *dtPostDate = [df1 dateFromString:pstrTime];
     return dtPostDate;
 }

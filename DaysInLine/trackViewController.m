@@ -566,6 +566,8 @@
 }
 -(void)dismissDimView
 {
+    [self.addingGoalField resignFirstResponder];
+    
     UIView *contentView = [self.myDimView viewWithTag:100];
     [UIView animateWithDuration:0.32f animations:^{
         if (contentView) {
@@ -644,6 +646,7 @@
     
     return YES;
 }
+
 
 
 

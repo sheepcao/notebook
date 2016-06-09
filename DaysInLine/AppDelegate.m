@@ -40,6 +40,11 @@
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+
     
     NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
     if (!autoSwitchString) {
@@ -150,7 +155,7 @@
     
     NSString *createCollect = @"CREATE TABLE IF NOT EXISTS collection (collectionID INTEGER PRIMARY KEY AUTOINCREMENT,eventID INTEGER)";
     NSString *createPassword = @"CREATE TABLE IF NOT EXISTS passwordVar (varName TEXT PRIMARY KEY,value TEXT)";
-    NSString *goalTable = @"CREATE TABLE IF NOT EXISTS GOALS (goal_id INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,theme TEXT,byTime INTEGER,target_time REAL,done_time REAL,target_count INTEGER,done_count INTEGER,start_date TEXT,finish_date TEXT,is_completed INTEGER)";
+    NSString *goalTable = @"CREATE TABLE IF NOT EXISTS GOALS (goal_id INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,theme TEXT,byTime INTEGER,target_time REAL,done_time REAL,target_count INTEGER,done_count INTEGER,start_date TEXT,finish_date TEXT,remind_time TEXT,remind_days TEXT,is_completed INTEGER)";
 
     
     [db executeUpdate:createCategoryTable];
