@@ -42,11 +42,39 @@
 }
 @synthesize db;
 
+-(void)pendingTimer
+{
+    if (countingButton) {
+        
+        goalTableViewCell *cell = (goalTableViewCell *)countingButton.superview ;
+        
+        NSString *timerCounts =  [NSString stringWithFormat:@"%ld", [cell timerCount]];
+        NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
+        NSString *timerTheme = cell.themeLabel.text;
+        NSDictionary *timerDict = @{@"timerTheme":timerTheme,@"timeNow":timeNow,@"timerCount":timerCounts};
+        [[NSUserDefaults standardUserDefaults] setObject:timerDict forKey:Timer];
+        dispatch_suspend(_timer);
+        [cell returnTimer];
+        countingButton = nil;
+        
+    }
+
+}
+
+-(void)resigningActive:(NSNotification *)noti
+{
+    NSLog(@"pending------");
+    [self pendingTimer];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resigningActive:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+
+
 
     if (IS_IPHONE_6P || IS_IPHONE_6) {
         bottomHeight = 65;
@@ -147,21 +175,8 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     NSLog(@"viewDidDisappear");
-    if (countingButton) {
-        
-        goalTableViewCell *cell = (goalTableViewCell *)countingButton.superview ;
-        
-        NSString *timerCounts =  [NSString stringWithFormat:@"%ld", [cell timerCount]];
-        NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
-        NSString *timerTheme = cell.themeLabel.text;
-        NSDictionary *timerDict = @{@"timerTheme":timerTheme,@"timeNow":timeNow,@"timerCount":timerCounts};
-        [[NSUserDefaults standardUserDefaults] setObject:timerDict forKey:Timer];
-        dispatch_suspend(_timer);
-        [cell returnTimer];
-        countingButton = nil;
-
-    }
     
+    [self pendingTimer];
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -24,6 +24,7 @@
 @property (nonatomic,strong) NSString *dbPath;
 @property (nonatomic,strong) NSString *docsPath;
 @property (nonatomic,strong) dispatch_source_t myTimer;
+@property (nonatomic,strong) NSString  *myGoingTimerTitle;
 
 
 + (CommonUtility *)sharedCommonUtility;

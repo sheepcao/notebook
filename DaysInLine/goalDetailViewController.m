@@ -957,7 +957,6 @@
             [hud hide:YES afterDelay:1.5];
             return;
         }
-        
         NSDate *reminder = self.myRemindPicker.date;
         self.remindTime = [[CommonUtility sharedCommonUtility] stringFromTime:reminder];
         NSMutableArray *selectedDays = [[NSMutableArray alloc] initWithCapacity:7];
@@ -968,14 +967,11 @@
             self.remindDays = [NSArray arrayWithArray:selectedDays];
             self.remindDays = [self.remindDays sortedArrayUsingSelector: @selector(compare:)];
         }
-
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
         [indexPaths addObject: indexPath];
         [self.goalInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-        
     }
-    
     [self dismissDimView];
 }
 
@@ -1002,59 +998,41 @@
     if ([sender.titleLabel.text isEqualToString:NSLocalizedString(@"+ 新主题",nil)])
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             categoryManagementViewController *exportVC = [[categoryManagementViewController alloc] initWithNibName:@"categoryManagementViewController" bundle:nil];
             [self presentViewController:exportVC animated:YES completion:nil];
         });
-        
         [self dismissDimView];
-        
         return;
     }
-    
     self.category =sender.titleLabel.text;
     self.goalType =(int)self.moneyTypeSeg.selectedSegmentIndex;
-    
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [indexPaths addObject: indexPath];
     [self.goalInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-    
-    
     [self dismissDimView];
-    
 }
 
 -(void)setNotificationsForGoal:(int)goalID
 {
     NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    
-//    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
-    
     NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday] -1;// this will give you current day of week
 
     for (NSNumber *oneDay in self.remindDays) {
         NSInteger index = [oneDay integerValue];
         NSInteger dayInterval = (index + 7 - dayofweek)%7;
         NSString *dstDate = [[CommonUtility sharedCommonUtility] dateByAddingDate:[NSDate date] andDaysToAdd:dayInterval];
-        
         NSString *dstTime = [NSString stringWithFormat:@"%@ %@:00",dstDate,self.remindTime];
         NSDate *fireTime = [[CommonUtility sharedCommonUtility] fullTimeFromString:dstTime];
-        
         UILocalNotification *notification=[[UILocalNotification alloc] init];
-        
         if (notification!=nil) {
             
             notification.fireDate=fireTime;
             
             notification.repeatInterval=kCFCalendarUnitWeekday;//循环次数，kCFCalendarUnitWeekday一周一次
-            
             notification.timeZone=[NSTimeZone defaultTimeZone];
-            
             notification.applicationIconBadgeNumber=1; //应用的红色数字
-            
             notification.soundName= UILocalNotificationDefaultSoundName;//声音，可以换成alarm.soundName = @"myMusic.caf"
-            
             //去掉下面2行就不会弹出提示框
             notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"是时候开始<%@>了",nil),self.category];
             notification.hasAction = NO; //是否显示额外的按钮，为no时alertAction消失

@@ -102,6 +102,15 @@
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     NSLog(@"applicationWillResignActive");
+//    NSDictionary * timerDict = [[NSUserDefaults standardUserDefaults] objectForKey:Timer];
+//    if (!timerDict) {
+//        dispatch_source_t  timer = [[CommonUtility sharedCommonUtility] myTimer];
+//        NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
+//        NSDictionary *timerDict = @{@"timerTheme":[[CommonUtility sharedCommonUtility] myGoingTimerTitle],@"timeNow":timeNow,@"timerCount":@"0"};
+//        [[NSUserDefaults standardUserDefaults] setObject:timerDict forKey:Timer];
+//        dispatch_suspend(timer);
+//    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

@@ -69,13 +69,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-
-
-    
     
     [self preparePhotos];
     [self configDimView];
@@ -85,19 +78,17 @@
     [self configDetailTable];
     [self configBottomView];
     
-////    [self configButton];
-//    
-//    [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
-//                                       fromViewController:[self class]
-//                                                forAction:RZTransitionAction_PresentDismiss];
-//    
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
     self.workCategoryArray = [[CommonUtility sharedCommonUtility] prepareCategoryDataForWork:YES];
     self.lifeCategoryArray = [[CommonUtility sharedCommonUtility] prepareCategoryDataForWork:NO];
     [MobClick beginLogPageView:@"itemDetail"];
@@ -111,6 +102,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [MobClick endLogPageView:@"itemDetail"];
 }
 
