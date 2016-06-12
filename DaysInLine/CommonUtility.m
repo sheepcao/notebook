@@ -798,5 +798,10 @@
     dispatch_source_set_timer(myTimer, dispatch_walltime(DISPATCH_TIME_NOW, 1ull * NSEC_PER_SEC), 1ull * NSEC_PER_SEC, 1ull * NSEC_PER_SEC);
 }
 
+-(NSArray *)weekDays
+{
+        return  @[NSLocalizedString(@"周日",nil),NSLocalizedString(@"周一",nil),NSLocalizedString(@"周二",nil),NSLocalizedString(@"周三",nil),NSLocalizedString(@"周四",nil),NSLocalizedString(@"周五",nil),NSLocalizedString(@"周六",nil)];
+}
+
 
 @end

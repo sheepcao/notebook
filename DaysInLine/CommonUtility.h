@@ -24,8 +24,8 @@
 @property (nonatomic,strong) NSString *dbPath;
 @property (nonatomic,strong) NSString *docsPath;
 @property (nonatomic,strong) dispatch_source_t myTimer;
-@property (nonatomic,strong) NSString  *myGoingTimerTitle;
-
+@property (nonatomic,strong) NSString *myGoingTimerTitle;
+@property (nonatomic,strong) NSArray *weekDays;
 
 + (CommonUtility *)sharedCommonUtility;
 + (BOOL)isSystemLangChinese;

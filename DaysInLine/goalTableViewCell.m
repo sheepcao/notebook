@@ -46,15 +46,7 @@
         self.centerButton = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, goalRowHeight-30, goalRowHeight-30)];
         [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];    ;
 //
-//        self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2;
-//        self.centerButton.layer.masksToBounds = YES;
-//        self.centerButton.layer.shadowOpacity = 1.0;
-//        self.centerButton.layer.shadowRadius = 1.5f;
-//        
-//        self.centerButton.layer.shadowColor =  [UIColor blackColor].CGColor;
-//        self.centerButton.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
-        
-//        [self.centerButton setImage:[UIImage imageNamed:@"上午"]];
+
 
         [self addSubview:self.centerButton];
         
@@ -80,14 +72,39 @@
         [self.centerButton addSubview:self.totalLabel];
         
         // adding  title =========================================================
-        self.themeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.pieChart.frame.size.width + self.pieChart.frame.origin.x + 10, goalRowHeight/2 - 15, 100, 30)];
+        self.themeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.pieChart.frame.size.width + self.pieChart.frame.origin.x + 10, goalRowHeight/2 - 15, 120, 30)];
         self.themeLabel.numberOfLines = 1;
         self.themeLabel.adjustsFontSizeToFitWidth = YES;
         self.themeLabel.textAlignment = NSTextAlignmentLeft;
         self.themeLabel.backgroundColor = [UIColor clearColor];
-        self.themeLabel.font  = [UIFont fontWithName:@"Avenir-Roman" size:14.0];
+        self.themeLabel.font  = [UIFont fontWithName:@"Avenir-Roman" size:15.0];
         [self addSubview:self.themeLabel];
-
+        
+        // adding reminder =========================================================
+    
+        self.reminderView = [[UIView alloc] initWithFrame:CGRectMake(self.themeLabel.frame.origin.x, goalRowHeight/2, self.themeLabel.frame.size.width, 40)];
+        UIImageView *reminderIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 23, 23)];
+        [reminderIcon setImage:[UIImage imageNamed:@"提醒"]];
+        [self.reminderView addSubview:reminderIcon];
+        
+        self.reminderTime = [[UILabel alloc] initWithFrame:CGRectMake(28, 10,  self.reminderView .frame.size.width - reminderIcon.frame.size.width,25)];
+        self.reminderTime.numberOfLines = 1;
+        self.reminderTime.font = [UIFont fontWithName:@"HelveticaNeue" size:13.5f];
+        self.reminderTime.textAlignment = NSTextAlignmentLeft;
+        [self.reminderView addSubview:self.reminderTime];
+//        
+//        self.reminderDays = [[UILabel alloc] initWithFrame:CGRectMake(25, self.reminderTime.frame.size.height ,  self.reminderView .frame.size.width - reminderIcon.frame.size.width,12)];
+//        self.reminderDays.numberOfLines = 1;
+//        self.reminderDays.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:10.5f];
+//        self.reminderDays.textAlignment = NSTextAlignmentCenter;
+//        self.reminderDays.adjustsFontSizeToFitWidth = YES;
+//        [self.reminderView addSubview:self.reminderDays];
+    
+        
+        [self.reminderView setHidden:YES];
+        
+        [self addSubview:self.reminderView];
+        
         // adding Timer button
         self.timerButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 32 -16) -  (goalRowHeight-40), 20 , goalRowHeight-40, goalRowHeight - 40)];
         [self.timerButton setImage:[UIImage imageNamed:@"pie"] forState:UIControlStateNormal];
@@ -220,6 +237,9 @@
     
     [self.centerButton setBackgroundColor:[UIColor clearColor]];
     self.themeLabel.textColor = myColor;
+    self.reminderTime.textColor = [UIColor colorWithRed:254/255.0f green:189/255.0f blue:82/255.0f alpha:1.0f];
+//    self.reminderDays.textColor = [UIColor colorWithRed:254/255.0f green:189/255.0f blue:82/255.0f alpha:1.0f];
+
     self.timerLabel.textColor = normalColor;
     [self.timerLabel setBackgroundColor:itemDone.color];
     [self.timerButton setBackgroundColor:itemDone.color];
@@ -236,6 +256,21 @@
     minute %= 60;
     [self.timerLabel setText:[NSString stringWithFormat:@"%ld:%02ld:%02d",(long)hours,(long)minute,second]];
     
+}
+
+-(void)showReminder
+{
+    CGRect aframe = self.themeLabel.frame;
+    aframe.origin.y = goalRowHeight/2 - aframe.size.height + 6;
+    [self.themeLabel setFrame:aframe];
+    [self.reminderView setHidden:NO];
+}
+
+-(void)hideReminder
+{
+    [self.themeLabel setFrame:CGRectMake(self.pieChart.frame.size.width + self.pieChart.frame.origin.x + 10, goalRowHeight/2 - 15, 120, 30)];
+    [self.reminderView setHidden:YES];
+
 }
 
 @end

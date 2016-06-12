@@ -20,6 +20,10 @@
 @property (nonatomic ,strong) UITableView *categoryTableView;
 @property (nonatomic ,strong) UITableView *remindTable;
 
+@property (nonatomic ,strong) UIButton *myDeleteButton;
+@property (nonatomic ,strong) UIButton *myRemoveReminderButton;
+
+
 @property (nonatomic ,strong) UIDatePicker *myRemindPicker;
 
 @property (nonatomic,strong) NSArray *weekDays;
@@ -46,9 +50,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.weekDays = @[NSLocalizedString(@"周日",nil),NSLocalizedString(@"周一",nil),NSLocalizedString(@"周二",nil),NSLocalizedString(@"周三",nil),NSLocalizedString(@"周四",nil),NSLocalizedString(@"周五",nil),NSLocalizedString(@"周六",nil)];
+    self.weekDays = [[CommonUtility sharedCommonUtility] weekDays];
     [self configTopbar];
     [self configDetailTable];
+    if (self.isEditing) {
+        [self configButton];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,6 +106,85 @@
     
 }
 
+
+-(void)configButton
+{
+    if (!self.myDeleteButton) {
+        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, SCREEN_HEIGHT - SCREEN_WIDTH/3, SCREEN_WIDTH/5,SCREEN_WIDTH/5+15 )];
+        [deleteButton setImage:[UIImage imageNamed:@"trush"] forState:UIControlStateNormal];
+        deleteButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
+        [deleteButton addTarget:self action:@selector(deleteTap) forControlEvents:UIControlEventTouchUpInside];
+        
+        UILabel *explainDelete = [[UILabel alloc] initWithFrame:CGRectMake(0, deleteButton.frame.size.height - 15, deleteButton.frame.size.width, 15)];
+        explainDelete.textAlignment = NSTextAlignmentCenter;
+        explainDelete.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+        [explainDelete setText:NSLocalizedString(@"删除",nil)];
+        [explainDelete setTextColor:normalColor];
+        [deleteButton addSubview:explainDelete];
+        [self.view addSubview:deleteButton];
+
+        self.myDeleteButton = deleteButton;
+
+    }
+    
+    if (!self.myRemoveReminderButton) {
+        UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/5-SCREEN_WIDTH/5, SCREEN_HEIGHT - SCREEN_WIDTH/3,SCREEN_WIDTH/5,SCREEN_WIDTH/5 + 15)];
+        [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+        editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
+        [editButton addTarget:self action:@selector(removeReminder) forControlEvents:UIControlEventTouchUpInside];
+        
+        UILabel *explainEdit = [[UILabel alloc] initWithFrame:CGRectMake(0, editButton.frame.size.height - 15, editButton.frame.size.width, 15)];
+        explainEdit.textAlignment = NSTextAlignmentCenter;
+        explainEdit.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+        [explainEdit setText:NSLocalizedString(@"不再提醒",nil)];
+        [explainEdit setTextColor:normalColor];
+        [editButton addSubview:explainEdit];
+        
+        [self.view addSubview:editButton];
+        self.myRemoveReminderButton = editButton;
+
+    }
+    
+    [self modifyButtons];
+}
+
+-(void)modifyButtons
+{
+    if (!self.remindTime || [self.remindTime isEqualToString:@""]) {
+        [self.myRemoveReminderButton setHidden:YES];
+        [self.myDeleteButton setFrame:CGRectMake(SCREEN_WIDTH/2 - SCREEN_WIDTH/10, SCREEN_HEIGHT - SCREEN_WIDTH/3, SCREEN_WIDTH/5,SCREEN_WIDTH/5+15 )];
+    }else
+    {
+        [self.myDeleteButton setFrame:CGRectMake(SCREEN_WIDTH/5, SCREEN_HEIGHT - SCREEN_WIDTH/3, SCREEN_WIDTH/5,SCREEN_WIDTH/5+15)];
+        [self.myRemoveReminderButton setHidden:NO];
+    }
+}
+
+-(void)deleteTap
+{
+    NSInteger itemID = [self.currentIGoalID integerValue];
+    if(itemID >=0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"永久删除该目标?",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"不",nil)  otherButtonTitles:NSLocalizedString(@"是的",nil), nil];
+        alert.tag = 77;
+        [alert show];
+        
+    }
+}
+-(void)removeReminder
+{
+    NSInteger itemID = [self.currentIGoalID integerValue];
+    if(itemID >=0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"取消此提醒?",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"不",nil)  otherButtonTitles:NSLocalizedString(@"是的",nil), nil];
+        alert.tag = 88;
+        [alert show];
+        
+    }
+}
+
+
+
 -(int)searchEventID
 {
     int recorderID = 0;
@@ -138,7 +224,7 @@
         NSLog(@"goalDetailVC/Could not open db.");
         return;
     }
-
+    
     NSNumber *totalTime = @-1.0f;
     NSNumber *totalCount = @-1;
     if (self.isByTime) {
@@ -160,9 +246,9 @@
     }
     
     if (self.isEditing) {
-
-
-        BOOL sql = [db executeUpdate:@"update GOALS set TYPE=? ,theme = ? ,byTime = ? ,target_time = ? ,target_count = ? ,remind_time = ?, remind_days = ?, is_completed = ? where goal_id = ?" ,[NSNumber numberWithInt:self.goalType],self.category,[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,self.remindTime,reminderDays,@0,self.currentIGoalID];
+        
+        
+        BOOL sql = [db executeUpdate:@"update GOALS set TYPE=? ,byTime = ? ,target_time = ? ,target_count = ? ,remind_time = ?, remind_days = ?, is_completed = ? where goal_id = ?" ,[NSNumber numberWithInt:self.goalType],[NSNumber numberWithInt:self.isByTime],totalTime,totalCount,self.remindTime,reminderDays,@0,self.currentIGoalID];
         if (!sql) {
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
@@ -220,7 +306,7 @@
         hud.mode = MBProgressHUDModeText;
         hud.labelText = NSLocalizedString(@"请选择一个主题",nil) ;
         [hud hide:YES afterDelay:1.5];
-
+        
         return NO;
     }else if (!self.totalNum)
     {
@@ -265,22 +351,22 @@
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.remindTable) {
-
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryNone;
+        
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- if (tableView == self.categoryTableView)
+    if (tableView == self.categoryTableView)
     {
         return ((int)(SCREEN_WIDTH/8));
     }else if(tableView == self.remindTable)
@@ -300,7 +386,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    
     if (tableView == self.categoryTableView)
     {
         if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
@@ -318,7 +404,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+    
     if (tableView == self.categoryTableView)
     {
         NSString *CellIdentifier = @"categoryCell";
@@ -380,7 +466,7 @@
             NSInteger index = [oneDay integerValue];
             if (indexPath.row == index) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
+                
                 break;
             }else {
                 cell.accessoryType = UITableViewCellAccessoryNone;
@@ -400,40 +486,41 @@
     [cell.leftText setTextColor:self.myTextColor];
     [cell.rightText setTitleColor:self.myTextColor forState:UIControlStateNormal];
     cell.rightText.titleLabel.numberOfLines = 2;
-
+    
     cell.padDelegate = self;
     cell.rightText.tag = indexPath.row + 10;
     
     switch (indexPath.row) {
         case 0:
             [cell.leftText  setText:NSLocalizedString(@" 主 题",nil)] ;
-            [cell addExpend];
             if(self.category)
             {
                 NSString *type = self.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
                 NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.category];
                 [cell.rightText setTitle:theme forState:UIControlStateNormal];
+                [cell.rightText setEnabled:NO];
                 
             }else
             {
+                [cell addExpend];
                 [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
         case 1:
-
+            
             [cell addExpend];
-
+            
             if(self.totalNum)
             {
-
+                
                 if (self.isByTime) {
                     [cell.leftText setText: NSLocalizedString(@"目标时间:",nil)];
                     [cell.rightText setTitle:[NSString stringWithFormat:@"%@小时",self.totalNum] forState:UIControlStateNormal];
                 }else
                 {
                     [cell.leftText setText: NSLocalizedString(@"目标次数:",nil)];
-                    [cell.rightText setTitle:[NSString stringWithFormat:@"%@次",self.totalNum] forState:UIControlStateNormal];
+                    [cell.rightText setTitle:[NSString stringWithFormat:@"%ld次",[self.totalNum integerValue]] forState:UIControlStateNormal];
                 }
                 
             }else
@@ -451,9 +538,9 @@
             {
                 [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 50)];
                 cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
-
+                
                 NSString *remindWeekDay = @"";
-
+                
                 for (NSNumber *oneDay in self.remindDays) {
                     NSInteger index = [oneDay integerValue];
                     remindWeekDay = [remindWeekDay stringByAppendingString:[NSString stringWithFormat:@"%@,",self.weekDays[index]]];
@@ -466,12 +553,17 @@
                 
             }else
             {
+                [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 30)];
                 [cell addExpend];
                 [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
-    
+            
+        case 3:
+            
+            break;
+            
         default:
             break;
     }
@@ -531,7 +623,7 @@
         [self.InputLabel setText:@"0"];
     }
     
-
+    
     UIView *numberPadView = [[UIView alloc] initWithFrame:CGRectMake(0, content.frame.size.height - (content.frame.size.width)*7/10 - 10, content.frame.size.width, (content.frame.size.width)*7/10)];
     numberPadView.backgroundColor = [UIColor blackColor];
     [content addSubview:numberPadView];
@@ -747,7 +839,7 @@
                 self.InputNumberString = self.InputLabel.text;
             }
             
-        }        
+        }
     }
     
 }
@@ -810,7 +902,7 @@
     }else if (row == 1 )
     {
         [self configNumberPadInView:contentView];
-
+        
         UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
         [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
         [cancelBtn setTitleColor:self.myTextColor forState:UIControlStateNormal];
@@ -872,7 +964,7 @@
         pickerTitle.textAlignment = NSTextAlignmentCenter;
         pickerTitle.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         [contentView addSubview:pickerTitle];
-
+        
         UITableView *repeatTable = [[UITableView alloc] initWithFrame:CGRectMake(0, pickerTitle.frame.size.height + pickerTitle.frame.origin.y + 5, SCREEN_WIDTH-20, 35*7)];
         repeatTable.showsVerticalScrollIndicator = NO;
         repeatTable.scrollEnabled = NO;
@@ -892,7 +984,7 @@
             NSIndexPath *oneIndex = [NSIndexPath indexPathForRow:[oneDay integerValue] inSection:0];
             [self.remindTable selectRowAtIndexPath:oneIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
-
+        
         
     }
 }
@@ -907,7 +999,7 @@
     }else if (sender.tag -10 == 2)
     {
         [self showingModelOfHeight:480 andColor:[UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f] forRow:2];
-
+        
     }
 }
 
@@ -1017,7 +1109,7 @@
 {
     NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday] -1;// this will give you current day of week
-
+    
     for (NSNumber *oneDay in self.remindDays) {
         NSInteger index = [oneDay integerValue];
         NSInteger dayInterval = (index + 7 - dayofweek)%7;
@@ -1036,7 +1128,7 @@
             //去掉下面2行就不会弹出提示框
             notification.alertBody = [NSString stringWithFormat:NSLocalizedString(@"是时候开始<%@>了",nil),self.category];
             notification.hasAction = NO; //是否显示额外的按钮，为no时alertAction消失
-             NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:goalID] forKey:@"reminderID"];
+            NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:goalID] forKey:@"reminderID"];
             notification.userInfo = infoDict; //添加额外的信息
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
         }
@@ -1044,5 +1136,89 @@
 }
 
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 77) {
+
+        if (buttonIndex ==1) {
+            [MobClick event:@"deleteGoal"];
+            
+            db = [[CommonUtility sharedCommonUtility] db];
+            if (![db open]) {
+                NSLog(@"mainVC/Could not open db.");
+                return;
+            }
+            
+            NSString *sqlCommand = [NSString stringWithFormat:@"delete from GOALS where goal_id =%ld",(long) [self.currentIGoalID integerValue]];
+            BOOL sql = [db executeUpdate:sqlCommand];
+            if (!sql) {
+                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+            }
+            [db close];
+            [self closeVC];
+            
+        }
+    }else if (alertView.tag == 88) {
+        
+        if (buttonIndex ==1) {
+            [MobClick event:@"deleteReminder"];
+            
+            db = [[CommonUtility sharedCommonUtility] db];
+            if (![db open]) {
+                NSLog(@"mainVC/Could not open db.");
+                return;
+            }
+            
+            self.remindDays = nil;
+            self.remindTime = @"";
+            
+            BOOL sql = [db executeUpdate:@"update GOALS set remind_time = ?, remind_days = ? where goal_id = ?" ,@"",@"",self.currentIGoalID];
+            if (!sql) {
+                NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+            }else
+            {
+                [self removeReminder:self.currentIGoalID];
+                [MobClick event:@"removeReminder"];
+            }
+            [db close];
+            
+            [self.goalInfoTable reloadData];
+            [self modifyButtons];
+
+        }
+    }
+}
+
+-(void)removeReminder:(NSNumber *)goalID
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    //获取本地推送数组
+    
+    NSArray *localArray = [app scheduledLocalNotifications];
+    
+    //声明本地通知对象
+    
+    
+    if (localArray) {
+        
+        for (UILocalNotification *noti in localArray) {
+            
+            NSDictionary *dict = noti.userInfo;
+            
+            if (dict) {
+                
+                NSNumber *inKey = [dict objectForKey:@"reminderID"];
+                
+                if ([inKey isEqualToNumber :goalID]) {
+                    
+                    [app cancelLocalNotification:noti];
+                    break;
+                }
+            }
+        }
+    }
+
+}
 
 @end

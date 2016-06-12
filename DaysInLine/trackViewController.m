@@ -24,7 +24,7 @@
     CGFloat oldGoalNum;
     BOOL isOldGoalByTime;
     int updatingID;
-
+    
 }
 @property (nonatomic,strong) UITableView *goalsTable;
 @property (nonatomic,strong) FMDatabase *db;
@@ -48,7 +48,7 @@
         
         goalTableViewCell *cell = (goalTableViewCell *)countingButton.superview ;
         
-        NSString *timerCounts =  [NSString stringWithFormat:@"%ld", [cell timerCount]];
+        NSString *timerCounts =  [NSString stringWithFormat:@"%ld", (long)[cell timerCount]];
         NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
         NSString *timerTheme = cell.themeLabel.text;
         NSDictionary *timerDict = @{@"timerTheme":timerTheme,@"timeNow":timeNow,@"timerCount":timerCounts};
@@ -58,7 +58,7 @@
         countingButton = nil;
         
     }
-
+    
 }
 
 -(void)resigningActive:(NSNotification *)noti
@@ -73,9 +73,9 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resigningActive:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-
-
-
+    
+    
+    
     if (IS_IPHONE_6P || IS_IPHONE_6) {
         bottomHeight = 65;
     }else
@@ -84,11 +84,11 @@
     }
     
     _timer = [[CommonUtility sharedCommonUtility] myTimer];
-
+    
     [self configTopbar];
     [self configDetailTable];
     [self configBottomView];
-
+    
     [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
                                        fromViewController:[self class]
                                                 forAction:RZTransitionAction_PresentDismiss];
@@ -103,36 +103,6 @@
 {
     self.goalArray = [[NSMutableArray alloc] init];
     
-//    goalObj *oneGoal = [[goalObj alloc] init];
-//    oneGoal.goalType = 0;
-//    NSString *type = oneGoal.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-//    oneGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type,@"阅读"];
-//    oneGoal.themeOnly = @"阅读";
-//    oneGoal.byTime = 1;
-//    oneGoal.targetTime = 20000;
-//    oneGoal.doneTime = 6000.3;
-//    
-//    goalObj *twoGoal = [[goalObj alloc] init];
-//    twoGoal.goalType = 1;
-//    NSString *type1 = twoGoal.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-//    twoGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type1,@"培训"];
-//    twoGoal.themeOnly = @"培训";
-//    twoGoal.byTime = 0;
-//    twoGoal.targetCount = 10;
-//    twoGoal.doneCount = 10;
-//    
-//    goalObj *threeGoal = [[goalObj alloc] init];
-//    threeGoal.goalType = 1;
-//    NSString *type2 = threeGoal.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-//    threeGoal.goalTheme = [NSString stringWithFormat:@"%@ > %@",type2,@"旅游"];
-//    threeGoal.themeOnly = @"旅游";
-//    threeGoal.byTime = 0;
-//    threeGoal.targetCount = 10;
-//    threeGoal.doneCount = 6;
-//    
-//    [self.goalArray addObject:oneGoal];
-//    [self.goalArray addObject:twoGoal];
-//    [self.goalArray addObject:threeGoal];
     db = [[CommonUtility sharedCommonUtility] db];
     if (![db open]) {
         NSLog(@"mainVC/Could not open db.");
@@ -147,6 +117,9 @@
         oneItem.goalType = [rs intForColumn:@"TYPE"];
         NSString *type = oneItem.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
         oneItem.goalTheme = [NSString stringWithFormat:@"%@ > %@",type,oneItem.themeOnly];
+        oneItem.remindTime  = [rs stringForColumn:@"remind_time"];
+        oneItem.remindInterval  = [rs stringForColumn:@"remind_days"];
+
         oneItem.byTime = [rs intForColumn:@"byTime"];
         if (oneItem.byTime) {
             oneItem.targetTime = [rs doubleForColumn:@"target_time"];
@@ -169,7 +142,7 @@
     
     [self.goalsTable reloadData];
     [self performSelector:@selector(timerShow) withObject:nil afterDelay:0.05f];
-
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -184,18 +157,16 @@
     [super viewDidAppear:animated];
     NSLog(@"viewDidAppear");
     [self prepareGoalsData];
-
+    
 }
 
 -(void)timerShow
 {
     NSDictionary * timerDict = [[NSUserDefaults standardUserDefaults] objectForKey:Timer];
     if (timerDict) {
-        
         NSInteger row = -1;
         for (int i = 0; i<self.goalArray.count; i++) {
             goalObj *oneGoal = self.goalArray[i];
-            
             if ([oneGoal.goalTheme isEqualToString:[timerDict objectForKey:@"timerTheme"]]) {
                 row = i;
                 break;
@@ -220,9 +191,9 @@
         [cell showTimerFrom:timerCount];
         countingButton = cell.timerButton;
     }
-
     
-
+    
+    
 }
 
 
@@ -233,7 +204,7 @@
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     [topbar.titleLabel  setText:NSLocalizedString(@"目标跟踪",nil)];
-
+    
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 30, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -266,7 +237,12 @@
     goalDetailViewController *newGoalVC = [[goalDetailViewController alloc] initWithNibName:@"goalDetailViewController" bundle:nil];
     [newGoalVC setTransitioningDelegate:[RZTransitionsManager shared]];
     newGoalVC.isEditing = NO;
-    [self presentViewController:newGoalVC animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self presentViewController:newGoalVC animated:YES completion:nil];
+        
+    });
+
 }
 
 -(void)closeVC
@@ -319,12 +295,123 @@
 {
     return goalRowHeight;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return wordsHeight;
+
+//    if ([CommonUtility isSystemLangChinese]) {
+//        return summaryViewHeight;
+//    }else
+//        return 0;
+}
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSString *words = @"\"一个人要让自己快乐其实是一件不难的事，你只要给自己一个较长时间的目标，然后按部就班的去接近它，实现它。\"—— 吴晓波";
+    CGFloat space = 20;
+    if (IS_IPHONE_6P) {
+        space = 10;
+    }
+    UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, wordsHeight)];
+    UILabel *myWords = [[UILabel alloc] initWithFrame:CGRectMake(space, 0,headView.frame.size.width - space*2 , headView.frame.size.height)];
+    myWords.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:13.0f];
+    myWords.textColor =  [UIColor colorWithWhite:0.15 alpha:1.0f];
+    myWords.numberOfLines = 3;
+    myWords.textAlignment = NSTextAlignmentLeft;
+
+    
+    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue-Medium",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 12.5f]
+                                                   }];
+    
+    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(3.8 * (CGFloat)M_PI / 180), 1, 0, 0);
+    attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
+    myWords.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
+    
+    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:words];
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
+    [attrString addAttribute:NSParagraphStyleAttributeName
+                       value:style
+                       range:NSMakeRange(0, attrString.length)];
+    myWords.attributedText = attrString;
+    
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,headView.frame.size.width , headView.frame.size.height)];
+    backView.layer.cornerRadius = myWords.frame.size.height/2;
+    backView.layer.masksToBounds = YES;
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
+    if (!showModel) {
+        backView.backgroundColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
+    }else if ([showModel isEqualToString:@"上午"]) {
+        backView.backgroundColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
+    }else
+    {
+        backView.backgroundColor = [UIColor colorWithRed:246/255.0f green:223/255.0f blue:23/255.0f alpha:1.0f];
+    }
+    backView.layer.borderColor = [UIColor colorWithWhite:0.05 alpha:1.0f].CGColor;
+    backView.layer.borderWidth = 0.9;
+    backView.layer.shadowColor = [UIColor grayColor].CGColor;
+    backView.layer.shadowOffset = CGSizeMake(0.2, 0.3);
+    
+    
+    [headView addSubview:backView];
+    [headView addSubview:myWords];
+
+    return headView;
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"didSelectRowAtIndexPath:%ld",indexPath.row);
-}
+    NSLog(@"didSelectRowAtIndexPath:%ld",(long)indexPath.row);
+    NSInteger itemID = -1;
+    NSString *theme = @"";
+    NSString *themeOnly = @"";
+    int itemType = -1;
+    BOOL isByTime = -1;
+    double timeDone = -1.0f;
+    double timeTotal = -1.0f;
+    NSString *remindTime = @"";
+    NSString *remindDays = @"";
+
+    goalObj *oneGoal = self.goalArray[indexPath.row];
+    itemID = [oneGoal.goalID integerValue];
+    theme = oneGoal.goalTheme;
+    itemType = oneGoal.goalType;
+    isByTime = oneGoal.byTime;
+    themeOnly = oneGoal.themeOnly;
+    remindTime = oneGoal.remindTime;
+    remindDays = oneGoal.remindInterval;
+    
+    if (isByTime) {
+        timeDone = oneGoal.doneTime;
+        timeTotal = oneGoal.targetTime;
+    }else
+    {
+        timeDone = oneGoal.doneCount;
+        timeTotal = oneGoal.targetCount;
+    }
+    
+    
+    
+    goalDetailViewController *newGoalVC = [[goalDetailViewController alloc] initWithNibName:@"goalDetailViewController" bundle:nil];
+    [newGoalVC setTransitioningDelegate:[RZTransitionsManager shared]];
+    newGoalVC.isEditing = YES;
+    newGoalVC.category = themeOnly;
+    newGoalVC.currentIGoalID = oneGoal.goalID;
+    newGoalVC.goalType = itemType;
+    newGoalVC.isByTime = isByTime;
+    newGoalVC.totalNum = [NSString stringWithFormat:@"%.2f",timeTotal];
+    newGoalVC.remindTime = remindTime;
+    newGoalVC.remindDays = [remindDays componentsSeparatedByString:@","];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [self presentViewController:newGoalVC animated:YES completion:nil];
+        
+    });}
 
 
 #pragma mark -
@@ -340,23 +427,28 @@
     NSInteger itemID = -1;
     NSString *theme = @"";
     NSString *themeOnly = @"";
-
-//    NSString *description = @"";
+    
+    //    NSString *description = @"";
     int itemType = -1;
     BOOL isByTime = -1;
     
     double timeDone = -1.0f;
     double timeTotal = -1.0f;
-
+    NSString *remindTime = @"";
+    NSString *remindDays = @"";
     
     if(self.goalArray.count>indexPath.row)
     {
+
+        
         goalObj *oneGoal = self.goalArray[indexPath.row];
         itemID = [oneGoal.goalID integerValue];
         theme = oneGoal.goalTheme;
         itemType = oneGoal.goalType;
         isByTime = oneGoal.byTime;
         themeOnly = oneGoal.themeOnly;
+        remindTime = oneGoal.remindTime;
+        remindDays = oneGoal.remindInterval;
         
         if (isByTime) {
             timeDone = oneGoal.doneTime;
@@ -391,7 +483,7 @@
     cell.timerButton.tag = indexPath.row;
     cell.finishButton.tag = indexPath.row;
     cell.goOnButton.tag = indexPath.row;
-
+    
     
     if (timeDone>=timeTotal) {
         [cell.timerButton setHidden:YES];
@@ -406,32 +498,40 @@
         [cell.goOnButton setHidden:YES];
     }
     
-
+    if (remindTime && ![remindTime isEqualToString:@""]) {
+        [cell showReminder];
+        [cell.reminderTime setText:remindTime];
+    }else
+    {
+        [cell hideReminder];
+    }
+    
+    
     
     
     return cell;
-
+    
 }
 
 #pragma mark cell delegate
 -(void)timerMove:(UIButton *)sender
 {
-
+    
     if (countingButton && countingButton != sender) {
         return;
     }
-
+    
     goalTableViewCell *cell = (goalTableViewCell *)sender.superview;
-
+    
     if (cell.isTimerShown) {
-//        dispatch_source_cancel(_timer);
+        //        dispatch_source_cancel(_timer);
         dispatch_suspend(_timer);
         [cell returnTimer];
         countingButton = nil;
         
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:Timer];
-
- 
+        
+        
     }else
     {
         dispatch_source_set_event_handler(_timer, ^{
@@ -442,18 +542,18 @@
         });
         
         dispatch_resume(_timer);
-
+        
         [cell showTimerFrom:0];
         countingButton = sender;
     }
-
+    
 }
 -(void)archiveGoal:(UIButton *)sender
 {
 }
 -(void)KeepingGoal:(UIButton *)sender
 {
-     [self showingModelOfHeight:SCREEN_HEIGHT*3/4 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] forRow:sender.tag];
+    [self showingModelOfHeight:SCREEN_HEIGHT*3/4 andColor:[UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] forRow:sender.tag];
 }
 
 -(void)showingModelOfHeight:(CGFloat)height andColor:(UIColor *)backColor forRow:(NSInteger)row
@@ -514,7 +614,7 @@
     [contentView addSubview:timeTitle];
     
     goalObj *oneGoal = self.goalArray[row];
-
+    
     updatingID = [oneGoal.goalID intValue];
     
     NSString *doneNum = @"";
@@ -523,7 +623,7 @@
         isOldGoalByTime = YES;
         doneNum = [NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),oneGoal.targetTime];
         oldGoalNum = oneGoal.targetTime;
-
+        
     }else
     {
         isOldGoalByTime = NO;
@@ -558,7 +658,7 @@
     [self.addingGoalField becomeFirstResponder];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:myAddingGoal];
-
+    
     
     UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(plusTitle.frame.origin.x, plusTitle.frame.origin.y + plusTitle.frame.size.height + 10, 220, 1)];
     midLine.backgroundColor = self.myTextColor;
@@ -590,7 +690,7 @@
         }
     } completion:^(BOOL isfinished){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-
+        
         [self.myDimView removeFromSuperview];
     }];
 }
@@ -625,13 +725,13 @@
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }
     }
-
+    
     
     [db close];
     
     [self prepareGoalsData];
-
-
+    
+    
     [self dismissDimView];
 }
 

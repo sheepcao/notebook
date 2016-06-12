@@ -28,6 +28,12 @@
 
 @property (nonatomic,strong) UIButton *timerButton;
 @property (nonatomic,strong) UILabel *timerLabel;
+
+@property (nonatomic,strong) UIView *reminderView;
+@property (nonatomic,strong) UILabel *reminderTime;
+//@property (nonatomic,strong) UILabel *reminderDays;
+
+
 @property BOOL isTimerShown;
 @property NSInteger timerCount;
 
@@ -42,4 +48,7 @@
 -(void)returnTimer;
 -(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor;
 -(void)showTimerFrom:(NSInteger )startTime;
+-(void)showReminder;
+-(void)hideReminder;
+
 @end
