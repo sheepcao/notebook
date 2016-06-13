@@ -207,7 +207,7 @@
     } ];
 }
 
--(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor
+-(void)updatePieWith:(NSArray *)array andTotal:(CGFloat)total byTime:(BOOL)isByTime centerColor:(UIColor *)myColor
 {
     [self.pieChart setItems:array];
     [self.pieChart recompute];
@@ -217,7 +217,6 @@
     [self.totalLabel setTextColor:myColor];
     
     PNPieChartDataItem * itemDone = array[0];
-    PNPieChartDataItem * itemUndone = array[1];
 
     if (isByTime) {
         if ([CommonUtility myContainsStringFrom:[NSString stringWithFormat:@"%.2f",itemDone.value] forSubstring:@".00"])
@@ -227,12 +226,12 @@
         {
             [self.doneLabel setText:[NSString stringWithFormat:@"%.2f h",itemDone.value]];
         }
-        [self.totalLabel setText:[NSString stringWithFormat:@"%d h",(int)(itemDone.value + itemUndone.value)]];
+        [self.totalLabel setText:[NSString stringWithFormat:@"%d h",(int)(total)]];
 
     }else
     {
         [self.doneLabel setText:[NSString stringWithFormat:@"%d",(int)itemDone.value]];
-        [self.totalLabel setText:[NSString stringWithFormat:@"%d",(int)(itemDone.value + itemUndone.value)]];
+        [self.totalLabel setText:[NSString stringWithFormat:@"%d",(int)(total)]];
     }
     
     [self.centerButton setBackgroundColor:[UIColor clearColor]];

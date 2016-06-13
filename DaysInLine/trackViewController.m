@@ -16,8 +16,9 @@
 #import "goalDetailViewController.h"
 #import "RZTransitions.h"
 #import "finishedGoalsViewController.h"
+#import "itemDetailViewController.h"
 
-@interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate,UITextFieldDelegate>
+@interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate,UITextFieldDelegate,reloadDataDelegate>
 {
     CGFloat bottomHeight;
     UIButton *countingButton;
@@ -125,16 +126,11 @@
         if (oneItem.byTime) {
             oneItem.targetTime = [rs doubleForColumn:@"target_time"];
             oneItem.doneTime = [rs doubleForColumn:@"done_time"];
-            if (oneItem.targetTime < oneItem.doneTime) {
-                oneItem.doneTime = oneItem.targetTime;
-            }
+
         }else
         {
             oneItem.targetCount = [rs intForColumn:@"target_count"];
             oneItem.doneCount = [rs intForColumn:@"done_count"];
-            if (oneItem.targetCount < oneItem.doneCount) {
-                oneItem.doneCount = oneItem.targetCount;
-            }
         }
         [self.goalArray addObject:oneItem];
         
@@ -277,7 +273,7 @@
     
     [self.view addSubview:bottomView];
     
-    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, 6, SCREEN_WIDTH/2, bottomHeight-12)];
+    highLightButton *addNewButton = [[highLightButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, 6, SCREEN_WIDTH/2, bottomHeight-12)];
     [addNewButton setTitle:NSLocalizedString(@"+ 新目标",nil) forState:UIControlStateNormal];
     [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -315,7 +311,7 @@
         space = 10;
     }
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, wordsHeight)];
-    UILabel *myWords = [[UILabel alloc] initWithFrame:CGRectMake(space, 0,headView.frame.size.width - space*2 , headView.frame.size.height)];
+    UILabel *myWords = [[UILabel alloc] initWithFrame:CGRectMake(space, 0,headView.frame.size.width - space*2 , headView.frame.size.height-7)];
     myWords.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:13.0f];
     myWords.textColor =  [UIColor colorWithWhite:0.15 alpha:1.0f];
     myWords.numberOfLines = 3;
@@ -341,7 +337,7 @@
                        range:NSMakeRange(0, attrString.length)];
     myWords.attributedText = attrString;
     
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,headView.frame.size.width , headView.frame.size.height)];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,headView.frame.size.width , headView.frame.size.height-7)];
     backView.layer.cornerRadius = myWords.frame.size.height/5.2;
     backView.layer.masksToBounds = YES;
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
@@ -437,6 +433,8 @@
     
     double timeDone = -1.0f;
     double timeTotal = -1.0f;
+    double timeUndone = -1.0f;
+
     NSString *remindTime = @"";
     NSString *remindDays = @"";
     
@@ -462,7 +460,13 @@
             timeTotal = oneGoal.targetCount;
         }
         
-        
+        if (timeTotal >= timeDone) {
+            timeUndone = timeTotal -timeDone;
+        }else
+        {
+            timeUndone = 0;
+        }
+    
     }
     
     static NSString *CellItemIdentifier = @"CellGoal";
@@ -478,11 +482,11 @@
     
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:timeDone color:categoryColor
                                                  description:@""],
-                       [PNPieChartDataItem dataItemWithValue:timeTotal - timeDone color:[[UIColor whiteColor] colorWithAlphaComponent:0.5f] description:@""]
+                       [PNPieChartDataItem dataItemWithValue:timeUndone color:[[UIColor whiteColor] colorWithAlphaComponent:0.5f] description:@""]
                        ];
     
     [cell.themeLabel setText:theme];
-    [cell updatePieWith:items byTime:isByTime centerColor:self.myTextColor];
+    [cell updatePieWith:items andTotal:timeTotal byTime:isByTime centerColor:self.myTextColor];
     cell.timerButton.tag = indexPath.row;
     cell.finishButton.tag = indexPath.row;
     cell.goOnButton.tag = indexPath.row;
@@ -515,6 +519,12 @@
     return cell;
     
 }
+#pragma mark refresh delegate
+-(void)refreshData
+{
+    [self prepareGoalsData];
+}
+
 
 #pragma mark cell delegate
 -(void)timerMove:(UIButton *)sender
@@ -534,6 +544,35 @@
         
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:Timer];
         
+        goalObj *oneGoal = self.goalArray[sender.tag];
+
+        itemDetailViewController* addItemVC = [[itemDetailViewController alloc] init];
+        addItemVC.isEditing =  NO;
+        addItemVC.itemType = oneGoal.goalType;
+        addItemVC.category = oneGoal.themeOnly;
+        addItemVC.relatedGoalID = [oneGoal.goalID integerValue];
+        addItemVC.isRelatedGoalByTime = oneGoal.byTime;
+        
+        NSDate *now = [NSDate date];
+        NSDate *startTime = [now dateByAddingTimeInterval:(0 - cell.timerCount)];
+        
+        NSString *startString = [[CommonUtility sharedCommonUtility] stringFromTime:startTime];
+        NSString *endString = [[CommonUtility sharedCommonUtility] stringFromTime:now];
+        NSString *startDay = [[CommonUtility sharedCommonUtility] stringFromDate:startTime];
+        NSString *endDay = [[CommonUtility sharedCommonUtility] stringFromDate:now];
+        addItemVC.itemStartTime = startString;
+        addItemVC.targetDate = startDay;
+        if ([startDay isEqualToString:endDay]) {
+            addItemVC.itemEndTime = endString;
+        }else
+        {
+            addItemVC.itemEndTime = [NSString stringWithFormat:@"+1 %@",endString];
+        }
+        addItemVC.refreshDelegate = self;
+        [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
+
+        [self presentViewController:addItemVC animated:YES completion:nil];
+
         
     }else
     {
@@ -543,7 +582,6 @@
                 [cell timerPlus];
             });
         });
-        
         dispatch_resume(_timer);
         
         [cell showTimerFrom:0];
@@ -646,14 +684,14 @@
     UILabel *timeDone = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 , timeTitle.frame.origin.y, 100, 20)];
     if (oneGoal.byTime) {
         isOldGoalByTime = YES;
-        doneNum = [NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),oneGoal.targetTime];
-        oldGoalNum = oneGoal.targetTime;
+        doneNum = [NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),oneGoal.doneTime];
+        oldGoalNum = oneGoal.doneTime;
         
     }else
     {
         isOldGoalByTime = NO;
-        doneNum = [NSString stringWithFormat:NSLocalizedString(@"%d 次",nil),oneGoal.targetCount];
-        oldGoalNum = oneGoal.targetCount;
+        doneNum = [NSString stringWithFormat:NSLocalizedString(@"%d 次",nil),oneGoal.doneCount];
+        oldGoalNum = oneGoal.doneCount;
     }
     
     [timeDone setText:doneNum];

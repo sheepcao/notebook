@@ -448,15 +448,44 @@
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
         {
-            [self.refreshDelegate refreshData];
+            if (self.relatedGoalID) {
+                if (self.isRelatedGoalByTime) {
+                    
+                    double doneTime =0.0;
+                    FMResultSet *rs = [db executeQuery:@"select done_time from GOALS where goal_id = ?", [NSNumber numberWithInteger:self.relatedGoalID]];
+                    if ([rs next]) {
+                        doneTime = [rs doubleForColumn:@"done_time"];
+                    }
+                    double hours = (endNum - startNum)/60;
+                    BOOL sql = [db executeUpdate:@"UPDATE GOALS set done_time = ?  where goal_id = ?" ,[NSNumber numberWithDouble:(doneTime + hours)] ,[NSNumber numberWithInteger:self.relatedGoalID]];
+                    
+                    if (!sql) {
+                        NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+                    }
+                }else
+                {
+                    int doneCount =0;
+                    FMResultSet *rs = [db executeQuery:@"select done_count from GOALS where goal_id = ?", [NSNumber numberWithInteger:self.relatedGoalID]];
+                    if ([rs next]) {
+                        doneCount = [rs intForColumn:@"done_count"];
+                    }
+                    BOOL sql = [db executeUpdate:@"UPDATE GOALS set done_count = ?  where goal_id = ?" ,[NSNumber numberWithDouble:(doneCount + 1)] ,[NSNumber numberWithInteger:self.relatedGoalID]];
+
+                    if (!sql) {
+                        NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+                    }
+
+                }
+            }
             [self dismissViewControllerAnimated:YES completion:nil];
+            [self.refreshDelegate refreshData];
             if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
                 [MobClick event:@"addWork"];
             }else
             {
                 [MobClick event:@"addLife"];
             }
-            
+
         }
         
     }
@@ -1037,15 +1066,23 @@
     switch (indexPath.row) {
         case 0:
             [cell.leftText  setText:NSLocalizedString(@" 主 题",nil)] ;
-            [cell addExpend];
             if(self.category)
             {
                 NSString *type = self.itemType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
                 NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.category];
                 [cell.rightText setTitle:theme forState:UIControlStateNormal];
-                                
+                if (self.relatedGoalID) {
+                    [cell.rightText setEnabled:NO];
+                }else
+                {
+                    [cell.rightText setEnabled:YES];
+                    [cell addExpend];
+
+                }
+                
             }else
             {
+                [cell addExpend];
                 [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }

@@ -42,7 +42,7 @@
 
 #define PieHeight 270
 #define summaryViewHeight 50
-#define wordsHeight 60
+#define wordsHeight 67
 
 #define bottomBar 50
 #define rowHeight 70

@@ -28,7 +28,7 @@
 @property (nonatomic,strong) NSMutableArray *todayItems;
 @property (nonatomic,strong)  constellationView *myConstellView;
 @property (nonatomic,strong) UIView *summaryView;
-
+@property (nonatomic,strong)  UIView *tableMidLine;
 @property (nonatomic,strong) UIButton *addNewBtn;
 @property (nonatomic,strong) UIButton *trackBtn;
 
@@ -174,6 +174,7 @@
     midLine.backgroundColor = self.myTextColor;
     [self.maintableView addSubview:midLine];
     [self.maintableView sendSubviewToBack:midLine];
+    self.tableMidLine = midLine;
 
     
     if ([CommonUtility isSystemLangChinese]) {
@@ -252,6 +253,8 @@
 
     [self.maintableView reloadData];
     
+    [self.tableMidLine setFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, moneyLuckSpace+ 18, 1, self.maintableView.contentSize.height)];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -311,9 +314,9 @@
     summaryView = [[UIView alloc] initWithFrame:CGRectMake(self.maintableView.frame.origin.x, 0, self.maintableView.frame.size.width, summaryViewHeight)];
     summaryView.backgroundColor = [UIColor clearColor];
     
-    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, 15, 1, summaryViewHeight-15)];
-    midLine.backgroundColor = self.myTextColor;
-    [summaryView addSubview:midLine];
+//    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, 15, 1, summaryViewHeight-15)];
+//    midLine.backgroundColor = self.myTextColor;
+//    [summaryView addSubview:midLine];
 
     myTextLabel *workLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(0, 0, summaryView.frame.size.width/2, summaryViewHeight) andColor:self.myTextColor];
     [workLabel setText:NSLocalizedString(@"工作",nil)];
@@ -386,7 +389,7 @@
     
     [self.view addSubview:bottomView];
     
-    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
+    highLightButton *addNewButton = [[highLightButton alloc] initWithFrame:CGRectMake(20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
     [addNewButton setTitle:NSLocalizedString(@"+ 新事项",nil) forState:UIControlStateNormal];
     [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -395,7 +398,7 @@
     addNewButton.layer.borderWidth = 0.75;
     self.addNewBtn = addNewButton;
     
-    UIButton *trackButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
+    highLightButton *trackButton = [[highLightButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
     [trackButton setTitle:NSLocalizedString(@"目标推进",nil) forState:UIControlStateNormal];
     trackButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     trackButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -672,13 +675,20 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     for (UITableViewCell *cell in self.maintableView.visibleCells) {
-        if ([cell isKindOfClass:[myLifeTableViewCell class]]) {
+        if ([cell isKindOfClass:[myLifeTableViewCell class]] ) {
             myLifeTableViewCell *oneCell = (myLifeTableViewCell *)cell;
             CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
+        }else  if ([cell isKindOfClass:[myWorkTableViewCell class]] ) {
+            myWorkTableViewCell *oneCell = (myWorkTableViewCell *)cell;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                [oneCell maskCellFromTop:hiddenFrameHeight];
+            }
         }
+
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt

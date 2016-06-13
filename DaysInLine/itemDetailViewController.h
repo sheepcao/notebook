@@ -28,4 +28,7 @@
 
 
 @property BOOL isEditing;
+@property NSInteger relatedGoalID;
+@property BOOL isRelatedGoalByTime;
+
 @end

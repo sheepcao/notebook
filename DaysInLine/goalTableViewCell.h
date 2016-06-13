@@ -46,7 +46,7 @@
 
 
 -(void)returnTimer;
--(void)updatePieWith:(NSArray *)array byTime:(BOOL)isByTime centerColor:(UIColor *)myColor;
+-(void)updatePieWith:(NSArray *)array andTotal:(CGFloat)total byTime:(BOOL)isByTime centerColor:(UIColor *)myColor;
 -(void)showTimerFrom:(NSInteger )startTime;
 -(void)showReminder;
 -(void)hideReminder;
