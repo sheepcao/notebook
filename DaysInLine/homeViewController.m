@@ -376,13 +376,17 @@
 -(void)configBottomView
 {
 
+    CGFloat space = 10;
+    if (IS_IPHONE_5_OR_LESS) {
+        space =5;
+    }
     
     BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-bottomHeight, SCREEN_WIDTH, bottomHeight)];
     bottomView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:bottomView];
     
-    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
+    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
     [addNewButton setTitle:NSLocalizedString(@"+ 新事项",nil) forState:UIControlStateNormal];
     [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -391,7 +395,7 @@
     addNewButton.layer.borderWidth = 0.75;
     self.addNewBtn = addNewButton;
     
-    UIButton *trackButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, 10, SCREEN_WIDTH/2-40, bottomHeight-20)];
+    UIButton *trackButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
     [trackButton setTitle:NSLocalizedString(@"目标推进",nil) forState:UIControlStateNormal];
     trackButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     trackButton.titleLabel.textAlignment = NSTextAlignmentCenter;

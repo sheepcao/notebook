@@ -259,7 +259,7 @@
         }
     }else
     {
-        FMResultSet *rs = [db executeQuery:@"select * from GOALS where TYPE = ? AND theme = ?", [NSNumber numberWithInt:self.goalType],self.category];
+        FMResultSet *rs = [db executeQuery:@"select * from GOALS where TYPE = ? AND theme = ? AND is_completed = ?", [NSNumber numberWithInt:self.goalType],self.category,@0];
         if ([rs next]) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.animationType = MBProgressHUDAnimationZoom;

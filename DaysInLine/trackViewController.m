@@ -15,6 +15,7 @@
 #import "CommonUtility.h"
 #import "goalDetailViewController.h"
 #import "RZTransitions.h"
+#import "finishedGoalsViewController.h"
 
 @interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate,UITextFieldDelegate>
 {
@@ -208,7 +209,7 @@
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 30, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
     [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
@@ -228,6 +229,8 @@
 }
 -(void)achieveList
 {
+    finishedGoalsViewController *finishedVC = [[finishedGoalsViewController alloc] initWithNibName:@"finishedGoalsViewController" bundle:nil];
+    [self.navigationController pushViewController:finishedVC animated:YES];
     NSLog(@"make a view controller for achieve list");
 }
 
@@ -339,7 +342,7 @@
     myWords.attributedText = attrString;
     
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,headView.frame.size.width , headView.frame.size.height)];
-    backView.layer.cornerRadius = myWords.frame.size.height/2;
+    backView.layer.cornerRadius = myWords.frame.size.height/5.2;
     backView.layer.masksToBounds = YES;
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if (!showModel) {
@@ -350,10 +353,10 @@
     {
         backView.backgroundColor = [UIColor colorWithRed:246/255.0f green:223/255.0f blue:23/255.0f alpha:1.0f];
     }
-    backView.layer.borderColor = [UIColor colorWithWhite:0.05 alpha:1.0f].CGColor;
-    backView.layer.borderWidth = 0.9;
-    backView.layer.shadowColor = [UIColor grayColor].CGColor;
-    backView.layer.shadowOffset = CGSizeMake(0.2, 0.3);
+    backView.layer.borderColor = [UIColor colorWithWhite:0.35 alpha:1.0f].CGColor;
+    backView.layer.borderWidth = 0.5;
+    backView.layer.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0f].CGColor;
+    backView.layer.shadowOffset = CGSizeMake(0.6, 0.9);
     
     
     [headView addSubview:backView];
@@ -550,6 +553,28 @@
 }
 -(void)archiveGoal:(UIButton *)sender
 {
+    
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"addingGoal/Could not open db.");
+        return;
+    }
+    
+    goalObj *oneGoal = self.goalArray[sender.tag];
+    
+    int updateID = [oneGoal.goalID intValue];
+    NSString *dateNow = [[CommonUtility sharedCommonUtility] todayDate];
+
+    BOOL sql = [db executeUpdate:@"update GOALS set is_completed = ? , finish_date = ? where goal_id = ?" ,@1,dateNow,[NSNumber numberWithInt:updateID]];
+    if (!sql) {
+        NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+    }
+    
+    [db close];
+    
+    [self prepareGoalsData];
+    
+    [self dismissDimView];
 }
 -(void)KeepingGoal:(UIButton *)sender
 {

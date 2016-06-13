@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/homeViewController.m"
-            timestampString = "486641094.885305"
+            timestampString = "487480327.619271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487419930.575818"
+            timestampString = "487487319.764001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "520"
-            endingLineNumber = "520"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "-timerMove:"
             landmarkType = "5">
          </BreakpointContent>
@@ -458,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487404323.958942"
+            timestampString = "487487319.764001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -474,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487419930.575818"
+            timestampString = "487487788.224199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "556"
-            endingLineNumber = "556"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "-KeepingGoal:"
             landmarkType = "5">
          </BreakpointContent>
@@ -490,13 +490,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487419930.575818"
+            timestampString = "487487788.224199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
             landmarkName = "-showingModelOfHeight:andColor:forRow:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[trackViewController showingModelOfHeight:andColor:forRow:]"
+                  moduleName = "DaysInLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/trackViewController.m"
+                  timestampString = "487487421.594083"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "588"
+                  endingLineNumber = "588"
+                  offsetFromSymbolStart = "2138">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__60-[trackViewController showingModelOfHeight:andColor:forRow:]_block_invoke"
+                  moduleName = "DaysInLine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/trackViewController.m"
+                  timestampString = "487487421.594265"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "588"
+                  endingLineNumber = "588"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -506,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487419930.575818"
+            timestampString = "487487788.224199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
+            startingLineNumber = "632"
+            endingLineNumber = "632"
             landmarkName = "-showingModelOfHeight:andColor:forRow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -586,44 +618,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487418183.046951"
+            timestampString = "487487319.764001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-prepareGoalsData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487418183.046951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "-prepareGoalsData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DaysInLine/trackViewController.m"
-            timestampString = "487419930.575818"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "-closeVC"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
