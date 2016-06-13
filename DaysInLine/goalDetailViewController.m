@@ -579,6 +579,12 @@
     self.goalByTimeSeg.selectedSegmentIndex = self.isByTime;
     [self.goalByTimeSeg addTarget:self action:@selector(goalAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [content addSubview:self.goalByTimeSeg];
+    if (self.isEditing) {
+        [self.goalByTimeSeg setHidden:YES];
+    }else
+    {
+        [self.goalByTimeSeg setHidden:NO];
+    }
     
     self.InputLabel = [[UILabel alloc] initWithFrame:CGRectMake(categoryLabelWith + 10,self.goalByTimeSeg.frame.size.height + self.goalByTimeSeg.frame.origin.y + 5, content.frame.size.width - categoryLabelWith - 20, SCREEN_WIDTH/4-15)];
     

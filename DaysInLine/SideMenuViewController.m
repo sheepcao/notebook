@@ -19,6 +19,7 @@
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
+@property (nonatomic, strong) NSArray *colorArray;
 
 @end
 
@@ -30,9 +31,10 @@
     // Do any additional setup after loading the view from its nib.
 //    NSLog(@"viewDidLoad ");
 
-    self.menuArray = @[NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"分类管理",nil),NSLocalizedString(@"帐目流水",nil),NSLocalizedString(@"帐目日历",nil),NSLocalizedString(@"显示模式",nil),NSLocalizedString(@"关于简簿",nil)];
+    self.menuArray = @[NSLocalizedString(@"事项总览",nil),NSLocalizedString(@"图表分析",nil),NSLocalizedString(@"近期走势",nil),NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"设置",nil)];
+    self.colorArray = @[[UIColor colorWithRed:162/255.0f green:168/255.0f blue:148/255.0f alpha:1.0f], [UIColor colorWithRed:117/255.0f green:176/255.0f blue:144/255.0f alpha:1.0f],[UIColor colorWithRed:68/255.0f green:111/255.0f blue:121/255.0f alpha:1.0f], [UIColor colorWithRed:45/255.0f green:78/255.0f blue:81/255.0f alpha:1.0f],[UIColor colorWithRed:40/255.0f green:56/255.0f blue:71/255.0f alpha:1.0f]];
     
-    UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
+    UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*2/5, SCREEN_HEIGHT)];
     menuTable.delegate = self;
     menuTable.dataSource = self;
     menuTable.scrollEnabled = NO;
@@ -40,10 +42,6 @@
     menuTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:menuTable];
     self.myMenuTable = menuTable;
-    
-
-    
-//    [self configUIAppearance];
     
 }
 
@@ -86,7 +84,7 @@
     
     if (!self.myBackImage)
     {
-        self.myBackImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*2/3, SCREEN_HEIGHT)];
+        self.myBackImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*2/5, SCREEN_HEIGHT)];
         [self.myBackImage setImage:[UIImage imageNamed:backName]];
         [self.view addSubview:self.myBackImage];
         [self.view sendSubviewToBack:self.myBackImage];
@@ -101,13 +99,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SCREEN_WIDTH/5.5;
+    return SCREEN_HEIGHT/5;
 
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    return [NSString stringWithFormat:@"Section %d", section];
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -118,7 +113,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *CellIdentifier = @"Cell";
+    NSString *CellIdentifier = @"sideCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UILabel *cellTitle  = [[UILabel alloc] init];
@@ -132,17 +127,17 @@
         UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                               @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
                                                                 UIFontDescriptorNameAttribute:@"HelveticaNeue",
-                                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/20]
+                                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/30]
                                                                 }];
-         [cellTitle setFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width*3/4, cell.frame.size.height)];
+         [cellTitle setFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width/2, SCREEN_HEIGHT/5)];
         cellTitle.textColor = self.myTextColor;
         [cellTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
-        cellTitle.textAlignment = NSTextAlignmentLeft;
+        cellTitle.textAlignment = NSTextAlignmentCenter;
         [cell addSubview:cellTitle];
         
     }
     cellTitle.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
-
+    cell.backgroundColor = self.colorArray[indexPath.row];
 
 
     return cell;

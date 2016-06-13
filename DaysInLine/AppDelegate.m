@@ -58,6 +58,7 @@
                                                     containerWithCenterViewController:[self navigationController]
                                                     leftMenuViewController:nil
                                                     rightMenuViewController:rightMenuViewController];
+    container.menuWidth = SCREEN_WIDTH*2/5;
     self.window.rootViewController = container;
     
     [self initDB];
@@ -202,27 +203,6 @@
     }
     if (categoryCount == 0) {
         [self insertDefaultCategoryToDB:db];
-//        
-//        BOOL sql = [db executeUpdate:@"alter table EVENT add column soundDir INTEGER DEFAULT 0"];
-//        if (!sql) {
-//            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-//        }
-//        BOOL sql2 = [db executeUpdate:@"alter table EVENT add column isPrivate TEXT DEFAULT '0'"];
-//        if (!sql2) {
-//            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-//        }
-        
-//        FMResultSet *findRS = [db executeQuery:@"select eventID from collection"];
-//        if ([findRS next]) {
-//            int privateEventID = [findRS intForColumn:@"eventID"];
-//            BOOL sql = [db executeUpdate:@"update EVENT set isPrivate = '1' where eventID = ?",[NSNumber numberWithInt:privateEventID]];
-//            if (!sql) {
-//                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-//            }
-//        }
-        
-        //soundID 等到编辑event时候，自然会得到id，到时候再update到soundDir中。
-        
     }
     
     int colorCount;
@@ -234,6 +214,17 @@
     if (colorCount == 0) {
         [self insertDefaultColorToDB:db];
     }
+    
+    int goalCount;
+    NSString *selectGoalCount = @"select count (*) from GOALS";
+    FMResultSet *rsGoal = [db executeQuery:selectGoalCount];
+    if ([rsColor next]) {
+        goalCount = [rsGoal intForColumnIndex:0];
+    }
+    if (colorCount == 0) {
+        [self insertDefaultGOALSToDB:db];
+    }
+    
     
     [db close];
 }
@@ -523,6 +514,23 @@
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (116,84,106,0)"];
     
     
+    
+    if (!sql) {
+        NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
+    }
+    
+}
+
+
+-(void)insertDefaultGOALSToDB:(FMDatabase *)database
+{
+    BOOL sql =  [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'沟通',0,0,10,0,0,0)"];
+    
+    [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'培训',0,0,5,0,0,0)"];
+    
+    [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'阅读',1,20,0,0,0,0)"];
+    
+    [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'跑步',1,50,0,0,0,0)"];
     
     if (!sql) {
         NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);

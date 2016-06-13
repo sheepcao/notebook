@@ -1,7 +1,7 @@
 
 //The MIT License (MIT)
 //
-//Copyright (c) 2013 Rafał Augustyniak
+//Copyright (c) 2014 Rafał Augustyniak
 //
 //Permission is hereby granted, free of charge, to any person obtaining a copy of
 //this software and associated documentation files (the "Software"), to deal in
@@ -18,22 +18,15 @@
 //CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface RADataObject : NSObject
+@interface RATableViewCell : UITableViewCell
 
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSArray *children;
-@property (strong, nonatomic) NSString *startTimeString;
-@property (strong, nonatomic) NSString *endTimeString;
-@property (strong, nonatomic) NSString *dataDescription;
+@property (nonatomic, copy) void (^additionButtonTapAction)(id sender);
+@property (nonatomic) BOOL additionButtonHidden;
 
-- (id)initWithName:(NSString *)name children:(NSArray *)array;
-
-+ (id)dataObjectWithName:(NSString *)name children:(NSArray *)children;
-+ (id)dataObjectWithName:(NSString *)name andStartTime:(double)startTime andEndTime:(double)endTime children:(NSArray *)children;
-
-- (void)addChild:(id)child;
-- (void)removeChild:(id)child;
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor;
+- (void)goExpendAnimated:(BOOL)animated;
+- (void)goCollapseAnimated:(BOOL)animated;
 
 @end

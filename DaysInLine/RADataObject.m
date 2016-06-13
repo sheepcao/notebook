@@ -19,6 +19,7 @@
 //
 
 #import "RADataObject.h"
+#import "CommonUtility.h"
 
 @implementation RADataObject
 
@@ -33,16 +34,36 @@
   }
   return self;
 }
-- (id)initWithName:(NSString *)name andIncome:(double)income andExpense:(double)expense andDescription:(NSString *)descrip  children:(NSArray *)children
+- (id)initWithName:(NSString *)name andStartTime:(double)startTime andEndTime:(double)endTime children:(NSArray *)children
 {
     self = [super init];
     if (self) {
+        
+        NSString *start = [[CommonUtility sharedCommonUtility] doubleToTime:(int)startTime];
+        NSString *end = [[CommonUtility sharedCommonUtility] doubleToTime:(int)endTime];
+
         self.children = [NSArray arrayWithArray:children];
         self.name = name;
-        self.income = [NSString stringWithFormat:@"%.2f",income];
-        self.expense = [NSString stringWithFormat:@"%.2f",expense];
-        self.dataDescription = descrip;
+        self.startTimeString = start;
+        self.endTimeString = end;
 
+    }
+    return self;
+}
+
+- (id)initWithName:(NSString *)name andWorkTime:(double)workTime andLifeTime:(double)lifeTime children:(NSArray *)children
+{
+    self = [super init];
+    if (self) {
+        
+        NSString *start = [[CommonUtility sharedCommonUtility] doubleToTime:(int)startTime];
+        NSString *end = [[CommonUtility sharedCommonUtility] doubleToTime:(int)endTime];
+        
+        self.children = [NSArray arrayWithArray:children];
+        self.name = name;
+        self.startTimeString = start;
+        self.endTimeString = end;
+        
     }
     return self;
 }
@@ -52,9 +73,14 @@
   return [[self alloc] initWithName:name children:children];
 }
 
-+ (id)dataObjectWithName:(NSString *)name andIncome:(double)income andExpense:(double)expense  andDescription:(NSString *)descrip children:(NSArray *)children
++ (id)dataObjectWithName:(NSString *)name andStartTime:(double)startTime andEndTime:(double)endTime children:(NSArray *)children
 {
-    return [[self alloc] initWithName:name andIncome:income andExpense:expense andDescription:descrip children:children];
+    return [[self alloc] initWithName:name andStartTime:startTime andEndTime:endTime children:(NSArray *)children];
+}
+
++ (id)dataObjectWithName:(NSString *)name andWorkTime:(double)workTime andLifeTime:(double)lifeTime children:(NSArray *)children
+{
+    return [[self alloc] initWithName:name andStartTime:startTime andEndTime:endTime children:(NSArray *)children];
 }
 
 - (void)addChild:(id)child

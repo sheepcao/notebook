@@ -12,6 +12,14 @@
 		A40E28E21D0E58110063247B /* finishedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28E11D0E58110063247B /* finishedTableViewCell.m */; };
 		A40E28E61D0E5B2B0063247B /* finishedGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28E41D0E5B2B0063247B /* finishedGoalsViewController.m */; };
 		A40E28E71D0E5B2B0063247B /* finishedGoalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28E51D0E5B2B0063247B /* finishedGoalsViewController.xib */; };
+		A40E28EB1D0EB36A0063247B /* summaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28E91D0EB36A0063247B /* summaryViewController.m */; };
+		A40E28EC1D0EB36A0063247B /* summaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28EA1D0EB36A0063247B /* summaryViewController.xib */; };
+		A40E28F61D0EB84B0063247B /* dayRATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28EE1D0EB84B0063247B /* dayRATableViewCell.m */; };
+		A40E28F71D0EB84B0063247B /* dayRATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28EF1D0EB84B0063247B /* dayRATableViewCell.xib */; };
+		A40E28F81D0EB84B0063247B /* itemRATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28F11D0EB84B0063247B /* itemRATableViewCell.m */; };
+		A40E28F91D0EB84B0063247B /* itemRATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28F21D0EB84B0063247B /* itemRATableViewCell.xib */; };
+		A40E28FA1D0EB84B0063247B /* RATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28F41D0EB84B0063247B /* RATableViewCell.m */; };
+		A40E28FB1D0EB84B0063247B /* RATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28F51D0EB84B0063247B /* RATableViewCell.xib */; };
 		A48D37F61D056E93005B87A5 /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37F51D056E93005B87A5 /* add1.png */; };
 		A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */; };
 		A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */; };
@@ -143,6 +151,18 @@
 		A40E28E31D0E5B2B0063247B /* finishedGoalsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = finishedGoalsViewController.h; sourceTree = "<group>"; };
 		A40E28E41D0E5B2B0063247B /* finishedGoalsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = finishedGoalsViewController.m; sourceTree = "<group>"; };
 		A40E28E51D0E5B2B0063247B /* finishedGoalsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = finishedGoalsViewController.xib; sourceTree = "<group>"; };
+		A40E28E81D0EB36A0063247B /* summaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = summaryViewController.h; sourceTree = "<group>"; };
+		A40E28E91D0EB36A0063247B /* summaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = summaryViewController.m; sourceTree = "<group>"; };
+		A40E28EA1D0EB36A0063247B /* summaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = summaryViewController.xib; sourceTree = "<group>"; };
+		A40E28ED1D0EB84B0063247B /* dayRATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dayRATableViewCell.h; sourceTree = "<group>"; };
+		A40E28EE1D0EB84B0063247B /* dayRATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dayRATableViewCell.m; sourceTree = "<group>"; };
+		A40E28EF1D0EB84B0063247B /* dayRATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = dayRATableViewCell.xib; sourceTree = "<group>"; };
+		A40E28F01D0EB84B0063247B /* itemRATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemRATableViewCell.h; sourceTree = "<group>"; };
+		A40E28F11D0EB84B0063247B /* itemRATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemRATableViewCell.m; sourceTree = "<group>"; };
+		A40E28F21D0EB84B0063247B /* itemRATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemRATableViewCell.xib; sourceTree = "<group>"; };
+		A40E28F31D0EB84B0063247B /* RATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATableViewCell.h; sourceTree = "<group>"; };
+		A40E28F41D0EB84B0063247B /* RATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATableViewCell.m; sourceTree = "<group>"; };
+		A40E28F51D0EB84B0063247B /* RATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RATableViewCell.xib; sourceTree = "<group>"; };
 		A48D37F51D056E93005B87A5 /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		A48D37F81D0693E8005B87A5 /* goalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalDetailViewController.h; sourceTree = "<group>"; };
 		A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalDetailViewController.m; sourceTree = "<group>"; };
@@ -400,6 +420,15 @@
 				A40E28E11D0E58110063247B /* finishedTableViewCell.m */,
 				A4A977F41CFEC52E00099E4F /* photoCell.h */,
 				A4A977F51CFEC52E00099E4F /* photoCell.m */,
+				A40E28ED1D0EB84B0063247B /* dayRATableViewCell.h */,
+				A40E28EE1D0EB84B0063247B /* dayRATableViewCell.m */,
+				A40E28EF1D0EB84B0063247B /* dayRATableViewCell.xib */,
+				A40E28F01D0EB84B0063247B /* itemRATableViewCell.h */,
+				A40E28F11D0EB84B0063247B /* itemRATableViewCell.m */,
+				A40E28F21D0EB84B0063247B /* itemRATableViewCell.xib */,
+				A40E28F31D0EB84B0063247B /* RATableViewCell.h */,
+				A40E28F41D0EB84B0063247B /* RATableViewCell.m */,
+				A40E28F51D0EB84B0063247B /* RATableViewCell.xib */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -416,6 +445,9 @@
 				A4A977FA1D001E1D00099E4F /* checkEventViewController.h */,
 				A4A977FB1D001E1D00099E4F /* checkEventViewController.m */,
 				A4A977FC1D001E1D00099E4F /* checkEventViewController.xib */,
+				A40E28E81D0EB36A0063247B /* summaryViewController.h */,
+				A40E28E91D0EB36A0063247B /* summaryViewController.m */,
+				A40E28EA1D0EB36A0063247B /* summaryViewController.xib */,
 			);
 			name = items;
 			sourceTree = "<group>";
@@ -849,6 +881,7 @@
 				A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */,
 				A4E26D8C1CFB0CBC004DFBC3 /* menu.png in Resources */,
 				A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */,
+				A40E28F91D0EB84B0063247B /* itemRATableViewCell.xib in Resources */,
 				A4E26D8F1CFB0E7F004DFBC3 /* calendar.png in Resources */,
 				A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */,
 				A4A977CB1CFD7D5C00099E4F /* back.png in Resources */,
@@ -870,11 +903,13 @@
 				A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */,
 				A4A977CD1CFD801800099E4F /* delete.png in Resources */,
 				A48D37F61D056E93005B87A5 /* add1.png in Resources */,
+				A40E28EC1D0EB36A0063247B /* summaryViewController.xib in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
 				A4EDDEFD1D015B0400733932 /* trackViewController.xib in Resources */,
 				A4EDDEF11D0122A600733932 /* trush.png in Resources */,
+				A40E28FB1D0EB84B0063247B /* RATableViewCell.xib in Resources */,
 				A4A977AC1CFC42D900099E4F /* cancel.png in Resources */,
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
 				A4A977C01CFD306C00099E4F /* launch.png in Resources */,
@@ -883,6 +918,7 @@
 				A40E28E71D0E5B2B0063247B /* finishedGoalsViewController.xib in Resources */,
 				A4EDDEF31D0122AC00733932 /* edit.png in Resources */,
 				A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */,
+				A40E28F71D0EB84B0063247B /* dayRATableViewCell.xib in Resources */,
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
 				A40E28DF1D0D42710063247B /* 提醒.png in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
@@ -978,11 +1014,13 @@
 				A4E26CE31CF842CB004DFBC3 /* AFURLConnectionOperation.m in Sources */,
 				A4A977F61CFEC52E00099E4F /* photoCell.m in Sources */,
 				A4E26CE11CF842CB004DFBC3 /* AFHTTPRequestOperation.m in Sources */,
+				A40E28FA1D0EB84B0063247B /* RATableViewCell.m in Sources */,
 				A4A977FD1D001E1D00099E4F /* checkEventViewController.m in Sources */,
 				A4E26CC91CF8425A004DFBC3 /* OpenShare.m in Sources */,
 				A4E26D0F1CF842E1004DFBC3 /* RATreeView+Enums.m in Sources */,
 				A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */,
 				A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */,
+				A40E28F61D0EB84B0063247B /* dayRATableViewCell.m in Sources */,
 				A4E26D111CF842E1004DFBC3 /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
 				A4E26C8B1CF84042004DFBC3 /* AppDelegate.m in Sources */,
 				A4E26D4C1CF843FA004DFBC3 /* pickerLabel.m in Sources */,
@@ -998,12 +1036,14 @@
 				A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A4E26CA91CF841CA004DFBC3 /* FlatDatePicker.m in Sources */,
 				A49E62421CFB2AEE0047011B /* myTextLabel.m in Sources */,
+				A40E28EB1D0EB36A0063247B /* summaryViewController.m in Sources */,
 				A49E62451CFB2E280047011B /* myLifeTableViewCell.m in Sources */,
 				A4E26D091CF842E1004DFBC3 /* RATableView.m in Sources */,
 				A4E26D0C1CF842E1004DFBC3 /* RATreeNodeController.m in Sources */,
 				A4E26D0B1CF842E1004DFBC3 /* RATreeNodeCollectionController.m in Sources */,
 				A4E26CAE1CF8420C004DFBC3 /* MLIAPManager.m in Sources */,
 				A4E26CCF1CF84271004DFBC3 /* UIControl+Blocks.m in Sources */,
+				A40E28F81D0EB84B0063247B /* itemRATableViewCell.m in Sources */,
 				A4E26CC41CF8425A004DFBC3 /* OpenShare+Alipay.m in Sources */,
 				A4E26D131CF842E1004DFBC3 /* RATreeView+TableViewDelegate.m in Sources */,
 				A4E26C881CF84042004DFBC3 /* main.m in Sources */,
