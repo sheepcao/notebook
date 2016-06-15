@@ -10,7 +10,7 @@
 #import "global.h"
 #import "MFSideMenu.h"
 #import "summaryViewController.h"
-//#import "categoryManagementViewController.h"
+#import "pieViewController.h"
 //#import "mainViewController.h"
 //#import "monthListViewController.h"
 //#import "loginViewController.h"
@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
 //    NSLog(@"viewDidLoad ");
 
-    self.menuArray = @[NSLocalizedString(@"事项总览",nil),NSLocalizedString(@"图表分析",nil),NSLocalizedString(@"近期走势",nil),NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"设置",nil)];
+    self.menuArray = @[NSLocalizedString(@"事项总览",nil),NSLocalizedString(@"图表分解",nil),NSLocalizedString(@"近期走势",nil),NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"设置",nil)];
     self.colorArray = @[[UIColor colorWithRed:162/255.0f green:168/255.0f blue:148/255.0f alpha:1.0f], [UIColor colorWithRed:117/255.0f green:176/255.0f blue:144/255.0f alpha:1.0f],[UIColor colorWithRed:68/255.0f green:111/255.0f blue:121/255.0f alpha:1.0f], [UIColor colorWithRed:45/255.0f green:78/255.0f blue:81/255.0f alpha:1.0f],[UIColor colorWithRed:40/255.0f green:56/255.0f blue:71/255.0f alpha:1.0f]];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*2/5, SCREEN_HEIGHT)];
@@ -120,7 +120,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         cell.backgroundColor = [UIColor clearColor];
         
         
@@ -151,6 +151,7 @@
     tableView.userInteractionEnabled = NO;
 
     if (indexPath.row ==0) {
+        NSLog(@"MFSideMenuStateClosing");
 
         summaryViewController *summaryVC = [[summaryViewController alloc] initWithNibName:@"summaryViewController" bundle:nil];
         UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
@@ -158,17 +159,16 @@
         [temp addObject:summaryVC];
         navigationController.viewControllers = temp;
         [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-        
+        NSLog(@"MFSideMenuStateClosed");
+    }else if (indexPath.row ==1) {
+        pieViewController *pieVC = [[pieViewController alloc] initWithNibName:@"pieViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:pieVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+
     }
-//    else if (indexPath.row ==1) {
-//        categoryManagementViewController *trendVC = [[categoryManagementViewController alloc] initWithNibName:@"categoryManagementViewController" bundle:nil];
-//        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
-//        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
-//        [temp addObject:trendVC];
-//        navigationController.viewControllers = temp;
-//        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-//
-//    }
 //    else if(indexPath.row ==2)
 //    {
 //        monthListViewController *monthListVC = [[monthListViewController alloc] initWithNibName:@"monthListViewController" bundle:nil];
@@ -206,8 +206,9 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-
     
 }
+
+
 
 @end

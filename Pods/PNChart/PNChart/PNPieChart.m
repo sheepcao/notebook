@@ -141,6 +141,12 @@ CGFloat fontSize;
     self.innerCircleRadius = self.outerCircleRadius - 5;
 }
 
+- (void)recomputeWithWIdth:(CGFloat)width {
+    self.outerCircleRadius = CGRectGetWidth(self.bounds) / 2;
+    self.innerCircleRadius = self.outerCircleRadius - width;
+}
+
+
 #pragma mark -
 
 - (void)strokeChart{
@@ -177,6 +183,42 @@ CGFloat fontSize;
     
     [self addAnimationIfNeeded];
 }
+
+- (void)strokeChartWithWidth:(CGFloat)width{
+    [self loadDefault];
+    [self recomputeWithWIdth:width];
+    
+    PNPieChartDataItem *currentItem;
+    for (int i = 0; i < _items.count; i++) {
+        currentItem = [self dataItemForIndex:i];
+        
+        
+        CGFloat startPercentage = [self startPercentageForItemAtIndex:i];
+        CGFloat endPercentage   = [self endPercentageForItemAtIndex:i];
+        
+        CGFloat radius = _innerCircleRadius + (_outerCircleRadius - _innerCircleRadius) / 2;
+        CGFloat borderWidth = _outerCircleRadius - _innerCircleRadius;
+        
+        CAShapeLayer *currentPieLayer =	[self newCircleLayerWithRadius:radius
+                                                           borderWidth:borderWidth
+                                                             fillColor:[UIColor clearColor]
+                                                           borderColor:currentItem.color
+                                                       startPercentage:startPercentage
+                                                         endPercentage:endPercentage];
+        [_pieLayer addSublayer:currentPieLayer];
+    }
+    
+    [self maskChart];
+    
+    for (int i = 0; i < _items.count; i++) {
+        UILabel *descriptionLabel =  [self descriptionLabelForItemAtIndex:i];
+        [_contentView addSubview:descriptionLabel];
+        [_descriptionLabels addObject:descriptionLabel];
+    }
+    
+    [self addAnimationIfNeeded];
+}
+
 
 - (UILabel *)descriptionLabelForItemAtIndex:(NSUInteger)index{
     PNPieChartDataItem *currentDataItem = [self dataItemForIndex:index];
@@ -537,9 +579,9 @@ CGFloat fontSize;
 }
 
 /* Redraw the chart on autolayout */
--(void)layoutSubviews {
-    [super layoutSubviews];
-    [self strokeChart];
-}
+//-(void)layoutSubviews {
+//    [super layoutSubviews];
+//    [self strokeChart];
+//}
 
 @end

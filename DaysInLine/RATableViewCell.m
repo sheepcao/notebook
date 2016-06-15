@@ -45,7 +45,7 @@
     self.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.13].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.012].CGColor, nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.17].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.012].CGColor, nil];
     
     gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
     gradientLayer.endPoint = CGPointMake(0.0f, 0.0f);

@@ -63,8 +63,10 @@
 @property (nonatomic) BOOL hideValues;
 
 - (void)strokeChart;
+- (void)strokeChartWithWidth:(CGFloat)width;
 
 - (void)recompute;
+- (void)recomputeWithWIdth:(CGFloat)width;
 
 - (CGFloat)ratioForItemAtIndex:(NSUInteger)index;
 @end

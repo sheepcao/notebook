@@ -132,6 +132,12 @@
 		A4E26D931CFB0F7A004DFBC3 /* calendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */; };
 		A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */; };
 		A4ED30301D113EA80023E05E /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED302F1D113EA80023E05E /* return.png */; };
+		A4ED30371D1147990023E05E /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30321D1147990023E05E /* categoryDetailViewController.m */; };
+		A4ED30381D1147990023E05E /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30331D1147990023E05E /* categoryDetailViewController.xib */; };
+		A4ED30391D1147990023E05E /* pieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30351D1147990023E05E /* pieViewController.m */; };
+		A4ED303A1D1147990023E05E /* pieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30361D1147990023E05E /* pieViewController.xib */; };
+		A4ED303E1D1147E80023E05E /* categoryItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED303D1D1147E80023E05E /* categoryItemsTableViewCell.m */; };
+		A4ED30411D1148220023E05E /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30401D1148220023E05E /* PieExplainTableViewCell.m */; };
 		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
@@ -351,6 +357,16 @@
 		A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calendarViewController.m; sourceTree = "<group>"; };
 		A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = calendarViewController.xib; sourceTree = "<group>"; };
 		A4ED302F1D113EA80023E05E /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
+		A4ED30311D1147990023E05E /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
+		A4ED30321D1147990023E05E /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
+		A4ED30331D1147990023E05E /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
+		A4ED30341D1147990023E05E /* pieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pieViewController.h; sourceTree = "<group>"; };
+		A4ED30351D1147990023E05E /* pieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pieViewController.m; sourceTree = "<group>"; };
+		A4ED30361D1147990023E05E /* pieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = pieViewController.xib; sourceTree = "<group>"; };
+		A4ED303C1D1147E80023E05E /* categoryItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryItemsTableViewCell.h; sourceTree = "<group>"; };
+		A4ED303D1D1147E80023E05E /* categoryItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryItemsTableViewCell.m; sourceTree = "<group>"; };
+		A4ED303F1D1148220023E05E /* PieExplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieExplainTableViewCell.h; sourceTree = "<group>"; };
+		A4ED30401D1148220023E05E /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
 		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
@@ -416,6 +432,10 @@
 				A4A978001D0027B400099E4F /* checkEventTableViewCell.m */,
 				A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */,
 				A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */,
+				A4ED303C1D1147E80023E05E /* categoryItemsTableViewCell.h */,
+				A4ED303D1D1147E80023E05E /* categoryItemsTableViewCell.m */,
+				A4ED303F1D1148220023E05E /* PieExplainTableViewCell.h */,
+				A4ED30401D1148220023E05E /* PieExplainTableViewCell.m */,
 				A4EDDF051D0170FA00733932 /* goalTableViewCell.h */,
 				A4EDDF061D0170FA00733932 /* goalTableViewCell.m */,
 				A40E28E01D0E58110063247B /* finishedTableViewCell.h */,
@@ -492,6 +512,7 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
+				A4ED303B1D1147A40023E05E /* pieVC */,
 				A48D37F71D069352005B87A5 /* goalsVC */,
 				A4A977C91CFD7AE400099E4F /* items */,
 				A4E26D951CFB0F8F004DFBC3 /* calendar */,
@@ -784,6 +805,19 @@
 			name = calendar;
 			sourceTree = "<group>";
 		};
+		A4ED303B1D1147A40023E05E /* pieVC */ = {
+			isa = PBXGroup;
+			children = (
+				A4ED30311D1147990023E05E /* categoryDetailViewController.h */,
+				A4ED30321D1147990023E05E /* categoryDetailViewController.m */,
+				A4ED30331D1147990023E05E /* categoryDetailViewController.xib */,
+				A4ED30341D1147990023E05E /* pieViewController.h */,
+				A4ED30351D1147990023E05E /* pieViewController.m */,
+				A4ED30361D1147990023E05E /* pieViewController.xib */,
+			);
+			name = pieVC;
+			sourceTree = "<group>";
+		};
 		BD527EC3E21E48CBE229C777 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +918,7 @@
 				A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */,
 				A4E26D8C1CFB0CBC004DFBC3 /* menu.png in Resources */,
 				A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */,
+				A4ED303A1D1147990023E05E /* pieViewController.xib in Resources */,
 				A40E28F91D0EB84B0063247B /* itemRATableViewCell.xib in Resources */,
 				A4E26D8F1CFB0E7F004DFBC3 /* calendar.png in Resources */,
 				A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */,
@@ -918,6 +953,7 @@
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
 				A4A977C01CFD306C00099E4F /* launch.png in Resources */,
 				A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */,
+				A4ED30381D1147990023E05E /* categoryDetailViewController.xib in Resources */,
 				A4A977F31CFEB84C00099E4F /* addPhoto.png in Resources */,
 				A40E28E71D0E5B2B0063247B /* finishedGoalsViewController.xib in Resources */,
 				A4EDDEF31D0122AC00733932 /* edit.png in Resources */,
@@ -987,6 +1023,7 @@
 			files = (
 				A40E28E61D0E5B2B0063247B /* finishedGoalsViewController.m in Sources */,
 				A4A977F91CFFD13F00099E4F /* highLightButton.m in Sources */,
+				A4ED30391D1147990023E05E /* pieViewController.m in Sources */,
 				A4E26CD01CF84271004DFBC3 /* XHShareView.m in Sources */,
 				A4E26D201CF842F5004DFBC3 /* FabonacciNum.m in Sources */,
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
@@ -994,6 +1031,7 @@
 				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
 				A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
+				A4ED30411D1148220023E05E /* PieExplainTableViewCell.m in Sources */,
 				A4A9779F1CFC24DA00099E4F /* TimeLineTableView.m in Sources */,
 				A4A977C71CFD7AD000099E4F /* categoryManagementViewController.m in Sources */,
 				A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */,
@@ -1036,11 +1074,13 @@
 				A4EDDF071D0170FA00733932 /* goalTableViewCell.m in Sources */,
 				A4E26D071CF842E1004DFBC3 /* RABatchChangeEntity.m in Sources */,
 				A4E26CC51CF8425A004DFBC3 /* OpenShare+QQ.m in Sources */,
+				A4ED30371D1147990023E05E /* categoryDetailViewController.m in Sources */,
 				A4E26D441CF843FA004DFBC3 /* BottomView.m in Sources */,
 				A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A4E26CA91CF841CA004DFBC3 /* FlatDatePicker.m in Sources */,
 				A49E62421CFB2AEE0047011B /* myTextLabel.m in Sources */,
 				A40E28EB1D0EB36A0063247B /* summaryViewController.m in Sources */,
+				A4ED303E1D1147E80023E05E /* categoryItemsTableViewCell.m in Sources */,
 				A49E62451CFB2E280047011B /* myLifeTableViewCell.m in Sources */,
 				A4E26D091CF842E1004DFBC3 /* RATableView.m in Sources */,
 				A4E26D0C1CF842E1004DFBC3 /* RATreeNodeController.m in Sources */,
