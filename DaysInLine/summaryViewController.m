@@ -182,17 +182,17 @@
     UITableViewCell * cell1;
     if (level == 0) {
         RATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([RATableViewCell class])];
-        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense andColor:self.myTextColor];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.workTimeString andExpense:dataObject.lifeTimeString andColor:self.myTextColor];
         cell1 = cell;
     }else if(level == 1)
     {
         dayRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([dayRATableViewCell class])];
-        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense andColor:self.myTextColor];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.workTimeString andExpense:dataObject.lifeTimeString andColor:self.myTextColor];
         cell1 = cell;
     }else if (level == 2)
     {
         itemRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([itemRATableViewCell class])];
-        [cell setupWithCategory:dataObject.name andDescription:dataObject.dataDescription andIncome:dataObject.income andExpense:dataObject.expense andColor:self.myTextColor];
+        [cell setupWithCategory:dataObject.name andIncome:dataObject.startTimeString andExpense:dataObject.endTimeString andColor:self.myTextColor];
         cell1 = cell;
     }
     
@@ -236,11 +236,11 @@
     
     FMResultSet *rs = [db executeQuery:@"select date from EVENTS order by date LIMIT 1"];
     while ([rs next]) {
-        minDate = [rs stringForColumn:@"target_date"];
+        minDate = [rs stringForColumn:@"date"];
     }
     FMResultSet *rs2 = [db executeQuery:@"select date from EVENTS order by date desc LIMIT 1"];
     while ([rs2 next]) {
-        maxDate = [rs2 stringForColumn:@"target_date"];
+        maxDate = [rs2 stringForColumn:@"date"];
     }
     
     NSArray *minArray = [minDate componentsSeparatedByString:@"-"];
@@ -274,8 +274,9 @@
         
         NSString *start = [NSString stringWithFormat:@"%ld-%02ld-01",(long)startYear,(long)startMonth];
         NSString *end = [NSString stringWithFormat:@"%ld-%02ld-01",(long)endYear,(long)endMonth];
-        
-        FMResultSet *rs = [db executeQuery:@"select distinct date from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by date desc", start,end];
+        NSString *priorEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: end andDaysToAdd:-1];
+
+        FMResultSet *rs = [db executeQuery:@"select distinct date from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by date desc", start,priorEndDay];
         while ([rs next]) {
             NSString *dateString = [rs stringForColumn:@"date"];
             NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
@@ -288,7 +289,7 @@
         }
         
         NSString *monthName = [NSString stringWithFormat:@"%ld-%02ld",(long)startYear,(long)startMonth];
-        RADataObject *monthData = [self dailyDataFrom:monthName withArray:monthArray duringStart:start andEnd:end];
+        RADataObject *monthData = [self dailyDataFrom:monthName withArray:monthArray duringStart:start andEnd:priorEndDay];
         [allMonth addObject:monthData];
     }
     [db close];
@@ -309,7 +310,7 @@
         NSMutableArray *oneDayItems = [[NSMutableArray alloc] init];
         NSString *nextDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: date andDaysToAdd:1];
         
-        FMResultSet *rs = [db executeQuery:@"select * from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by date desc", date,nextDay];
+        FMResultSet *rs = [db executeQuery:@"select * from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by date desc", date,date];
         while ([rs next]) {
             itemObj *oneItem = [[itemObj alloc] init];
             
@@ -337,34 +338,34 @@
         double sumLife = 0.00f;
         double sumWork = 0.00f;
         
-        FMResultSet *resultLife = [db executeQuery:@"select sum(startTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", date,nextDay];
+        FMResultSet *resultLife = [db executeQuery:@"select sum(startTime), sum(endTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TYPE = 1", date,date];
         if ([resultLife next]) {
-            sumLife =  [resultLife doubleForColumnIndex:0];
+            sumLife =  [resultLife doubleForColumnIndex:1] - [resultLife doubleForColumnIndex:0];
         }
         
-        FMResultSet *resultWork = [db executeQuery:@"select sum(endTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", date,nextDay];
+        FMResultSet *resultWork = [db executeQuery:@"select sum(startTime), sum(endTime)  from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TYPE = 0", date,date];
         
         if ([resultWork next]) {
-            sumWork =  [resultWork doubleForColumnIndex:0];
+            sumWork =  [resultWork doubleForColumnIndex:1] - [resultWork doubleForColumnIndex:0];
         }
         
-        RADataObject *dailyData = [RADataObject dataObjectWithName:dayOnly andStartTime:<#(double)#> andEndTime:<#(double)#> children:<#(NSArray *)#>:dayOnly andIncome:sumIncome andExpense:sumExpense andDescription:@"" children:oneDayItems];
+        RADataObject *dailyData = [RADataObject dataObjectWithName:dayOnly andWorkTime:sumWork andLifeTime:sumLife children:oneDayItems];
         
         [monthlyDataArray addObject:dailyData];
     }
     
-    double monthIncome = 0.00f;
-    double monthExpense = 0.00f;
-    FMResultSet *resultIncomeMonth = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startDate,endDate];
+    double sumLifeMonth = 0.00f;
+    double sumWorkMonth = 0.00f;
+    FMResultSet *resultIncomeMonth = [db executeQuery:@"select sum(startTime), sum(endTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TYPE = 1", startDate,endDate];
     if ([resultIncomeMonth next]) {
-        monthIncome =  [resultIncomeMonth doubleForColumnIndex:0];
+        sumLifeMonth =  [resultIncomeMonth doubleForColumnIndex:1] - [resultIncomeMonth doubleForColumnIndex:0];
     }
-    FMResultSet *resultExpenseMonth = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startDate,endDate];
+    FMResultSet *resultExpenseMonth = [db executeQuery:@"select sum(startTime), sum(endTime)  from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TYPE = 0", startDate,endDate];
     if ([resultExpenseMonth next]) {
-        monthExpense =  [resultExpenseMonth doubleForColumnIndex:0];
+        sumWorkMonth =  [resultExpenseMonth doubleForColumnIndex:1] - [resultExpenseMonth doubleForColumnIndex:0];
     }
     
-    RADataObject *monthlyData = [RADataObject dataObjectWithName:monthName andIncome:monthIncome andExpense:monthExpense andDescription:@"" children:monthlyDataArray];
+    RADataObject *monthlyData = [RADataObject dataObjectWithName:monthName andWorkTime:sumWorkMonth andLifeTime:sumLifeMonth children:monthlyDataArray];
     
     return monthlyData;
 }

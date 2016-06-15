@@ -28,10 +28,14 @@
 @property (strong, nonatomic) NSString *endTimeString;
 @property (strong, nonatomic) NSString *dataDescription;
 
+@property (strong, nonatomic) NSString *workTimeString;
+@property (strong, nonatomic) NSString *lifeTimeString;
+
 - (id)initWithName:(NSString *)name children:(NSArray *)array;
 
 + (id)dataObjectWithName:(NSString *)name children:(NSArray *)children;
 + (id)dataObjectWithName:(NSString *)name andStartTime:(double)startTime andEndTime:(double)endTime children:(NSArray *)children;
++ (id)dataObjectWithName:(NSString *)name andWorkTime:(double)workTime andLifeTime:(double)lifeTime children:(NSArray *)children;
 
 - (void)addChild:(id)child;
 - (void)removeChild:(id)child;

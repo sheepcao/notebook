@@ -38,7 +38,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1m6-ve-Q91">
-                        <rect key="frame" x="51" y="10" width="44" height="35.5"/>
+                        <rect key="frame" x="51" y="8.5" width="44" height="35.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="71" id="Ews-yA-Gum"/>
                             <constraint firstAttribute="height" constant="35.5" id="Lsy-sM-Dte"/>
@@ -60,7 +60,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收入:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCn-vA-3tr">
-                        <rect key="frame" x="229" y="8" width="60" height="15"/>
+                        <rect key="frame" x="229" y="8" width="60" height="15.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="YC2-N3-6xB"/>
                         </constraints>
@@ -69,7 +69,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支出:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLA-44-BLa">
-                        <rect key="frame" x="229" y="24" width="60" height="15"/>
+                        <rect key="frame" x="229" y="24" width="60" height="15.5"/>
                         <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="13"/>
                         <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -91,7 +91,7 @@
                     <constraint firstItem="9Ye-w3-d0X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-5" id="80i-UY-3da"/>
                     <constraint firstItem="V9R-xR-6Ot" firstAttribute="centerX" secondItem="9Ye-w3-d0X" secondAttribute="centerX" id="8h4-EF-nTj"/>
                     <constraint firstItem="V9R-xR-6Ot" firstAttribute="centerY" secondItem="9Ye-w3-d0X" secondAttribute="centerY" id="99x-Yz-YCe"/>
-                    <constraint firstItem="1m6-ve-Q91" firstAttribute="centerY" secondItem="kks-KC-AnK" secondAttribute="centerY" id="9dT-Xk-zdm"/>
+                    <constraint firstItem="1m6-ve-Q91" firstAttribute="centerY" secondItem="kks-KC-AnK" secondAttribute="centerY" constant="-2" id="9dT-Xk-zdm"/>
                     <constraint firstItem="9Ye-w3-d0X" firstAttribute="leading" secondItem="JCn-vA-3tr" secondAttribute="trailing" constant="2" id="Kai-im-XbN"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9Ye-w3-d0X" secondAttribute="trailing" constant="15" id="LFm-IX-rwB"/>
                     <constraint firstItem="kks-KC-AnK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="LaF-4G-B53"/>
@@ -134,6 +134,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="expend.png" width="200" height="200"/>
+        <image name="expend.png" width="400" height="400"/>
     </resources>
 </document>

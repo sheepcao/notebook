@@ -56,13 +56,11 @@
     self = [super init];
     if (self) {
         
-        NSString *start = [[CommonUtility sharedCommonUtility] doubleToTime:(int)startTime];
-        NSString *end = [[CommonUtility sharedCommonUtility] doubleToTime:(int)endTime];
-        
+
         self.children = [NSArray arrayWithArray:children];
         self.name = name;
-        self.startTimeString = start;
-        self.endTimeString = end;
+        self.workTimeString = [NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),workTime/60];
+        self.lifeTimeString = [NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),lifeTime/60];
         
     }
     return self;
@@ -80,7 +78,7 @@
 
 + (id)dataObjectWithName:(NSString *)name andWorkTime:(double)workTime andLifeTime:(double)lifeTime children:(NSArray *)children
 {
-    return [[self alloc] initWithName:name andStartTime:startTime andEndTime:endTime children:(NSArray *)children];
+    return [[self alloc] initWithName:name andWorkTime:workTime andLifeTime:lifeTime children:children];
 }
 
 - (void)addChild:(id)child

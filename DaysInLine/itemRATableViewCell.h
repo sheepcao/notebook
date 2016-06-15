@@ -13,5 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (weak, nonatomic) IBOutlet UILabel *point;
 
-- (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor;
+- (void)setupWithCategory:(NSString *)category andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor;
 @end

@@ -9,7 +9,7 @@
 #import "SideMenuViewController.h"
 #import "global.h"
 #import "MFSideMenu.h"
-//#import "calendarViewController.h"
+#import "summaryViewController.h"
 //#import "categoryManagementViewController.h"
 //#import "mainViewController.h"
 //#import "monthListViewController.h"
@@ -150,16 +150,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.userInteractionEnabled = NO;
 
-//    if (indexPath.row ==0) {
-//
-//        loginViewController *loginVC = [[loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil];
-//        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
-//        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
-//        [temp addObject:loginVC];
-//        navigationController.viewControllers = temp;
-//        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-//        
-//    }else if (indexPath.row ==1) {
+    if (indexPath.row ==0) {
+
+        summaryViewController *summaryVC = [[summaryViewController alloc] initWithNibName:@"summaryViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:summaryVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+        
+    }
+//    else if (indexPath.row ==1) {
 //        categoryManagementViewController *trendVC = [[categoryManagementViewController alloc] initWithNibName:@"categoryManagementViewController" bundle:nil];
 //        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
 //        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
@@ -167,7 +168,8 @@
 //        navigationController.viewControllers = temp;
 //        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
 //
-//    }else if(indexPath.row ==2)
+//    }
+//    else if(indexPath.row ==2)
 //    {
 //        monthListViewController *monthListVC = [[monthListViewController alloc] initWithNibName:@"monthListViewController" bundle:nil];
 //        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;

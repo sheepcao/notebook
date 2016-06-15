@@ -131,6 +131,7 @@
 		A4E26D8F1CFB0E7F004DFBC3 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D8E1CFB0E7F004DFBC3 /* calendar.png */; };
 		A4E26D931CFB0F7A004DFBC3 /* calendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */; };
 		A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */; };
+		A4ED30301D113EA80023E05E /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED302F1D113EA80023E05E /* return.png */; };
 		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
@@ -349,6 +350,7 @@
 		A4E26D901CFB0F7A004DFBC3 /* calendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calendarViewController.h; sourceTree = "<group>"; };
 		A4E26D911CFB0F7A004DFBC3 /* calendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calendarViewController.m; sourceTree = "<group>"; };
 		A4E26D921CFB0F7A004DFBC3 /* calendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = calendarViewController.xib; sourceTree = "<group>"; };
+		A4ED302F1D113EA80023E05E /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
 		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				A4A977CC1CFD801800099E4F /* delete.png */,
 				A4A977CA1CFD7D5C00099E4F /* back.png */,
 				A4A977B71CFC8AFB00099E4F /* expend.png */,
+				A4ED302F1D113EA80023E05E /* return.png */,
 				A4A977B81CFC8AFB00099E4F /* expend0.png */,
 				A4A977AD1CFC42FE00099E4F /* done.png */,
 				A4A977AE1CFC42FE00099E4F /* doneBig.png */,
@@ -911,6 +914,7 @@
 				A4EDDEF11D0122A600733932 /* trush.png in Resources */,
 				A40E28FB1D0EB84B0063247B /* RATableViewCell.xib in Resources */,
 				A4A977AC1CFC42D900099E4F /* cancel.png in Resources */,
+				A4ED30301D113EA80023E05E /* return.png in Resources */,
 				A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */,
 				A4A977C01CFD306C00099E4F /* launch.png in Resources */,
 				A4E26D941CFB0F7A004DFBC3 /* calendarViewController.xib in Resources */,
