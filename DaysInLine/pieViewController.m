@@ -492,12 +492,17 @@
     NSString *category = oneItemOfPie.textDescription;
     NSArray *KeyArray = [category componentsSeparatedByString:@" > "];
     NSString *typeOnly = @"";
+    NSString *categoryOnly = @"";
+
     if (KeyArray.count>0) {
         typeOnly = KeyArray[0];
     }
+    if (KeyArray.count>1) {
+        categoryOnly = KeyArray[1];
+    }
     NSInteger type = [typeOnly isEqualToString:NSLocalizedString(@"工作",nil)] ? 0:1;
     categoryDetailViewController *categoryDetailVC = [[categoryDetailViewController alloc] initWithNibName:@"categoryDetailViewController" bundle:nil];
-    categoryDetailVC.categoryName = category;
+    categoryDetailVC.categoryName = categoryOnly;
     categoryDetailVC.categoryType = type;
     categoryDetailVC.startDate = self.startLabel.text;
     categoryDetailVC.endDate = self.endLabel.text;

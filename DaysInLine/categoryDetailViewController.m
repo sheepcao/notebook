@@ -17,7 +17,7 @@
 #import "CommonUtility.h"
 #import "itemObj.h"
 #import "categoryItemsTableViewCell.h"
-#import "itemDetailViewController.h"
+#import "checkEventViewController.h"
 
 
 @interface categoryDetailViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate,UIScrollViewDelegate>
@@ -52,7 +52,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"categoryDetail"];
+    [MobClick beginLogPageView:@"themeDetail"];
 
     [self prepareDataFrom:self.startDate toDate:self.endDate];
     [self.itemsTable reloadData];
@@ -81,20 +81,20 @@
         return;
     }
     
-    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDate andDaysToAdd:1];
+//    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDate andDaysToAdd:1];
     
-    
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where item_category = ? AND item_type = ? AND strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", self.categoryName,[NSNumber numberWithInteger:self.categoryType],startDate,nextEndDay];
+
+    FMResultSet *rs = [db executeQuery:@"select * from EVENTS where TITLE = ? AND TYPE = ? AND strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", self.categoryName,[NSNumber numberWithInteger:self.categoryType],startDate,endDate];
     
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
-        oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"item_id"]];
-        oneItem.itemCategory  = [rs stringForColumn:@"item_category"];
-        oneItem.itemDescription = [rs stringForColumn:@"item_description"];
-        oneItem.itemType = [rs intForColumn:@"item_type"];
-        oneItem.createdTime = [rs stringForColumn:@"create_time"];
-        oneItem.targetTime = [rs stringForColumn:@"target_date"];
-//        oneItem.moneyAmount = [rs doubleForColumn:@"money"];
+        oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"eventID"]];
+        oneItem.itemCategory  = [rs stringForColumn:@"TITLE"];
+        oneItem.itemDescription = [rs stringForColumn:@"mainText"];
+        oneItem.itemType = [rs intForColumn:@"TYPE"];
+        oneItem.startTime = [rs doubleForColumn:@"startTime"];
+        oneItem.endTime = [rs doubleForColumn:@"endTime"];
+        oneItem.targetTime = [rs stringForColumn:@"date"];
         [allItems addObject:oneItem];
     }
     
@@ -102,8 +102,7 @@
     
     for (itemObj *item in allItems) {
 
-        NSArray *timeParts = [item.targetTime componentsSeparatedByString:@" "];
-        NSString *dateString = timeParts[0];
+        NSString *dateString =item.targetTime;
         
         NSArray *itemsOneDay = [itemsDic objectForKey:dateString];
         if (!itemsOneDay) {
@@ -124,31 +123,34 @@
     {
         [self.timeWindowItems removeAllObjects];
     }
+    NSArray *keys = [itemsDic allKeys];
+    keys = [keys sortedArrayUsingComparator:^(id a, id b) {
+        return [b compare:a options:NSNumericSearch];
+    }];
     for (NSString *key in [itemsDic allKeys]) {
         [self.timeWindowItems addObject:[itemsDic objectForKey:key]];
     }
     
-    //
-    double catgoryMoney = 0.0f;
-    FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_category = ? AND item_type = ?", startDate,nextEndDay,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
+    double catgoryTime = 0.0f;
+    FMResultSet *resultMoney = [db executeQuery:@"select sum(startTime), sum(endTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TITLE = ? AND TYPE = ?", startDate,endDate,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
     if ([resultMoney next]) {
-        catgoryMoney =  [resultMoney doubleForColumnIndex:0];
-        [self.moneyLabel setText:[NSString stringWithFormat:@"%.2f",catgoryMoney]];
+        catgoryTime =  [resultMoney doubleForColumnIndex:1] - [resultMoney doubleForColumnIndex:0];
+        [self.moneyLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),catgoryTime/60]];
         
     }
     
-    FMResultSet *resultRatio = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInteger:self.categoryType]];
+    FMResultSet *resultRatio = [db executeQuery:@"select sum(startTime), sum(endTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TYPE = ?", startDate,endDate,[NSNumber numberWithInteger:self.categoryType]];
     if ([resultRatio next]) {
-        double sumMoney =  [resultRatio doubleForColumnIndex:0];
-        if (sumMoney>0.0001) {
-            [self.moneyRatioLabel setText:[NSString stringWithFormat:@"%.2f%%",catgoryMoney*100/sumMoney]];
+        double sumTime =  [resultRatio doubleForColumnIndex:1] - [resultRatio doubleForColumnIndex:0];
+        if (sumTime>0.0001) {
+            [self.moneyRatioLabel setText:[NSString stringWithFormat:@"%.2f%%",catgoryTime*100/sumTime]];
         }else
         {
             [self.moneyRatioLabel setText:@"0.00%"];
         }
     }
     
-    FMResultSet *resultCount = [db executeQuery:@"select count(*) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_category = ? AND item_type = ?", startDate,nextEndDay,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
+    FMResultSet *resultCount = [db executeQuery:@"select count(*) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TITLE = ? AND TYPE = ?", startDate,endDate,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
     
     if ([resultCount next]) {
         int moneyCount =  [resultCount intForColumnIndex:0];
@@ -157,7 +159,7 @@
     [db close];
     
 }
-
+////////////////////////////////////////////////////////////////////////
 
 
 -(void)configTopbar
@@ -174,21 +176,13 @@
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-//    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
     [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topBar addSubview:closeViewButton];
     
-    [self.myTopBar.titleLabel  setText:NSLocalizedString(@"分类明细",nil)];
+    [self.myTopBar.titleLabel  setText:NSLocalizedString(@"主题明细",nil)];
 
-//    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
-//    [titileLabel setText:@"分类明细"];
-//    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
-//    titileLabel.textAlignment = NSTextAlignmentCenter;
-//    [titileLabel setTextColor:normalColor];
-//    [topBar addSubview:titileLabel];
-    
     UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, topBar.frame.size.height - 100,SCREEN_WIDTH/2,65)];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
@@ -200,12 +194,14 @@
     categoryLabel.textColor = self.myTextColor;
     categoryLabel.textAlignment = NSTextAlignmentCenter;
     categoryLabel.adjustsFontSizeToFitWidth = YES;
-    [categoryLabel setText:self.categoryName];
+    NSString *type = self.categoryType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
+    NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.categoryName];
+    [categoryLabel setText:theme];
     [topBar addSubview:categoryLabel];
     
     
     
-    UILabel *moneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - summaryLabelWidth/2,categoryLabel.frame.origin.y +categoryLabel.frame.size.height +10, summaryLabelWidth, summaryLabelHeight)];
+    UILabel *moneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - summaryLabelWidth/4,categoryLabel.frame.origin.y +categoryLabel.frame.size.height +10, summaryLabelWidth, summaryLabelHeight)];
     [moneyRatio setText:@""];
     moneyRatio.font = [UIFont fontWithName:@"HelveticaNeue" size:13.5f];
     moneyRatio.textAlignment = NSTextAlignmentCenter;
@@ -368,49 +364,23 @@
         categoryItemsTableViewCell *itemCell = (categoryItemsTableViewCell *)cell;
         [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
         
-        itemDetailViewController *itemDetailVC = [[itemDetailViewController alloc] initWithNibName:@"itemDetailViewController" bundle:nil];
-        NSString *category = @"";
-        NSString *categoryOnly = @"";
-        NSString *description = @"";
-        NSString *money = @"";
-        NSString *itemTime = @"";
-        NSNumber *itemID = @(-1);
-        int itemType = -1;
-        
-//        if (indexPath.section >= self.timeWindowItems.count ) {
-//            return;
-//        }else
-//        {
-//            NSArray *itemsOfDay = (NSArray *)self.timeWindowItems[indexPath.section];
-//            if (indexPath.row >= itemsOfDay.count) {
-//                return;
-//            }
-//            
-//            itemObj *oneItem = itemsOfDay[indexPath.row];
-//            itemID = oneItem.itemID;
-//            categoryOnly = oneItem.itemCategory;
-//            description = oneItem.itemDescription;
-//            itemType = oneItem.itemType;
-//
-//            money = [NSString stringWithFormat:@"%.2f",(oneItem.moneyAmount)];
-//            itemTime = oneItem.createdTime;
-//            if (oneItem.itemType == 0)
-//            {
-//                category = [NSLocalizedString(@"支出 > ",nil) stringByAppendingString:categoryOnly];
-//            }else
-//            {
-//                category = [NSLocalizedString(@"收入 > ",nil) stringByAppendingString:categoryOnly];
-//            }
-//        }
-//        itemDetailVC.currentItemID = itemID;
-//        itemDetailVC.itemType = itemType;
-//        itemDetailVC.category = category;
-//        itemDetailVC.categoryOnly = categoryOnly;
-//        itemDetailVC.money = money;
-//        itemDetailVC.itemDescription = description;
-//        itemDetailVC.itemCreatedTime = itemTime;
-//        
-        [self.navigationController pushViewController:itemDetailVC animated:YES];
+        checkEventViewController *itemDetailVC = [[checkEventViewController alloc] initWithNibName:@"checkEventViewController" bundle:nil];
+
+        if (indexPath.section >= self.timeWindowItems.count ) {
+            return;
+        }else
+        {
+            NSArray *itemsOfDay = (NSArray *)self.timeWindowItems[indexPath.section];
+            if (indexPath.row >= itemsOfDay.count) {
+                return;
+            }
+            
+            
+            itemObj *oneItem = itemsOfDay[indexPath.row];
+            itemDetailVC.currentItem = oneItem;
+
+                 [self.navigationController pushViewController:itemDetailVC animated:YES];
+        }
         
     }
     [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
@@ -436,7 +406,6 @@
 }
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SCREEN_WIDTH/16)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, headerView.frame.size.height - 18, 160, 18)];
@@ -448,8 +417,7 @@
     if(itemsOfDay.count>0)
     {
         itemObj *oneItem = itemsOfDay[0];
-        NSArray *timeParts = [oneItem.targetTime componentsSeparatedByString:@" "];
-        NSString *dateString = timeParts[0];
+        NSString *dateString = oneItem.targetTime;
         [dateLabel setText:dateString];
     }
     return headerView;
@@ -478,7 +446,6 @@
         itemObj *oneItem = itemsOfDay[indexPath.row];
         NSString *category = oneItem.itemCategory;
         NSString *description = oneItem.itemDescription;
-//        NSString *money = [NSString stringWithFormat:@"%.2f",oneItem.moneyAmount] ;
         
         if (![description isEqualToString:@""]) {
             description = [@" - " stringByAppendingString:description];
@@ -486,7 +453,11 @@
         
         NSString *contentString = [NSString stringWithFormat:@"%@%@",category,description];
         [cell.category setText:contentString];
-//        [cell.money setText:money];
+
+        NSString *startString = [[CommonUtility sharedCommonUtility] timeInLine:((int)oneItem.startTime)];
+        NSString *endString = [[CommonUtility sharedCommonUtility] timeInLine:((int)oneItem.endTime)];
+        
+        [cell.money setText:[NSString stringWithFormat:@"%@ — %@",startString,endString]];
         [cell makeTextStyle:self.myTextColor];
 
     }

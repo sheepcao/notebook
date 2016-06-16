@@ -39,7 +39,8 @@
         self.money.shadowOffset =  CGSizeMake(0.16, 0.16);
         
         self.money.adjustsFontSizeToFitWidth = YES;
-        
+        self.category.adjustsFontSizeToFitWidth = YES;
+
         
         [self addSubview:self.category];
         [self addSubview:self.money];
