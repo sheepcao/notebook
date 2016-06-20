@@ -154,6 +154,16 @@
 		A4ED30661D17C5E90023E05E /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30641D17C5E90023E05E /* download.png */; };
 		A4ED30691D17C60F0023E05E /* csv.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30671D17C60F0023E05E /* csv.png */; };
 		A4ED306A1D17C60F0023E05E /* xls.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30681D17C60F0023E05E /* xls.png */; };
+		A4ED30711D17CA810023E05E /* aboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED306C1D17CA810023E05E /* aboutViewController.m */; };
+		A4ED30721D17CA810023E05E /* aboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED306D1D17CA810023E05E /* aboutViewController.xib */; };
+		A4ED30731D17CA810023E05E /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED306F1D17CA810023E05E /* shareViewController.m */; };
+		A4ED30741D17CA810023E05E /* shareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30701D17CA810023E05E /* shareViewController.xib */; };
+		A4ED30791D17CB9B0023E05E /* exportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30771D17CB9B0023E05E /* exportViewController.m */; };
+		A4ED307A1D17CB9B0023E05E /* exportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30781D17CB9B0023E05E /* exportViewController.xib */; };
+		A4ED307C1D17CC280023E05E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4ED307B1D17CC280023E05E /* StoreKit.framework */; };
+		A4ED307E1D17CE8A0023E05E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED307D1D17CE8A0023E05E /* logo.png */; };
+		A4ED30811D17D1B80023E05E /* QR_cn1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED307F1D17D1B80023E05E /* QR_cn1.png */; };
+		A4ED30821D17D1B80023E05E /* QR_en1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30801D17D1B80023E05E /* QR_en1.png */; };
 		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
@@ -405,6 +415,19 @@
 		A4ED30641D17C5E90023E05E /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
 		A4ED30671D17C60F0023E05E /* csv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = csv.png; sourceTree = "<group>"; };
 		A4ED30681D17C60F0023E05E /* xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xls.png; sourceTree = "<group>"; };
+		A4ED306B1D17CA810023E05E /* aboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aboutViewController.h; sourceTree = "<group>"; };
+		A4ED306C1D17CA810023E05E /* aboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aboutViewController.m; sourceTree = "<group>"; };
+		A4ED306D1D17CA810023E05E /* aboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = aboutViewController.xib; sourceTree = "<group>"; };
+		A4ED306E1D17CA810023E05E /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
+		A4ED306F1D17CA810023E05E /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
+		A4ED30701D17CA810023E05E /* shareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = shareViewController.xib; sourceTree = "<group>"; };
+		A4ED30761D17CB9B0023E05E /* exportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exportViewController.h; sourceTree = "<group>"; };
+		A4ED30771D17CB9B0023E05E /* exportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = exportViewController.m; sourceTree = "<group>"; };
+		A4ED30781D17CB9B0023E05E /* exportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = exportViewController.xib; sourceTree = "<group>"; };
+		A4ED307B1D17CC280023E05E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A4ED307D1D17CE8A0023E05E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		A4ED307F1D17D1B80023E05E /* QR_cn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_cn1.png; sourceTree = "<group>"; };
+		A4ED30801D17D1B80023E05E /* QR_en1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_en1.png; sourceTree = "<group>"; };
 		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
@@ -431,6 +454,7 @@
 				A4E26D821CF8492B004DFBC3 /* libz.tbd in Frameworks */,
 				A4E26D801CF84922004DFBC3 /* libsqlite3.tbd in Frameworks */,
 				A4E26D7E1CF84914004DFBC3 /* CoreTelephony.framework in Frameworks */,
+				A4ED307C1D17CC280023E05E /* StoreKit.framework in Frameworks */,
 				A4E26D7C1CF848F7004DFBC3 /* FBSDKShareKit.framework in Frameworks */,
 				1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */,
 				A4E26D7A1CF848F7004DFBC3 /* FBSDKCoreKit.framework in Frameworks */,
@@ -550,6 +574,7 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
+				A4ED30751D17CA8B0023E05E /* settingVC */,
 				A4ED305D1D17B62E0023E05E /* backupVC */,
 				A4ED30471D13E1180023E05E /* trendVC */,
 				A4ED303B1D1147A40023E05E /* pieVC */,
@@ -568,6 +593,8 @@
 		A4E26C861CF84042004DFBC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED307F1D17D1B80023E05E /* QR_cn1.png */,
+				A4ED30801D17D1B80023E05E /* QR_en1.png */,
 				A4E26D8D1CFB0CC1004DFBC3 /* components */,
 				A4E26D651CF8473F004DFBC3 /* backgrounds */,
 				A4E26C871CF84042004DFBC3 /* main.m */,
@@ -806,6 +833,7 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED307D1D17CE8A0023E05E /* logo.png */,
 				A4ED30671D17C60F0023E05E /* csv.png */,
 				A4ED30681D17C60F0023E05E /* xls.png */,
 				A4ED30631D17C5E90023E05E /* backup.png */,
@@ -894,6 +922,22 @@
 			name = backupVC;
 			sourceTree = "<group>";
 		};
+		A4ED30751D17CA8B0023E05E /* settingVC */ = {
+			isa = PBXGroup;
+			children = (
+				A4ED306B1D17CA810023E05E /* aboutViewController.h */,
+				A4ED306C1D17CA810023E05E /* aboutViewController.m */,
+				A4ED306D1D17CA810023E05E /* aboutViewController.xib */,
+				A4ED306E1D17CA810023E05E /* shareViewController.h */,
+				A4ED306F1D17CA810023E05E /* shareViewController.m */,
+				A4ED30701D17CA810023E05E /* shareViewController.xib */,
+				A4ED30761D17CB9B0023E05E /* exportViewController.h */,
+				A4ED30771D17CB9B0023E05E /* exportViewController.m */,
+				A4ED30781D17CB9B0023E05E /* exportViewController.xib */,
+			);
+			name = settingVC;
+			sourceTree = "<group>";
+		};
 		BD527EC3E21E48CBE229C777 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -906,6 +950,7 @@
 		C80F2DC47583D05BFC322F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED307B1D17CC280023E05E /* StoreKit.framework */,
 				A4E26D811CF8492B004DFBC3 /* libz.tbd */,
 				A4E26D7F1CF84922004DFBC3 /* libsqlite3.tbd */,
 				A4E26D7D1CF84914004DFBC3 /* CoreTelephony.framework */,
@@ -959,6 +1004,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -994,6 +1042,7 @@
 				A4EDDF011D015D7C00733932 /* trend.png in Resources */,
 				A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */,
 				A4E26D8C1CFB0CBC004DFBC3 /* menu.png in Resources */,
+				A4ED30741D17CA810023E05E /* shareViewController.xib in Resources */,
 				A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */,
 				A4ED303A1D1147990023E05E /* pieViewController.xib in Resources */,
 				A40E28F91D0EB84B0063247B /* itemRATableViewCell.xib in Resources */,
@@ -1005,6 +1054,8 @@
 				A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */,
 				A4ED30571D17B6150023E05E /* forgotPasswordViewController.xib in Resources */,
 				A4E26CA81CF841CA004DFBC3 /* FlatDatePicker-Icon-Close@2x.png in Resources */,
+				A4ED307E1D17CE8A0023E05E /* logo.png in Resources */,
+				A4ED30811D17D1B80023E05E /* QR_cn1.png in Resources */,
 				A48D38031D06C9C5005B87A5 /* minus1.png in Resources */,
 				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
 				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
@@ -1017,9 +1068,11 @@
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
 				A4EDDEFF1D015CF800733932 /* pie.png in Resources */,
+				A4ED307A1D17CB9B0023E05E /* exportViewController.xib in Resources */,
 				A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */,
 				A4A977CD1CFD801800099E4F /* delete.png in Resources */,
 				A48D37F61D056E93005B87A5 /* add1.png in Resources */,
+				A4ED30721D17CA810023E05E /* aboutViewController.xib in Resources */,
 				A40E28EC1D0EB36A0063247B /* summaryViewController.xib in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
@@ -1049,6 +1102,7 @@
 				A4ED30621D17C09B0023E05E /* TermUseViewController.xib in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
 				A4E26C911CF84042004DFBC3 /* Main.storyboard in Resources */,
+				A4ED30821D17D1B80023E05E /* QR_en1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1139,6 +1193,7 @@
 				A4E26CC81CF8425A004DFBC3 /* OpenShare+Weixin.m in Sources */,
 				A4E26D141CF842E1004DFBC3 /* RATreeView.m in Sources */,
 				A4E26CC61CF8425A004DFBC3 /* OpenShare+Renren.m in Sources */,
+				A4ED30791D17CB9B0023E05E /* exportViewController.m in Sources */,
 				A4E26D451CF843FA004DFBC3 /* categoryButton.m in Sources */,
 				A4A977A61CFC3E6C00099E4F /* itemDetailViewController.m in Sources */,
 				A4E26D121CF842E1004DFBC3 /* RATreeView+TableViewDataSource.m in Sources */,
@@ -1165,6 +1220,7 @@
 				A4E26CC51CF8425A004DFBC3 /* OpenShare+QQ.m in Sources */,
 				A4ED30581D17B6150023E05E /* loginViewController.m in Sources */,
 				A4ED30371D1147990023E05E /* categoryDetailViewController.m in Sources */,
+				A4ED30711D17CA810023E05E /* aboutViewController.m in Sources */,
 				A4E26D441CF843FA004DFBC3 /* BottomView.m in Sources */,
 				A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A4E26CA91CF841CA004DFBC3 /* FlatDatePicker.m in Sources */,
@@ -1175,6 +1231,7 @@
 				A4E26D091CF842E1004DFBC3 /* RATableView.m in Sources */,
 				A4E26D0C1CF842E1004DFBC3 /* RATreeNodeController.m in Sources */,
 				A4E26D0B1CF842E1004DFBC3 /* RATreeNodeCollectionController.m in Sources */,
+				A4ED30731D17CA810023E05E /* shareViewController.m in Sources */,
 				A4E26CAE1CF8420C004DFBC3 /* MLIAPManager.m in Sources */,
 				A4E26CCF1CF84271004DFBC3 /* UIControl+Blocks.m in Sources */,
 				A4ED30611D17C09B0023E05E /* TermUseViewController.m in Sources */,

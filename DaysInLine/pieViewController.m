@@ -115,17 +115,7 @@
         oneItem.targetTime = [rs stringForColumn:@"date"];
         [self.timeWindowItems addObject:oneItem];
     }
-    //
-//    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startDate,endDate];
-//    if ([resultIncome next]) {
-//        self.sumIncome =  [resultIncome doubleForColumnIndex:0];
-//    }
-//    
-//    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startDate,endDate];
-//    
-//    if ([resultExpense next]) {
-//        self.sumExpense =  [resultExpense doubleForColumnIndex:0];
-//    }
+
     [db close];
     
 }

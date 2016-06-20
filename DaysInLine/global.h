@@ -71,8 +71,10 @@
 #define TextColor2 [UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1.0]
 #define TextColor3 [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.0]
 
-#define REVIEW_URL @"https://itunes.apple.com/us/app/money-ongo/id1113936277?ls=1&mt=8"
-#define REVIEW_URL_CN @"https://itunes.apple.com/cn/app/money-ongo/id1113936277?ls=1&mt=8"
+#define REVIEW_URL_CN @"http://itunes.apple.com/cn/app/daysinline/id844914780?mt=8"
+#define REVIEW_URL_EN @"http://itunes.apple.com/us/app/daysinline/id844914780?mt=8"
+#define proAPP_URL @"https://itunes.apple.com/cn/app/daysinline-pro./id998813044?ls=1&mt=8"
+
 
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"
 
