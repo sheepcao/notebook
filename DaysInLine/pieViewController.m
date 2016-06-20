@@ -234,8 +234,8 @@
     dateSelectionView.backgroundColor = [UIColor clearColor];
     [pieView addSubview:dateSelectionView];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"Avenir",
+                                                   UIFontDescriptorNameAttribute:@"Avenir-Medium",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  14.0f]
                                                    }];
     UILabel * midLine = [[UILabel alloc] initWithFrame:CGRectMake(dateSelectionView.frame.size.width/2-15, 0, 30, dateSelectionView.frame.size.height)];
@@ -317,8 +317,8 @@
 {
     NSMutableAttributedString* attrString;
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"Avenir",
+                                                   UIFontDescriptorNameAttribute:@"Avenir-Medium",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  self.centerLabel.frame.size.width/6.2]
                                                    }];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];

@@ -362,7 +362,6 @@
     
     [lineChart setXLabels:self.chartDatesArray];
     
-    
     // Line Chart No.1
     NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
@@ -385,7 +384,6 @@
         CGFloat yValue = [data02Array[index] floatValue];
         return [PNLineChartDataItem dataItemWithY:yValue];
     };
-    
     lineChart.chartData = @[data01,data02];
     lineChart.showCoordinateAxis = NO;
     lineChart.showLabel = YES;
@@ -394,7 +392,6 @@
     lineChart.axisWidth = 1.0f;
     
     self.axisChart = lineChart;
-    
     [self.view addSubview:lineChart];
     
 }

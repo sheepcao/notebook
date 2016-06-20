@@ -14,7 +14,7 @@
 #import "trendViewController.h"
 //#import "mainViewController.h"
 //#import "monthListViewController.h"
-//#import "loginViewController.h"
+#import "loginViewController.h"
 //#import "backupViewController.h"
 //#import "aboutViewController.h"
 
@@ -180,23 +180,19 @@
         [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         
     }
-//    else if (indexPath.row == 3) {
-//        calendarViewController *trendVC = [[calendarViewController alloc] initWithNibName:@"calendarViewController" bundle:nil];
-//        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
-//        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
-//        [temp addObject:trendVC];
-//        navigationController.viewControllers = temp;
-//        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-//
-//    }else if(indexPath.row ==4)
-//    {
-//        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-//        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
-//        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
-//        mainViewController *mainVC = (mainViewController *) [temp lastObject];
-//        [mainVC showingModel];
-//
-//    }else if(indexPath.row ==5)
+    else if (indexPath.row == 3) {
+        loginViewController *loginVC = [[loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:loginVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+
+    }else if(indexPath.row ==4)
+    {
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+    }
+//    else if(indexPath.row ==5)
 //    {
 //        aboutViewController *trendVC = [[aboutViewController alloc] initWithNibName:@"aboutViewController" bundle:nil];
 //        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;

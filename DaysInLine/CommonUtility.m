@@ -196,6 +196,30 @@
     return [self stringFromTime:now];
 }
 
+-(NSString *)timeNowFull
+{
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *date = [NSDate date];
+    NSDateComponents *comps = [cal components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitHour |NSCalendarUnitSecond)
+                                     fromDate:date];
+    
+    NSDate *now = [cal dateFromComponents:comps];
+    return [self fullStringFromTime:now];
+}
+
+- (NSString *)fullStringFromTime:(NSDate *)time{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter.calendar = cal;
+    //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *destDateString = [dateFormatter stringFromDate:time];
+    return destDateString;
+}
+
 -(NSDate *)timeNowDate
 {
     NSCalendar *cal = [[NSCalendar alloc]
@@ -651,7 +675,7 @@
 - (BOOL) validateEmail: (NSString *) candidate {
     if ([[candidate stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
     {
-        return YES;
+        return NO;
     }
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
@@ -662,7 +686,7 @@
 - (BOOL) validatePassword: (NSString *) candidate {
     if ([candidate isEqualToString:@""])
     {
-        return YES;
+        return NO;
     }
     NSString *emailRegex = @"^[0-9A-Za-z]{6,20}$";
     NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];

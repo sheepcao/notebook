@@ -38,6 +38,8 @@
 
 -(NSDate *)timeNowDate;
 -(NSString *)timeNow;
+-(NSString *)timeNowFull;
+
 -(NSString *)todayDate;
 -(NSString *)tomorrowDate;
 -(NSString *)yesterdayDate;

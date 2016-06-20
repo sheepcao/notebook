@@ -140,6 +140,20 @@
 		A4ED30411D1148220023E05E /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30401D1148220023E05E /* PieExplainTableViewCell.m */; };
 		A4ED30451D13E1120023E05E /* trendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30431D13E1120023E05E /* trendViewController.m */; };
 		A4ED30461D13E1120023E05E /* trendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30441D13E1120023E05E /* trendViewController.xib */; };
+		A4ED30541D17B6150023E05E /* backupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30491D17B6150023E05E /* backupViewController.m */; };
+		A4ED30551D17B6150023E05E /* backupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED304A1D17B6150023E05E /* backupViewController.xib */; };
+		A4ED30561D17B6150023E05E /* forgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED304C1D17B6150023E05E /* forgotPasswordViewController.m */; };
+		A4ED30571D17B6150023E05E /* forgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED304D1D17B6150023E05E /* forgotPasswordViewController.xib */; };
+		A4ED30581D17B6150023E05E /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED304F1D17B6150023E05E /* loginViewController.m */; };
+		A4ED30591D17B6150023E05E /* loginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30501D17B6150023E05E /* loginViewController.xib */; };
+		A4ED305A1D17B6150023E05E /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30521D17B6150023E05E /* registerViewController.m */; };
+		A4ED305B1D17B6150023E05E /* registerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30531D17B6150023E05E /* registerViewController.xib */; };
+		A4ED30611D17C09B0023E05E /* TermUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED305F1D17C09B0023E05E /* TermUseViewController.m */; };
+		A4ED30621D17C09B0023E05E /* TermUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30601D17C09B0023E05E /* TermUseViewController.xib */; };
+		A4ED30651D17C5E90023E05E /* backup.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30631D17C5E90023E05E /* backup.png */; };
+		A4ED30661D17C5E90023E05E /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30641D17C5E90023E05E /* download.png */; };
+		A4ED30691D17C60F0023E05E /* csv.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30671D17C60F0023E05E /* csv.png */; };
+		A4ED306A1D17C60F0023E05E /* xls.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30681D17C60F0023E05E /* xls.png */; };
 		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
@@ -372,6 +386,25 @@
 		A4ED30421D13E1120023E05E /* trendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trendViewController.h; sourceTree = "<group>"; };
 		A4ED30431D13E1120023E05E /* trendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = trendViewController.m; sourceTree = "<group>"; };
 		A4ED30441D13E1120023E05E /* trendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = trendViewController.xib; sourceTree = "<group>"; };
+		A4ED30481D17B6140023E05E /* backupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backupViewController.h; sourceTree = "<group>"; };
+		A4ED30491D17B6150023E05E /* backupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = backupViewController.m; sourceTree = "<group>"; };
+		A4ED304A1D17B6150023E05E /* backupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = backupViewController.xib; sourceTree = "<group>"; };
+		A4ED304B1D17B6150023E05E /* forgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgotPasswordViewController.h; sourceTree = "<group>"; };
+		A4ED304C1D17B6150023E05E /* forgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgotPasswordViewController.m; sourceTree = "<group>"; };
+		A4ED304D1D17B6150023E05E /* forgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = forgotPasswordViewController.xib; sourceTree = "<group>"; };
+		A4ED304E1D17B6150023E05E /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		A4ED304F1D17B6150023E05E /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		A4ED30501D17B6150023E05E /* loginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = loginViewController.xib; sourceTree = "<group>"; };
+		A4ED30511D17B6150023E05E /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
+		A4ED30521D17B6150023E05E /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
+		A4ED30531D17B6150023E05E /* registerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = registerViewController.xib; sourceTree = "<group>"; };
+		A4ED305E1D17C09B0023E05E /* TermUseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermUseViewController.h; sourceTree = "<group>"; };
+		A4ED305F1D17C09B0023E05E /* TermUseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermUseViewController.m; sourceTree = "<group>"; };
+		A4ED30601D17C09B0023E05E /* TermUseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermUseViewController.xib; sourceTree = "<group>"; };
+		A4ED30631D17C5E90023E05E /* backup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backup.png; sourceTree = "<group>"; };
+		A4ED30641D17C5E90023E05E /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		A4ED30671D17C60F0023E05E /* csv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = csv.png; sourceTree = "<group>"; };
+		A4ED30681D17C60F0023E05E /* xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xls.png; sourceTree = "<group>"; };
 		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
@@ -517,6 +550,7 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
+				A4ED305D1D17B62E0023E05E /* backupVC */,
 				A4ED30471D13E1180023E05E /* trendVC */,
 				A4ED303B1D1147A40023E05E /* pieVC */,
 				A48D37F71D069352005B87A5 /* goalsVC */,
@@ -772,6 +806,10 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED30671D17C60F0023E05E /* csv.png */,
+				A4ED30681D17C60F0023E05E /* xls.png */,
+				A4ED30631D17C5E90023E05E /* backup.png */,
+				A4ED30641D17C5E90023E05E /* download.png */,
 				A40E28DE1D0D42710063247B /* 提醒.png */,
 				A48D37F51D056E93005B87A5 /* add1.png */,
 				A4EDDF001D015D7C00733932 /* trend.png */,
@@ -832,6 +870,28 @@
 				A4ED30441D13E1120023E05E /* trendViewController.xib */,
 			);
 			name = trendVC;
+			sourceTree = "<group>";
+		};
+		A4ED305D1D17B62E0023E05E /* backupVC */ = {
+			isa = PBXGroup;
+			children = (
+				A4ED30481D17B6140023E05E /* backupViewController.h */,
+				A4ED30491D17B6150023E05E /* backupViewController.m */,
+				A4ED304A1D17B6150023E05E /* backupViewController.xib */,
+				A4ED304B1D17B6150023E05E /* forgotPasswordViewController.h */,
+				A4ED304C1D17B6150023E05E /* forgotPasswordViewController.m */,
+				A4ED304D1D17B6150023E05E /* forgotPasswordViewController.xib */,
+				A4ED304E1D17B6150023E05E /* loginViewController.h */,
+				A4ED304F1D17B6150023E05E /* loginViewController.m */,
+				A4ED30501D17B6150023E05E /* loginViewController.xib */,
+				A4ED30511D17B6150023E05E /* registerViewController.h */,
+				A4ED30521D17B6150023E05E /* registerViewController.m */,
+				A4ED30531D17B6150023E05E /* registerViewController.xib */,
+				A4ED305E1D17C09B0023E05E /* TermUseViewController.h */,
+				A4ED305F1D17C09B0023E05E /* TermUseViewController.m */,
+				A4ED30601D17C09B0023E05E /* TermUseViewController.xib */,
+			);
+			name = backupVC;
 			sourceTree = "<group>";
 		};
 		BD527EC3E21E48CBE229C777 /* Pods */ = {
@@ -926,6 +986,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4ED306A1D17C60F0023E05E /* xls.png in Resources */,
 				A4A977B41CFC845700099E4F /* 夜间.png in Resources */,
 				A48D38041D06C9C5005B87A5 /* plus1.png in Resources */,
 				A4E26D151CF842E1004DFBC3 /* Info.plist in Resources */,
@@ -942,6 +1003,7 @@
 				A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */,
 				A4A977AF1CFC42FE00099E4F /* done.png in Resources */,
 				A4E26D761CF84867004DFBC3 /* SideMenuViewController.xib in Resources */,
+				A4ED30571D17B6150023E05E /* forgotPasswordViewController.xib in Resources */,
 				A4E26CA81CF841CA004DFBC3 /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A48D38031D06C9C5005B87A5 /* minus1.png in Resources */,
 				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
@@ -950,6 +1012,7 @@
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4A977B91CFC8AFB00099E4F /* expend.png in Resources */,
 				A48D38011D06C9C5005B87A5 /* delete1.png in Resources */,
+				A4ED305B1D17B6150023E05E /* registerViewController.xib in Resources */,
 				A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
@@ -960,8 +1023,13 @@
 				A40E28EC1D0EB36A0063247B /* summaryViewController.xib in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
 				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
+				A4ED30551D17B6150023E05E /* backupViewController.xib in Resources */,
+				A4ED30591D17B6150023E05E /* loginViewController.xib in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,
+				A4ED30651D17C5E90023E05E /* backup.png in Resources */,
+				A4ED30661D17C5E90023E05E /* download.png in Resources */,
 				A4EDDEFD1D015B0400733932 /* trackViewController.xib in Resources */,
+				A4ED30691D17C60F0023E05E /* csv.png in Resources */,
 				A4EDDEF11D0122A600733932 /* trush.png in Resources */,
 				A40E28FB1D0EB84B0063247B /* RATableViewCell.xib in Resources */,
 				A4A977AC1CFC42D900099E4F /* cancel.png in Resources */,
@@ -978,6 +1046,7 @@
 				A40E28F71D0EB84B0063247B /* dayRATableViewCell.xib in Resources */,
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
 				A40E28DF1D0D42710063247B /* 提醒.png in Resources */,
+				A4ED30621D17C09B0023E05E /* TermUseViewController.xib in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
 				A4E26C911CF84042004DFBC3 /* Main.storyboard in Resources */,
 			);
@@ -1058,6 +1127,7 @@
 				A4E26D471CF843FA004DFBC3 /* dateSelectView.m in Sources */,
 				A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */,
 				A4E26D4E1CF843FA004DFBC3 /* topBarView.m in Sources */,
+				A4ED30561D17B6150023E05E /* forgotPasswordViewController.m in Sources */,
 				A4E26D0D1CF842E1004DFBC3 /* RATreeNodeItem+Private.m in Sources */,
 				A4A977AA1CFC3F6600099E4F /* itemDetailTableViewCell.m in Sources */,
 				A4E26D751CF84867004DFBC3 /* SideMenuViewController.m in Sources */,
@@ -1065,6 +1135,7 @@
 				A4A978011D0027B400099E4F /* checkEventTableViewCell.m in Sources */,
 				A4E26D211CF842F5004DFBC3 /* MFSideMenuContainerViewController.m in Sources */,
 				A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */,
+				A4ED30541D17B6150023E05E /* backupViewController.m in Sources */,
 				A4E26CC81CF8425A004DFBC3 /* OpenShare+Weixin.m in Sources */,
 				A4E26D141CF842E1004DFBC3 /* RATreeView.m in Sources */,
 				A4E26CC61CF8425A004DFBC3 /* OpenShare+Renren.m in Sources */,
@@ -1092,6 +1163,7 @@
 				A4EDDF071D0170FA00733932 /* goalTableViewCell.m in Sources */,
 				A4E26D071CF842E1004DFBC3 /* RABatchChangeEntity.m in Sources */,
 				A4E26CC51CF8425A004DFBC3 /* OpenShare+QQ.m in Sources */,
+				A4ED30581D17B6150023E05E /* loginViewController.m in Sources */,
 				A4ED30371D1147990023E05E /* categoryDetailViewController.m in Sources */,
 				A4E26D441CF843FA004DFBC3 /* BottomView.m in Sources */,
 				A4E26D231CF842F5004DFBC3 /* UIViewController+MFSideMenuAdditions.m in Sources */,
@@ -1105,11 +1177,13 @@
 				A4E26D0B1CF842E1004DFBC3 /* RATreeNodeCollectionController.m in Sources */,
 				A4E26CAE1CF8420C004DFBC3 /* MLIAPManager.m in Sources */,
 				A4E26CCF1CF84271004DFBC3 /* UIControl+Blocks.m in Sources */,
+				A4ED30611D17C09B0023E05E /* TermUseViewController.m in Sources */,
 				A40E28F81D0EB84B0063247B /* itemRATableViewCell.m in Sources */,
 				A4E26CC41CF8425A004DFBC3 /* OpenShare+Alipay.m in Sources */,
 				A4E26D131CF842E1004DFBC3 /* RATreeView+TableViewDelegate.m in Sources */,
 				A4E26C881CF84042004DFBC3 /* main.m in Sources */,
 				A4E26D2B1CF84385004DFBC3 /* itemObj.m in Sources */,
+				A4ED305A1D17B6150023E05E /* registerViewController.m in Sources */,
 				A4E26D4A1CF843FA004DFBC3 /* LuckyLabel.m in Sources */,
 				A40E28E21D0E58110063247B /* finishedTableViewCell.m in Sources */,
 				A4E26CB51CF8422C004DFBC3 /* UIDevice-Hardware.m in Sources */,

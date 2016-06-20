@@ -62,8 +62,8 @@
     
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                 @{UIFontDescriptorFamilyAttribute: @"Avenir",
+                                                   UIFontDescriptorNameAttribute:@"Avenir-Medium",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/22-3.0]
                                                    }];
     

@@ -25,9 +25,9 @@
         [self addSubview:self.leftText ];
         [self addSubview:self.rightText ];
         
-        self.leftText.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:14.5f];
+        self.leftText.font = [UIFont fontWithName:@"Avenir-Medium" size:14.5f];
         self.leftText.textAlignment = NSTextAlignmentLeft;
-        self.rightText.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:14.0f];
+        self.rightText.font = [UIFont fontWithName:@"Avenir-Medium" size:14.0f];
         self.rightText.textAlignment = NSTextAlignmentRight;
         self.rightText.numberOfLines = 2;
         self.rightText.minimumScaleFactor = 0.8;

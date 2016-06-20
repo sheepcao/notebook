@@ -152,7 +152,7 @@
     
     UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 32, 100, 40)];
     [titileLabel setText:self.recordDate];
-    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
+    titileLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
     [titileLabel setTextColor:normalColor];
     [topbar addSubview:titileLabel];

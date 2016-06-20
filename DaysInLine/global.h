@@ -77,13 +77,11 @@
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"
 
 #define constellationService @"http://cgx.nwpu.info/simpleBuService/constellation.php"
-#define emailService @"http://cgx.nwpu.info/simpleBuService/sendEmail.php"
 
-//#define constellationService @"http://localhost/~ericcao/simpleBuService/constellation.php"
-//#define emailService @"http://localhost/~ericcao/simpleBuService/sendEmail.php"
+#define emailService @"http://cgx.nwpu.info/daysinline/sendEmail.php"
+#define backupURL @"http://cgx.nwpu.info/daysinline/uploads.php"
+#define backupPath @"http://cgx.nwpu.info/daysinline/upload/"
 
-#define backupService @"http://cgx.nwpu.info/simpleBuService/uploads.php"
-#define backupPath @"http://cgx.nwpu.info/simpleBuService/upload/"
 
 #define SHOWMODEL @"showModel"
 #define AUTOSWITCH @"autoSwitch"
