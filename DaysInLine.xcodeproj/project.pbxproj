@@ -138,6 +138,8 @@
 		A4ED303A1D1147990023E05E /* pieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30361D1147990023E05E /* pieViewController.xib */; };
 		A4ED303E1D1147E80023E05E /* categoryItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED303D1D1147E80023E05E /* categoryItemsTableViewCell.m */; };
 		A4ED30411D1148220023E05E /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30401D1148220023E05E /* PieExplainTableViewCell.m */; };
+		A4ED30451D13E1120023E05E /* trendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ED30431D13E1120023E05E /* trendViewController.m */; };
+		A4ED30461D13E1120023E05E /* trendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30441D13E1120023E05E /* trendViewController.xib */; };
 		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
@@ -367,6 +369,9 @@
 		A4ED303D1D1147E80023E05E /* categoryItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryItemsTableViewCell.m; sourceTree = "<group>"; };
 		A4ED303F1D1148220023E05E /* PieExplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieExplainTableViewCell.h; sourceTree = "<group>"; };
 		A4ED30401D1148220023E05E /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
+		A4ED30421D13E1120023E05E /* trendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trendViewController.h; sourceTree = "<group>"; };
+		A4ED30431D13E1120023E05E /* trendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = trendViewController.m; sourceTree = "<group>"; };
+		A4ED30441D13E1120023E05E /* trendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = trendViewController.xib; sourceTree = "<group>"; };
 		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
@@ -512,6 +517,7 @@
 				A4E26D541CF84654004DFBC3 /* baseViewController.h */,
 				A4E26D551CF84654004DFBC3 /* baseViewController.m */,
 				A4E26D561CF84654004DFBC3 /* baseViewController.xib */,
+				A4ED30471D13E1180023E05E /* trendVC */,
 				A4ED303B1D1147A40023E05E /* pieVC */,
 				A48D37F71D069352005B87A5 /* goalsVC */,
 				A4A977C91CFD7AE400099E4F /* items */,
@@ -818,6 +824,16 @@
 			name = pieVC;
 			sourceTree = "<group>";
 		};
+		A4ED30471D13E1180023E05E /* trendVC */ = {
+			isa = PBXGroup;
+			children = (
+				A4ED30421D13E1120023E05E /* trendViewController.h */,
+				A4ED30431D13E1120023E05E /* trendViewController.m */,
+				A4ED30441D13E1120023E05E /* trendViewController.xib */,
+			);
+			name = trendVC;
+			sourceTree = "<group>";
+		};
 		BD527EC3E21E48CBE229C777 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -958,6 +974,7 @@
 				A40E28E71D0E5B2B0063247B /* finishedGoalsViewController.xib in Resources */,
 				A4EDDEF31D0122AC00733932 /* edit.png in Resources */,
 				A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */,
+				A4ED30461D13E1120023E05E /* trendViewController.xib in Resources */,
 				A40E28F71D0EB84B0063247B /* dayRATableViewCell.xib in Resources */,
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
 				A40E28DF1D0D42710063247B /* 提醒.png in Resources */,
@@ -1029,6 +1046,7 @@
 				A4E26D2C1CF84385004DFBC3 /* RADataObject.m in Sources */,
 				A4EDDEFC1D015B0400733932 /* trackViewController.m in Sources */,
 				A4E26D481CF843FA004DFBC3 /* dateShowView.m in Sources */,
+				A4ED30451D13E1120023E05E /* trendViewController.m in Sources */,
 				A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */,
 				A4E26D221CF842F5004DFBC3 /* MFSideMenuShadow.m in Sources */,
 				A4ED30411D1148220023E05E /* PieExplainTableViewCell.m in Sources */,

@@ -467,14 +467,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-//-(void)segmentAction:(UISegmentedControl *)Seg{
-//    NSInteger Index = Seg.selectedSegmentIndex;
-//    NSLog(@"Index %ld", (long)Index);
-//    
-//    self.timeWindowCategories = [self makePieData];
-//    [self updatePieWith:self.timeWindowCategories];
-//    [self.detailTable reloadData];
-//}
 
 
 
@@ -548,7 +540,7 @@
     PNPieChartDataItem *oneItemOfPie = (PNPieChartDataItem *)self.timeWindowCategories[indexPath.row];
     category = oneItemOfPie.textDescription;
     categoryColor = oneItemOfPie.color;
-    money = [NSString stringWithFormat:@"%.2f    ",oneItemOfPie.value];
+    money = [NSString stringWithFormat:NSLocalizedString(@"%.2f小时  ",nil),oneItemOfPie.value/60];
     moneyRatio = [NSString stringWithFormat:@"%.2f%%",[self.pieChart ratioForItemAtIndex:indexPath.row] * 100];
 
     NSArray *KeyArray = [category componentsSeparatedByString:@" > "];

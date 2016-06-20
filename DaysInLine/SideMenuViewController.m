@@ -11,6 +11,7 @@
 #import "MFSideMenu.h"
 #import "summaryViewController.h"
 #import "pieViewController.h"
+#import "trendViewController.h"
 //#import "mainViewController.h"
 //#import "monthListViewController.h"
 //#import "loginViewController.h"
@@ -169,16 +170,17 @@
         [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
 
     }
-//    else if(indexPath.row ==2)
-//    {
-//        monthListViewController *monthListVC = [[monthListViewController alloc] initWithNibName:@"monthListViewController" bundle:nil];
-//        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
-//        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
-//        [temp addObject:monthListVC];
-//        navigationController.viewControllers = temp;
-//        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-//        
-//    }else if (indexPath.row == 3) {
+    else if(indexPath.row ==2)
+    {
+         trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:trendVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+        
+    }
+//    else if (indexPath.row == 3) {
 //        calendarViewController *trendVC = [[calendarViewController alloc] initWithNibName:@"calendarViewController" bundle:nil];
 //        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
 //        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];

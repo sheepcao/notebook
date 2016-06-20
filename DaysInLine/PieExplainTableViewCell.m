@@ -17,7 +17,7 @@
     if (self)
     {
         if (IS_IPHONE_5_OR_LESS) {
-            fontSize = 14.5f;
+            fontSize = 13.0f;
         }else if(IS_IPHONE_6)
         {
             fontSize = 15.0f;
@@ -38,7 +38,7 @@
         self.MoneyRatio.textAlignment = NSTextAlignmentLeft;
         self.MoneyRatio.adjustsFontSizeToFitWidth = YES;
 
-        UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(self.MoneyRatio.frame.origin.x - 9, self.MoneyRatio.frame.size.height/3, 1, self.MoneyRatio.frame.size.height*2/3)];
+        UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(self.MoneyRatio.frame.origin.x - 9, self.MoneyRatio.frame.size.height - fontSize - 5, 1, fontSize + 5)];
         [midline setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:midline];
         
@@ -55,7 +55,7 @@
         UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                      @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                                        UIFontDescriptorNameAttribute:@"HelveticaNeue-Medium",
-                                                       UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize+1.6]
+                                                       UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
                                                        }];
         
         [self.money setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
@@ -63,6 +63,7 @@
 
         self.categoryName.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
         self.categoryName.shadowOffset =  CGSizeMake(0, 0.65);
+        self.categoryName.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:fontSize + 1];
         self.money.shadowColor = [normalColor colorWithAlphaComponent:0.35];
         self.money.shadowOffset =  CGSizeMake(0.16, 0.16);
         self.MoneyRatio.shadowColor = [normalColor colorWithAlphaComponent:0.35];
