@@ -1227,9 +1227,9 @@
     double lowPassResults = pow(10, (0.5 * [self.recorder peakPowerForChannel:0]));
     //图片随音量大小变化
     if (0<lowPassResults<=0.06) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"上午.png"]];
+        [self.voiceImageview setImage:[UIImage imageNamed:@"白天.png"]];
     }else if (0.06<lowPassResults<=0.13) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"上午1.png"]];
+        [self.voiceImageview setImage:[UIImage imageNamed:@"白天1.png"]];
     }else if (0.13<lowPassResults<=0.20) {
         [self.voiceImageview setImage:[UIImage imageNamed:@"下午.png"]];
     }else if (0.20<lowPassResults<=0.27) {
@@ -1245,9 +1245,9 @@
     }else if (0.55<lowPassResults<=0.62) {
         [self.voiceImageview setImage:[UIImage imageNamed:@"done.png"]];
     }else if (0.62<lowPassResults<=0.69) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"上午.png"]];
+        [self.voiceImageview setImage:[UIImage imageNamed:@"白天.png"]];
     }else if (0.69<lowPassResults<=0.76) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"上午1.png"]];
+        [self.voiceImageview setImage:[UIImage imageNamed:@"白天1.png"]];
     }else if (0.76<lowPassResults<=0.83) {
         [self.voiceImageview setImage:[UIImage imageNamed:@"下午.png"]];
     }else if (0.83<lowPassResults<=0.9) {

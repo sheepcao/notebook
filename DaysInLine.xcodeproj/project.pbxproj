@@ -40,7 +40,7 @@
 		A4A977B41CFC845700099E4F /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977B21CFC845700099E4F /* 夜间.png */; };
 		A4A977B91CFC8AFB00099E4F /* expend.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977B71CFC8AFB00099E4F /* expend.png */; };
 		A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977B81CFC8AFB00099E4F /* expend0.png */; };
-		A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BD1CFD2F6900099E4F /* 上午.png */; };
+		A4A977BE1CFD2F6900099E4F /* 白天.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BD1CFD2F6900099E4F /* 白天.png */; };
 		A4A977C01CFD306C00099E4F /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A977BF1CFD306C00099E4F /* launch.png */; };
 		A4A977C31CFD6E8A00099E4F /* categoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */; };
 		A4A977C71CFD7AD000099E4F /* categoryManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A977C51CFD7AD000099E4F /* categoryManagementViewController.m */; };
@@ -114,7 +114,7 @@
 		A4E26D531CF8445F004DFBC3 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D511CF8445F004DFBC3 /* CommonUtility.m */; };
 		A4E26D571CF84654004DFBC3 /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26D551CF84654004DFBC3 /* baseViewController.m */; };
 		A4E26D581CF84654004DFBC3 /* baseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D561CF84654004DFBC3 /* baseViewController.xib */; };
-		A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D671CF8473F004DFBC3 /* 上午1.png */; };
+		A4E26D6D1CF8473F004DFBC3 /* 白天1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D671CF8473F004DFBC3 /* 白天1.png */; };
 		A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D681CF8473F004DFBC3 /* 下午.png */; };
 		A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D691CF8473F004DFBC3 /* 下午1.png */; };
 		A4E26D711CF8473F004DFBC3 /* 夜间1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D6B1CF8473F004DFBC3 /* 夜间1.png */; };
@@ -164,6 +164,7 @@
 		A4ED307E1D17CE8A0023E05E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED307D1D17CE8A0023E05E /* logo.png */; };
 		A4ED30811D17D1B80023E05E /* QR_cn1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED307F1D17D1B80023E05E /* QR_cn1.png */; };
 		A4ED30821D17D1B80023E05E /* QR_en1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30801D17D1B80023E05E /* QR_en1.png */; };
+		A4ED30841D17DFE60023E05E /* mode.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ED30831D17DFE60023E05E /* mode.png */; };
 		A4EDDEF11D0122A600733932 /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF01D0122A600733932 /* trush.png */; };
 		A4EDDEF31D0122AC00733932 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EDDEF21D0122AC00733932 /* edit.png */; };
 		A4EDDEF71D012CEE00733932 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EDDEF51D012CEE00733932 /* historyViewController.m */; };
@@ -224,7 +225,7 @@
 		A4A977B21CFC845700099E4F /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
 		A4A977B71CFC8AFB00099E4F /* expend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expend.png; sourceTree = "<group>"; };
 		A4A977B81CFC8AFB00099E4F /* expend0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expend0.png; sourceTree = "<group>"; };
-		A4A977BD1CFD2F6900099E4F /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
+		A4A977BD1CFD2F6900099E4F /* 白天.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "白天.png"; sourceTree = "<group>"; };
 		A4A977BF1CFD306C00099E4F /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
 		A4A977C11CFD6E8A00099E4F /* categoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryTableViewCell.h; sourceTree = "<group>"; };
 		A4A977C21CFD6E8A00099E4F /* categoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryTableViewCell.m; sourceTree = "<group>"; };
@@ -363,7 +364,7 @@
 		A4E26D541CF84654004DFBC3 /* baseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseViewController.h; sourceTree = "<group>"; };
 		A4E26D551CF84654004DFBC3 /* baseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseViewController.m; sourceTree = "<group>"; };
 		A4E26D561CF84654004DFBC3 /* baseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = baseViewController.xib; sourceTree = "<group>"; };
-		A4E26D671CF8473F004DFBC3 /* 上午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午1.png"; sourceTree = "<group>"; };
+		A4E26D671CF8473F004DFBC3 /* 白天1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "白天1.png"; sourceTree = "<group>"; };
 		A4E26D681CF8473F004DFBC3 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
 		A4E26D691CF8473F004DFBC3 /* 下午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午1.png"; sourceTree = "<group>"; };
 		A4E26D6B1CF8473F004DFBC3 /* 夜间1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间1.png"; sourceTree = "<group>"; };
@@ -428,6 +429,7 @@
 		A4ED307D1D17CE8A0023E05E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A4ED307F1D17D1B80023E05E /* QR_cn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_cn1.png; sourceTree = "<group>"; };
 		A4ED30801D17D1B80023E05E /* QR_en1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_en1.png; sourceTree = "<group>"; };
+		A4ED30831D17DFE60023E05E /* mode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mode.png; sourceTree = "<group>"; };
 		A4EDDEF01D0122A600733932 /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4EDDEF21D0122AC00733932 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A4EDDEF41D012CEE00733932 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
@@ -821,8 +823,8 @@
 			children = (
 				A4A977BF1CFD306C00099E4F /* launch.png */,
 				A4A977B21CFC845700099E4F /* 夜间.png */,
-				A4A977BD1CFD2F6900099E4F /* 上午.png */,
-				A4E26D671CF8473F004DFBC3 /* 上午1.png */,
+				A4A977BD1CFD2F6900099E4F /* 白天.png */,
+				A4E26D671CF8473F004DFBC3 /* 白天1.png */,
 				A4E26D681CF8473F004DFBC3 /* 下午.png */,
 				A4E26D691CF8473F004DFBC3 /* 下午1.png */,
 				A4E26D6B1CF8473F004DFBC3 /* 夜间1.png */,
@@ -833,6 +835,7 @@
 		A4E26D8D1CFB0CC1004DFBC3 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4ED30831D17DFE60023E05E /* mode.png */,
 				A4ED307D1D17CE8A0023E05E /* logo.png */,
 				A4ED30671D17C60F0023E05E /* csv.png */,
 				A4ED30681D17C60F0023E05E /* xls.png */,
@@ -1060,11 +1063,12 @@
 				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
 				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
 				A48D38021D06C9C5005B87A5 /* equal1.png in Resources */,
+				A4ED30841D17DFE60023E05E /* mode.png in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4A977B91CFC8AFB00099E4F /* expend.png in Resources */,
 				A48D38011D06C9C5005B87A5 /* delete1.png in Resources */,
 				A4ED305B1D17B6150023E05E /* registerViewController.xib in Resources */,
-				A4A977BE1CFD2F6900099E4F /* 上午.png in Resources */,
+				A4A977BE1CFD2F6900099E4F /* 白天.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
 				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
 				A4EDDEFF1D015CF800733932 /* pie.png in Resources */,
@@ -1075,7 +1079,7 @@
 				A4ED30721D17CA810023E05E /* aboutViewController.xib in Resources */,
 				A40E28EC1D0EB36A0063247B /* summaryViewController.xib in Resources */,
 				A4A977A71CFC3E6C00099E4F /* itemDetailViewController.xib in Resources */,
-				A4E26D6D1CF8473F004DFBC3 /* 上午1.png in Resources */,
+				A4E26D6D1CF8473F004DFBC3 /* 白天1.png in Resources */,
 				A4ED30551D17B6150023E05E /* backupViewController.xib in Resources */,
 				A4ED30591D17B6150023E05E /* loginViewController.xib in Resources */,
 				A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */,

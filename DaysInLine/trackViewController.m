@@ -343,7 +343,7 @@
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if (!showModel) {
         backView.backgroundColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
-    }else if ([showModel isEqualToString:@"上午"]) {
+    }else if ([showModel isEqualToString:@"白天"]) {
         backView.backgroundColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
     }else
     {

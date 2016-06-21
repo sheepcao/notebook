@@ -90,6 +90,20 @@
                                             <action selector="showCalendar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="49l-BF-imo"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dH-fp-xIt">
+                                        <rect key="frame" x="55" y="32" width="46" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="Pyr-xv-WuT"/>
+                                            <constraint firstAttribute="height" constant="40" id="m2M-jh-OiD"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="12" minY="10" maxX="12" maxY="10"/>
+                                        <state key="normal" title="modes" image="mode.png">
+                                            <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showModes:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ixs-tx-z5W"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -98,11 +112,13 @@
                                     <constraint firstItem="0uu-gE-6ik" firstAttribute="centerX" secondItem="Hi3-Z2-1e0" secondAttribute="centerX" id="6kk-rD-2lj"/>
                                     <constraint firstItem="2BQ-d1-Ohs" firstAttribute="centerX" secondItem="W2v-oR-FuS" secondAttribute="centerX" id="9tE-vV-aqM"/>
                                     <constraint firstItem="0uu-gE-6ik" firstAttribute="leading" secondItem="Hi3-Z2-1e0" secondAttribute="leading" constant="25" id="ARJ-BG-Hg4"/>
+                                    <constraint firstItem="9dH-fp-xIt" firstAttribute="centerY" secondItem="A0L-Be-Jme" secondAttribute="centerY" id="Air-az-d9Z"/>
                                     <constraint firstItem="D98-Bk-Bhz" firstAttribute="centerY" secondItem="W2v-oR-FuS" secondAttribute="centerY" constant="3" id="BJ7-8W-hrl"/>
                                     <constraint firstItem="2BQ-d1-Ohs" firstAttribute="centerY" secondItem="W2v-oR-FuS" secondAttribute="centerY" id="J6a-8x-GfL"/>
                                     <constraint firstItem="2BQ-d1-Ohs" firstAttribute="width" secondItem="W2v-oR-FuS" secondAttribute="width" id="Rgc-2b-fpz"/>
                                     <constraint firstItem="0uu-gE-6ik" firstAttribute="top" secondItem="W2v-oR-FuS" secondAttribute="bottom" constant="15" id="T3B-aN-2Y0"/>
                                     <constraint firstItem="TBJ-Td-NpU" firstAttribute="leading" secondItem="0uu-gE-6ik" secondAttribute="leading" id="ZUh-vJ-Ncw"/>
+                                    <constraint firstItem="9dH-fp-xIt" firstAttribute="leading" secondItem="A0L-Be-Jme" secondAttribute="trailing" constant="1" id="e6S-w7-K8W"/>
                                     <constraint firstItem="W2v-oR-FuS" firstAttribute="centerX" secondItem="Hi3-Z2-1e0" secondAttribute="centerX" id="hl9-DW-toh"/>
                                     <constraint firstAttribute="bottom" secondItem="0uu-gE-6ik" secondAttribute="bottom" id="qJl-fz-DxO"/>
                                     <constraint firstItem="A0L-Be-Jme" firstAttribute="leading" secondItem="Hi3-Z2-1e0" secondAttribute="leading" constant="8" id="sVg-5U-OkB"/>
@@ -137,5 +153,6 @@
     <resources>
         <image name="calendar.png" width="262" height="210"/>
         <image name="menu.png" width="200" height="200"/>
+        <image name="mode.png" width="128" height="128"/>
     </resources>
 </document>

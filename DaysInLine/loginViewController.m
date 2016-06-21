@@ -100,19 +100,21 @@
 //    [content addSubview:logoView];
 //    self.contentView = content;
     
-    UILabel *logoView =[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/6, SCREEN_HEIGHT/6.6, SCREEN_WIDTH*2/3, SCREEN_WIDTH/6)];
-    [logoView setText:NSLocalizedString(@"Days In Line",nil)];
-    logoView.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:48.5f];
-    if (logoView.text.length>6) {
-        logoView.font =  [UIFont fontWithName:@"HelveticaNeue" size:32.5f];
-    }
-    [logoView setTextColor:normalColor];
-    logoView.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.35];
-    logoView.shadowOffset =  CGSizeMake(0.66, 1.66);
-    
-    logoView.textAlignment = NSTextAlignmentCenter;
-    
-    logoView.layer.cornerRadius = logoView.frame.size.width/6.4;
+//    UILabel *logoView =[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/6, SCREEN_HEIGHT/6.6, SCREEN_WIDTH*2/3, SCREEN_WIDTH/6)];
+//    [logoView setText:NSLocalizedString(@"Days In Line",nil)];
+//    logoView.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:48.5f];
+//    if (logoView.text.length>6) {
+//        logoView.font =  [UIFont fontWithName:@"HelveticaNeue" size:32.5f];
+//    }
+//    [logoView setTextColor:normalColor];
+//    logoView.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.35];
+//    logoView.shadowOffset =  CGSizeMake(0.66, 1.66);
+//    
+//    logoView.textAlignment = NSTextAlignmentCenter;
+//    
+//    logoView.layer.cornerRadius = logoView.frame.size.width/6.4;
+    UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3, topBarHeight+ 10, SCREEN_WIDTH/3, SCREEN_WIDTH/3)];
+    [logoView setImage:[UIImage imageNamed:@"logo.png"]];
     [content addSubview:logoView];
     self.contentView = content;
     

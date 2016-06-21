@@ -6,6 +6,7 @@
 //  Copyright © 2016 sheepcao. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "homeViewController.h"
 #import "SideMenuViewController.h"
 #import "MFSideMenu.h"
@@ -31,6 +32,7 @@
 @property (nonatomic,strong)  UIView *tableMidLine;
 @property (nonatomic,strong) UIButton *addNewBtn;
 @property (nonatomic,strong) UIButton *trackBtn;
+@property (nonatomic,strong) UIView *myDimView;
 
 @end
 
@@ -41,7 +43,7 @@
 - (void)configUIAppearance{
     NSLog(@"home config ui ");
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
-    if ([showModel isEqualToString:@"上午"]) {
+    if ([showModel isEqualToString:@"白天"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"夜间"]) {
         self.myTextColor = TextColor2;
@@ -49,7 +51,7 @@
 
     NSString *backName;
     if (!showModel) {
-        backName = @"上午.png";
+        backName = @"白天.png";
     }else
     {
         backName  = [NSString stringWithFormat:@"%@.png",showModel];
@@ -94,6 +96,18 @@
     [self.trackBtn setTitleColor:self.myTextColor forState:UIControlStateNormal];
     self.trackBtn.layer.borderColor = self.myTextColor.CGColor;
     
+    myTextLabel *workLabel = (myTextLabel *)[summaryView viewWithTag:11];
+    myTextLabel *lifeLabel = (myTextLabel *)[summaryView viewWithTag:22];
+
+    [workLabel setTextColor:self.myTextColor];
+    [lifeLabel setTextColor:self.myTextColor];
+    [self.tableMidLine setBackgroundColor:self.myTextColor];
+    
+    UIView *bottomLine1 = [workLabel viewWithTag:10];
+    bottomLine1.backgroundColor = self.myTextColor;
+    UIView *bottomLine2 = [lifeLabel viewWithTag:10];
+    bottomLine2.backgroundColor = self.myTextColor;
+
 }
 
 
@@ -323,6 +337,8 @@
     UIView *bottomLine = [[UIView alloc ] initWithFrame:CGRectMake(workLabel.frame.size.width/8, workLabel.frame.size.height - 11, workLabel.frame.size.width*3/4, 1)];
     bottomLine.backgroundColor = self.myTextColor;
     [workLabel addSubview:bottomLine];
+    bottomLine.tag = 10;
+    workLabel.tag = 11;
     [summaryView addSubview:workLabel];
     
     myTextLabel *lifeLabel = [[myTextLabel alloc] initWithFrame:CGRectMake(summaryView.frame.size.width/2, 0, summaryView.frame.size.width/2, summaryViewHeight) andColor:self.myTextColor];
@@ -330,6 +346,8 @@
     UIView *bottomLine2 = [[UIView alloc ] initWithFrame:CGRectMake(workLabel.frame.size.width/8, workLabel.frame.size.height - 11, workLabel.frame.size.width*3/4, 1)];
     bottomLine2.backgroundColor = self.myTextColor;
     [lifeLabel addSubview:bottomLine2];
+    bottomLine2.tag = 10;
+    lifeLabel.tag =22;
     [summaryView addSubview:lifeLabel];
 }
 
@@ -338,6 +356,182 @@
     
     calendarViewController *calendarVC = [[calendarViewController alloc] initWithNibName:@"calendarViewController" bundle:nil];
     [self.navigationController pushViewController:calendarVC animated:YES];
+}
+
+- (IBAction)showModes:(id)sender {
+    
+    [MobClick event:@"showModel"];
+    
+    UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];
+    [self.view addSubview:dimView];
+    self.myDimView = dimView;
+    
+    UIView *gestureView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*3/4)];
+    gestureView.backgroundColor = [UIColor clearColor];
+    [dimView addSubview:gestureView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [gestureView addGestureRecognizer:tap];
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT/4)];
+    contentView.tag = 100;
+    contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:0.9f];
+    [dimView addSubview:contentView];
+    [UIView animateWithDuration:0.32f delay:0.15f options:UIViewAnimationOptionLayoutSubviews animations:^{
+        if (contentView) {
+            [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT*3/4, contentView.frame.size.width, contentView.frame.size.height)];
+        }
+    } completion:nil ];
+    
+    
+    UILabel *autoChangeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, contentView.frame.size.height*2/5)];
+    [autoChangeTitle setText:NSLocalizedString(@"自动调整",nil) ];
+    autoChangeTitle.textAlignment = NSTextAlignmentLeft;
+    [contentView addSubview:autoChangeTitle];
+    
+    UISwitch *enableAutoSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(contentView.frame.size.width-110, autoChangeTitle.frame.size.height/2 -20, 80, 40)];
+    enableAutoSwitch.tintColor = [UIColor colorWithRed:0.39 green:0.39 blue:0.42 alpha:0.88];
+    [enableAutoSwitch setCenter:CGPointMake(contentView.frame.size.width-70, autoChangeTitle.center.y)];
+    [contentView addSubview:enableAutoSwitch];
+    NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
+    if ([autoSwitchString isEqualToString:@"on"])
+    {
+        enableAutoSwitch.on = YES;
+    }else
+    {
+        enableAutoSwitch.on = NO;
+    }
+    [enableAutoSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    
+    UILabel *modelTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, contentView.frame.size.height*2/5, 80, contentView.frame.size.height*3/5)];
+    [modelTitle setText:NSLocalizedString(@"显示模式",nil)];
+    modelTitle.textAlignment = NSTextAlignmentLeft;
+    [contentView addSubview:modelTitle];
+    
+    
+    UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(0, contentView.frame.size.height*2/5, contentView.frame.size.width, 0.65f)];
+    midline.backgroundColor = [UIColor darkGrayColor];
+    [contentView addSubview:midline];
+    
+    NSArray *timeTitle = @[@"白天",@"夜间"];
+    for (int i = 2; i>0; i--) {
+        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 85 - (2-i) *(60+45), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 60, 40)];
+        timeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        [timeButton setTitle:NSLocalizedString(timeTitle[i - 1] ,nil)forState:UIControlStateNormal];
+        timeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        [timeButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        timeButton.tag = i;
+        [timeButton addTarget:self action:@selector(timeSelect:) forControlEvents:UIControlEventTouchUpInside];
+        [contentView addSubview:timeButton];
+        
+        UIView *selectedBar = [[UIView alloc] initWithFrame:CGRectMake(0, timeButton.frame.size.height-3, timeButton.frame.size.width, 3)];
+        selectedBar.backgroundColor = [UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9];
+        selectedBar.tag = 10;
+        [timeButton addSubview:selectedBar];
+        [selectedBar setHidden:YES];
+    }
+    
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
+    for (int i = 0 ; i < 2; i++) {
+        if ([showModel isEqualToString:timeTitle[i]])
+        {
+            UIButton *button = (UIButton *)[contentView viewWithTag:i+1];
+            
+            [button setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
+            UIView *selectBar = (UIView *)[button viewWithTag:10];
+            [selectBar setHidden:NO];
+            break;
+        }
+    }
+}
+
+-(void)timeSelect:(UIButton *)sender
+{
+    for (int i =2; i>0; i--) {
+        UIView *superView = sender.superview;
+        UIButton *button = (UIButton *)[superView viewWithTag:i];
+        [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+        UIView *selectBar = (UIView *)[button viewWithTag:10];
+        [selectBar setHidden:YES];
+        
+    }
+    
+    [sender setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
+    sender.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
+    UIView *selectBar = (UIView *)[sender viewWithTag:10];
+    [selectBar setHidden:NO];
+    
+    NSArray *timeTitle = @[@"白天",@"夜间"];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:timeTitle[sender.tag - 1] forKey:SHOWMODEL];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
+    
+    if ([timeTitle[sender.tag - 1] isEqualToString:@"白天"]) {
+        self.myTextColor = TextColor0;
+    }else if([timeTitle[sender.tag - 1] isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor2;
+    }
+
+    [self.maintableView reloadData];
+    [self configTextColor];
+    
+}
+-(void)switchAction:(UISwitch *)sender
+{
+    if (sender.on) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"on" forKey:AUTOSWITCH];
+    }else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"off" forKey:AUTOSWITCH];
+    }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate judgeTimeFrame];
+    
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
+    NSArray *timeTitle = @[@"白天",@"夜间"];
+    UIView *contentView = [self.myDimView viewWithTag:100];
+    
+    //还原未选状态
+    for (int i =2 ; i>0; i--) {
+        UIView *superView = sender.superview;
+        UIButton *button = (UIButton *)[superView viewWithTag:i];
+        [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+        UIView *selectBar = (UIView *)[button viewWithTag:10];
+        [selectBar setHidden:YES];
+        
+    }
+    //选择一个模式
+    for (int i = 0 ; i < 2; i++) {
+        if ([showModel isEqualToString:timeTitle[i]])
+        {
+            UIButton *button = (UIButton *)[contentView viewWithTag:i+1];
+            
+            [button setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
+            UIView *selectBar = (UIView *)[button viewWithTag:10];
+            [selectBar setHidden:NO];
+            break;
+        }
+    }
+    
+}
+-(void)dismissKeyboard
+{
+    UIView *contentView = [self.myDimView viewWithTag:100];
+    [UIView animateWithDuration:0.32f animations:^{
+        if (contentView) {
+            [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT, contentView.frame.size.width, contentView.frame.size.height)];
+        }
+    } completion:^(BOOL isfinished){
+        [self.myDimView removeFromSuperview];
+    }];
 }
 
 - (IBAction)configConstellation:(id)sender {

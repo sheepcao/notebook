@@ -253,7 +253,7 @@
     }
     
     if (hour>6 &&hour<18) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"上午" forKey:SHOWMODEL];
+        [[NSUserDefaults standardUserDefaults] setObject:@"白天" forKey:SHOWMODEL];
     }else
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"夜间" forKey:SHOWMODEL];

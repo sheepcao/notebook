@@ -66,7 +66,7 @@
 - (void)configUIAppearance{
     //    NSLog(@"sidebar config ui ");
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
-    if ([showModel isEqualToString:@"上午"]) {
+    if ([showModel isEqualToString:@"白天"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"夜间"]) {
         self.myTextColor = TextColor2;
@@ -74,7 +74,7 @@
     NSString *backName;
     
     if (!showModel) {
-        backName = @"上午1.png";
+        backName = @"白天1.png";
     }else
     {
         backName  = [NSString stringWithFormat:@"%@1.png",showModel];
@@ -97,7 +97,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SCREEN_HEIGHT/5;
+    return SCREEN_HEIGHT/self.menuArray.count;
     
 }
 

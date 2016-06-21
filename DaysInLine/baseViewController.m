@@ -20,7 +20,7 @@
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if (!showModel) {
         self.myTextColor = normalColor;
-    }else if ([showModel isEqualToString:@"上午"]) {
+    }else if ([showModel isEqualToString:@"白天"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"夜间"]) {
         self.myTextColor = TextColor2;
@@ -48,14 +48,14 @@
 - (void)configUIAppearance{
 //    NSLog(@"base config ui ");
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
-    if ([showModel isEqualToString:@"上午"]) {
+    if ([showModel isEqualToString:@"白天"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"夜间"]) {
         self.myTextColor = TextColor3;
     }
     NSString *backName;
     if (!showModel) {
-        backName = @"上午.png";
+        backName = @"白天.png";
     }else
     {
         backName  = [NSString stringWithFormat:@"%@.png",showModel];
