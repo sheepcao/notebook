@@ -313,22 +313,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DaysInLine/homeViewController.m"
-            timestampString = "488180751.485535"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "726"
-            endingLineNumber = "726"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DaysInLine/itemDetailViewController.m"
             timestampString = "487493000.574393"
             startingColumnNumber = "9223372036854775807"
@@ -506,7 +490,7 @@
                   moduleName = "DaysInLine"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/trackViewController.m"
-                  timestampString = "488097706.062017"
+                  timestampString = "488189835.551578"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "650"
@@ -521,7 +505,7 @@
                   moduleName = "DaysInLine"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/daysinline_refactor/DaysInLine/DaysInLine/trackViewController.m"
-                  timestampString = "488097706.062291"
+                  timestampString = "488189835.551703"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "650"
@@ -890,11 +874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/CommonUtility.m"
-            timestampString = "488097695.053003"
+            timestampString = "488189084.625495"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
+            startingLineNumber = "682"
+            endingLineNumber = "682"
             landmarkName = "-validateEmail:"
             landmarkType = "5">
          </BreakpointContent>
@@ -906,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DaysInLine/CommonUtility.m"
-            timestampString = "488097695.053003"
+            timestampString = "488189084.625495"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "687"
-            endingLineNumber = "687"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
             landmarkName = "-validatePassword:"
             landmarkType = "5">
          </BreakpointContent>

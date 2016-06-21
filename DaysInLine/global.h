@@ -78,7 +78,7 @@
 
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"
 
-#define constellationService @"http://cgx.nwpu.info/simpleBuService/constellation.php"
+#define constellationService @"http://cgx.nwpu.info/daysinline/constellation.php"
 
 #define emailService @"http://cgx.nwpu.info/daysinline/sendEmail.php"
 #define backupURL @"http://cgx.nwpu.info/daysinline/uploads.php"

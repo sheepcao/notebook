@@ -563,9 +563,11 @@
     
     FMResultSet *rs = [db executeQuery:selectLuckExist];
     if ([rs next]) {
-        NSString *luckString = [rs stringForColumn:@"content"];
-        [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n\t%@",constellation,luckString]];
+        NSString *luckWork = [rs stringForColumn:@"work"];
+        NSString *luckLife = [rs stringForColumn:@"life"];
+        
         [db close];
+        [textLabel makeText:[NSString stringWithFormat:@"工作:\t%@\n\n生活:\t%@",luckWork,luckLife]];
     }else
     {
         [db close];
@@ -584,13 +586,14 @@
             }
             
             NSArray *nameArray = [success objectForKey:@"name"];
-            NSArray *contentArray = [success objectForKey:@"content"];
+            NSArray *lifeArray = [success objectForKey:@"life"];
+            NSArray *workArray = [success objectForKey:@"work"];
             NSString *startDate = [success objectForKey:@"start_date"][0];
             NSString *week = [success objectForKey:@"week"][0];
             
             NSLog(@"%@",startDate);
             NSLog(@"%@",nameArray[0]);
-            NSLog(@"%@",contentArray[0]);
+            NSLog(@"%@",lifeArray[0]);
             NSLog(@"%@",week);
             if (![db open]) {
                 NSLog(@"Could not open db.");
@@ -598,7 +601,7 @@
                 return ;
             }
             for (int i = 0; i<nameArray.count; i++) {
-                BOOL sql = [db executeUpdate:@"insert into MONEYLUCK (constellation,content,start_date,week_sequence) values (?,?,?,?)",nameArray[i],contentArray[i],startDate,week];
+                BOOL sql = [db executeUpdate:@"insert into MONEYLUCK (constellation,life,work,start_date,week_sequence) values (?,?,?,?,?)",nameArray[i],lifeArray[i],workArray[i],startDate,week];
                 if (!sql) {
                     NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
                 }
@@ -607,9 +610,11 @@
             NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@' and constellation = '%@'",dateString,constellation];
             FMResultSet *rs = [db executeQuery:selectLuckExist];
             if ([rs next]) {
-                NSString *luckString = [rs stringForColumn:@"content"];
+                NSString *luckWork = [rs stringForColumn:@"work"];
+                NSString *luckLife = [rs stringForColumn:@"life"];
+
                 [db close];
-                [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n\t%@",constellation,luckString]];
+                [textLabel makeText:[NSString stringWithFormat:@"工作:\t%@\n\n生活:\t%@",luckWork,luckLife]];
             }
             
             [hud hide:YES];
@@ -620,11 +625,12 @@
             NSString *selectLuckLast = [NSString stringWithFormat:@"select * from MONEYLUCK where constellation = '%@' order by start_date desc LIMIT 1",constellation];
             FMResultSet *rs = [db executeQuery:selectLuckLast];
             if ([rs next]) {
-                NSString *luckString = [rs stringForColumn:@"content"];
-                [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n\t%@",constellation,luckString]];
+                NSString *luckWork = [rs stringForColumn:@"work"];
+                NSString *luckLife = [rs stringForColumn:@"life"];
+                [textLabel makeText:[NSString stringWithFormat:@"工作:\t%@\n\n生活:\t%@",luckWork,luckLife]];
             }else
             {
-                [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n \t网络似乎不太给力 =.=!",constellation]];
+                [textLabel makeText:[NSString stringWithFormat:@"%@:\n \t网络似乎不太给力 =.=!",constellation]];
             }
 
             [db close];

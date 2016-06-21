@@ -541,7 +541,17 @@
     constellView.constellPicker.dataSource = self;
     constellView.constellDelegate = self;
     [constellView addGesture];
-    [constellView.constellPicker selectRow:12*1000 inComponent:0 animated:NO];
+    NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
+
+    NSInteger row = 0;
+    for (int i = 0; i<constellationList.count; i ++) {
+        if ([Constellation isEqualToString:[constellationList[i] componentsSeparatedByString:@" "][0]]) {
+            row = i;
+            break;
+        }
+    }
+    [constellView.constellPicker selectRow:12*1000 + row inComponent:0 animated:NO];
+
     self.myConstellView = constellView;
     [self.view addSubview:constellView];
     

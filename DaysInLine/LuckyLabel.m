@@ -37,15 +37,15 @@
     
     if (IS_IPHONE_5_OR_LESS) {
         fontSize = 12.5f;
-        lineSpace = 0.27f;
+        lineSpace = 0.33f;
     }else if(IS_IPHONE_6)
     {
-        fontSize = 14.0f;
-        lineSpace = 0.43;
+        fontSize = 13.0f;
+        lineSpace = 0.4;
     }else
     {
-        fontSize = 14.5f;
-        lineSpace = 0.43;
+        fontSize = 13.5f;
+        lineSpace = 0.41;
     }
     
     
@@ -55,14 +55,14 @@
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
                                                    }];
     
-    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(7 * (CGFloat)M_PI / 180), 1, 0, 0);
+    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5.2 * (CGFloat)M_PI / 180), 1, 0, 0);
     attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
     self.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
     
     NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:text];
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
+    [style setLineSpacing:attributeFontDescriptor.pointSize *lineSpace];
     [attrString addAttribute:NSParagraphStyleAttributeName
                        value:style
                        range:NSMakeRange(0, attrString.length)];
