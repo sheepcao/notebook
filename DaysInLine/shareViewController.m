@@ -145,9 +145,7 @@
 #pragma mark - 配置分享信息
 - (OSMessage *)shareMessage {
     OSMessage *message = [[OSMessage alloc] init];
-//    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
-//    fmt.dateFormat = @"yyyy年MM月dd日HH时mm分ss秒";
-//    NSString *now = [fmt stringFromDate:[NSDate date]];
+
     message.title = [NSString stringWithFormat:NSLocalizedString(@"DaysInLine",nil)];
     message.image = [UIImage imageNamed:@"icon"];
     // 缩略图

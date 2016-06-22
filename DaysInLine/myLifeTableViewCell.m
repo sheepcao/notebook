@@ -119,15 +119,17 @@
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:attributeFontDescriptor.pointSize *0.41];
+    [style setAlignment:NSTextAlignmentRight];
     [attributedNote addAttribute:NSParagraphStyleAttributeName
                        value:style
                        range:NSMakeRange(0, srcNote.length)];
 
 
+    
 
     self.category.attributedText = attributedCategory;
     self.note.attributedText = attributedNote;
-    
+
     if ([self.note.text isEqualToString:@""]) {
         [self.category setFrame:CGRectMake(self.line.frame.origin.x  + self.line.frame.size.width, 7, SCREEN_WIDTH * 22/66, rowHeight-7*2)];
     }else

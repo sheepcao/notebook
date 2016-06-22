@@ -20,6 +20,8 @@
 		A40E28F91D0EB84B0063247B /* itemRATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28F21D0EB84B0063247B /* itemRATableViewCell.xib */; };
 		A40E28FA1D0EB84B0063247B /* RATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28F41D0EB84B0063247B /* RATableViewCell.m */; };
 		A40E28FB1D0EB84B0063247B /* RATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28F51D0EB84B0063247B /* RATableViewCell.xib */; };
+		A43726461D194C7300734588 /* startImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A43726451D194C7300734588 /* startImage.png */; };
+		A43726481D1A346100734588 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A43726471D1A346100734588 /* icon.png */; };
 		A48D37F61D056E93005B87A5 /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37F51D056E93005B87A5 /* add1.png */; };
 		A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */; };
 		A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */; };
@@ -58,7 +60,6 @@
 		A4E26C8E1CF84042004DFBC3 /* homeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E26C8D1CF84042004DFBC3 /* homeViewController.m */; };
 		A4E26C911CF84042004DFBC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C8F1CF84042004DFBC3 /* Main.storyboard */; };
 		A4E26C931CF84042004DFBC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C921CF84042004DFBC3 /* Assets.xcassets */; };
-		A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C941CF84042004DFBC3 /* LaunchScreen.storyboard */; };
 		A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26C9F1CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png */; };
 		A4E26CA61CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26CA01CF841CA004DFBC3 /* FlatDatePicker-Icon-Check@2x.png */; };
 		A4E26CA71CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26CA11CF841CA004DFBC3 /* FlatDatePicker-Icon-Close.png */; };
@@ -197,6 +198,8 @@
 		A40E28F31D0EB84B0063247B /* RATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RATableViewCell.h; sourceTree = "<group>"; };
 		A40E28F41D0EB84B0063247B /* RATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RATableViewCell.m; sourceTree = "<group>"; };
 		A40E28F51D0EB84B0063247B /* RATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RATableViewCell.xib; sourceTree = "<group>"; };
+		A43726451D194C7300734588 /* startImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startImage.png; sourceTree = "<group>"; };
+		A43726471D1A346100734588 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A48D37F51D056E93005B87A5 /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		A48D37F81D0693E8005B87A5 /* goalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalDetailViewController.h; sourceTree = "<group>"; };
 		A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalDetailViewController.m; sourceTree = "<group>"; };
@@ -252,7 +255,6 @@
 		A4E26C8D1CF84042004DFBC3 /* homeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeViewController.m; sourceTree = "<group>"; };
 		A4E26C901CF84042004DFBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4E26C921CF84042004DFBC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A4E26C951CF84042004DFBC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4E26C971CF84042004DFBC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4E26C9D1CF841A3004DFBC3 /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		A4E26C9F1CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Check.png"; sourceTree = "<group>"; };
@@ -585,7 +587,6 @@
 				A4E26D951CFB0F8F004DFBC3 /* calendar */,
 				A49E62461CFB2E2D0047011B /* cells */,
 				A4E26C921CF84042004DFBC3 /* Assets.xcassets */,
-				A4E26C941CF84042004DFBC3 /* LaunchScreen.storyboard */,
 				A4E26C971CF84042004DFBC3 /* Info.plist */,
 				A4E26C861CF84042004DFBC3 /* Supporting Files */,
 			);
@@ -595,8 +596,10 @@
 		A4E26C861CF84042004DFBC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A43726451D194C7300734588 /* startImage.png */,
 				A4ED307F1D17D1B80023E05E /* QR_cn1.png */,
 				A4ED30801D17D1B80023E05E /* QR_en1.png */,
+				A43726471D1A346100734588 /* icon.png */,
 				A4E26D8D1CFB0CC1004DFBC3 /* components */,
 				A4E26D651CF8473F004DFBC3 /* backgrounds */,
 				A4E26C871CF84042004DFBC3 /* main.m */,
@@ -1063,6 +1066,7 @@
 				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
 				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
 				A48D38021D06C9C5005B87A5 /* equal1.png in Resources */,
+				A43726461D194C7300734588 /* startImage.png in Resources */,
 				A4ED30841D17DFE60023E05E /* mode.png in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4A977B91CFC8AFB00099E4F /* expend.png in Resources */,
@@ -1070,7 +1074,6 @@
 				A4ED305B1D17B6150023E05E /* registerViewController.xib in Resources */,
 				A4A977BE1CFD2F6900099E4F /* 白天.png in Resources */,
 				A4E26D6E1CF8473F004DFBC3 /* 下午.png in Resources */,
-				A4E26C961CF84042004DFBC3 /* LaunchScreen.storyboard in Resources */,
 				A4EDDEFF1D015CF800733932 /* pie.png in Resources */,
 				A4ED307A1D17CB9B0023E05E /* exportViewController.xib in Resources */,
 				A4EDDEF81D012CEE00733932 /* historyViewController.xib in Resources */,
@@ -1104,6 +1107,7 @@
 				A4E26D8B1CFB0CBC004DFBC3 /* glow.png in Resources */,
 				A40E28DF1D0D42710063247B /* 提醒.png in Resources */,
 				A4ED30621D17C09B0023E05E /* TermUseViewController.xib in Resources */,
+				A43726481D1A346100734588 /* icon.png in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
 				A4E26C911CF84042004DFBC3 /* Main.storyboard in Resources */,
 				A4ED30821D17D1B80023E05E /* QR_en1.png in Resources */,
@@ -1269,14 +1273,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		A4E26C941CF84042004DFBC3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A4E26C951CF84042004DFBC3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1365,8 +1361,9 @@
 			baseConfigurationReference = AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = DaysInLine/DaysInLine.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CAO GUANGXU (JTX9TS223Q)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1377,6 +1374,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.DaysInLine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1385,8 +1383,9 @@
 			baseConfigurationReference = 79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = DaysInLine/DaysInLine.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CAO GUANGXU (DBBLJY69ER)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1397,6 +1396,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.DaysInLine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d50f0d26-4a62-4112-b2b6-0cee1a5144f6";
 			};
 			name = Release;
 		};

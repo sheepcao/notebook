@@ -117,6 +117,7 @@
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:attributeFontDescriptor.pointSize *0.41];
+    [style setAlignment:NSTextAlignmentLeft];
     [attributedNote addAttribute:NSParagraphStyleAttributeName
                        value:style
                        range:NSMakeRange(0, srcNote.length)];

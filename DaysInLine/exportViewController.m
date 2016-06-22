@@ -134,6 +134,9 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
         double startTime =  [result doubleForColumn:@"startTime"];
         double endTime =  [result doubleForColumn:@"endTime"];
 
+        NSString *startString = [[CommonUtility sharedCommonUtility] timeInLine:((int)startTime)];
+        NSString *endString = [[CommonUtility sharedCommonUtility] timeInLine:((int)endTime)];
+        
         [oneItemDict setObject:[result stringForColumn:@"TITLE"] forKey:@"item_category"];
         [oneItemDict setObject:[result stringForColumn:@"mainText"] forKey:@"item_description"];
         if (type == 0) {
@@ -143,8 +146,8 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
             [oneItemDict setObject:NSLocalizedString(@"生活",nil) forKey:@"item_type"];
         }
         [oneItemDict setObject:[result stringForColumn:@"date"] forKey:@"target_date"];
-        [oneItemDict setObject:[NSString stringWithFormat:@"%.2f",startTime] forKey:@"startTime"];
-        [oneItemDict setObject:[NSString stringWithFormat:@"%.2f",endTime] forKey:@"endTime"];
+        [oneItemDict setObject:[NSString stringWithFormat:@"%@",startString] forKey:@"startTime"];
+        [oneItemDict setObject:[NSString stringWithFormat:@"%@",endString] forKey:@"endTime"];
 
         [self.flowData addObject:oneItemDict];
     }
@@ -204,7 +207,7 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     NSString *xlsstring = @"";
     
     NSInteger numberOfRows =1;
-    NSInteger numberOfCols = 5;
+    NSInteger numberOfCols = 6;
     numberOfRows = numberOfRows + self.flowData.count;
     
     NSString *colomnFormat = [NSString stringWithFormat:@"<Table ss:ExpandedColumnCount=\"%ld\" ss:ExpandedRowCount=\"%ld\" x:FullColumns=\"1\" x:FullRows=\"1\">",(long)numberOfCols,(long)numberOfRows];

@@ -16,6 +16,7 @@
 #import "itemRATableViewCell.h"
 #import "CommonUtility.h"
 #import "itemObj.h"
+#import "exportViewController.h"
 
 @interface summaryViewController ()<RATreeViewDelegate, RATreeViewDataSource>
 @property(nonatomic,strong)  RATreeView * treeView;
@@ -90,9 +91,9 @@
 }
 -(void)exportVC
 {
-//    exportViewController *myExport = [[exportViewController alloc] initWithNibName:@"exportViewController" bundle:nil];
-//    [self.navigationController pushViewController:myExport animated:YES];
-//    
+    exportViewController *myExport = [[exportViewController alloc] initWithNibName:@"exportViewController" bundle:nil];
+    [self.navigationController pushViewController:myExport animated:YES];
+//
 }
 
 -(void)configTable
@@ -308,7 +309,7 @@
     
     for (NSString *date in monthlyArray) {
         NSMutableArray *oneDayItems = [[NSMutableArray alloc] init];
-        NSString *nextDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: date andDaysToAdd:1];
+//        NSString *nextDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: date andDaysToAdd:1];
         
         FMResultSet *rs = [db executeQuery:@"select * from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by date desc", date,date];
         while ([rs next]) {
