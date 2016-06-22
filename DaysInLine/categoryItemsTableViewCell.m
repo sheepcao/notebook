@@ -17,11 +17,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        
-        
-        self.category = [[UILabel alloc] initWithFrame:CGRectMake(25, 3, (SCREEN_WIDTH-50)*2/3, SCREEN_WIDTH/8.5-3*2)];
-        
-        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 3, (SCREEN_WIDTH-50)/3, self.category.frame.size.height)];
+        self.category = [[UILabel alloc] initWithFrame:CGRectMake(16, 3, (SCREEN_WIDTH-32)*2/3, SCREEN_WIDTH/8.5-3*2)];
+        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 3, (SCREEN_WIDTH-32)/3, self.category.frame.size.height)];
         self.category.textAlignment = NSTextAlignmentLeft;
         self.money.textAlignment = NSTextAlignmentRight;
 

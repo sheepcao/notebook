@@ -27,14 +27,14 @@
         }
         
         CGFloat thisRowHeight = self.frame.size.height;
-        self.seperator = [[UILabel alloc] initWithFrame:CGRectMake(25, thisRowHeight/2-pointRadius, pointRadius*2, pointRadius*2)];
+        self.seperator = [[UILabel alloc] initWithFrame:CGRectMake(16, thisRowHeight/2-pointRadius, pointRadius*2, pointRadius*2)];
         self.seperator.backgroundColor = [UIColor clearColor];
         self.seperator.layer.cornerRadius = pointRadius;
         self.seperator.layer.masksToBounds = YES;
         
-        self.categoryName = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 6, 90, thisRowHeight-6*2)];
+        self.categoryName = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 6, SCREEN_WIDTH-(self.seperator.frame.size.width+self.seperator.frame.origin.x+15)-160, thisRowHeight-6*2)];
         
-        self.MoneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - fontSize*5.5 , 7, fontSize*4.52, thisRowHeight-6*2)];
+        self.MoneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80 , 7, 80, thisRowHeight-6*2)];
         self.MoneyRatio.textAlignment = NSTextAlignmentLeft;
         self.MoneyRatio.adjustsFontSizeToFitWidth = YES;
 
@@ -42,7 +42,7 @@
         [midline setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:midline];
         
-        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryName.frame.origin.x+self.categoryName.frame.size.width, 7, (midline.frame.origin.x - 8 -(self.categoryName.frame.origin.x+self.categoryName.frame.size.width) ), thisRowHeight-6*2)];
+        self.money = [[UILabel alloc] initWithFrame:CGRectMake(midline.frame.origin.x-88, 7, 80, thisRowHeight-6*2)];
         self.categoryName.textAlignment = NSTextAlignmentLeft;
         self.money.textAlignment = NSTextAlignmentRight;
         self.money.adjustsFontSizeToFitWidth = YES;

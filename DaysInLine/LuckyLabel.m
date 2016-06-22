@@ -48,10 +48,13 @@
         lineSpace = 0.41;
     }
     
+    if (text.length > 130) {
+        fontSize -= 2.0f;
+    }
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
-                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
+                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
                                                    }];
     

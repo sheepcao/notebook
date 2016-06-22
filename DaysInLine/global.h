@@ -94,6 +94,7 @@
 #define ThemeChanged  @"modelNotification"
 #define LuckChanged  @"luckNotification"
 
+#define ADMOB_ID @"ca-app-pub-3074684817942615/1126186689"
 
 #define VERSIONNUMBER   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 

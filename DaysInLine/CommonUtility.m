@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Eric Cao/Mady Kou. All rights reserved.
 //
 
+@class GADBannerView;
+@import GoogleMobileAds;
 
 #import "CommonUtility.h"
 #import "itemObj.h"
@@ -13,6 +15,7 @@
 #import "AFHTTPSessionManager.h"
 #import "MBProgressHUD.h"
 #import "categoryObject.h"
+
 
 
 @implementation CommonUtility
@@ -833,5 +836,21 @@
         return  @[NSLocalizedString(@"周日",nil),NSLocalizedString(@"周一",nil),NSLocalizedString(@"周二",nil),NSLocalizedString(@"周三",nil),NSLocalizedString(@"周四",nil),NSLocalizedString(@"周五",nil),NSLocalizedString(@"周六",nil)];
 }
 
+
+-(void)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC
+{
+    GADBannerView *bannerView = [[GADBannerView alloc] init];
+    GADRequest *request = [GADRequest request];
+    bannerView.frame = CGRectMake(0, SCREEN_HEIGHT -SCREEN_WIDTH *50/320 - SpaceBottom, SCREEN_WIDTH, SCREEN_WIDTH *50/320);
+    [view addSubview:bannerView];
+    
+    
+    bannerView.adUnitID = ADMOB_ID;
+    //    request.testDevices = @[
+    //                                @"bf69fad09ecd3e30b0db75ebdd3570ec"  // Eric's iPod Touch
+    //                                ];
+    bannerView.rootViewController = rootVC;
+    [bannerView loadRequest:request];
+}
 
 @end

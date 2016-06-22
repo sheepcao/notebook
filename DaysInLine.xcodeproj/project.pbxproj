@@ -22,6 +22,8 @@
 		A40E28FB1D0EB84B0063247B /* RATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40E28F51D0EB84B0063247B /* RATableViewCell.xib */; };
 		A43726461D194C7300734588 /* startImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A43726451D194C7300734588 /* startImage.png */; };
 		A43726481D1A346100734588 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A43726471D1A346100734588 /* icon.png */; };
+		A437264C1D1A6A1000734588 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A437264B1D1A6A1000734588 /* GoogleMobileAds.framework */; };
+		A437264E1D1A92A900734588 /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A437264D1D1A92A900734588 /* SourceHanSansCN-Normal.ttf */; };
 		A48D37F61D056E93005B87A5 /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37F51D056E93005B87A5 /* add1.png */; };
 		A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */; };
 		A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */; };
@@ -200,6 +202,8 @@
 		A40E28F51D0EB84B0063247B /* RATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RATableViewCell.xib; sourceTree = "<group>"; };
 		A43726451D194C7300734588 /* startImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startImage.png; sourceTree = "<group>"; };
 		A43726471D1A346100734588 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		A437264B1D1A6A1000734588 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		A437264D1D1A92A900734588 /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
 		A48D37F51D056E93005B87A5 /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		A48D37F81D0693E8005B87A5 /* goalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalDetailViewController.h; sourceTree = "<group>"; };
 		A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalDetailViewController.m; sourceTree = "<group>"; };
@@ -455,6 +459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A437264C1D1A6A1000734588 /* GoogleMobileAds.framework in Frameworks */,
 				A4E26D821CF8492B004DFBC3 /* libz.tbd in Frameworks */,
 				A4E26D801CF84922004DFBC3 /* libsqlite3.tbd in Frameworks */,
 				A4E26D7E1CF84914004DFBC3 /* CoreTelephony.framework in Frameworks */,
@@ -824,6 +829,7 @@
 		A4E26D651CF8473F004DFBC3 /* backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				A437264D1D1A92A900734588 /* SourceHanSansCN-Normal.ttf */,
 				A4A977BF1CFD306C00099E4F /* launch.png */,
 				A4A977B21CFC845700099E4F /* 夜间.png */,
 				A4A977BD1CFD2F6900099E4F /* 白天.png */,
@@ -956,6 +962,7 @@
 		C80F2DC47583D05BFC322F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A437264B1D1A6A1000734588 /* GoogleMobileAds.framework */,
 				A4ED307B1D17CC280023E05E /* StoreKit.framework */,
 				A4E26D811CF8492B004DFBC3 /* libz.tbd */,
 				A4E26D7F1CF84922004DFBC3 /* libsqlite3.tbd */,
@@ -1066,6 +1073,7 @@
 				A4A977FE1D001E1D00099E4F /* checkEventViewController.xib in Resources */,
 				A4A977C81CFD7AD000099E4F /* categoryManagementViewController.xib in Resources */,
 				A48D38021D06C9C5005B87A5 /* equal1.png in Resources */,
+				A437264E1D1A92A900734588 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A43726461D194C7300734588 /* startImage.png in Resources */,
 				A4ED30841D17DFE60023E05E /* mode.png in Resources */,
 				A4E26CA51CF841CA004DFBC3 /* FlatDatePicker-Icon-Check.png in Resources */,

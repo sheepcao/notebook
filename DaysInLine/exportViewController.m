@@ -70,6 +70,13 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     {
         [self showBoughtView];
     }
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        
+    }else
+    {
+        [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+    }
 }
 
 

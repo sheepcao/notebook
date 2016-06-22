@@ -28,6 +28,10 @@
     [self configTopbar];
     [self configDetailTable];
     [self prepareGoalsData];
+    
+
+    [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {

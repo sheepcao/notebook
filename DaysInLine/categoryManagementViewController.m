@@ -63,6 +63,9 @@
 //    [self configSortView];
     [self configTopbar];
     
+    [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

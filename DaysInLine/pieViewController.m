@@ -55,6 +55,13 @@
     [self configTopbar];
     [self configPieWithStartDate:self.startTime AndEndDate:self.endTime];
     [self configDetailTable];
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        
+    }else
+    {
+        [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

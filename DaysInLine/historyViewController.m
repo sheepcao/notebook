@@ -17,7 +17,7 @@
 #import "itemDetailViewController.h"
 #import "checkEventViewController.h"
 #import "topBarView.h"
-@interface historyViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface historyViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     CGFloat bottomHeight;
 }
@@ -60,7 +60,8 @@
                                                 forAction:RZTransitionAction_PresentDismiss];
     
     
-    
+    [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+
 }
 
 -(void)configTable

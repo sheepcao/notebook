@@ -80,6 +80,7 @@
     [self.view addSubview:calendar];
     self.calendar = calendar;
     
+    [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
 
     // Do any additional setup after loading the view from its nib.
 }

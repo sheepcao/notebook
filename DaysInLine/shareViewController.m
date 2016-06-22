@@ -46,17 +46,18 @@
     
 
     
-    XHShareView *shareView = [[XHShareView alloc] initWithFrame:CGRectMake(size.width * 0.1 , size.height - viewHight - 20 - (SCREEN_WIDTH - 320), size.width * 0.8, viewHight)];
-    shareView.delegate = self;
-    [self.view addSubview:shareView];
+
     
     UILabel *share = [[UILabel alloc]init];
     share.textColor = self.myTextColor;
-    share.frame = CGRectMake(SCREEN_WIDTH/6,shareView.frame.origin.y - 60 , SCREEN_WIDTH*2/3,40);
+    share.frame = CGRectMake(SCREEN_WIDTH/6, QRcode.frame.size.height+QRcode.frame.origin.y + 10 , SCREEN_WIDTH*2/3,40);
     share.text =  NSLocalizedString(@"或分享至",nil);
     share.textAlignment = NSTextAlignmentCenter;
-
     [self.view addSubview:share];
+    
+    XHShareView *shareView = [[XHShareView alloc] initWithFrame:CGRectMake(size.width * 0.1 , share.frame.size.height+share.frame.origin.y + 5, size.width * 0.8, viewHight)];
+    shareView.delegate = self;
+    [self.view addSubview:shareView];
 }
 
 - (void)viewWillAppear:(BOOL)animated

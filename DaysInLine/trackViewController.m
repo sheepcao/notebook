@@ -94,6 +94,13 @@
     [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
                                        fromViewController:[self class]
                                                 forAction:RZTransitionAction_PresentDismiss];
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        
+    }else
+    {
+        [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

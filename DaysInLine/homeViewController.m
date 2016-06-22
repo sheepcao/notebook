@@ -111,6 +111,8 @@
 }
 
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -171,19 +173,19 @@
     {
         moneyLuckSpace = 0;
     }
-//    if (IS_IPHONE_5) {
-//        moneyLuckSpace = moneyLuckSpace-58;
-//    }else if (IS_IPHONE_4_OR_LESS)
-//    {
-//        moneyLuckSpace = moneyLuckSpace-76;
-//    }else if(IS_IPHONE_6P)
-//    {
-//        moneyLuckSpace = moneyLuckSpace-20;
-//    }else
-//    {
-//        moneyLuckSpace = moneyLuckSpace-38;
-//    }
-//    
+    if (IS_IPHONE_5) {
+        moneyLuckSpace = moneyLuckSpace-58;
+    }else if (IS_IPHONE_4_OR_LESS)
+    {
+        moneyLuckSpace = moneyLuckSpace-76;
+    }else if(IS_IPHONE_6P)
+    {
+        moneyLuckSpace = moneyLuckSpace-20;
+    }else
+    {
+        moneyLuckSpace = moneyLuckSpace-38;
+    }
+    
     UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.5, moneyLuckSpace+ 18, 1, self.maintableView.frame.size.height)];
     midLine.backgroundColor = self.myTextColor;
     [self.maintableView addSubview:midLine];
@@ -204,8 +206,8 @@
                                        fromViewController:[self class]
                                                 forAction:RZTransitionAction_PresentDismiss];
     
-
-
+    [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
@@ -311,6 +313,8 @@
 
 -(void)configLuckyText
 {
+    self.luckyText.minimumScaleFactor = 0.7f;
+    self.luckyText.adjustsFontSizeToFitWidth =YES;
     
     NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
     if (!Constellation) {

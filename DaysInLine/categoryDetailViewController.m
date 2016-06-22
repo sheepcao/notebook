@@ -56,6 +56,9 @@
 
     [self prepareDataFrom:self.startDate toDate:self.endDate];
     [self.itemsTable reloadData];
+
+    [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+    
     
 }
 

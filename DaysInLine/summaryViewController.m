@@ -36,7 +36,12 @@
     [self prepareDB];
     
     [self configTopbar];
-    [self configTable];}
+    [self configTable];
+    [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

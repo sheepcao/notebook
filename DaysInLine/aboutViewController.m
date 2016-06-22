@@ -29,9 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.rowList = @[NSLocalizedString(@"导出日程",nil),NSLocalizedString(@"邀请好友",nil) ,NSLocalizedString(@"邮件反馈",nil) ,NSLocalizedString(@"前往评分",nil) ,NSLocalizedString(@"用户协议",nil) ,NSLocalizedString(@"联系方式",nil) ];
+    self.rowList = @[NSLocalizedString(@"导出日程",nil),NSLocalizedString(@"去除广告",nil) ,NSLocalizedString(@"邀请好友",nil) ,NSLocalizedString(@"邮件反馈",nil) ,NSLocalizedString(@"前往评分",nil) ,NSLocalizedString(@"联系方式",nil) ];
     [self configTopbar];
     [self configTable];
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        
+    }else
+    {
+        [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,7 +120,12 @@
     [versionLabel setTextColor:self.myTextColor];
     [self.view addSubview:versionLabel];
     
-    self.settingTable = [[UITableView alloc] initWithFrame:CGRectMake(16, versionLabel.frame.origin.y + versionLabel.frame.size.height+30, SCREEN_WIDTH-32, SCREEN_HEIGHT- (versionLabel.frame.origin.y + versionLabel.frame.size.height)) style:UITableViewStylePlain];
+    CGFloat space = 25;
+    if (IS_IPHONE_4_OR_LESS) {
+        space =8;
+    }
+    
+    self.settingTable = [[UITableView alloc] initWithFrame:CGRectMake(16, versionLabel.frame.origin.y + versionLabel.frame.size.height+space, SCREEN_WIDTH-32, SCREEN_HEIGHT- (versionLabel.frame.origin.y + versionLabel.frame.size.height)) style:UITableViewStylePlain];
     self.settingTable.showsVerticalScrollIndicator = NO;
     self.settingTable.scrollEnabled = NO;
     self.settingTable.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -175,20 +187,20 @@
             exportViewController *exportVC = [[exportViewController alloc] initWithNibName:@"exportViewController" bundle:nil];
             [self.navigationController pushViewController:exportVC animated:YES];
         });
-    }else if (indexPath.row == 1)
+    }else if (indexPath.row == 2)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             shareViewController *shareVC = [[shareViewController alloc] initWithNibName:@"shareViewController" bundle:nil];
             [self presentViewController:shareVC animated:YES completion:nil];
         });
-    }else if(indexPath.row == 2)
+    }else if(indexPath.row == 3)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self emailTapped];
         });
-    }else if(indexPath.row == 3)
+    }else if(indexPath.row == 4)
     {
         [MobClick event:@"reviewAPP"];
         
@@ -199,10 +211,6 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL_EN]];
         }
         
-    }else if (indexPath.row == 4)
-    {
-        TermUseViewController *termsVC = [[TermUseViewController alloc] initWithNibName:@"TermUseViewController" bundle:nil];
-        [self.navigationController pushViewController:termsVC animated:YES];
     }
 }
 

@@ -89,4 +89,6 @@
 -(NSString *)timeInLine:(int)timeNumber;
 -(void)createTimer;
 
+-(void)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC;
+
 @end

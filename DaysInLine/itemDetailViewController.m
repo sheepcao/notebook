@@ -78,6 +78,13 @@
     [self configDetailTable];
     [self configBottomView];
     
+    if (IS_IPHONE_5_OR_LESS) {
+        
+    }else
+    {
+        [[CommonUtility sharedCommonUtility] addADWithY:0 InView:self.view OfRootVC:self];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
