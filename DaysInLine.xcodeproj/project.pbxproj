@@ -24,6 +24,8 @@
 		A43726481D1A346100734588 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A43726471D1A346100734588 /* icon.png */; };
 		A437264C1D1A6A1000734588 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A437264B1D1A6A1000734588 /* GoogleMobileAds.framework */; };
 		A437264E1D1A92A900734588 /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A437264D1D1A92A900734588 /* SourceHanSansCN-Normal.ttf */; };
+		A43726541D1BCB6C00734588 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A43726561D1BCB6C00734588 /* InfoPlist.strings */; };
+		A43726591D1BCBFA00734588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A437265B1D1BCBFA00734588 /* Localizable.strings */; };
 		A48D37F61D056E93005B87A5 /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A48D37F51D056E93005B87A5 /* add1.png */; };
 		A48D37FB1D0693E8005B87A5 /* goalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */; };
 		A48D37FC1D0693E8005B87A5 /* goalDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48D37FA1D0693E8005B87A5 /* goalDetailViewController.xib */; };
@@ -204,6 +206,13 @@
 		A43726471D1A346100734588 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A437264B1D1A6A1000734588 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		A437264D1D1A92A900734588 /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
+		A43726511D1BCA9B00734588 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A43726551D1BCB6C00734588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A43726571D1BCB6E00734588 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A43726581D1BCB7000734588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A437265A1D1BCBFA00734588 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A437265C1D1BCBFB00734588 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A437265D1D1BCBFC00734588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A48D37F51D056E93005B87A5 /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		A48D37F81D0693E8005B87A5 /* goalDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalDetailViewController.h; sourceTree = "<group>"; };
 		A48D37F91D0693E8005B87A5 /* goalDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalDetailViewController.m; sourceTree = "<group>"; };
@@ -608,6 +617,8 @@
 				A4E26D8D1CFB0CC1004DFBC3 /* components */,
 				A4E26D651CF8473F004DFBC3 /* backgrounds */,
 				A4E26C871CF84042004DFBC3 /* main.m */,
+				A437265B1D1BCBFA00734588 /* Localizable.strings */,
+				A43726561D1BCB6C00734588 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1031,6 +1042,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A4E26C7A1CF84042004DFBC3;
 			productRefGroup = A4E26C841CF84042004DFBC3 /* Products */;
@@ -1052,6 +1064,7 @@
 				A48D38041D06C9C5005B87A5 /* plus1.png in Resources */,
 				A4E26D151CF842E1004DFBC3 /* Info.plist in Resources */,
 				A4E26D6F1CF8473F004DFBC3 /* 下午1.png in Resources */,
+				A43726541D1BCB6C00734588 /* InfoPlist.strings in Resources */,
 				A4EDDF011D015D7C00733932 /* trend.png in Resources */,
 				A4A977BA1CFC8AFB00099E4F /* expend0.png in Resources */,
 				A4E26D8C1CFB0CBC004DFBC3 /* menu.png in Resources */,
@@ -1116,6 +1129,7 @@
 				A40E28DF1D0D42710063247B /* 提醒.png in Resources */,
 				A4ED30621D17C09B0023E05E /* TermUseViewController.xib in Resources */,
 				A43726481D1A346100734588 /* icon.png in Resources */,
+				A43726591D1BCBFA00734588 /* Localizable.strings in Resources */,
 				A4A977B01CFC42FE00099E4F /* doneBig.png in Resources */,
 				A4E26C911CF84042004DFBC3 /* Main.storyboard in Resources */,
 				A4ED30821D17D1B80023E05E /* QR_en1.png in Resources */,
@@ -1273,10 +1287,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		A43726561D1BCB6C00734588 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A43726551D1BCB6C00734588 /* Base */,
+				A43726571D1BCB6E00734588 /* zh-Hans */,
+				A43726581D1BCB7000734588 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A437265B1D1BCBFA00734588 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A437265A1D1BCBFA00734588 /* Base */,
+				A437265C1D1BCBFB00734588 /* zh-Hans */,
+				A437265D1D1BCBFC00734588 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		A4E26C8F1CF84042004DFBC3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A4E26C901CF84042004DFBC3 /* Base */,
+				A43726511D1BCA9B00734588 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

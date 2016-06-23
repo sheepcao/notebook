@@ -246,8 +246,8 @@ static NSString * const removeADId = @"sheepcao.daysinline.removeAD";
     UIDevice *device = [UIDevice currentDevice];
     
     NSMutableString *emailBody = [NSMutableString string];
-    [picker setSubject:NSLocalizedString(@"意见反馈-DaysInLine",nil) ];
-    [emailBody appendString: NSLocalizedString(@"感谢您使用DaysInLine，请留下您的宝贵意见，我们将与您取得联系!",nil)];
+    [picker setSubject:NSLocalizedString(@"意见反馈-历历在目",nil) ];
+    [emailBody appendString: NSLocalizedString(@"感谢您使用历历在目，请留下您的宝贵意见，我们将与您取得联系!",nil)];
     [emailBody appendFormat:@"\n\n\n\n\n\nApp Ver: %@\n", VERSIONNUMBER];
     [emailBody appendFormat:@"Platform: %@\n", [device platform]];
     [emailBody appendFormat:@"Platform String: %@\n", [device platformString]];

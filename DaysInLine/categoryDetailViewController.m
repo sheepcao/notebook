@@ -138,7 +138,7 @@
     FMResultSet *resultMoney = [db executeQuery:@"select sum(startTime), sum(endTime) from EVENTS where strftime('%s', date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND TITLE = ? AND TYPE = ?", startDate,endDate,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
     if ([resultMoney next]) {
         catgoryTime =  [resultMoney doubleForColumnIndex:1] - [resultMoney doubleForColumnIndex:0];
-        [self.moneyLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),catgoryTime/60]];
+        [self.moneyLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%.2f h",nil),catgoryTime/60]];
         
     }
     

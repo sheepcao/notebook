@@ -193,7 +193,7 @@
     termsLabel.titleLabel.numberOfLines = 2;
     termsLabel.titleLabel.font =  [UIFont fontWithName:@"Avenir-Medium" size:11.0f];
     termsLabel.titleLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:0.88];
-    [termsLabel setTitle:NSLocalizedString(@"点击提交，您将同意并遵守DayInLine的用户使用协议。点击阅读 >",nil) forState:UIControlStateNormal];
+    [termsLabel setTitle:NSLocalizedString(@"点击提交，您将同意并遵守历历在目的用户使用协议。点击阅读 >",nil) forState:UIControlStateNormal];
     [termsLabel addTarget: self action:@selector(userTerms) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:termsLabel];
     

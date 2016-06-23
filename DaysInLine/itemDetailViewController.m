@@ -1090,7 +1090,7 @@
             }else
             {
                 [cell addExpend];
-                [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请选择",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
@@ -1104,7 +1104,7 @@
                 
             }else
             {
-                [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请选择",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
@@ -1118,7 +1118,7 @@
                 
             }else
             {
-                [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请选择",nil)forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
@@ -1131,7 +1131,7 @@
                 
             }else
             {
-                [cell.rightText setTitle:@"请输入" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请输入",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal] ;
             }
             break;
@@ -1140,7 +1140,7 @@
             [cell.leftText  setText:NSLocalizedString(@"语音备注",nil)] ;
             if( [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil])
             {
-                [cell.rightText setTitle:@"播放(长按重录)" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"播放(长按重录)",nil) forState:UIControlStateNormal];
                 UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(sendVoiceButtonLongPress:)];
                 //设置长按时间
                 longPress.minimumPressDuration = 1.25;
@@ -1148,7 +1148,7 @@
                 
             }else
             {
-                [cell.rightText setTitle:@"按住 录音" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"按住 录音",nil) forState:UIControlStateNormal];
                 UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(sendVoiceButtonLongPress:)];
                 //设置长按时间
                 longPress.minimumPressDuration = 0.5;

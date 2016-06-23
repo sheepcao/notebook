@@ -147,7 +147,7 @@
 - (OSMessage *)shareMessage {
     OSMessage *message = [[OSMessage alloc] init];
 
-    message.title = [NSString stringWithFormat:NSLocalizedString(@"DaysInLine",nil)];
+    message.title = [NSString stringWithFormat:NSLocalizedString(@"历历在目",nil)];
     message.image = [UIImage imageNamed:@"icon"];
     // 缩略图
     message.thumbnail = [UIImage imageNamed:@"icon.png"];

@@ -534,7 +534,7 @@
     PNPieChartDataItem *oneItemOfPie = (PNPieChartDataItem *)self.timeWindowCategories[indexPath.row];
     category = oneItemOfPie.textDescription;
     categoryColor = oneItemOfPie.color;
-    money = [NSString stringWithFormat:NSLocalizedString(@"%.2f小时  ",nil),oneItemOfPie.value/60];
+    money = [NSString stringWithFormat:NSLocalizedString(@"%.2f h  ",nil),oneItemOfPie.value/60];
     moneyRatio = [NSString stringWithFormat:@"%.2f%%",[self.pieChart ratioForItemAtIndex:indexPath.row] * 100];
 
     NSArray *KeyArray = [category componentsSeparatedByString:@" > "];

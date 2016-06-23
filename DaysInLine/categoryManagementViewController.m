@@ -212,7 +212,7 @@
 //    sortButton.backgroundColor = [UIColor clearColor];
 //    [topbar addSubview:sortButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"支出",nil),NSLocalizedString(@"收入",nil),nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"工作",nil),NSLocalizedString(@"生活",nil),nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 28, SCREEN_WIDTH*3/7, 30);
     self.moneyTypeSeg.tintColor =  TextColor2;
@@ -366,7 +366,7 @@
     self.inputView = inputCategoryView;
     inputCategoryView.backgroundColor = [UIColor colorWithRed:173/255.0f  green:181/255.0f blue:190/255.0f alpha:1.0f];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,5, 80, inputCategoryView.frame.size.height-12)];
-    [titleLabel setText:NSLocalizedString(@"类 别 :",nil)];
+    [titleLabel setText:NSLocalizedString(@"主 题 :",nil)];
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor whiteColor];

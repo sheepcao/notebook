@@ -227,7 +227,7 @@
         
         switch (indexPath.row) {
             case 0:
-                [cell.leftText setText: NSLocalizedString(@"类别",nil)];
+                [cell.leftText setText: NSLocalizedString(@"主题",nil)];
                 [cell.rightText setText:theme];
                 break;
             case 1:
