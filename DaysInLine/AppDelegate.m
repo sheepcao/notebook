@@ -38,14 +38,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     application.applicationIconBadgeNumber = 0;
-
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
+    
     if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound categories:nil];
         [application registerUserNotificationSettings:settings];
     }
-
+    
     
     NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
     if (!autoSwitchString) {
@@ -79,7 +79,7 @@
     
     [[CommonUtility sharedCommonUtility] createTimer];
     
-
+    
     return YES;
 }
 
@@ -111,7 +111,7 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [self judgeTimeFrame];
     application.applicationIconBadgeNumber = 0;
-
+    
     NSLog(@"applicationWillEnterForeground");
 }
 
@@ -125,7 +125,7 @@
         NSLog(@"不是中文");
     }
     
-
+    
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification*)notification{
     
@@ -143,8 +143,8 @@
 
 -(void)initDB
 {
-
-
+    
+    
     db = [[CommonUtility sharedCommonUtility] db];
     
     if (![db open]) {
@@ -160,7 +160,7 @@
     NSString *createCollect = @"CREATE TABLE IF NOT EXISTS collection (collectionID INTEGER PRIMARY KEY AUTOINCREMENT,eventID INTEGER)";
     NSString *createPassword = @"CREATE TABLE IF NOT EXISTS passwordVar (varName TEXT PRIMARY KEY,value TEXT)";
     NSString *goalTable = @"CREATE TABLE IF NOT EXISTS GOALS (goal_id INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,theme TEXT,byTime INTEGER,target_time REAL,done_time REAL,target_count INTEGER,done_count INTEGER,start_date TEXT,finish_date TEXT,remind_time TEXT,remind_days TEXT,is_completed INTEGER)";
-
+    
     
     [db executeUpdate:createCategoryTable];
     [db executeUpdate:createLuckTable];
@@ -169,7 +169,7 @@
     [db executeUpdate:createCollect];
     [db executeUpdate:createPassword];
     [db executeUpdate:goalTable];
-
+    
     
     NSString *selectEVENTSCount = @"select * from EVENTS";
     FMResultSet *rs1 = [db executeQuery:selectEVENTSCount];
@@ -188,12 +188,12 @@
         if (!sql2) {
             NSLog(@"DROP ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }
-
+        
     }
     
-
-
-
+    
+    
+    
     //第一次启动，加载默认类别和颜色
     int categoryCount;
     NSString *selectCategoryCount = @"select count (*) from CATEGORYINFO";
@@ -232,7 +232,7 @@
 
 -(void)judgeTimeFrame
 {
-//    NSLog(@"judgeTimeFrame");
+    //    NSLog(@"judgeTimeFrame");
     
     NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
     if (![autoSwitchString isEqualToString:@"on"])
@@ -266,7 +266,7 @@
 -(void)loadLuckInfoFromServer
 {
     
-//    NSLog(@"loadLuckInfoFromServer");
+    //    NSLog(@"loadLuckInfoFromServer");
     
     NSDate *dateNow = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
@@ -333,7 +333,7 @@
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:LuckChanged  object:nil];
             
-          [db close];
+            [db close];
             
         } failure:^(NSError * failure){
             NSLog(@"%@",failure);
@@ -357,7 +357,7 @@
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('访友',1,71,66,36)"];
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('陪孩子',1,246,154,10)"];
         ///////////////////////////////////////////
-
+        
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('培训',0,129,79,40)"];
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('开会',0,136,21,203)"];
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('求职',0,224,104,1)"];
@@ -367,7 +367,7 @@
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('施工',0,68,111,121)"];
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('编码',0,45,78,81)"];
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('文案',0,40,56,71)"];
-
+        
         if (!sql) {
             NSLog(@"CATEGORY ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
         }
@@ -426,7 +426,7 @@
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (136,21,203,1)"];
     
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (224,104,1,1)"];
-  
+    
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (116,84,106,1)"];
     
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (162,168,148,1)"];
@@ -438,8 +438,8 @@
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (183,29,99,0)"];
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (116,78,19,0)"];
     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (90,73,109,0)"];
-
-
+    
+    
     
     if (!sql) {
         NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
@@ -450,16 +450,32 @@
 
 -(void)insertDefaultGOALSToDB:(FMDatabase *)database
 {
-    BOOL sql =  [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'沟通',0,0,10,0,0,0)"];
-    
-    [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'培训',0,0,5,0,0,0)"];
-    
-    [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'阅读',1,20,0,0,0,0)"];
-    
-    [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'健身',1,50,0,0,0,0)"];
-    
-    if (!sql) {
-        NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
+    if ([CommonUtility isSystemLangChinese]) {
+        
+        BOOL sql =  [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'沟通',0,0,10,0,0,0)"];
+        
+        [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'培训',0,0,5,0,0,0)"];
+        
+        [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'阅读',1,20,0,0,0,0)"];
+        
+        [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'健身',1,50,0,0,0,0)"];
+        
+        if (!sql) {
+            NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
+        }
+    }else
+    {
+        BOOL sql =  [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'Communicate',0,0,10,0,0,0)"];
+        
+        [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(0,'Training',0,0,5,0,0,0)"];
+        
+        [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'Reading',1,20,0,0,0,0)"];
+        
+        [database executeUpdate:@"INSERT INTO GOALS(TYPE,theme,byTime,target_time,target_count,done_time,done_count,is_completed) VALUES(1,'Sports',1,50,0,0,0,0)"];
+        
+        if (!sql) {
+            NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
+        }
     }
     
 }
@@ -467,7 +483,7 @@
 -(void)configShare
 {
     NSLog(@"configShare");
-
+    
     
     [MobClick startWithAppkey:@"5466fe56fd98c505fb003d3c" reportPolicy:REALTIME   channelId:nil];
     [MobClick setAppVersion:VERSIONNUMBER];

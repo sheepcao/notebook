@@ -237,8 +237,8 @@
         NSLog(@"summaryVC/Could not open db.");
         return;
     }
-    NSString *minDate = @"2016-06-01";
-    NSString *maxDate = @"2016-12-01";
+    NSString *minDate = [[CommonUtility sharedCommonUtility] todayDate];
+    NSString *maxDate = minDate;
     
     FMResultSet *rs = [db executeQuery:@"select date from EVENTS order by date LIMIT 1"];
     while ([rs next]) {

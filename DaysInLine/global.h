@@ -90,7 +90,7 @@
 #define DEFAULT_USER @"defaultUser"
 #define EXPORTBUY @"ExportBuy"
 #define Timer @"timerDict"
-
+#define REMOVEAD @"removeAdBuy"
 #define ThemeChanged  @"modelNotification"
 #define LuckChanged  @"luckNotification"
 

@@ -16,15 +16,21 @@
 #import "TermUseViewController.h"
 #import "UIDevice-Hardware.h"
 #import "exportViewController.h"
+#import "MLIAPManager.h"
+
+static NSString * const removeADId = @"sheepcao.daysinline.removeAD";
 
 
-@interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
+@interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate,MLIAPManagerDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) UITableView *settingTable;
 @property (nonatomic,strong) topBarView *topBar;
 @property (nonatomic,strong) NSArray *rowList;
+@property (nonatomic, strong) MBProgressHUD *iapHud;
+
 @end
 
 @implementation aboutViewController
+@synthesize iapHud;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -187,6 +193,13 @@
             exportViewController *exportVC = [[exportViewController alloc] initWithNibName:@"exportViewController" bundle:nil];
             [self.navigationController pushViewController:exportVC animated:YES];
         });
+    }else if(indexPath.row == 1)
+    {
+        
+        UIActionSheet *myActionSheet;
+        myActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles: NSLocalizedString(@"购买（¥18 去除广告）",nil), NSLocalizedString(@"恢复购买",nil), nil];
+        [myActionSheet showInView:self.view];
+
     }else if (indexPath.row == 2)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -309,5 +322,123 @@
     
 }
 
+#pragma mark actionsheet delegate..
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:
+            
+            iapHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            iapHud.mode = MBProgressHUDModeIndeterminate;
+            iapHud.dimBackground = YES;
+            
+            [MLIAPManager sharedManager].delegate = self;
+            
+            [[MLIAPManager sharedManager] requestProductWithId:removeADId];
+            break;
+            
+        case 1:
+            iapHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            iapHud.mode = MBProgressHUDModeIndeterminate;
+            iapHud.dimBackground = YES;
+            [MLIAPManager sharedManager].delegate = self;
 
+            [[MLIAPManager sharedManager] restorePurchase];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+#pragma mark - **************** MLIAPManager Delegate
+
+- (void)receiveProduct:(SKProduct *)product {
+    
+    if (product != nil) {
+        //购买商品
+        if (![[MLIAPManager sharedManager] purchaseProduct:product]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"失败",nil) message:NSLocalizedString(@"您禁止了应用内购买权限,请到设置中开启",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:NSLocalizedString(@"无法连接App store!",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+
+
+- (void)successfulPurchaseOfId:(NSString *)productId andReceipt:(NSData *)transactionReceipt {
+    NSLog(@"购买成功");
+    [iapHud hide:YES afterDelay:0.5f];
+    
+    [self showBoughtView];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.animationType = MBProgressHUDAnimationZoom;
+    hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = NSLocalizedString(@"成功购买",nil);
+    [hud hide:YES afterDelay:1.5];
+    
+}
+
+- (void)failedPurchaseWithError:(NSString *)errorDescripiton {
+    NSLog(@"购买失败");
+    [iapHud hide:YES afterDelay:0.5f];
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:errorDescripiton delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+-(void)restorePurchaseSuccess:(SKPaymentTransactionState)state
+{
+    [iapHud hide:YES afterDelay:0.5f];
+    
+    [self showBoughtView];
+    
+    NSLog(@"state:%ldl",(long)state);
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"成功",nil) message:NSLocalizedString(@"成功恢复购买",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+//    [alert show];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.animationType = MBProgressHUDAnimationZoom;
+    hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = NSLocalizedString(@"成功恢复购买",nil);
+    [hud hide:YES afterDelay:1.5];
+    
+}
+
+-(void)nonePurchase
+{
+    [iapHud hide:YES afterDelay:0.5f];
+    
+    NSLog(@"nonePurchase");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:NSLocalizedString(@"您没有购买记录",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+-(void)restorePurchaseFailed
+{
+    [iapHud hide:YES afterDelay:0.5f];
+    
+    NSLog(@"restorePurchaseFailed");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:NSLocalizedString(@"恢复失败，请重新尝试",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)cancelPurchase
+{
+    [iapHud hide:YES afterDelay:0.5f];
+}
+
+
+
+-(void)showBoughtView
+{
+    NSLog(@"remove ads success");
+    [[CommonUtility sharedCommonUtility] removeADs];
+    [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:REMOVEAD];
+
+    
+}
 @end

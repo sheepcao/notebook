@@ -302,13 +302,10 @@
 
     [pieView addSubview:self.centerLabel];
     
-    [self makeMidText: [NSString stringWithFormat:@"%.0f",self.sumTime]];
+    [self makeMidText: [NSString stringWithFormat:@"%.1f h",self.sumTime/60]];
     
 }
-//-(void)switchMoneyType
-//{
-//    (self.moneyTypeSeg.selectedSegmentIndex == 0)?(self.moneyTypeSeg.selectedSegmentIndex = 1):(self.moneyTypeSeg.selectedSegmentIndex = 0);
-//}
+
 
 -(void)makeMidText:(NSString *)time
 {

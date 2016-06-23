@@ -138,19 +138,18 @@
 
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
-    
     NSURL *receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
     NSData *receiptData = [NSData dataWithContentsOfURL:receiptUrl];
     [_delegate successfulPurchaseOfId:transaction.payment.productIdentifier andReceipt:receiptData];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 
-
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {
     
     if (transaction.error.code != SKErrorPaymentCancelled && transaction.error.code != SKErrorUnknown) {
         [_delegate failedPurchaseWithError:transaction.error.localizedDescription];
-    }else if (transaction.error.code == SKErrorPaymentCancelled )
+    }else
+//        if (transaction.error.code == SKErrorPaymentCancelled )
     {
         [_delegate cancelPurchase];
     }

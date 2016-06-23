@@ -449,7 +449,7 @@
         }
     }else
     {
-        BOOL sql = [db executeUpdate:@"INSERT INTO EVENTS(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,self.targetDate,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames];
+        BOOL sql = [db executeUpdate:@"INSERT INTO EVENTS(TYPE,TITLE,mainText,date,startTime,endTime,distance,photoDir) VALUES(?,?,?,?,?,?,?,?)" ,[NSNumber numberWithInteger:self.itemType],self.category,self.itemDescription,self.targetDate,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames];
         
         if (!sql) {
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);

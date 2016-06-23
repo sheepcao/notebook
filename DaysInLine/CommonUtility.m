@@ -38,7 +38,7 @@
 {
     self = [super init];
     if (self) {
-//        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        //        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
         NSString *dbPath = [self dbPath];
         NSLog(@"dbPath:%@",dbPath);
         db = [FMDatabase databaseWithPath:dbPath];
@@ -63,7 +63,7 @@
 {
     NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
     NSString *voicePath = [[storeURL path] stringByAppendingPathComponent:[NSString stringWithFormat:@"message%d.caf",recorderID]];
-
+    
     return voicePath;
 }
 
@@ -167,12 +167,12 @@
 
 - (NSString *) timeByAddingMinutes: (NSString *)srcTime andMinsToAdd:(NSInteger) minsToAdd
 {
-
+    
     NSDate *day = [self timeFromString:srcTime];
-  
+    
     NSDate *plusHour = [day dateByAddingTimeInterval:minsToAdd * 60.0f];
     return [self stringFromTime:plusHour];
-
+    
 }
 -(NSString *)todayDate
 {
@@ -516,16 +516,16 @@
 }
 
 - (void)httpGetUrlTEXT:(NSString *)url
-                   params:(NSDictionary *)paramsDict
-                  success:(void (^)(id))success
-                  failure:(void (^)(NSError *))failure
+                params:(NSDictionary *)paramsDict
+               success:(void (^)(id))success
+               failure:(void (^)(NSError *))failure
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = 12.0f;
     manager.responseSerializer.acceptableContentTypes =[NSSet setWithObject:@"application/json"];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-//    [manager.requestSerializer  setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    //    [manager.requestSerializer  setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     
     [manager POST:url parameters:paramsDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
@@ -562,7 +562,7 @@
     }
     
     NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where constellation = '%@' order by start_date desc LIMIT 1",constellation];
-
+    
     
     FMResultSet *rs = [db executeQuery:selectLuckExist];
     if ([rs next]) {
@@ -574,7 +574,7 @@
     }else
     {
         [db close];
-
+        
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:textLabel animated:YES];
         
         hud.mode = MBProgressHUDModeIndeterminate;
@@ -615,7 +615,7 @@
             if ([rs next]) {
                 NSString *luckWork = [rs stringForColumn:@"work"];
                 NSString *luckLife = [rs stringForColumn:@"life"];
-
+                
                 [db close];
                 [textLabel makeText:[NSString stringWithFormat:@"工作:\t%@\n\n生活:\t%@",luckWork,luckLife]];
             }
@@ -635,10 +635,10 @@
             {
                 [textLabel makeText:[NSString stringWithFormat:@"%@:\n \t网络似乎不太给力 =.=!",constellation]];
             }
-
+            
             [db close];
             [hud hide:YES];
-
+            
         }];
         
     }
@@ -650,7 +650,7 @@
     registerButtonView.userInteractionEnabled=YES;
     UIImageView *sheenImageView = (UIImageView *)[registerButtonView viewWithTag:11];
     if (!sheenImageView) {
-         sheenImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 86, registerButtonView.frame.size.height)];
+        sheenImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 86, registerButtonView.frame.size.height)];
         [sheenImageView setImage:[UIImage imageNamed:@"glow.png"]];
         sheenImageView.layer.masksToBounds = YES;
         sheenImageView.tag = 11;
@@ -659,7 +659,7 @@
         [registerButtonView setNeedsDisplay];
     }else
     {
-       [sheenImageView setFrame:CGRectMake(0, 0, 86, registerButtonView.frame.size.height)];
+        [sheenImageView setFrame:CGRectMake(0, 0, 86, registerButtonView.frame.size.height)];
     }
     
     [UIView animateKeyframesWithDuration:3.5 delay:1.5 options:UIViewKeyframeAnimationOptionCalculationModeLinear  | UIViewKeyframeAnimationOptionRepeat animations:^{
@@ -677,7 +677,7 @@
             [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-86, 0, 86,registerButtonView.frame.size.height)];
         }];
     } completion:^(BOOL finished) {
-
+        
     }];
 }
 
@@ -707,16 +707,16 @@
 -(NSMutableArray *)prepareCategoryDataForWork:(BOOL)isWork
 {
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
-
+    
     db = [[CommonUtility sharedCommonUtility] db];
     if (![db open]) {
         NSLog(@"addNewItem/Could not open db.");
         return nil;
     }
     NSString *sqlCommand;
-
+    
     sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
-
+    
     
     FMResultSet *rs = [db executeQuery:sqlCommand];
     while ([rs next]) {
@@ -774,7 +774,7 @@
         double minite_0 = [timePart[1] doubleValue];
         double timeTemp = hour_0*60 + minite_0;
         destTime += timeTemp;
-
+        
     }
     
     return destTime;
@@ -833,7 +833,7 @@
 
 -(NSArray *)weekDays
 {
-        return  @[NSLocalizedString(@"周日",nil),NSLocalizedString(@"周一",nil),NSLocalizedString(@"周二",nil),NSLocalizedString(@"周三",nil),NSLocalizedString(@"周四",nil),NSLocalizedString(@"周五",nil),NSLocalizedString(@"周六",nil)];
+    return  @[NSLocalizedString(@"周日",nil),NSLocalizedString(@"周一",nil),NSLocalizedString(@"周二",nil),NSLocalizedString(@"周三",nil),NSLocalizedString(@"周四",nil),NSLocalizedString(@"周五",nil),NSLocalizedString(@"周六",nil)];
 }
 
 
@@ -842,15 +842,28 @@
     GADBannerView *bannerView = [[GADBannerView alloc] init];
     GADRequest *request = [GADRequest request];
     bannerView.frame = CGRectMake(0, SCREEN_HEIGHT -SCREEN_WIDTH *50/320 - SpaceBottom, SCREEN_WIDTH, SCREEN_WIDTH *50/320);
-    [view addSubview:bannerView];
-    
-    
-    bannerView.adUnitID = ADMOB_ID;
-    //    request.testDevices = @[
-    //                                @"bf69fad09ecd3e30b0db75ebdd3570ec"  // Eric's iPod Touch
-    //                                ];
-    bannerView.rootViewController = rootVC;
-    [bannerView loadRequest:request];
+    NSString *removeADBought = [[NSUserDefaults standardUserDefaults] objectForKey:REMOVEAD];
+    if (![removeADBought isEqualToString:@"yes"]) {
+        [view addSubview:bannerView];
+        
+        if (!self.bannerViews) {
+            self.bannerViews = [[NSMutableArray alloc] initWithCapacity:8];
+        }
+        
+        [self.bannerViews addObject:bannerView];
+        
+        
+        bannerView.adUnitID = ADMOB_ID;
+        bannerView.rootViewController = rootVC;
+        [bannerView loadRequest:request];
+    }
+}
+
+-(void)removeADs
+{
+    for (GADBannerView *bannerView in self.bannerViews) {
+        [bannerView removeFromSuperview];
+    }
 }
 
 @end

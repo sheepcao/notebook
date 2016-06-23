@@ -54,7 +54,6 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     
 
     
-    [MLIAPManager sharedManager].delegate = self;
 
     [self prepareData];
     [self configTopbar];
@@ -116,8 +115,8 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
         return;
     }
     
-    NSString *minDate = @"2016-05-01";
-    NSString *maxDate = @"2016-12-01";
+    NSString *minDate = [[CommonUtility sharedCommonUtility] todayDate];
+    NSString *maxDate = minDate;
     
     FMResultSet *rs = [db executeQuery:@"select date from EVENTS order by date LIMIT 1"];
     while ([rs next]) {
@@ -378,7 +377,8 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.dimBackground = YES;
 
-    
+    [MLIAPManager sharedManager].delegate = self;
+
     [[MLIAPManager sharedManager] requestProductWithId:productId];
 }
 
@@ -412,6 +412,9 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     
     
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    if (!picker) {
+        return;
+    }
     [picker.view setFrame:CGRectMake(0,20 , 320, self.view.frame.size.height-20)];
     picker.mailComposeDelegate = self;
     
@@ -436,7 +439,7 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 
 {
-    
+    NSLog(@"error:%@",error);
        [self  dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -485,9 +488,15 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     [self showBoughtView];
     [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:EXPORTBUY];
     
-    NSLog(@"state:%ldl",(long)state);
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"成功",nil) message:NSLocalizedString(@"成功恢复购买",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
-    [alert show];
+//    NSLog(@"state:%ldl",(long)state);
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"成功",nil) message:NSLocalizedString(@"成功恢复购买",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+//    [alert show];
+    MBProgressHUD *hud2 = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud2.animationType = MBProgressHUDAnimationZoom;
+    hud2.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    hud2.mode = MBProgressHUDModeText;
+    hud2.labelText = NSLocalizedString(@"成功恢复购买",nil);
+    [hud2 hide:YES afterDelay:1.5];
 
 }
 

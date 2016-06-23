@@ -48,7 +48,9 @@
 {
     if (countingButton) {
         
-        goalTableViewCell *cell = (goalTableViewCell *)countingButton.superview ;
+        NSIndexPath *index = [NSIndexPath indexPathForRow:countingButton.tag inSection:0];
+        
+        goalTableViewCell *cell = (goalTableViewCell *)[self.goalsTable cellForRowAtIndexPath:index];
         
         NSString *timerCounts =  [NSString stringWithFormat:@"%ld", (long)[cell timerCount]];
         NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
@@ -541,10 +543,11 @@
         return;
     }
     
-    goalTableViewCell *cell = (goalTableViewCell *)sender.superview;
+    NSIndexPath *index = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    
+    goalTableViewCell *cell = (goalTableViewCell *)[self.goalsTable cellForRowAtIndexPath:index];
     
     if (cell.isTimerShown) {
-        //        dispatch_source_cancel(_timer);
         dispatch_suspend(_timer);
         [cell returnTimer];
         countingButton = nil;

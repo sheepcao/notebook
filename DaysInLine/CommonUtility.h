@@ -26,6 +26,8 @@
 @property (nonatomic,strong) dispatch_source_t myTimer;
 @property (nonatomic,strong) NSString *myGoingTimerTitle;
 @property (nonatomic,strong) NSArray *weekDays;
+@property (nonatomic,strong) NSMutableArray *bannerViews;
+
 
 + (CommonUtility *)sharedCommonUtility;
 + (BOOL)isSystemLangChinese;
@@ -90,5 +92,6 @@
 -(void)createTimer;
 
 -(void)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC;
+-(void)removeADs;
 
 @end
