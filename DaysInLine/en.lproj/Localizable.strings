@@ -284,3 +284,6 @@
 "周五" = "Friday";
 "周六" = "Saturday";
 "周日" = "Sunday";
+
+"%ld年" = "%ld";
+"%ld日" = "%ld";

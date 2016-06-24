@@ -889,6 +889,8 @@
 #pragma mark - 保存图片至沙盒 和 系统相册
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
 {
+    [MobClick event:@"photo"];
+    
     NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.1);
     
     NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
@@ -1186,6 +1188,7 @@
         if ([self.recorder prepareToRecord]) {
             //开始录音
             [self.recorder record];
+            [MobClick event:@"record"];
         }
         //定时检测
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(detectionVice) userInfo:nil repeats:YES];

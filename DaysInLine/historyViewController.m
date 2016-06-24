@@ -130,8 +130,14 @@
     
     [super viewWillAppear:animated];
     [self prepareData];
-    [MobClick beginLogPageView:@"homePage"];
+    [MobClick beginLogPageView:@"historyPage"];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"historyPage"];
 }
 
 -(void)configTitle

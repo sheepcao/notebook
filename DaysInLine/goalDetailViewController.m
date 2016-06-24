@@ -70,6 +70,11 @@
     self.lifeCategoryArray = [[CommonUtility sharedCommonUtility] prepareCategoryDataForWork:NO];
     [MobClick beginLogPageView:@"goalDetail"];
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"goalDetail"];
+}
 
 -(void)configTopbar
 {
@@ -131,7 +136,7 @@
         UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/5-SCREEN_WIDTH/5, SCREEN_HEIGHT - SCREEN_WIDTH/3,SCREEN_WIDTH/5,SCREEN_WIDTH/5 + 15)];
         [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
         editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
-        [editButton addTarget:self action:@selector(removeReminder) forControlEvents:UIControlEventTouchUpInside];
+        [editButton addTarget:self action:@selector(removeRemind) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *explainEdit = [[UILabel alloc] initWithFrame:CGRectMake(0, editButton.frame.size.height - 15, editButton.frame.size.width, 15)];
         explainEdit.textAlignment = NSTextAlignmentCenter;
@@ -171,7 +176,7 @@
         
     }
 }
--(void)removeReminder
+-(void)removeRemind
 {
     NSInteger itemID = [self.currentIGoalID integerValue];
     if(itemID >=0)
@@ -1069,6 +1074,8 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
         [indexPaths addObject: indexPath];
         [self.goalInfoTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        
+        [MobClick event:@"reminder"];
     }
     [self dismissDimView];
 }

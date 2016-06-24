@@ -8,6 +8,7 @@
 
 #import "FlatDatePicker.h"
 #import "global.h"
+#import "CommonUtility.h"
 
 // Constants times :
 #define kFlatDatePickerAnimationDuration 0.4
@@ -1083,7 +1084,7 @@
 
     for (NSInteger i = yearMin; i <= yearMax; i++) {
         
-        [years addObject:[NSString stringWithFormat:@"%ld年", (long)i]];
+        [years addObject:[NSString stringWithFormat:NSLocalizedString(@"%ld年",nil), (long)i]];
     }
          
     return years;
@@ -1091,32 +1092,41 @@
 
 - (NSMutableArray*)getMonths {
     
+    
     NSMutableArray *months = [[NSMutableArray alloc] init];
     
-    for (NSInteger monthNumber = 1; monthNumber <= 12; monthNumber++) {
-        
-        NSString *dateString = [NSString stringWithFormat: @"%ld", (long)monthNumber];
-        
-        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-        NSCalendar *cal = [[NSCalendar alloc]
-                           initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        dateFormatter.calendar = cal;
-        if (self.timeZone != nil) [dateFormatter setTimeZone:self.timeZone];
-        [dateFormatter setLocale:self.locale];
-        [dateFormatter setDateFormat:@"MM"];
-        NSDate* myDate = [dateFormatter dateFromString:dateString];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.calendar = cal;
+    if ([CommonUtility isSystemLangChinese]) {
+        for (NSInteger monthNumber = 1; monthNumber <= 12; monthNumber++) {
+            
+            NSString *dateString = [NSString stringWithFormat: @"%ld", (long)monthNumber];
+            
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+            NSCalendar *cal = [[NSCalendar alloc]
+                               initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            dateFormatter.calendar = cal;
+            if (self.timeZone != nil) [dateFormatter setTimeZone:self.timeZone];
+            [dateFormatter setLocale:self.locale];
+            [dateFormatter setDateFormat:@"MM"];
+            NSDate* myDate = [dateFormatter dateFromString:dateString];
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.calendar = cal;
+            
+            if (self.timeZone != nil) [dateFormatter setTimeZone:self.timeZone];
+            [dateFormatter setLocale:self.locale];
+            [formatter setDateFormat:@"MM"];
+            NSString *stringFromDate = [formatter stringFromDate:myDate];
+            
+            [months addObject:[NSString stringWithFormat:@"%@月",stringFromDate]];
+        }
 
-        if (self.timeZone != nil) [dateFormatter setTimeZone:self.timeZone];
-        [dateFormatter setLocale:self.locale];
-        [formatter setDateFormat:@"MM"];
-        NSString *stringFromDate = [formatter stringFromDate:myDate];
-        
-        [months addObject:[NSString stringWithFormat:@"%@月",stringFromDate]];
+    }else
+    {
+        NSArray *monthEn = @[@"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec"];
+        months = [NSMutableArray arrayWithArray:monthEn];
     }
-  
+    
+    
     return months;
 }
 
@@ -1162,7 +1172,7 @@
     
     for (NSInteger i = 1; i <= daysRange.length; i++) {
         
-        [days addObject:[NSString stringWithFormat:@"%ld日", (long)i]];
+        [days addObject:[NSString stringWithFormat:NSLocalizedString(@"%ld日",nil), (long)i]];
     }
     
     return days;

@@ -407,7 +407,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex ==1) {
-        [MobClick event:@"deleteItem"];
+        [MobClick event:@"delete"];
         
         db = [[CommonUtility sharedCommonUtility] db];
         if (![db open]) {

@@ -282,13 +282,11 @@
     [MobClick beginLogPageView:@"homePage"];
     
 }
-
-//#pragma mark reloadData delegate
-//-(void)refreshData
-//{
-//    [self prepareData];
-//}
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"homePage"];
+}
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
