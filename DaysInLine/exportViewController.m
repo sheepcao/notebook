@@ -38,13 +38,13 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
 -(NSString *)dataFilePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:NSLocalizedString(@"数据导出-DaysInLine.csv",nil) ];
+    return [documentsDirectory stringByAppendingPathComponent:NSLocalizedString(@"数据导出-历历在目.csv",nil) ];
 }
 
 -(NSString *)xlsFilePath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:NSLocalizedString(@"数据导出-DaysInLine.csv.xls",nil) ];
+    return [documentsDirectory stringByAppendingPathComponent:NSLocalizedString(@"数据导出-历历在目.xls",nil) ];
 }
 
 
@@ -392,7 +392,7 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     
 
     NSMutableString *emailBody = [NSMutableString string];
-    [picker setSubject:NSLocalizedString(@"数据导出-DaysInLine",nil) ];
+    [picker setSubject:NSLocalizedString(@"数据导出-历历在目",nil) ];
     [emailBody appendString: NSLocalizedString(@"请查收附件中的数据文件",nil)];
     [picker setMessageBody:emailBody isHTML:NO];
     
@@ -402,7 +402,7 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     }
     [picker addAttachmentData:[NSData dataWithContentsOfFile:[self dataFilePath]]
                      mimeType:@"text/csv"
-                     fileName:NSLocalizedString(@"数据导出-DaysInLine.csv",nil) ];
+                     fileName:NSLocalizedString(@"数据导出-历历在目.csv",nil) ];
 
     [self presentViewController:picker animated:YES completion:nil];
 }
@@ -420,7 +420,7 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     
     
     NSMutableString *emailBody = [NSMutableString string];
-    [picker setSubject:NSLocalizedString(@"数据导出-DaysInLine",nil) ];
+    [picker setSubject:NSLocalizedString(@"数据导出-历历在目",nil) ];
     [emailBody appendString: NSLocalizedString(@"请查收附件中的数据文件",nil)];
     [picker setMessageBody:emailBody isHTML:NO];
     
@@ -430,7 +430,7 @@ static NSString * const productId = @"sheepcao.daysinline.exportData";
     }
     [picker addAttachmentData:[NSData dataWithContentsOfFile:[self xlsFilePath]]
                      mimeType:@"text/csv"
-                     fileName:NSLocalizedString(@"数据导出-DaysInLine.xls",nil) ];
+                     fileName:NSLocalizedString(@"数据导出-历历在目.xls",nil) ];
     
     [self presentViewController:picker animated:YES completion:nil];
 }

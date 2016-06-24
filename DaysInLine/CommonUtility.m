@@ -837,7 +837,7 @@
 }
 
 
--(void)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC
+-(BOOL)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC
 {
     GADBannerView *bannerView = [[GADBannerView alloc] init];
     GADRequest *request = [GADRequest request];
@@ -856,7 +856,9 @@
         bannerView.adUnitID = ADMOB_ID;
         bannerView.rootViewController = rootVC;
         [bannerView loadRequest:request];
+        return YES;
     }
+    return NO;
 }
 
 -(void)removeADs

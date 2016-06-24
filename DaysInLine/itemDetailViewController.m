@@ -436,7 +436,7 @@
 
     
     if (self.isEditing) {
-        BOOL sql = [db executeUpdate:@"update EVENTS set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where eventID = ?" ,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[NSNumber numberWithInt:[self searchEventID]]];
+        BOOL sql = [db executeUpdate:@"update EVENTS set TYPE=? ,TITLE = ? ,mainText = ? ,startTime = ? ,endTime = ? ,distance = ? ,photoDir = ? where eventID = ?" ,[NSNumber numberWithInteger:self.itemType],self.category,self.itemDescription,[NSNumber numberWithDouble:startNum],[NSNumber numberWithDouble:endNum],[NSNumber numberWithDouble:(endNum - startNum)],self.photoNames,[NSNumber numberWithInt:[self searchEventID]]];
         if (!sql) {
             NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else

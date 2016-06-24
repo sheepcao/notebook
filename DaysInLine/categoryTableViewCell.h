@@ -21,6 +21,8 @@
 @property(nonatomic,strong) categoryButton *firstButton;
 -(void)contentWithCategories:(NSArray *)cateArray;
 
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andWidth:(CGFloat )width;
+
 -(void)showDeleteButton;
 -(void)removeDeleteButton;
 

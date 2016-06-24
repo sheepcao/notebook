@@ -411,7 +411,7 @@
         
         categoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[categoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[categoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier andWidth:tableView.frame.size.width];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
             cell.categoryDelegate = self;
@@ -503,7 +503,7 @@
             }else
             {
                 [cell addExpend];
-                [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请选择",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
@@ -516,18 +516,18 @@
                 
                 if (self.isByTime) {
                     [cell.leftText setText: NSLocalizedString(@"目标时间:",nil)];
-                    [cell.rightText setTitle:[NSString stringWithFormat:@"%@小时",self.totalNum] forState:UIControlStateNormal];
+                    [cell.rightText setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@小时",nil),self.totalNum] forState:UIControlStateNormal];
                 }else
                 {
                     [cell.leftText setText: NSLocalizedString(@"目标次数:",nil)];
-                    [cell.rightText setTitle:[NSString stringWithFormat:@"%ld次",[self.totalNum integerValue]] forState:UIControlStateNormal];
+                    [cell.rightText setTitle:[NSString stringWithFormat:NSLocalizedString(@"%ld次",nil),[self.totalNum integerValue]] forState:UIControlStateNormal];
                 }
                 
             }else
             {
                 [cell.leftText setText: NSLocalizedString(@" 目 标:",nil)];
                 
-                [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请选择",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;
@@ -555,7 +555,7 @@
             {
                 [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 30)];
                 [cell addExpend];
-                [cell.rightText setTitle:@"请选择" forState:UIControlStateNormal];
+                [cell.rightText setTitle:NSLocalizedString(@"请选择",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
             }
             break;

@@ -91,7 +91,7 @@
 -(NSString *)timeInLine:(int)timeNumber;
 -(void)createTimer;
 
--(void)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC;
+-(BOOL)addADWithY:(CGFloat)SpaceBottom InView:(UIView *)view OfRootVC:(UIViewController *)rootVC;
 -(void)removeADs;
 
 @end

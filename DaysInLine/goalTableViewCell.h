@@ -50,5 +50,6 @@
 -(void)showTimerFrom:(NSInteger )startTime;
 -(void)showReminder;
 -(void)hideReminder;
+- (void)maskCellFromTop:(CGFloat)margin;
 
 @end

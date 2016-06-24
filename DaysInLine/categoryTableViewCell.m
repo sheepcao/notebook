@@ -25,13 +25,13 @@
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier andWidth:(CGFloat )width
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
         
-        CGFloat width = SCREEN_WIDTH -20;
+//        CGFloat width = SCREEN_WIDTH -20;
         
         for (int i = 0; i< 4; i++) {
             categoryButton *categoryLabel = [[categoryButton alloc] initWithFrame:CGRectMake(16+i * ((width-20)/4), self.contentView.frame.size.height/2-15, (width-16)/4-16, (int)(width/12))];

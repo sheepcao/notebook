@@ -18,7 +18,7 @@
 #import "finishedGoalsViewController.h"
 #import "itemDetailViewController.h"
 
-@interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate,UITextFieldDelegate,reloadDataDelegate>
+@interface trackViewController ()<UITableViewDelegate,UITableViewDataSource,showTimerDelegate,UITextFieldDelegate,reloadDataDelegate,UIScrollViewDelegate>
 {
     CGFloat bottomHeight;
     UIButton *countingButton;
@@ -101,7 +101,12 @@
         
     }else
     {
-        [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+       BOOL isHaveingAD = [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+        if (isHaveingAD) {
+            CGRect aframe = self.goalsTable.frame;
+            aframe.size.height -=50;
+            [self.goalsTable setFrame:aframe];
+        }
     }
 }
 
@@ -322,7 +327,7 @@
     UIView *headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, wordsHeight)];
     UILabel *myWords = [[UILabel alloc] initWithFrame:CGRectMake(space, 0,headView.frame.size.width - space*2 , headView.frame.size.height-7)];
     myWords.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:13.0f];
-    myWords.textColor =  [UIColor colorWithWhite:0.15 alpha:1.0f];
+    myWords.textColor = self.myTextColor;
     myWords.numberOfLines = 3;
     myWords.textAlignment = NSTextAlignmentLeft;
 
@@ -347,23 +352,44 @@
     myWords.attributedText = attrString;
     
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,headView.frame.size.width , headView.frame.size.height-7)];
-    backView.layer.cornerRadius = myWords.frame.size.height/5.2;
-    backView.layer.masksToBounds = YES;
+//    backView.layer.cornerRadius = myWords.frame.size.height/5.2;
+//    backView.layer.masksToBounds = YES;
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
+    UIColor *backColor;
     if (!showModel) {
-        backView.backgroundColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
+//        backColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
+        backColor = [UIColor colorWithRed:133/255.0f green:172/255.0f blue:108/255.0f alpha:1.0f];
+
     }else if ([showModel isEqualToString:@"白天"]) {
-        backView.backgroundColor = [UIColor colorWithRed:38/255.0f green:180/255.0f blue:91/255.0f alpha:1.0f];
+        backColor = [UIColor colorWithRed:133/255.0f green:172/255.0f blue:108/255.0f alpha:1.0f];
     }else
     {
-        backView.backgroundColor = [UIColor colorWithRed:246/255.0f green:223/255.0f blue:23/255.0f alpha:1.0f];
+        backColor = [UIColor colorWithRed:133/255.0f green:172/255.0f blue:108/255.0f alpha:1.0f];
     }
-    backView.layer.borderColor = [UIColor colorWithWhite:0.35 alpha:1.0f].CGColor;
-    backView.layer.borderWidth = 0.5;
-    backView.layer.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0f].CGColor;
-    backView.layer.shadowOffset = CGSizeMake(0.6, 0.9);
+//    backView.layer.borderColor = [UIColor colorWithWhite:0.35 alpha:1.0f].CGColor;
+//    backView.layer.borderWidth = 0.5;
+//    backView.layer.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0f].CGColor;
+//    backView.layer.shadowOffset = CGSizeMake(0.6, 0.9);
     
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, backView.frame.size.width/2, backView.frame.size.height);
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.012].CGColor, (id)[backColor colorWithAlphaComponent:0.36].CGColor,nil];
     
+    gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
+    gradientLayer.endPoint = CGPointMake(1.0f, 0.0f);
+    backView.layer.mask = gradientLayer;
+    [backView.layer insertSublayer:gradientLayer atIndex:0];
+    
+    CAGradientLayer *gradientLayer1 = [CAGradientLayer layer];
+    gradientLayer1.frame = CGRectMake(backView.frame.size.width/2,0, backView.frame.size.width/2, backView.frame.size.height);
+    gradientLayer1.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.012].CGColor, (id)[backColor colorWithAlphaComponent:0.36].CGColor,nil];
+    
+    gradientLayer1.startPoint = CGPointMake(1.0f, 0.0f);
+    gradientLayer1.endPoint = CGPointMake(0.0f, 0.0f);
+    backView.layer.mask = gradientLayer1;
+    [backView.layer insertSublayer:gradientLayer1 atIndex:0];
+
+
     [headView addSubview:backView];
     [headView addSubview:myWords];
 
@@ -528,6 +554,24 @@
     return cell;
     
 }
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    for (UITableViewCell *cell in self.goalsTable.visibleCells) {
+        if ([cell isKindOfClass:[goalTableViewCell class]] ) {
+            goalTableViewCell *oneCell = (goalTableViewCell *)cell;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + wordsHeight - cell.frame.origin.y;
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                [oneCell maskCellFromTop:hiddenFrameHeight];
+            }
+        }
+    }
+}
+
+
+
 #pragma mark refresh delegate
 -(void)refreshData
 {
@@ -827,10 +871,10 @@
     
     if (isOldGoalByTime )
     {
-        newGoalNum = [NSString stringWithFormat:@"%.2f 小时",oldGoalNum + [self.addingGoalField.text doubleValue]];
+        newGoalNum = [NSString stringWithFormat:NSLocalizedString(@"%.2f 小时",nil),oldGoalNum + [self.addingGoalField.text doubleValue]];
     }else
     {
-        newGoalNum = [NSString stringWithFormat:@"%d 次",(int)oldGoalNum + [self.addingGoalField.text intValue]];
+        newGoalNum = [NSString stringWithFormat:NSLocalizedString(@"%d 次",nil),(int)oldGoalNum + [self.addingGoalField.text intValue]];
     }
     [self.myNewGoal setText:newGoalNum];
     
