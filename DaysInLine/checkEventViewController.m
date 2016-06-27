@@ -314,7 +314,7 @@
         photoHeigh = 105;
     }
     
-    CGFloat f = (SCREEN_HEIGHT-SCREEN_WIDTH)*0.5;
+    CGFloat f = (SCREEN_HEIGHT-SCREEN_WIDTH)*0.5-20;
     self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(f, -f, photoHeigh, SCREEN_WIDTH) style:UITableViewStylePlain];
 //    [self.photoTable setCenter:CGPointMake(SCREEN_WIDTH/2, parentView.frame.size.height/2)];
     self.photoTable.dataSource = self;

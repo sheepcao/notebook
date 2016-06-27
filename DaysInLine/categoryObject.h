@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface categoryObject : NSObject
-@property double color_R;
+@property (nonatomic) double color_R;
 @property double color_G;
 @property double color_B;
 @property (strong , nonatomic) NSString *categoryName;

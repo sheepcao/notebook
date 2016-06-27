@@ -310,12 +310,11 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return wordsHeight;
-
-//    if ([CommonUtility isSystemLangChinese]) {
-//        return summaryViewHeight;
-//    }else
-//        return 0;
+//    return wordsHeight;
+    if ([CommonUtility isSystemLangChinese]) {
+        return wordsHeight;
+    }else
+        return 0;
 }
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -366,14 +365,10 @@
     {
         backColor = [UIColor colorWithRed:133/255.0f green:172/255.0f blue:108/255.0f alpha:1.0f];
     }
-//    backView.layer.borderColor = [UIColor colorWithWhite:0.35 alpha:1.0f].CGColor;
-//    backView.layer.borderWidth = 0.5;
-//    backView.layer.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0f].CGColor;
-//    backView.layer.shadowOffset = CGSizeMake(0.6, 0.9);
-    
+
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, backView.frame.size.width/2, backView.frame.size.height);
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.012].CGColor, (id)[backColor colorWithAlphaComponent:0.36].CGColor,nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.02].CGColor, (id)[backColor colorWithAlphaComponent:0.36].CGColor,nil];
     
     gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
     gradientLayer.endPoint = CGPointMake(1.0f, 0.0f);
@@ -382,7 +377,7 @@
     
     CAGradientLayer *gradientLayer1 = [CAGradientLayer layer];
     gradientLayer1.frame = CGRectMake(backView.frame.size.width/2,0, backView.frame.size.width/2, backView.frame.size.height);
-    gradientLayer1.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.012].CGColor, (id)[backColor colorWithAlphaComponent:0.36].CGColor,nil];
+    gradientLayer1.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.02].CGColor, (id)[backColor colorWithAlphaComponent:0.36].CGColor,nil];
     
     gradientLayer1.startPoint = CGPointMake(1.0f, 0.0f);
     gradientLayer1.endPoint = CGPointMake(0.0f, 0.0f);
@@ -462,7 +457,6 @@
     NSString *theme = @"";
     NSString *themeOnly = @"";
     
-    //    NSString *description = @"";
     int itemType = -1;
     BOOL isByTime = -1;
     
@@ -476,7 +470,6 @@
     if(self.goalArray.count>indexPath.row)
     {
 
-        
         goalObj *oneGoal = self.goalArray[indexPath.row];
         itemID = [oneGoal.goalID integerValue];
         theme = oneGoal.goalTheme;

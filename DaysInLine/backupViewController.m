@@ -20,10 +20,12 @@
 @property (nonatomic,strong)topBarView *topBar;
 @property (nonatomic, strong) UIView *lastBackupView;
 @property (nonatomic,strong) UIView *firstBackupView;
+@property (nonatomic,strong) FMDatabase *db;
 
 @end
 
 @implementation backupViewController
+@synthesize db;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -303,6 +305,7 @@
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = NSLocalizedString(@"正在备份...",nil);
     hud.dimBackground = YES;
+    hud.tag = 123;
     
     NSDictionary *parameters = @{@"tag": @"uploadSQLs",@"name":self.username,@"backup_device":deviceName,@"backupTime":backupTime};
     
@@ -325,12 +328,14 @@
         NSString *backupDevice = [responseObject objectForKey:@"backup_device"];
         
         [self updateBackupInfoWithDate:backupDay andDevice:backupDevice];
-        [self.lastBackupView setHidden:NO];
-        [self.firstBackupView setHidden:YES];
-        
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = NSLocalizedString(@"备份成功",nil);
-        [hud hide:YES afterDelay:1.5];
+        [self uploadRecords];
+
+//        [self.lastBackupView setHidden:NO];
+//        [self.firstBackupView setHidden:YES];
+//        
+//        hud.mode = MBProgressHUDModeText;
+//        hud.labelText = NSLocalizedString(@"备份成功",nil);
+//        [hud hide:YES afterDelay:1.5];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         hud.mode = MBProgressHUDModeText;
@@ -468,6 +473,225 @@
         [self downloadMulti:urlArray withManager:manager];
     }
 }
+
+
+-(void)uploadRecords
+{
+    NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
+    NSString *docsPath = [storeURL path];
+    
+    NSString *path;
+    NSFileManager *fm;
+    NSArray *dirArray;
+    NSError *error;
+    
+    NSMutableArray *soundsArray = [[NSMutableArray alloc] init];
+    NSMutableArray *soundsNameArray = [[NSMutableArray alloc] init];
+    
+    
+    fm = [NSFileManager defaultManager];
+    
+    //获取当前的工作目录的路径
+    path = [fm currentDirectoryPath];
+    
+    dirArray = [fm contentsOfDirectoryAtPath:docsPath error:&error];
+    NSLog(@"path error:%@",error);
+    
+    for(path in dirArray)
+    {
+        if ([CommonUtility myContainsStringFrom:path forSubstring:@"message"]) {
+            NSLog(@"path-------------%@",path);
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",docsPath,path];
+            NSData *sqlData = [NSData dataWithContentsOfFile:fullPath];
+        
+            [soundsNameArray addObject:path];
+            [soundsArray addObject:sqlData];
+            
+        }
+        
+    }
+    
+    
+    NSDictionary *parameters = @{@"tag": @"uploadSounds",@"name":self.username,@"soundCount":[NSString stringWithFormat:@"%lu",(unsigned long)soundsArray.count]};
+
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:backupURL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for(int i = 0;i<soundsNameArray.count;i++)
+        {
+            NSData *eachSound = soundsArray[i];
+            NSString *soundName = soundsNameArray[i];
+            NSString *soundOnServer = [NSString stringWithFormat:@"%@_%@",self.username,soundName];
+            
+            [formData appendPartWithFileData:eachSound name:[NSString stringWithFormat:@"file%d",i] fileName:soundOnServer mimeType:@"audio/x-caf"];
+        }
+    } error:&error];
+    request.timeoutInterval = 120;
+    
+    NSLog(@"upload sounds error:%@",error);
+    
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+            MBProgressHUD *hud = (MBProgressHUD *)[self.view viewWithTag:123];
+            if(hud)
+            {
+                hud.labelText = NSLocalizedString(@"备份失败",nil);
+                [hud hide:YES afterDelay:1.2];
+            }
+        } else {
+            NSLog(@"----===%@ %@", response, responseObject);
+            [self uploadImages];
+            
+            
+        }
+        
+    }];
+    
+    
+    [uploadTask resume];
+    
+    
+    
+    
+    
+}
+
+//
+-(void)uploadImages
+{
+    NSURL *storeURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.sheepcao.DaysInLine"];
+    NSString *docsPath = [storeURL path];
+    
+    NSString *path;
+    NSFileManager *fm;
+    //    NSArray *dirArray;
+    NSError *error;
+    
+    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
+    NSMutableArray *imgNameArray = [[NSMutableArray alloc] init];
+    
+    
+    fm = [NSFileManager defaultManager];
+    
+    //获取当前的工作目录的路径
+    //    path = [fm currentDirectoryPath];
+    
+    //    dirArray = [fm contentsOfDirectoryAtPath:docsPath error:&error];
+    NSLog(@"path error:%@",error);
+    
+    
+    NSString *allPhoeoNames = [self selectPhotoNames];
+    
+    NSArray *photoNameArray = [allPhoeoNames componentsSeparatedByString:@";"];
+    
+    
+    
+    
+    for(path in photoNameArray)
+    {
+        if ([CommonUtility myContainsStringFrom:path forSubstring:@".png"] && path.length>18) {
+            NSLog(@"path-------------%@",path);
+            
+            NSString *fullPath = [NSString stringWithFormat:@"%@/%@",docsPath,path];
+            NSData *sqlData = [NSData dataWithContentsOfFile:fullPath];
+        
+            [imgNameArray addObject:path];
+            [imgArray addObject:sqlData];
+            
+        }
+        
+    }
+    
+    
+    NSDictionary *parameters = @{@"tag": @"uploadImages",@"name":self.username,@"imageCount":[NSString stringWithFormat:@"%lu",(unsigned long)imgArray.count]};
+    
+    
+    
+    
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:backupURL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for(int i = 0;i<imgNameArray.count;i++)
+        {
+            NSData *eachImg = imgArray[i];
+            NSString *imgName = imgNameArray[i];
+            NSString *imgOnServer = [NSString stringWithFormat:@"%@_%@",self.username,imgName];
+            
+            [formData appendPartWithFileData:eachImg name:[NSString stringWithFormat:@"file%d",i] fileName:imgOnServer mimeType:@"image/png"];
+        }
+    } error:&error];
+    request.timeoutInterval = 180;
+    
+    NSLog(@"upload images error:%@",error);
+    
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
+    
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:^(NSProgress * _Nonnull uploadProgress) {
+
+    }completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+            MBProgressHUD *hud = (MBProgressHUD *)[self.view viewWithTag:123];
+            if(hud)
+            {
+                hud.mode = MBProgressHUDModeText;
+                
+                hud.labelText = @"备份失败";
+                [hud hide:YES afterDelay:1.2];
+            }
+
+        } else {
+            NSLog(@"----===%@ %@", response, responseObject);
+                    [self.lastBackupView setHidden:NO];
+                    [self.firstBackupView setHidden:YES];
+                MBProgressHUD *hud = (MBProgressHUD *)[self.view viewWithTag:123];
+
+                    hud.mode = MBProgressHUDModeText;
+                    hud.labelText = NSLocalizedString(@"备份成功",nil);
+                    [hud hide:YES afterDelay:1.5];
+        }
+        
+        
+        
+         }];
+    
+    
+    [uploadTask resume];
+    
+
+}
+
+
+-(NSString *)selectPhotoNames
+{
+    
+    NSString *photo = @"";
+    db = [[CommonUtility sharedCommonUtility] db];
+
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return nil;
+    }
+    
+    NSString *onePhoto;
+    
+    FMResultSet *rs = [db executeQuery:@"SELECT photoDir from EVENTS"];
+    while ([rs next]) {
+        onePhoto = [rs stringForColumn:@"photoDir"];
+        if(![onePhoto isEqualToString:@""]&&![onePhoto isEqualToString:@" "])
+        {
+            photo = [NSString stringWithFormat:@"%@;%@",photo,onePhoto];
+        }
+    }
+    
+    return photo;
+}
+
 
 
 @end
