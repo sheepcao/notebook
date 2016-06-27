@@ -119,7 +119,6 @@
     
     for (UILocalNotification * localNotification in allLocalNotification) {
         NSString * alarmValue=[localNotification.userInfo objectForKey:@"key"];
-        NSLog(@"alarmValue:%@",alarmValue);
         if ([@"name" isEqualToString:alarmValue]) {
                [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
         }

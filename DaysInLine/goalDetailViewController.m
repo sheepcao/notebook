@@ -538,10 +538,11 @@
             break;
         case 2:
             [cell.leftText  setText: NSLocalizedString(@" 提 醒",nil)];
-            
+            cell.rightText.titleLabel.numberOfLines = 3;
+
             if(self.remindTime && ![self.remindTime isEqualToString:@""])
             {
-                [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 50)];
+                [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y-10, cell.rightText.frame.size.width, 60)];
                 cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
                 
                 NSString *remindWeekDay = @"";
@@ -1123,18 +1124,39 @@
     NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday] -1;// this will give you current day of week
     
+    if (self.remindDays.count>0) {
+        db = [[CommonUtility sharedCommonUtility] db];
+        if (![db open]) {
+            NSLog(@"mainVC/Could not open db.");
+            return;
+        }
+        
+
+        FMResultSet *result = [db executeQuery:@"select  remind_time  from GOALS where goal_id = ?" ,self.currentIGoalID];
+        if ([result next]) {
+            NSString *remindTimeTemp = [result stringForColumnIndex:0];
+            if (![remindTimeTemp isKindOfClass:[NSNull class]] &&![remindTimeTemp isEqualToString:@""]) {
+                [self removeReminder:self.currentIGoalID];
+            }
+        }
+        [db close];
+    }
+    
     for (NSNumber *oneDay in self.remindDays) {
         NSInteger index = [oneDay integerValue];
         NSInteger dayInterval = (index + 7 - dayofweek)%7;
         NSString *dstDate = [[CommonUtility sharedCommonUtility] dateByAddingDate:[NSDate date] andDaysToAdd:dayInterval];
         NSString *dstTime = [NSString stringWithFormat:@"%@ %@:00",dstDate,self.remindTime];
         NSDate *fireTime = [[CommonUtility sharedCommonUtility] fullTimeFromString:dstTime];
+        
+//        self.remindDays = nil;
+//        self.remindTime = @"";
         UILocalNotification *notification=[[UILocalNotification alloc] init];
         if (notification!=nil) {
             
             notification.fireDate=fireTime;
             
-            notification.repeatInterval=kCFCalendarUnitWeekday;//循环次数，kCFCalendarUnitWeekday一周一次
+            notification.repeatInterval=NSWeekCalendarUnit;//循环次数，kCFCalendarUnitWeekday一周一次
             notification.timeZone=[NSTimeZone defaultTimeZone];
             notification.applicationIconBadgeNumber=1; //应用的红色数字
             notification.soundName= UILocalNotificationDefaultSoundName;//声音，可以换成alarm.soundName = @"myMusic.caf"
@@ -1226,7 +1248,6 @@
                 if ([inKey isEqualToNumber :goalID]) {
                     
                     [app cancelLocalNotification:noti];
-                    break;
                 }
             }
         }
