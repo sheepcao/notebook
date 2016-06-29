@@ -651,13 +651,13 @@
 
         }
         
-        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
+        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 60, 35)];
         [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
         [cancelBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
         cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0];
         [contentView addSubview:cancelBtn];
         
-        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-48, 5, 40, 35)];
+        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-68, 5, 60, 35)];
         [selectBtn setTitle:NSLocalizedString(@"确定",nil) forState:UIControlStateNormal];
         [selectBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
         selectBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];

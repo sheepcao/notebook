@@ -490,7 +490,7 @@
     }
     [cell.leftText setTextColor:self.myTextColor];
     [cell.rightText setTitleColor:self.myTextColor forState:UIControlStateNormal];
-    cell.rightText.titleLabel.numberOfLines = 2;
+    cell.rightText.titleLabel.numberOfLines = 1;
     
     cell.padDelegate = self;
     cell.rightText.tag = indexPath.row + 10;
@@ -498,6 +498,7 @@
     switch (indexPath.row) {
         case 0:
             [cell.leftText  setText:NSLocalizedString(@" 主 题",nil)] ;
+
             if(self.category)
             {
                 NSString *type = self.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
@@ -538,15 +539,17 @@
             break;
         case 2:
             [cell.leftText  setText: NSLocalizedString(@" 提 醒",nil)];
-            cell.rightText.titleLabel.numberOfLines = 3;
 
             if(self.remindTime && ![self.remindTime isEqualToString:@""])
             {
-                [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y-10, cell.rightText.frame.size.width, 60)];
+                [cell redrawRightButton:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y-15, cell.rightText.frame.size.width, 58)];
+                cell.rightText.tag = indexPath.row + 10;
+                cell.rightText.titleLabel.numberOfLines = 3;
+
+//                [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y-10, cell.rightText.frame.size.width, 60)];
                 cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
                 
                 NSString *remindWeekDay = @"";
-                
                 for (NSNumber *oneDay in self.remindDays) {
                     NSInteger index = [oneDay integerValue];
                     remindWeekDay = [remindWeekDay stringByAppendingString:[NSString stringWithFormat:@"%@,",self.weekDays[index]]];
@@ -915,13 +918,13 @@
     {
         [self configNumberPadInView:contentView];
         
-        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
+        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 60, 35)];
         [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
         [cancelBtn setTitleColor:self.myTextColor forState:UIControlStateNormal];
         cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0];
         [contentView addSubview:cancelBtn];
         
-        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-48, 5, 40, 35)];
+        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-68, 5, 60, 35)];
         [selectBtn setTitle:NSLocalizedString(@"确定",nil) forState:UIControlStateNormal];
         [selectBtn setTitleColor:self.myTextColor forState:UIControlStateNormal];
         selectBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -935,13 +938,13 @@
         
     }else if(row == 2)
     {
-        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
+        UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 60, 35)];
         [cancelBtn setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
         [cancelBtn setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
         cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0];
         [contentView addSubview:cancelBtn];
         
-        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-48, 5, 40, 35)];
+        UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width-68, 5, 60, 35)];
         [selectBtn setTitle:NSLocalizedString(@"确定",nil) forState:UIControlStateNormal];
         [selectBtn setTitleColor:[UIColor colorWithWhite:0.35f alpha:0.9f] forState:UIControlStateNormal];
         selectBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -951,7 +954,7 @@
         [cancelBtn addTarget:self action:@selector(cancelSetting) forControlEvents:UIControlEventTouchUpInside];
         [selectBtn addTarget:self action:@selector(goalChoose:) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *timeTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 50, 8, 100, 20)];
+        UILabel *timeTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 100, 8, 200, 20)];
         [timeTitle setText:NSLocalizedString(@"提醒时间",nil)];
         [timeTitle setTextColor:[UIColor colorWithWhite:0.35f alpha:0.9f]];
         timeTitle.textAlignment = NSTextAlignmentCenter;
@@ -970,7 +973,7 @@
         [contentView addSubview:datePicker];
         self.myRemindPicker = datePicker;
         
-        UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 50, datePicker.frame.size.height + datePicker.frame.origin.y + 8, 100, 20)];
+        UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 100, datePicker.frame.size.height + datePicker.frame.origin.y + 8, 200, 20)];
         [pickerTitle setText:NSLocalizedString(@"提醒日期",nil)];
         [pickerTitle setTextColor:[UIColor colorWithWhite:0.35f alpha:0.9f]];
         pickerTitle.textAlignment = NSTextAlignmentCenter;

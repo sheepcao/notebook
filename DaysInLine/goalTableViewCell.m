@@ -107,7 +107,7 @@
         
         // adding Timer button
         self.timerButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 32 -16) -  (goalRowHeight-40), 20 , goalRowHeight-40, goalRowHeight - 40)];
-        [self.timerButton setImage:[UIImage imageNamed:@"pie"] forState:UIControlStateNormal];
+        [self.timerButton setImage:[UIImage imageNamed:@"timer2"] forState:UIControlStateNormal];
         [self.timerButton setBackgroundColor:[UIColor darkGrayColor]];
         self.timerButton.layer.cornerRadius = self.timerButton.frame.size.width/2;
         self.timerButton.layer.masksToBounds = YES;

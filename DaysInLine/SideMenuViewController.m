@@ -14,9 +14,12 @@
 #import "trendViewController.h"
 #import "loginViewController.h"
 #import "aboutViewController.h"
+#import "sideTableViewCell.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
+@property (nonatomic, strong) NSArray *menuImageArray;
+
 @property (nonatomic, strong) NSArray *colorArray;
 
 @end
@@ -30,6 +33,7 @@
     //    NSLog(@"viewDidLoad ");
     
     self.menuArray = @[NSLocalizedString(@"事项总览",nil),NSLocalizedString(@"图表分解",nil),NSLocalizedString(@"近期走势",nil),NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"设置",nil)];
+    self.menuImageArray = @[[UIImage imageNamed:@"summary"],[UIImage imageNamed:@"analyse"],[UIImage imageNamed:@"trendSide"],[UIImage imageNamed:@"backupSide"],[UIImage imageNamed:@"setting"],];
     self.colorArray = @[[UIColor colorWithRed:162/255.0f green:168/255.0f blue:148/255.0f alpha:1.0f], [UIColor colorWithRed:117/255.0f green:176/255.0f blue:144/255.0f alpha:1.0f],[UIColor colorWithRed:68/255.0f green:111/255.0f blue:121/255.0f alpha:1.0f], [UIColor colorWithRed:45/255.0f green:78/255.0f blue:81/255.0f alpha:1.0f],[UIColor colorWithRed:40/255.0f green:56/255.0f blue:71/255.0f alpha:1.0f]];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*2/5, SCREEN_HEIGHT)];
@@ -110,33 +114,20 @@
     return self.menuArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *CellIdentifier = @"sideCell";
+- (sideTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *sideCellIdentifier = @"sideCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    UILabel *cellTitle  = [[UILabel alloc] init];
+    sideTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sideCellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[sideTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sideCellIdentifier Image:self.menuImageArray[indexPath.row] Title:self.menuArray[indexPath.row]];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
         cell.backgroundColor = [UIColor clearColor];
         
-        
-        UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                              @{UIFontDescriptorFamilyAttribute: @"HelveticaNeue",
-                                                                UIFontDescriptorNameAttribute:@"HelveticaNeue",
-                                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/30]
-                                                                }];
-        [cellTitle setFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width/2, SCREEN_HEIGHT/5)];
-        cellTitle.textColor = self.myTextColor;
-        [cellTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
-        cellTitle.textAlignment = NSTextAlignmentCenter;
-        [cell addSubview:cellTitle];
-        
     }
-    cellTitle.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
     cell.backgroundColor = self.colorArray[indexPath.row];
-    
+    [cell.menuTitle setText:self.menuArray[indexPath.row]];
+    [cell.titleImage setImage:self.menuImageArray[indexPath.row]];
     
     return cell;
 }

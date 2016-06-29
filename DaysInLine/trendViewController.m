@@ -170,7 +170,7 @@
         [infoView addSubview:titlesLabel];
         
     }
-    UIView *firstRowLine = [[UIView alloc] initWithFrame:CGRectMake(0, infoView.frame.size.height/3, infoView.frame.size.width, 1)];
+    UIView *firstRowLine = [[UIView alloc] initWithFrame:CGRectMake(0, infoView.frame.size.height/3, infoView.frame.size.width, 0.8)];
     firstRowLine.backgroundColor = TextColor1;
     [infoView addSubview:firstRowLine];
     
@@ -208,7 +208,7 @@
         [infoView addSubview:titlesLabel];
     }
     
-    UIView *secondRowLine = [[UIView alloc] initWithFrame:CGRectMake(0, infoView.frame.size.height*2/3, infoView.frame.size.width, 1)];
+    UIView *secondRowLine = [[UIView alloc] initWithFrame:CGRectMake(0, infoView.frame.size.height*2/3, infoView.frame.size.width, 0.8)];
     secondRowLine.backgroundColor = TextColor1;
     [infoView addSubview:secondRowLine];
     
@@ -248,7 +248,7 @@
     }
     
 
-    UIView *colomnLine = [[UIView alloc] initWithFrame:CGRectMake(infoView.frame.size.width/4-3, 8, 1, infoView.frame.size.height-13)];
+    UIView *colomnLine = [[UIView alloc] initWithFrame:CGRectMake(infoView.frame.size.width/4-3, 8, 0.8, infoView.frame.size.height-13)];
     colomnLine.backgroundColor = TextColor1;
     [infoView addSubview:colomnLine];
 }

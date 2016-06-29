@@ -84,13 +84,13 @@ CGFloat fontSize;
     
     
     if (IS_IPHONE_5_OR_LESS) {
-        fontSize = 15.5f;
+        fontSize = 12.5f;
     }else if(IS_IPHONE_6)
     {
-        fontSize = 16.5f;
+        fontSize = 13.5f;
     }else
     {
-        fontSize = 18.0f;
+        fontSize = 14.0f;
     }
     
     _selectedItems = [NSMutableDictionary dictionary];
@@ -275,6 +275,8 @@ CGFloat fontSize;
     descriptionLabel.center          = center;
     descriptionLabel.alpha           = 0;
     descriptionLabel.backgroundColor = [UIColor clearColor];
+    descriptionLabel.adjustsFontSizeToFitWidth = YES;
+    descriptionLabel.minimumScaleFactor = 0.6f;
     return descriptionLabel;
 }
 

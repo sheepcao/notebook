@@ -62,7 +62,7 @@
 
 -(void)configTopbar
 {
-    self.topBar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight + 5)];
+    self.topBar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topBarHeight)];
     self.topBar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.topBar];
     [self.topBar.titleLabel  setText:NSLocalizedString(@"事项总览",nil)];

@@ -44,6 +44,8 @@
         
         self.money = [[UILabel alloc] initWithFrame:CGRectMake(midline.frame.origin.x-88, 7, 80, thisRowHeight-6*2)];
         self.categoryName.textAlignment = NSTextAlignmentLeft;
+        self.categoryName.adjustsFontSizeToFitWidth = YES;
+        self.categoryName.minimumScaleFactor = 0.6f;
         self.money.textAlignment = NSTextAlignmentRight;
         self.money.adjustsFontSizeToFitWidth = YES;
         

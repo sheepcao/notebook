@@ -229,8 +229,8 @@
     UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-52, 30, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [saveButton setImage:[UIImage imageNamed:@"add1"] forState:UIControlStateNormal];
-    saveButton.imageEdgeInsets = UIEdgeInsetsMake(3.9, 3.9,3.9, 3.9);
+    [saveButton setImage:[UIImage imageNamed:@"accomplishment"] forState:UIControlStateNormal];
+    saveButton.imageEdgeInsets = UIEdgeInsetsMake(11, 7,3, 7);
     [saveButton setTitleColor: normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(achieveList) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];

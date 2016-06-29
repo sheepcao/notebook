@@ -19,4 +19,6 @@
 @property (nonatomic,strong) UILabel *leftText;
 @property (nonatomic,strong) UIButton *rightText;
 -(void)addExpend;
+-(void)redrawRightButton:(CGRect)rect;
+
 @end

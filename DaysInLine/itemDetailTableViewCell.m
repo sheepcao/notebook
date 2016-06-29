@@ -62,6 +62,34 @@
     
 }
 
+-(void)redrawRightButton:(CGRect)rect
+{
+    if (self.rightText) {
+        [self.rightText removeFromSuperview];
+        CGFloat Height;
+
+        if (IS_IPHONE_4_OR_LESS) {
+            Height = 20;
+        }else
+        {
+            Height = 28;
+        }
+        self.rightText = [[highLightButton alloc] initWithFrame:rect];
+        self.rightText.layer.borderWidth = 0.75f;
+        self.rightText.layer.borderColor = normalColor.CGColor;
+        self.rightText.layer.cornerRadius = 5;
+        self.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:14.0f];
+        self.rightText.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.rightText.titleLabel.numberOfLines = 1;
+        self.rightText.titleLabel.adjustsFontSizeToFitWidth = TRUE;
+        self.rightText.titleLabel.minimumScaleFactor = 0.6;
+        [self addSubview:self.rightText ];
+        
+        [self.rightText addTarget:self.padDelegate action:@selector(showPad:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+}
+
 
 
 - (void)awakeFromNib {

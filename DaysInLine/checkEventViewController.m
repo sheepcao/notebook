@@ -315,7 +315,7 @@
     }
     
     CGFloat f = (SCREEN_HEIGHT-SCREEN_WIDTH)*0.5-20;
-    self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(f, -f, photoHeigh, SCREEN_WIDTH) style:UITableViewStylePlain];
+    self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(f, -f, photoHeigh, SCREEN_WIDTH-20) style:UITableViewStylePlain];
 //    [self.photoTable setCenter:CGPointMake(SCREEN_WIDTH/2, parentView.frame.size.height/2)];
     self.photoTable.dataSource = self;
     self.photoTable.delegate = self;
@@ -325,13 +325,13 @@
     self.photoTable.showsVerticalScrollIndicator = NO;
     self.photoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    UIView *upline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y-1.5,self.photoTable.frame.size.width, 1.2)];
+    UIView *upline = [[UIView alloc] initWithFrame:CGRectMake(10,self.photoTable.frame.origin.y-1.5,self.photoTable.frame.size.width, 1.2)];
     upline.backgroundColor = normalColor;
     upline.layer.shadowOffset = CGSizeMake(0.5, 0.6);
     upline.layer.shadowColor = [UIColor blackColor].CGColor;
     upline.layer.shadowOpacity = 0.8;
     
-    UIView *downline = [[UIView alloc] initWithFrame:CGRectMake(0,self.photoTable.frame.origin.y + self.photoTable.frame.size.height-1.5,self.photoTable.frame.size.width,1.2)];
+    UIView *downline = [[UIView alloc] initWithFrame:CGRectMake(10,self.photoTable.frame.origin.y + self.photoTable.frame.size.height-1.5,self.photoTable.frame.size.width,1.2)];
     downline.backgroundColor = normalColor;
     downline.layer.shadowOffset = CGSizeMake(0.5, 0.6);
     downline.layer.shadowColor = [UIColor blackColor].CGColor;
