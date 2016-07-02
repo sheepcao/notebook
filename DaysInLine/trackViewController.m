@@ -288,12 +288,14 @@
     [self.view addSubview:bottomView];
     
     highLightButton *addNewButton = [[highLightButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, 6, SCREEN_WIDTH/2, bottomHeight-12)];
-    [addNewButton setTitle:NSLocalizedString(@"+ 新目标",nil) forState:UIControlStateNormal];
-    [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    [addNewButton setTitle:NSLocalizedString(@"新目标",nil) forState:UIControlStateNormal];
+    [addNewButton setTitleColor:TextColor1 forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     addNewButton.layer.borderColor = self.myTextColor.CGColor;
     addNewButton.layer.borderWidth = 0.9;
+    [addNewButton addLeftImage:[UIImage imageNamed:@"addGoal"] andScale:0.6];
+
     
     [addNewButton addTarget:self action:@selector(addGoal) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:addNewButton];
@@ -551,7 +553,9 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+    if (![CommonUtility isSystemLangChinese]) {
+        return;
+    }
     for (UITableViewCell *cell in self.goalsTable.visibleCells) {
         if ([cell isKindOfClass:[goalTableViewCell class]] ) {
             goalTableViewCell *oneCell = (goalTableViewCell *)cell;

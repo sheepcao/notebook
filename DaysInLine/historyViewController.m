@@ -199,13 +199,15 @@
     
     [self.view addSubview:bottomView];
     
-    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 6, SCREEN_WIDTH-80, bottomHeight-12)];
-    [addNewButton setTitle:NSLocalizedString(@"+ 新事项",nil) forState:UIControlStateNormal];
+    highLightButton *addNewButton = [[highLightButton alloc] initWithFrame:CGRectMake(40, 6, SCREEN_WIDTH-80, bottomHeight-12)];
+    [addNewButton setTitle:NSLocalizedString(@"新事项",nil) forState:UIControlStateNormal];
     [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     addNewButton.layer.borderColor = self.myTextColor.CGColor;
     addNewButton.layer.borderWidth = 0.75;
+    [addNewButton addLeftImage:[UIImage imageNamed:@"addEvent"] andScale:0.6];
+
     self.addNewBtn = addNewButton;
     
     [addNewButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];

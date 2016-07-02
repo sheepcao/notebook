@@ -110,9 +110,15 @@
         [self.timerButton setImage:[UIImage imageNamed:@"timer2"] forState:UIControlStateNormal];
         [self.timerButton setBackgroundColor:[UIColor darkGrayColor]];
         self.timerButton.layer.cornerRadius = self.timerButton.frame.size.width/2;
-        self.timerButton.layer.masksToBounds = YES;
         self.timerButton.layer.shadowColor =  [UIColor blackColor].CGColor;
-        self.timerButton.layer.shadowOffset = CGSizeMake(0.3f, 0.5f);
+        self.timerButton.layer.shadowOffset = CGSizeMake(0.9f, 1.3f);
+        self.timerButton.layer.shadowOpacity = 0.8;
+
+        self.timerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        self.timerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.timerButton.titleLabel.font  = [UIFont fontWithName:@"Avenir-Medium" size:12.5];
+        [self.timerButton setTitleColor:TextColor1 forState:UIControlStateNormal];
+
         [self.timerButton addTarget:self.timerDelegate action:@selector(timerMove:) forControlEvents:UIControlEventTouchUpInside];
         
         self.timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.timerButton.frame.origin.x + 10, self.timerButton.center.y - 13, 20, 26)];
@@ -167,6 +173,8 @@
 -(void)showTimerFrom:(NSInteger )startTime
 {
     [self.timerButton setEnabled:NO];
+    [self.timerButton setImage:nil forState:UIControlStateNormal];
+    [self.timerButton setTitle:@"STOP" forState:UIControlStateNormal];
 
     [self.timerLabel setText:@"0:00:00"];
     self.timerCount = startTime;
@@ -202,6 +210,8 @@
         }
     } completion:^(BOOL isfinished){
         [self.timerButton setEnabled:YES];
+        [self.timerButton setImage:[UIImage imageNamed:@"timer2"] forState:UIControlStateNormal];
+        [self.timerButton setTitle:@"" forState:UIControlStateNormal];
 
         self.isTimerShown = NO;
     } ];

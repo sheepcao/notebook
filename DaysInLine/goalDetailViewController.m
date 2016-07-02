@@ -134,7 +134,7 @@
     
     if (!self.myRemoveReminderButton) {
         UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/5-SCREEN_WIDTH/5, SCREEN_HEIGHT - SCREEN_WIDTH/3,SCREEN_WIDTH/5,SCREEN_WIDTH/5 + 15)];
-        [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+        [editButton setImage:[UIImage imageNamed:@"noReminder"] forState:UIControlStateNormal];
         editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
         [editButton addTarget:self action:@selector(removeRemind) forControlEvents:UIControlEventTouchUpInside];
         
@@ -240,7 +240,7 @@
     }
     
     NSString *reminderDays = @"";
-    for (NSNumber *oneDay in self.remindDays) {
+    for (NSString *oneDay in self.remindDays) {
         reminderDays = [reminderDays stringByAppendingString:[NSString stringWithFormat:@"%@,",oneDay]];
     }
     if (reminderDays.length>0) {
@@ -467,7 +467,11 @@
         }
         [cell.textLabel setText:[NSString stringWithFormat:NSLocalizedString(@"每%@",nil),self.weekDays[indexPath.row]]];
         cell.textLabel.textColor =  [UIColor colorWithWhite:0.2f alpha:1.0f];
-        for (NSNumber *oneDay in self.remindDays) {
+        for (NSString *oneDay in self.remindDays) {
+            if ([oneDay isEqualToString:@""]) {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                continue;
+            }
             NSInteger index = [oneDay integerValue];
             if (indexPath.row == index) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -501,11 +505,18 @@
 
             if(self.category)
             {
-                NSString *type = self.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
-                NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.category];
-                [cell.rightText setTitle:theme forState:UIControlStateNormal];
-                [cell.rightText setEnabled:NO];
-                
+                [cell removeExpend];
+                if (self.isEditing) {
+                    NSString *type = self.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
+                    NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.category];
+                    [cell.rightText setTitle:theme forState:UIControlStateNormal];
+                    [cell.rightText setEnabled:NO];
+                }else
+                {
+                    NSString *type = self.goalType?NSLocalizedString(@"生活",nil):NSLocalizedString(@"工作",nil);
+                    NSString *theme = [NSString stringWithFormat:@"%@ > %@",type,self.category];
+                    [cell.rightText setTitle:theme forState:UIControlStateNormal];
+                }
             }else
             {
                 [cell addExpend];
@@ -550,7 +561,10 @@
                 cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
                 
                 NSString *remindWeekDay = @"";
-                for (NSNumber *oneDay in self.remindDays) {
+                for (NSString *oneDay in self.remindDays) {
+                    if ([oneDay isEqualToString:@""]) {
+                        continue;
+                    }
                     NSInteger index = [oneDay integerValue];
                     remindWeekDay = [remindWeekDay stringByAppendingString:[NSString stringWithFormat:@"%@,",self.weekDays[index]]];
                 }
@@ -562,7 +576,11 @@
                 
             }else
             {
-                [cell.rightText setFrame:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y, cell.rightText.frame.size.width, 30)];
+                [cell redrawRightButton:CGRectMake(cell.leftText.frame.origin.x + cell.leftText.frame.size.width +10, cell.leftText.frame.origin.y, SCREEN_WIDTH*3/5 -10 - 20-20 -10, 30)];
+                cell.rightText.tag = indexPath.row + 10;
+                cell.rightText.titleLabel.numberOfLines = 1;
+                cell.rightText.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14.0f];
+
                 [cell addExpend];
                 [cell.rightText setTitle:NSLocalizedString(@"请选择",nil) forState:UIControlStateNormal];
                 [cell.rightText setTitleColor:[self.myTextColor colorWithAlphaComponent:0.9f] forState:UIControlStateNormal];
@@ -995,7 +1013,10 @@
         [contentView addSubview:repeatTable];
         
         
-        for (NSNumber *oneDay in self.remindDays) {
+        for (NSString *oneDay in self.remindDays) {
+            if ([oneDay isEqualToString:@""]) {
+                continue;
+            }
             NSIndexPath *oneIndex = [NSIndexPath indexPathForRow:[oneDay integerValue] inSection:0];
             [self.remindTable selectRowAtIndexPath:oneIndex animated:NO scrollPosition:UITableViewScrollPositionNone];
         }
@@ -1068,11 +1089,13 @@
         self.remindTime = [[CommonUtility sharedCommonUtility] stringFromTime:reminder];
         NSMutableArray *selectedDays = [[NSMutableArray alloc] initWithCapacity:7];
         for (NSIndexPath *oneIndex in [self.remindTable indexPathsForSelectedRows]) {
-            [selectedDays addObject:[NSNumber numberWithInteger:oneIndex.row]];
+            [selectedDays addObject:[NSString stringWithFormat:@"%ld",oneIndex.row]];
         }
         if (selectedDays.count>0) {
             self.remindDays = [NSArray arrayWithArray:selectedDays];
-            self.remindDays = [self.remindDays sortedArrayUsingSelector: @selector(compare:)];
+            self.remindDays = [self.remindDays sortedArrayUsingComparator:^(id a, id b) {
+                return [a compare:b options:NSNumericSearch];
+            }];
         }
         NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
@@ -1145,7 +1168,10 @@
         [db close];
     }
     
-    for (NSNumber *oneDay in self.remindDays) {
+    for (NSString *oneDay in self.remindDays) {
+        if ([oneDay isEqualToString:@""]) {
+            continue;
+        }
         NSInteger index = [oneDay integerValue];
         NSInteger dayInterval = (index + 7 - dayofweek)%7;
         NSString *dstDate = [[CommonUtility sharedCommonUtility] dateByAddingDate:[NSDate date] andDaysToAdd:dayInterval];

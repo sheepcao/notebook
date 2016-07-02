@@ -62,6 +62,17 @@
     
 }
 
+-(void)removeExpend
+{
+    UIView *oneSub = [self.rightText viewWithTag:100];
+    
+    if (oneSub) {
+        [oneSub removeFromSuperview];
+    }
+    
+}
+
+
 -(void)redrawRightButton:(CGRect)rect
 {
     if (self.rightText) {

@@ -20,12 +20,12 @@
     if (self)
     {
         
-        CGFloat space = 10;
+        CGFloat space = -3;
         if (IS_IPHONE_4_OR_LESS) {
-            space = 1;
+            space = -8;
         }
-        
-        self.titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(sideRowWidth/4, (sideRowHeight - 30 - sideRowWidth/2)/2, sideRowWidth/2, sideRowWidth/2)];
+
+        self.titleImage = [[UIImageView alloc] initWithFrame:CGRectMake(sideRowWidth/4, (sideRowHeight  - sideRowWidth/2)/2, sideRowWidth/2, sideRowWidth/2)];
         [self.titleImage setImage:image];
         [self addSubview:self.titleImage];
         

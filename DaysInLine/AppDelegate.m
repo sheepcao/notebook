@@ -14,6 +14,7 @@
 #import "OpenShareHeader.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 @interface AppDelegate ()
+
 @property (nonatomic,strong) FMDatabase *db;
 
 @end
@@ -102,6 +103,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     NSLog(@"applicationWillResignActive");
+    self.isActive = NO;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -113,6 +115,7 @@
     application.applicationIconBadgeNumber = 0;
     
     NSLog(@"applicationWillEnterForeground");
+    self.isActive = YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

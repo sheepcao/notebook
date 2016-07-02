@@ -11,12 +11,13 @@
 
 @implementation highLightButton
 
+
 - (void)drawRect:(CGRect)rect {
   UIColor * backColor = [UIColor colorWithRed:253/255.0f green:142/255.0f blue:28/255.0f alpha:1.0f];
 
 CAGradientLayer *gradientLayer = [CAGradientLayer layer];
 gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height);
-gradientLayer.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.05].CGColor, (id)[backColor colorWithAlphaComponent:0.25].CGColor,nil];
+gradientLayer.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.05].CGColor, (id)[backColor colorWithAlphaComponent:0.18].CGColor,nil];
 
 gradientLayer.startPoint = CGPointMake(0.0f, 0.0f);
 gradientLayer.endPoint = CGPointMake(1.0f, 0.0f);
@@ -25,7 +26,7 @@ self.layer.mask = gradientLayer;
 
 CAGradientLayer *gradientLayer1 = [CAGradientLayer layer];
 gradientLayer1.frame = CGRectMake(self.frame.size.width/2,0, self.frame.size.width/2, self.frame.size.height);
-gradientLayer1.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.05].CGColor, (id)[backColor colorWithAlphaComponent:0.25].CGColor,nil];
+gradientLayer1.colors = [NSArray arrayWithObjects:(id)[backColor colorWithAlphaComponent:0.05].CGColor, (id)[backColor colorWithAlphaComponent:0.18].CGColor,nil];
 
 gradientLayer1.startPoint = CGPointMake(1.0f, 0.0f);
 gradientLayer1.endPoint = CGPointMake(0.0f, 0.0f);
@@ -42,6 +43,29 @@ self.layer.mask = gradientLayer1;
         self.layer.borderColor =  normalColor.CGColor;
 
     }
+}
+
+-(void)addLeftImage:(UIImage *)image andScale:(CGFloat)scale
+{
+    CGFloat leftRatio = 1.0f;
+    if (IS_IPHONE_6) {
+        leftRatio = 1.2f;
+    }else
+    {
+        leftRatio = 1.38f;
+    }
+    
+    UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width/3 - self.frame.size.height*scale *leftRatio, self.frame.size.height*(1-scale)/2, self.frame.size.height*scale, self.frame.size.height*scale)];
+    [leftImageView setImage:image];
+    [self addSubview:leftImageView];
+    CGFloat spaceLeft = 0.8f;
+    if (IS_IPHONE_6) {
+        spaceLeft = 0.9f;
+    }else
+    {
+        spaceLeft = 1.0f;
+    }
+    [self setTitleEdgeInsets:UIEdgeInsetsMake(0, self.frame.size.height*scale*spaceLeft, 0, 0)];
 }
 
 @end

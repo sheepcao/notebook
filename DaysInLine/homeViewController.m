@@ -606,21 +606,32 @@
     [self.view addSubview:bottomView];
     
     highLightButton *addNewButton = [[highLightButton alloc] initWithFrame:CGRectMake(20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
-    [addNewButton setTitle:NSLocalizedString(@"+ 新事项",nil) forState:UIControlStateNormal];
-    [addNewButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    
+    [addNewButton setTitleColor:TextColor1 forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     addNewButton.layer.borderColor = self.myTextColor.CGColor;
     addNewButton.layer.borderWidth = 0.75;
+    [addNewButton setTitle:NSLocalizedString(@"新事项",nil) forState:UIControlStateNormal];
+    CGFloat scale = 0.6f;
+    if (IS_IPHONE_6) {
+        scale = 0.5f;
+    }else
+    {
+        scale = 0.65f;
+    }
+    [addNewButton addLeftImage:[UIImage imageNamed:@"addEvent"] andScale:scale];
     self.addNewBtn = addNewButton;
     
     highLightButton *trackButton = [[highLightButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+20, space, SCREEN_WIDTH/2-40, bottomHeight-2*space)];
     [trackButton setTitle:NSLocalizedString(@"目标推进",nil) forState:UIControlStateNormal];
     trackButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     trackButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [trackButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    [trackButton setTitleColor:TextColor1 forState:UIControlStateNormal];
     trackButton.layer.borderColor = self.myTextColor.CGColor;
     trackButton.layer.borderWidth = 0.75;
+    [trackButton addLeftImage:[UIImage imageNamed:@"goal"] andScale:scale];
+
     self.trackBtn = trackButton;
     
     [addNewButton addTarget:self action:@selector(addNewItem:) forControlEvents:UIControlEventTouchUpInside];

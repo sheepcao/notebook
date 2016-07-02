@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface highLightButton : UIButton
+-(void)addLeftImage:(UIImage *)image andScale:(CGFloat)scale;
 
 @end

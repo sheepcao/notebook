@@ -19,6 +19,7 @@
 #import "dateSelectView.h"
 #import "pickerLabel.h"
 #import "photoCell.h"
+#import "AppDelegate.h"
 
 
 @interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,showPadDelegate,categoryTapDelegate,FlatDatePickerDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
@@ -87,6 +88,7 @@
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -108,6 +110,7 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    NSLog(@"viewWillDisappear");
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [MobClick endLogPageView:@"itemDetail"];
@@ -136,7 +139,7 @@
             }
         }
     }
-    [self.photosArray addObject:[UIImage imageNamed:@"addPhoto.png"]];
+    [self.photosArray addObject:[UIImage imageNamed:@"addPic.png"]];
 
 }
 
@@ -321,6 +324,10 @@
 
 -(void)keyboardWasShown:(NSNotification*)notification
 {
+
+    if ([[UIApplication sharedApplication] applicationState] !=UIApplicationStateActive) {
+        return;
+    }
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.25f animations:^{
@@ -675,23 +682,31 @@
         UIView *operateBar = [[UIView alloc] initWithFrame:CGRectMake(6, 0,(SCREEN_WIDTH -32), 50)];
         operateBar.backgroundColor = [UIColor colorWithRed:0.18f green:0.18f blue:0.18f alpha:1.0f] ;
         UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
-        [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
-        deleteBtn.layer.borderWidth = 0.5f;
+//        [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        [deleteBtn setImage:[UIImage imageNamed:@"delete0"] forState:UIControlStateNormal];
+        [deleteBtn setImageEdgeInsets:UIEdgeInsetsMake(6, 5, 6, 5)];
+//        deleteBtn.layer.borderWidth = 0.5f;
         deleteBtn.layer.borderColor = normalColor.CGColor;
         
         UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width - 45 , 5, 40, 40)];
-        [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
-        closeBtn.layer.borderWidth = 0.5f;
+//        [closeBtn setTitle:@"关闭" forState:UIControlStateNormal];
+        [closeBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+        [closeBtn setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+
+//        closeBtn.layer.borderWidth = 0.5f;
         closeBtn.layer.borderColor = normalColor.CGColor;
         
-        UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width/2 - 41 , 5, 40, 40)];
-        [leftBtn setTitle:@"左" forState:UIControlStateNormal];
-        leftBtn.layer.borderWidth = 0.5f;
+        UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width/2 - 45 , 5, 40, 40)];
+        [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+        [leftBtn setImage:[UIImage imageNamed:@"left"] forState:UIControlStateNormal];
+//        leftBtn.layer.borderWidth = 0.5f;
         leftBtn.layer.borderColor = normalColor.CGColor;
         
-        UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width/2+1 , 5, 40, 40)];
-        [rightBtn setTitle:@"右" forState:UIControlStateNormal];
-        rightBtn.layer.borderWidth = 0.5f;
+        UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(operateBar.frame.size.width/2+5 , 5, 40, 40)];
+        [rightBtn setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+        [rightBtn setImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
+
+//        rightBtn.layer.borderWidth = 0.5f;
         rightBtn.layer.borderColor = normalColor.CGColor;
         
         [operateBar addSubview:deleteBtn];
@@ -1236,35 +1251,31 @@
     [self.recorder updateMeters];
     double lowPassResults = pow(10, (0.5 * [self.recorder peakPowerForChannel:0]));
     //图片随音量大小变化
-    if (0<lowPassResults<=0.06) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"白天.png"]];
-    }else if (0.06<lowPassResults<=0.13) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"白天1.png"]];
-    }else if (0.13<lowPassResults<=0.20) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"下午.png"]];
-    }else if (0.20<lowPassResults<=0.27) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"下午1.png"]];
-    }else if (0.27<lowPassResults<=0.34) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"夜间.png"]];
-    }else if (0.34<lowPassResults<=0.41) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"夜间1.png"]];
-    }else if (0.41<lowPassResults<=0.48) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"launch.png"]];
-    }else if (0.48<lowPassResults<=0.55) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"menu.png"]];
-    }else if (0.55<lowPassResults<=0.62) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"done.png"]];
-    }else if (0.62<lowPassResults<=0.69) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"白天.png"]];
-    }else if (0.69<lowPassResults<=0.76) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"白天1.png"]];
-    }else if (0.76<lowPassResults<=0.83) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"下午.png"]];
-    }else if (0.83<lowPassResults<=0.9) {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"下午1.png"]];
-    }else {
-        [self.voiceImageview setImage:[UIImage imageNamed:@"夜间.png"]];
-    }//图片根据音量来变化,大家知道就好
+    if (0<lowPassResults<=0.08) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic1.png"]];
+    }else if (0.08<lowPassResults<=0.16) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic1.png"]];
+    }else if (0.16<lowPassResults<=0.24) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic2.png"]];
+    }else if (0.24<lowPassResults<=0.32) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic2.png"]];
+    }else if (0.32<lowPassResults<=0.40) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic3.png"]];
+    }else if (0.40<lowPassResults<=0.48) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic3.png"]];
+    }else if (0.48<lowPassResults<=0.56) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic4.png"]];
+    }else if (0.56<lowPassResults<=0.64) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic4.png"]];
+    }else if (0.64<lowPassResults<=0.72) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic5.png"]];
+    }else if (0.72<lowPassResults<=0.80) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic5.png"]];
+    }else if (0.80<lowPassResults<=0.88) {
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic6.png"]];
+    }else{
+        [self.voiceImageview setImage:[UIImage imageNamed:@"mic6.png"]];
+    }
     
 }
 
