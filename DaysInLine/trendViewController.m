@@ -94,7 +94,7 @@
         
         if ([resultTime next]) {
             double totalTime = [resultTime doubleForColumnIndex:1] - [resultTime doubleForColumnIndex:0];
-            [self.chartDataArray addObject:[NSNumber numberWithDouble:totalTime]];
+            [self.chartDataArray addObject:[NSNumber numberWithDouble:totalTime/60]];
             
             if (i == 1) {
                 lastWeekWork = totalTime;
@@ -108,7 +108,7 @@
         
         if ([resultLifeTime next]) {
             double totalTime = [resultLifeTime doubleForColumnIndex:1] - [resultLifeTime doubleForColumnIndex:0];
-            [self.chartLifeDataArray addObject:[NSNumber numberWithDouble:totalTime]];
+            [self.chartLifeDataArray addObject:[NSNumber numberWithDouble:totalTime/60]];
             
             if (i == 1) {
                 lastWeekLife = totalTime;

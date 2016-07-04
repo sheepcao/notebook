@@ -329,7 +329,7 @@
     
     NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
     
-    [components setDay:([components day] - ((dayofweek) - 2))];// for beginning of the week.
+    [components setDay:([components day] - ((dayofweek) - 1))];// for beginning of the week.
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -349,7 +349,7 @@
     
     NSInteger Enddayofweek = [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
     
-    [componentsEnd setDay:([componentsEnd day]+(7-Enddayofweek)+1)];// for end day of the week
+    [componentsEnd setDay:([componentsEnd day]+(7-Enddayofweek))];// for end day of the week
     
     NSDate *EndOfWeek = [gregorianEnd dateFromComponents:componentsEnd];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

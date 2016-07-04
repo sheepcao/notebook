@@ -380,7 +380,7 @@
     } else
     {
         if (IS_IPHONE_4_OR_LESS) {
-            return 65;
+            return 62;
         }else
         {
             return 80;
@@ -553,7 +553,7 @@
 
             if(self.remindTime && ![self.remindTime isEqualToString:@""])
             {
-                [cell redrawRightButton:CGRectMake(cell.rightText.frame.origin.x, cell.rightText.frame.origin.y-15, cell.rightText.frame.size.width, 58)];
+                [cell redrawRightButton:CGRectMake(cell.rightText.frame.origin.x, 10, cell.rightText.frame.size.width, 58)];
                 cell.rightText.tag = indexPath.row + 10;
                 cell.rightText.titleLabel.numberOfLines = 3;
 

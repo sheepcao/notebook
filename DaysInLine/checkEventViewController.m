@@ -130,7 +130,7 @@
     moneyLabel.textColor = self.myTextColor;
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     moneyLabel.adjustsFontSizeToFitWidth = YES;
-    NSString *typeString = ((self.currentItem.itemType == 0)?NSLocalizedString(@"工 作",nil):NSLocalizedString(@"生 活",nil));
+    NSString *typeString = ((self.currentItem.itemType == 0)?NSLocalizedString(@"工作",nil):NSLocalizedString(@"生活",nil));
     [moneyLabel setText:typeString];
     self.itemMoneyLabel  = moneyLabel;
     [self.topBar addSubview:moneyLabel];
@@ -242,7 +242,7 @@
                     [cell.rightText setText:self.currentItem.itemDescription];
                 }else
                 {
-                    [cell.rightText setText:@"无"];
+                    [cell.rightText setText:NSLocalizedString(@"无",nil)];
                 }
                 break;
             case 3:
@@ -308,14 +308,19 @@
 {
     CGFloat photoHeigh;
     if (IS_IPHONE_4_OR_LESS) {
-        photoHeigh = 80 ;
+        photoHeigh = 76 ;
     }else
     {
-        photoHeigh = 105;
+        photoHeigh = 100;
     }
     
     CGFloat f = (SCREEN_HEIGHT-SCREEN_WIDTH)*0.5-10;
-    self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(f, -f, photoHeigh, SCREEN_WIDTH-20) style:UITableViewStylePlain];
+    CGFloat offsite = 16;
+    if (IS_IPHONE_4_OR_LESS) {
+        offsite = -40;
+    }
+    self.photoTable = [[UITableView alloc]initWithFrame:CGRectMake(f-(offsite-16), -f + offsite, photoHeigh, SCREEN_WIDTH-20) style:UITableViewStylePlain];
+
 //    [self.photoTable setCenter:CGPointMake(SCREEN_WIDTH/2, parentView.frame.size.height/2)];
     self.photoTable.dataSource = self;
     self.photoTable.delegate = self;
