@@ -73,7 +73,8 @@
 
 #define REVIEW_URL_CN @"http://itunes.apple.com/cn/app/daysinline/id844914780?mt=8"
 #define REVIEW_URL_EN @"http://itunes.apple.com/us/app/daysinline/id844914780?mt=8"
-#define proAPP_URL @"https://itunes.apple.com/cn/app/daysinline-pro./id998813044?ls=1&mt=8"
+#define proAPP_URL_CN @"https://itunes.apple.com/cn/app/daysinline-pro./id998813044?ls=1&mt=8"
+#define proAPP_URL_EN @"https://itunes.apple.com/us/app/daysinline-pro./id998813044?ls=1&mt=8"
 
 
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"

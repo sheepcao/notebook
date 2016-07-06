@@ -96,8 +96,9 @@
 "正在同步到本地..." = "Recovering";
 "同步失败，请稍后重试" = "Recover Failed, please try again";
 "成功同步到本机" = "Recover Success";
-
-
+"请注意：免费版不支持备份您的语音和照片,请下载专业版解锁全部备份功能" = "Notice: We don't support backup voices and photos in free version,please download the PRO version to unlock the full backup.";
+"前往下载" = "DownLoad";
+"暂不" = "Later";
 //////////////////////////////////////////////////////////////register
 "邮箱(用户名)" = "Email";
 "*重要 : 用于登录及密码找回" = "Use email to find password";

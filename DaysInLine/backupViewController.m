@@ -328,14 +328,16 @@
         NSString *backupDevice = [responseObject objectForKey:@"backup_device"];
         
         [self updateBackupInfoWithDate:backupDay andDevice:backupDevice];
-        [self uploadRecords];
+//        [self uploadRecords];
 
-//        [self.lastBackupView setHidden:NO];
-//        [self.firstBackupView setHidden:YES];
-//        
+        [self.lastBackupView setHidden:NO];
+        [self.firstBackupView setHidden:YES];
+        
 //        hud.mode = MBProgressHUDModeText;
 //        hud.labelText = NSLocalizedString(@"备份成功",nil);
-//        [hud hide:YES afterDelay:1.5];
+        [hud hide:YES afterDelay:1.0];
+        UIAlertView *freebackupAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"备份成功",nil) message:NSLocalizedString(@"请注意：免费版不支持备份您的语音和照片,请下载专业版解锁全部备份功能",nil) delegate: self cancelButtonTitle:NSLocalizedString(@"暂不",nil) otherButtonTitles:NSLocalizedString(@"前往下载",nil) , nil];
+        [freebackupAlert show];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         hud.mode = MBProgressHUDModeText;
@@ -577,10 +579,6 @@
     
     fm = [NSFileManager defaultManager];
     
-    //获取当前的工作目录的路径
-    //    path = [fm currentDirectoryPath];
-    
-    //    dirArray = [fm contentsOfDirectoryAtPath:docsPath error:&error];
     NSLog(@"path error:%@",error);
     
     
@@ -692,6 +690,18 @@
     return photo;
 }
 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        if ([CommonUtility isSystemLangChinese]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:proAPP_URL_CN]];
+        }else
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:proAPP_URL_EN]];
+        }
+    }
+}
 
 
 @end

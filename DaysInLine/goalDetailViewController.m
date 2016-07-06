@@ -138,7 +138,7 @@
         editButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
         [editButton addTarget:self action:@selector(removeRemind) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *explainEdit = [[UILabel alloc] initWithFrame:CGRectMake(0, editButton.frame.size.height - 15, editButton.frame.size.width, 15)];
+        UILabel *explainEdit = [[UILabel alloc] initWithFrame:CGRectMake(-20, editButton.frame.size.height - 15, editButton.frame.size.width+40, 15)];
         explainEdit.textAlignment = NSTextAlignmentCenter;
         explainEdit.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
         [explainEdit setText:NSLocalizedString(@"不再提醒",nil)];
