@@ -11,6 +11,8 @@
 
 @interface homeViewController :baseViewController
 {
+    
+    
     CGFloat moneyLuckSpace;
     CGFloat bottomHeight;
     CGFloat fontSize;
