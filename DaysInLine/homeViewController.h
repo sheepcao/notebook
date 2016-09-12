@@ -26,6 +26,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *luckView;
 @property (weak, nonatomic) IBOutlet LuckyLabel *luckyText;
+
 @property (weak, nonatomic) IBOutlet UIButton *constellationButton;
 
 @property (strong, nonatomic)  UITableView *maintableView;
