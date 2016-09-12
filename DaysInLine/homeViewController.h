@@ -21,7 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *TimelineText;
-
+@property UILabel *test;
 @property (weak, nonatomic) IBOutlet UIView *luckView;
 @property (weak, nonatomic) IBOutlet LuckyLabel *luckyText;
 
