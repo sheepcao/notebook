@@ -11,8 +11,6 @@
 
 @interface homeViewController :baseViewController
 {
-    
-    
     CGFloat moneyLuckSpace;
     CGFloat bottomHeight;
     CGFloat fontSize;
@@ -22,6 +20,8 @@
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *TimelineText;
 
 @property (weak, nonatomic) IBOutlet UIView *luckView;
