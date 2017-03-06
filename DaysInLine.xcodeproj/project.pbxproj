@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5983FA2D9325FA1EAD7D0CC /* libPods.a */; };
+		7D16084A10C27A7B84DAF8CD /* libPods-DaysInLine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4369BADCD44E335A829E5856 /* libPods-DaysInLine.a */; };
 		A40E28DF1D0D42710063247B /* 提醒.png in Resources */ = {isa = PBXBuildFile; fileRef = A40E28DE1D0D42710063247B /* 提醒.png */; };
 		A40E28E21D0E58110063247B /* finishedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28E11D0E58110063247B /* finishedTableViewCell.m */; };
 		A40E28E61D0E5B2B0063247B /* finishedGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40E28E41D0E5B2B0063247B /* finishedGoalsViewController.m */; };
@@ -200,7 +200,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		0DA230C6631D83ED8D2A5457 /* Pods-DaysInLine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaysInLine.release.xcconfig"; path = "Pods/Target Support Files/Pods-DaysInLine/Pods-DaysInLine.release.xcconfig"; sourceTree = "<group>"; };
+		4369BADCD44E335A829E5856 /* libPods-DaysInLine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DaysInLine.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A40E28DE1D0D42710063247B /* 提醒.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提醒.png"; sourceTree = "<group>"; };
 		A40E28E01D0E58110063247B /* finishedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = finishedTableViewCell.h; sourceTree = "<group>"; };
 		A40E28E11D0E58110063247B /* finishedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = finishedTableViewCell.m; sourceTree = "<group>"; };
@@ -494,8 +495,7 @@
 		A4EDDF031D01619900733932 /* goalObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalObj.m; sourceTree = "<group>"; };
 		A4EDDF051D0170FA00733932 /* goalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = goalTableViewCell.h; sourceTree = "<group>"; };
 		A4EDDF061D0170FA00733932 /* goalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goalTableViewCell.m; sourceTree = "<group>"; };
-		AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		C5983FA2D9325FA1EAD7D0CC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACDA6C7306150A581C193AF1 /* Pods-DaysInLine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaysInLine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaysInLine/Pods-DaysInLine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,15 +509,24 @@
 				A4E26D7E1CF84914004DFBC3 /* CoreTelephony.framework in Frameworks */,
 				A4ED307C1D17CC280023E05E /* StoreKit.framework in Frameworks */,
 				A4E26D7C1CF848F7004DFBC3 /* FBSDKShareKit.framework in Frameworks */,
-				1504EE35355062D4663FE2C1 /* libPods.a in Frameworks */,
 				A4E26D7A1CF848F7004DFBC3 /* FBSDKCoreKit.framework in Frameworks */,
 				A4E26D7B1CF848F7004DFBC3 /* FBSDKLoginKit.framework in Frameworks */,
+				7D16084A10C27A7B84DAF8CD /* libPods-DaysInLine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10805A30B2D553CCAAEF09C2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACDA6C7306150A581C193AF1 /* Pods-DaysInLine.debug.xcconfig */,
+				0DA230C6631D83ED8D2A5457 /* Pods-DaysInLine.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A48D37F71D069352005B87A5 /* goalsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,8 +605,8 @@
 			children = (
 				A4E26C851CF84042004DFBC3 /* DaysInLine */,
 				A4E26C841CF84042004DFBC3 /* Products */,
-				BD527EC3E21E48CBE229C777 /* Pods */,
 				C80F2DC47583D05BFC322F90 /* Frameworks */,
+				10805A30B2D553CCAAEF09C2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1014,15 +1023,6 @@
 			name = settingVC;
 			sourceTree = "<group>";
 		};
-		BD527EC3E21E48CBE229C777 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */,
-				79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		C80F2DC47583D05BFC322F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1034,7 +1034,7 @@
 				A4E26D771CF848F7004DFBC3 /* FBSDKCoreKit.framework */,
 				A4E26D781CF848F7004DFBC3 /* FBSDKLoginKit.framework */,
 				A4E26D791CF848F7004DFBC3 /* FBSDKShareKit.framework */,
-				C5983FA2D9325FA1EAD7D0CC /* libPods.a */,
+				4369BADCD44E335A829E5856 /* libPods-DaysInLine.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1046,12 +1046,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A4E26C9A1CF84042004DFBC3 /* Build configuration list for PBXNativeTarget "DaysInLine" */;
 			buildPhases = (
-				C5B37880917116C3D65A4D73 /* Check Pods Manifest.lock */,
+				A9F64AA0FED51D21300FD9F6 /* [CP] Check Pods Manifest.lock */,
 				A4E26C7F1CF84042004DFBC3 /* Sources */,
 				A4E26C801CF84042004DFBC3 /* Frameworks */,
 				A4E26C811CF84042004DFBC3 /* Resources */,
-				3A45CEA0A4113423AA8731A0 /* Embed Pods Frameworks */,
-				6309FCC8B7D6E379809CDB1C /* Copy Pods Resources */,
+				AE2B61D6836CCC69B49BF413 /* [CP] Embed Pods Frameworks */,
+				7017DE543004A9DBEFF2E0F9 /* [CP] Copy Pods Resources */,
+				65DDF22E1E6041DA00B4F53F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1074,6 +1075,7 @@
 					A4E26C821CF84042004DFBC3 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DBBLJY69ER;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1208,49 +1210,62 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A45CEA0A4113423AA8731A0 /* Embed Pods Frameworks */ = {
+		65DDF22E1E6041DA00B4F53F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" bc367a445f88cf5a5c02a54966d1432f00fe93f0 5a2c732e92a103f4fcf7314bf13b68af30f265bb910535ec139bfa839fc8b638";
+		};
+		7017DE543004A9DBEFF2E0F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DaysInLine/Pods-DaysInLine-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6309FCC8B7D6E379809CDB1C /* Copy Pods Resources */ = {
+		A9F64AA0FED51D21300FD9F6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C5B37880917116C3D65A4D73 /* Check Pods Manifest.lock */ = {
+		AE2B61D6836CCC69B49BF413 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DaysInLine/Pods-DaysInLine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1471,12 +1486,14 @@
 		};
 		A4E26C9B1CF84042004DFBC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE00D25255A0B5B56280B353 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = ACDA6C7306150A581C193AF1 /* Pods-DaysInLine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = DaysInLine/DaysInLine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: CAO GUANGXU (JTX9TS223Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1493,12 +1510,13 @@
 		};
 		A4E26C9C1CF84042004DFBC3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79C205DE3DA5EAE9C52FD236 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 0DA230C6631D83ED8D2A5457 /* Pods-DaysInLine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = DaysInLine/DaysInLine.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CAO GUANGXU (DBBLJY69ER)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1509,7 +1527,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.DaysInLine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d50f0d26-4a62-4112-b2b6-0cee1a5144f6";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

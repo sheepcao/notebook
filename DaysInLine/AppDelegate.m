@@ -13,6 +13,8 @@
 #import "CommonUtility.h"
 #import "OpenShareHeader.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface AppDelegate ()
 
 @property (nonatomic,strong) FMDatabase *db;
@@ -38,6 +40,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+
+    [Fabric with:@[[Crashlytics class]]];
+    [[Fabric sharedSDK] setDebug: YES];
+//    [[Crashlytics sharedInstance] crash];
+
+
+    
     application.applicationIconBadgeNumber = 0;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -80,7 +90,8 @@
     
     [[CommonUtility sharedCommonUtility] createTimer];
     
-    
+
+
     return YES;
 }
 

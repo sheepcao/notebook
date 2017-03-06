@@ -645,7 +645,10 @@
 }
 -(void)addNewItem:(UIButton *)sender
 {
-    
+//    NSArray *array = [NSArray arrayWithObjects:@"123",@"33",nil,@"332", nil];
+//    array[4];
+////    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:nil,@"123",nil];
+////    NSLog(@"%@",dictionary);
     [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
     
 }
