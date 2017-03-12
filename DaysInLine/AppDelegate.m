@@ -44,8 +44,6 @@
 
     [Fabric with:@[[Crashlytics class]]];
     [[Fabric sharedSDK] setDebug: YES];
-//    [[Crashlytics sharedInstance] crash];
-
 
     
     application.applicationIconBadgeNumber = 0;

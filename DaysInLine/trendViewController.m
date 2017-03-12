@@ -292,7 +292,7 @@
     NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
     data01.inflexionPointStyle = PNLineChartPointStyleCircle;
-    data01.color = PNTitleColor;
+    data01.color = PNiOSGreenColor;
     data01.lineWidth = 2.0f;
     data01.itemCount = lineChart.xLabels.count;
     data01.getData = ^(NSUInteger index) {
@@ -303,7 +303,7 @@
     NSArray * data02Array = [NSArray arrayWithArray:self.chartLifeDataArray];
     PNLineChartData *data02 = [PNLineChartData new];
     data02.inflexionPointStyle = PNLineChartPointStyleCircle;
-    data02.color = PNRed;
+    data02.color = PNWeiboColor;
     data02.lineWidth = 1.6f;
     data02.itemCount = self.chartDatesArray.count;
     data02.getData = ^(NSUInteger index) {
@@ -333,7 +333,7 @@
     [self.view addSubview:legendWork];
     UIView *legendWorkLine = [[UIView alloc] initWithFrame:CGRectMake(legendWork.frame.origin.x + legendWork.frame.size.width + 5,legendWork.frame.origin.y + legendWork.frame.size.height/2 -1, 45, 2)];
     legendWorkLine.layer.cornerRadius = 1;
-    [legendWorkLine setBackgroundColor:PNTitleColor];
+    [legendWorkLine setBackgroundColor:PNiOSGreenColor];
     [self.view addSubview:legendWorkLine];
 
     UILabel *legendLife = [[UILabel alloc ] initWithFrame:CGRectMake( SCREEN_WIDTH/2 +7, legendWork.frame.origin.y , 38, 15)];
@@ -344,7 +344,7 @@
     [self.view addSubview:legendLife];
     UIView *legendLifeLine = [[UIView alloc] initWithFrame:CGRectMake(legendLife.frame.origin.x + legendLife.frame.size.width + 5, legendLife.frame.origin.y + legendLife.frame.size.height/2 -1, 45, 2)];
     legendLifeLine.layer.cornerRadius = 1;
-    [legendLifeLine setBackgroundColor:PNRed];
+    [legendLifeLine setBackgroundColor:PNWeiboColor];
     [self.view addSubview:legendLifeLine];
     
 }
@@ -366,7 +366,7 @@
     NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
     data01.inflexionPointStyle = PNLineChartPointStyleCircle;
-    data01.color = PNTitleColor;
+    data01.color = PNiOSGreenColor;
     data01.lineWidth = 2.0f;
     data01.itemCount = lineChart.xLabels.count;
     data01.getData = ^(NSUInteger index) {
@@ -377,7 +377,7 @@
     NSArray * data02Array = [NSArray arrayWithArray:self.chartLifeDataArray];
     PNLineChartData *data02 = [PNLineChartData new];
     data02.inflexionPointStyle = PNLineChartPointStyleCircle;
-    data02.color = PNRed;
+    data02.color = PNWeiboColor;
     data02.lineWidth = 1.6f;
     data02.itemCount = self.chartDatesArray.count;
     data02.getData = ^(NSUInteger index) {

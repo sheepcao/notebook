@@ -265,7 +265,7 @@
     // Button Cancel
 //    NSLog(@"kFlatDatePickerHeaderHeight: %d", kFlatDatePickerHeaderHeight);
     _buttonClose = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, kFlatDatePickerButtonHeaderWidth, kFlatDatePickerHeaderHeight)];
-    _buttonClose.hidden = !IS_PHONE;
+    _buttonClose.hidden = !(IS_PHONE);
     _buttonClose.backgroundColor = kFlatDatePickerBackgroundColorButtonCancel;
     [_buttonClose setImage:[UIImage imageNamed:kFlatDatePickerIconCancel] forState:UIControlStateNormal];
     [_buttonClose addTarget:self action:@selector(actionButtonCancel) forControlEvents:UIControlEventTouchUpInside];
@@ -273,7 +273,7 @@
 
     // Button Valid
     _buttonValid = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - kFlatDatePickerButtonHeaderWidth, 0.0, kFlatDatePickerButtonHeaderWidth, kFlatDatePickerHeaderHeight)];
-    _buttonValid.hidden = !IS_PHONE;
+    _buttonValid.hidden = !(IS_PHONE);
     _buttonValid.backgroundColor = kFlatDatePickerBackgroundColorButtonValid;
     [_buttonValid setImage:[UIImage imageNamed:kFlatDatePickerIconValid] forState:UIControlStateNormal];
     [_buttonValid addTarget:self action:@selector(actionButtonValid) forControlEvents:UIControlEventTouchUpInside];

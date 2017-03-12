@@ -208,7 +208,7 @@
     }else
     {
         self.TimelineText.alpha = 1.0f;
-        self.titleTextLabel.alpha =0.0f;
+        self.titleTextLabel.alpha = 0.0f;
         self.luckyText.alpha = 0.0f;
     }
     

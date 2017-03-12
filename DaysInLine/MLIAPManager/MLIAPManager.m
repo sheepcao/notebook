@@ -77,7 +77,7 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
     
-    NSLog(@"received restored transactions: %i", queue.transactions.count);
+    NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
     if(queue.transactions.count == 0)
         [_delegate nonePurchase];
 
