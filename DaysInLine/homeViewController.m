@@ -216,7 +216,7 @@
                                        fromViewController:[self class]
                                                 forAction:RZTransitionAction_PresentDismiss];
     
-    [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
+//    [[CommonUtility sharedCommonUtility] addADWithY:bottomHeight InView:self.view OfRootVC:self];
     
 }
 
