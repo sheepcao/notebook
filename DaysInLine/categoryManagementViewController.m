@@ -523,13 +523,13 @@
             }else
             {
                 for (categoryObject *oneCategory in self.workCategoryArray) {
-                    if( [categoryDeleted.categoryName isEqualToString:self.deletingButton.titleLabel.text])
+                    if( [oneCategory.categoryName isEqualToString:self.deletingButton.titleLabel.text])
                     {
                         categoryDeleted = oneCategory;
                         break;
                     }
                 }
-                [self.workCategoryArray addObject:categoryDeleted];
+                [self.workCategoryArray removeObject:categoryDeleted];
             }
             [self.categoryTableView reloadData];
         }

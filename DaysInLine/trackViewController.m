@@ -51,10 +51,17 @@
         NSIndexPath *index = [NSIndexPath indexPathForRow:countingButton.tag inSection:0];
         
         goalTableViewCell *cell = (goalTableViewCell *)[self.goalsTable cellForRowAtIndexPath:index];
+        if(!cell)
+        {
+            return;
+        }
         
         NSString *timerCounts =  [NSString stringWithFormat:@"%ld", (long)[cell timerCount]];
         NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
         NSString *timerTheme = cell.themeLabel.text;
+        if (!timerCounts || !timeNow || !timerTheme) {
+            return;
+        }
         NSDictionary *timerDict = @{@"timerTheme":timerTheme,@"timeNow":timeNow,@"timerCount":timerCounts};
         [[NSUserDefaults standardUserDefaults] setObject:timerDict forKey:Timer];
         dispatch_suspend(_timer);
@@ -71,12 +78,21 @@
     [self pendingTimer];
 }
 
+-(void)assigningActive:(NSNotification *)noti
+{
+    NSLog(@"resuming------");
+    [self prepareGoalsData];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resigningActive:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(assigningActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+
     
     
     
@@ -185,6 +201,11 @@
         }
         NSIndexPath *indexPath= [NSIndexPath indexPathForRow:row inSection:0];
         goalTableViewCell *cell = (goalTableViewCell *) [self.goalsTable cellForRowAtIndexPath:indexPath];
+        if (!cell)
+        {
+            [self performSelector:@selector(timerShow) withObject:nil afterDelay:0.4f];
+            return;
+        }
         NSDate *timeLast = [timerDict objectForKey:@"timeNow"];
         NSDate *timeNow = [[CommonUtility sharedCommonUtility] timeNowDate];
         NSInteger timeInterval = [[CommonUtility sharedCommonUtility] timeIntervalFromLastTime:timeLast ToCurrentTime:timeNow];

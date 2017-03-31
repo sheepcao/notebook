@@ -33,7 +33,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -66,6 +66,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth Permission</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Calendars Usage Permission</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Permission</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceHanSansCN-Normal.ttf</string>
@@ -84,9 +90,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library Permission</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Calendars Usage Permission</string>
 </dict>
 </plist>
