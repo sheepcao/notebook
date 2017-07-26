@@ -142,8 +142,8 @@
 #pragma mark - Initializers
 
 -(id)initWithFrame:(CGRect)frame {
-    
-    if ([super initWithFrame:frame]) {
+    self = [super initWithFrame:frame];
+    if (self) {
         
         _isSelectingEndTime = NO;
         _datePickerMode = FlatDatePickerModeDate;

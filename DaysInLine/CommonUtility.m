@@ -414,6 +414,9 @@
 
 + (BOOL)isSystemLangChinese
 {
+    //disable the luck info from chinese version.
+//    return NO;
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
     NSString *currentLang = [languages objectAtIndex:0];

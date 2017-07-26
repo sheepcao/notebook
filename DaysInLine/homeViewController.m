@@ -178,7 +178,9 @@
     [self configBottomView];
     
     if ([CommonUtility isSystemLangChinese]) {
-        moneyLuckSpace = self.luckView.frame.size.height + self.luckView.frame.origin.y - topBarHeight;
+//        moneyLuckSpace = self.luckView.frame.size.height + self.luckView.frame.origin.y - topBarHeight;
+        moneyLuckSpace = 0;
+
     }else
     {
         moneyLuckSpace = 0;
@@ -203,14 +205,14 @@
     self.tableMidLine = midLine;
 
     
-    if ([CommonUtility isSystemLangChinese]) {
-        [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
-    }else
-    {
+//    if ([CommonUtility isSystemLangChinese]) {
+//        [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+//    }else
+//    {
         self.TimelineText.alpha = 1.0f;
         self.titleTextLabel.alpha = 0.0f;
         self.luckyText.alpha = 0.0f;
-    }
+//    }
     
     [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
                                        fromViewController:[self class]
@@ -330,9 +332,9 @@
         return;
     }
     
-    if ([CommonUtility isSystemLangChinese]) {
-        [[CommonUtility sharedCommonUtility] fetchConstellation:Constellation ForView:self.luckyText];
-    }
+//    if ([CommonUtility isSystemLangChinese]) {
+//        [[CommonUtility sharedCommonUtility] fetchConstellation:Constellation ForView:self.luckyText];
+//    }
 }
 
 -(void)configHeaderView
@@ -575,9 +577,9 @@
     NSString *constellationOnly = [constellationSelected componentsSeparatedByString:@" "][0];
     
     [[NSUserDefaults standardUserDefaults] setObject:constellationOnly forKey:@"Constellation"];
-    if ([CommonUtility isSystemLangChinese]) {
-        [[CommonUtility sharedCommonUtility] fetchConstellation:constellationOnly ForView:self.luckyText];
-    }
+//    if ([CommonUtility isSystemLangChinese]) {
+//        [[CommonUtility sharedCommonUtility] fetchConstellation:constellationOnly ForView:self.luckyText];
+//    }
     
     if ([self.luckyText.text isEqualToString:@"设置星座，随时掌握财运 >"]) {
         [UIView animateWithDuration:0.35f animations:^(void){
@@ -732,9 +734,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if ([CommonUtility isSystemLangChinese]) {
-            return moneyLuckSpace;
-        }
+//        if ([CommonUtility isSystemLangChinese]) {
+//            return moneyLuckSpace;
+//        }
         return 0;
     }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
         
@@ -923,29 +925,29 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt
 {
-    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-        
-        //    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-        [UIView animateWithDuration:0.35f animations:^(void){
-            [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
-        }];
-    }else
+//    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//        
+//        //    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//        [UIView animateWithDuration:0.35f animations:^(void){
+//            [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+//        }];
+//    }else
         return;
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-        
-        //    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-        
-        if (!decelerate) {
-            [UIView animateWithDuration:0.35f animations:^(void){
-                [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
-            }];
-        }else
-            return;
-        
-    }else
+//    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//        
+//        //    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//        
+//        if (!decelerate) {
+//            [UIView animateWithDuration:0.35f animations:^(void){
+//                [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+//            }];
+//        }else
+//            return;
+//        
+//    }else
         return;
 }
 

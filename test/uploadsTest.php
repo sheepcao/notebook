@@ -204,24 +204,24 @@
                     
                 }
                 
-                if(!is_writable(getcwd() ."/upload/") )
+                if(!is_writable(getcwd() ."/uploadTestTest/") )
                 {
-                    $response["errorPath"] = getcwd()."/upload/"."is not writable.";
-                    chmod(getcwd() ."/upload/",777);
+                    $response["errorPath"] = getcwd()."/uploadTestTest/"."is not writable.";
+                    chmod(getcwd() ."/uploadTestTest/",777);
                     
                 }
                 
-                if (file_exists(getcwd() ."/upload/" . $_FILES["file"]["name"]))
+                if (file_exists(getcwd() ."/uploadTestTest/" . $_FILES["file"]["name"]))
                 {
-                    chmod(getcwd() ."/upload/" . $_FILES["file"]["name"],777); //Change the file permissions if allowed
-                    unlink(getcwd() ."/upload/" . $_FILES["file"]["name"]);
+                    chmod(getcwd() ."/uploadTestTest/" . $_FILES["file"]["name"],777); //Change the file permissions if allowed
+                    unlink(getcwd() ."/uploadTestTest/" . $_FILES["file"]["name"]);
                     
                     
                     $moved = move_uploaded_file($_FILES["file"]["tmp_name"],
-                                                getcwd() ."/upload/" . $_FILES["file"]["name"]);
+                                                getcwd() ."/uploadTestTest/" . $_FILES["file"]["name"]);
                     if($moved)
                     {
-                        $response["NoError"] = "Stored in: " . getcwd() . "/upload/" . $_FILES["file"]["name"];
+                        $response["NoError"] = "Stored in: " . getcwd() . "/uploadTestTest/" . $_FILES["file"]["name"];
                         
                         
                         $user = $db->updateBackup($name,$device,$backup_time);
@@ -263,10 +263,10 @@
                 else
                 {
                     $moved = move_uploaded_file($_FILES["file"]["tmp_name"],
-                                                getcwd() ."/upload/" . $_FILES["file"]["name"]);
+                                                getcwd() ."/uploadTestTest/" . $_FILES["file"]["name"]);
                     if($moved)
                     {
-                        $response["NoError"] = "Stored in: " . getcwd() . "/upload/" . $_FILES["file"]["name"];
+                        $response["NoError"] = "Stored in: " . getcwd() . "/uploadTestTest/" . $_FILES["file"]["name"];
                         
                         
                         $user = $db->updateBackup($name,$device,$backup_time);
@@ -351,29 +351,29 @@
                     }
                     
                     
-                    if(!is_writable(getcwd() ."/upload/") )
+                    if(!is_writable(getcwd() ."/uploadTestTest/") )
                     {
                         $response["file".$num]["errorPath"] = "upload  is not writable.";
-                        chmod(getcwd() ."/upload/",777);
+                        chmod(getcwd() ."/uploadTestTest/",777);
                         
                     }
                     
 
                     
-                    if (file_exists(getcwd() ."/upload/" . $_FILES["file".$num]["name"]))
+                    if (file_exists(getcwd() ."/uploadTestTest/" . $_FILES["file".$num]["name"]))
                     {
-                        chmod(getcwd() ."/upload/" . $_FILES["file".$num]["name"],777); //Change the file permissions if allowed
-                        unlink(getcwd() ."/upload/" . $_FILES["file".$num]["name"]);
+                        chmod(getcwd() ."/uploadTestTest/" . $_FILES["file".$num]["name"],777); //Change the file permissions if allowed
+                        unlink(getcwd() ."/uploadTestTest/" . $_FILES["file".$num]["name"]);
                         
                         
                         $moved = move_uploaded_file($_FILES["file".$num]["tmp_name"],
-                                                    getcwd() ."/upload/" . $_FILES["file".$num]["name"]);
+                                                    getcwd() ."/uploadTestTest/" . $_FILES["file".$num]["name"]);
                         
 //                        sendResponse(200,json_encode($response));
 
                         if($moved)
                         {
-                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/upload/" . $_FILES["file".$num]["name"];
+                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/uploadTest/" . $_FILES["file".$num]["name"];
                             
                             
 //                            sendResponse(200,json_encode($response));
@@ -396,10 +396,10 @@
                     else
                     {
                         $moved = move_uploaded_file($_FILES["file".$num]["tmp_name"],
-                                                    getcwd() ."/upload/" . $_FILES["file".$num]["name"]);
+                                                    getcwd() ."/uploadTest/" . $_FILES["file".$num]["name"]);
                         if($moved)
                         {
-                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/upload/" . $_FILES["file".$num]["name"];
+                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/uploadTest/" . $_FILES["file".$num]["name"];
                             
                             
 //                            sendResponse(200,json_encode($response));
@@ -479,29 +479,29 @@
                     }
                     
                     
-                    if(!is_writable(getcwd() ."/upload/") )
+                    if(!is_writable(getcwd() ."/uploadTest/") )
                     {
                         $response["file".$num]["errorPath"] = "upload  is not writable.";
-                        chmod(getcwd() ."/upload/",777);
+                        chmod(getcwd() ."/uploadTest/",777);
                         
                     }
                     
                     
                     
-                    if (file_exists(getcwd() ."/upload/" . $_FILES["file".$num]["name"]))
+                    if (file_exists(getcwd() ."/uploadTest/" . $_FILES["file".$num]["name"]))
                     {
-                        chmod(getcwd() ."/upload/" . $_FILES["file".$num]["name"],777); //Change the file permissions if allowed
-                        unlink(getcwd() ."/upload/" . $_FILES["file".$num]["name"]);
+                        chmod(getcwd() ."/uploadTest/" . $_FILES["file".$num]["name"],777); //Change the file permissions if allowed
+                        unlink(getcwd() ."/uploadTest/" . $_FILES["file".$num]["name"]);
                         
                         
                         $moved = move_uploaded_file($_FILES["file".$num]["tmp_name"],
-                                                    getcwd() ."/upload/" . $_FILES["file".$num]["name"]);
+                                                    getcwd() ."/uploadTest/" . $_FILES["file".$num]["name"]);
                         
                         //                        sendResponse(200,json_encode($response));
                         
                         if($moved)
                         {
-                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/upload/" . $_FILES["file".$num]["name"];
+                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/uploadTest/" . $_FILES["file".$num]["name"];
                             
                             
                             //                            sendResponse(200,json_encode($response));
@@ -524,10 +524,10 @@
                     else
                     {
                         $moved = move_uploaded_file($_FILES["file".$num]["tmp_name"],
-                                                    getcwd() ."/upload/" . $_FILES["file".$num]["name"]);
+                                                    getcwd() ."/uploadTest/" . $_FILES["file".$num]["name"]);
                         if($moved)
                         {
-                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/upload/" . $_FILES["file".$num]["name"];
+                            $response["file".$num]["NoError"] = "Stored in: " . getcwd() . "/uploadTest/" . $_FILES["file".$num]["name"];
                             
                             
                             //                            sendResponse(200,json_encode($response));
@@ -573,7 +573,7 @@
             //
             $name = $_POST['name'];
 
-            if ($handle = opendir(getcwd() ."/upload/")) {
+            if ($handle = opendir(getcwd() ."/uploadTest/")) {
                 
                 while (false !== ($entry = readdir($handle))) {
                     

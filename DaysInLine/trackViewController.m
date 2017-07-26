@@ -175,13 +175,14 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     NSLog(@"viewDidDisappear");
+    [super viewDidDisappear:animated];
     
     [self pendingTimer];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     NSLog(@"viewDidAppear");
     [self prepareGoalsData];
     
